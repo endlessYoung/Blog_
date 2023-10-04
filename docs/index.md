@@ -1,25 +1,28 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
-  name: "Endlessyoung's Blog"
-  text: "Welcome to Endlessyoung's Blog!"
-  tagline: My great project tagline
+  name: Endlessyoung
+  text: 这世界太大，勇敢的少年奔赴天涯！
+  tagline: 想象力足以改变一切...
+  image:
+    src: /idea.png
+    alt: 成功
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: 从这里开始
+      link: /page/github链接不上怎么办？.html
     - theme: alt
-      text: API Examples
-      link: /api-examples
-
+      text: 转到->GitHub
+      link: https://github.com/endlessYoung
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: 🛠️
+    title: github、docker、tomcat...
+    details: 工具类问题
+  - icon: ⚡️
+    title: java、kotlin、js、C、C++...
+    details: 语言类问题
+  - icon: 🖖
+    title: SQL、MySQL、SQLlite、MongoDB...
+    details: 数据库类问题
 ---
-
