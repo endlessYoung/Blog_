@@ -5,6 +5,7 @@ export default defineConfig({
   title: "Endlessyoung's Blog",
   description: "这是endlessyoung的个人博客",
   lastUpdated: true, 
+  base: '/Blog_/',
   locales: {
     root: {
       label: 'Chinese',
