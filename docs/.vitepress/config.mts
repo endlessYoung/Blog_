@@ -5,17 +5,22 @@ export default defineConfig({
   title: "Endlessyoung's Blog",
   description: "这是endlessyoung的个人博客",
   lastUpdated: true, 
+  locales: {
+    root: {
+      label: 'Chinese',
+      lang: 'zh-CN'
+    }
+  },
   lang: 'zh-CN',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }], // 也是放在/public目录中
   ],
   themeConfig: {
     logo: '/panda.png',
-    // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
+      { text: 'Home', link: '/common/common_index' },
       { text: 'Examples', link: '/markdown-examples' },
-      { text: 'Android', link: '/Android/1' },
+      { text: 'Android', link: '/Android/Activity' },
       { text: 'JS', link: '/JS/1' },
       { text: 'Java', link: '/Java/1' },
       { text: 'Kotlin', link: '/Kotlin/1' },
@@ -27,14 +32,48 @@ export default defineConfig({
     sidebar: {
       '/Android/': [
         {
-          text: 'Android',
+          text: 'Android基础',
           collapsed: false,
           items: [
-            { text: '活动', link: '/Android/' },
-            { text: '服务', link: '/Android/one' },
-            { text: '广播', link: '/Android/two' }
+            { text: 'Android简介', link: '/Android/Android简介' },
+            { text: '活动(Activity)', link: '/Android/Activity' },
+            { text: '服务(Service)', link: '/Android/Service' },
+            { text: '广播(BroadcastReceiver)', link: '/Android/BroadcastReceiver' },
+            { text: '内容提供器(ContentProvider)', link: '/Android/ContentProvider' },
           ]
-        }
+        },
+        {
+          text: '服务(Service)',
+          collapsed: false,
+          items: [
+            { text: '活动', link: '/Android/Activity' },
+            { text: '服务', link: '/Android/one' },
+            { text: '广播', link: '/Android/two' },
+            { text: '安卓类加载器', link: '/Android/安卓类加载器' },
+          ]
+        },
+        {
+          text: '广播(BroadcastReceiver)',
+          collapsed: false,
+          items: [
+            { text: '活动', link: '/Android/Activity' },
+            { text: '服务', link: '/Android/one' },
+            { text: '广播', link: '/Android/two' },
+            { text: '安卓类加载器', link: '/Android/安卓类加载器' },
+          ]
+        },
+        {
+          text: '内容提供器(ContentProvider)',
+          collapsed: false,
+          items: [
+            { text: '活动', link: '/Android/Activity' },
+            { text: '服务', link: '/Android/one' },
+            { text: '广播', link: '/Android/two' },
+            { text: '安卓类加载器', link: '/Android/安卓类加载器' },
+          ]
+        },
+
+        
       ],
       '/JS/': [
         {
@@ -124,6 +163,10 @@ export default defineConfig({
           }
         }
       }
+    },
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2019-present <a href="https://github.com/endlessYoung">Endless Young</a>'
     }
   }
 })
