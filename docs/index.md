@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: 从这里开始
-      link: /page/github链接不上怎么办？.html
+      link: /1
     - theme: alt
       text: 转到->GitHub
       link: https://github.com/endlessYoung

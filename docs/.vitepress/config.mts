@@ -40,6 +40,12 @@ export default defineConfig({
             { text: '服务(Service)', link: '/Android/Service' },
             { text: '广播(BroadcastReceiver)', link: '/Android/BroadcastReceiver' },
             { text: '内容提供器(ContentProvider)', link: '/Android/ContentProvider' },
+            { text: 'Activity栈', link: '/Android/Activity栈' },
+            { text: 'Activity的生命周期详解', link: '/Android/Activity的生命周期详解' },
+            { text: '进程和应用生命周期', link: '/Android/进程和应用生命周期' },
+            { text: 'Parcelable和Bundle', link: '/Android/Parcelable和Bundle' },
+            { text: 'Service的启动方式', link: '/Android/Service的启动方式' },
+            { text: 'Service生命周期', link: '/Android/Service生命周期' },
           ]
         },
         {
