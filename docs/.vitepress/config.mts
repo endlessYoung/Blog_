@@ -47,6 +47,8 @@ export default defineConfig({
             { text: 'Parcelable和Bundle', link: '/Android/Parcelable和Bundle' },
             { text: 'Service的启动方式', link: '/Android/Service的启动方式' },
             { text: 'Service生命周期', link: '/Android/Service生命周期' },
+            { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
+            
           ]
         },
         {
