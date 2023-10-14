@@ -81,6 +81,13 @@ export default defineConfig({
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
           ]
         },
+        {
+          text: '实践',
+          collapsed: false,
+          items: [
+            { text: '实践-亮度调节', link: '/Android/实践-亮度调节' },
+          ]
+        }
 
         
       ],
