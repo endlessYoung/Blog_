@@ -48,6 +48,7 @@ export default defineConfig({
             { text: 'Service的启动方式', link: '/Android/Service的启动方式' },
             { text: 'Service生命周期', link: '/Android/Service生命周期' },
             { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
+            { text: '实践-手机所有应用', link: '/Android/实践-手机所有应用' },
             
           ]
         },
