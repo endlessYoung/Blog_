@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: 从这里开始
-      link: /1
+      link: /Android/Activity
     - theme: alt
       text: 转到->GitHub
       link: https://github.com/endlessYoung

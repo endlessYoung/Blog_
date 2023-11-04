@@ -24,7 +24,7 @@ export default defineConfig({
       { text: 'Android', link: '/Android/Activity' },
       { text: 'JS', link: '/JS/1' },
       { text: 'Java', link: '/Java/1' },
-      { text: 'Kotlin', link: '/Kotlin/1' },
+      { text: 'Kotlin', link: '/Kotlin/数据类' },
       { text: 'Python', link: '/Python/1' },
       { text: 'C', link: '/C/1' },
       { text: 'C++', link: '/C++/1' },
@@ -47,9 +47,10 @@ export default defineConfig({
             { text: 'Parcelable和Bundle', link: '/Android/Parcelable和Bundle' },
             { text: 'Service的启动方式', link: '/Android/Service的启动方式' },
             { text: 'Service生命周期', link: '/Android/Service生命周期' },
-            { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
-            { text: '实践-手机所有应用', link: '/Android/实践-手机所有应用' },
-            
+            { text: '日志详解', link: '/Android/日志详解' },
+            { text: 'Intent', link: '/Android/Intent' },
+            { text: 'Binder', link: '/Android/Binder' },
+          
           ]
         },
         {
@@ -87,6 +88,16 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '实践-亮度调节', link: '/Android/实践-亮度调节' },
+            { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
+            { text: '实践-手机所有应用', link: '/Android/实践-手机所有应用' },
+            { text: 'OpenGL-纹理', link: '/Android/OpenGL-纹理' },
+          ]
+        },
+        {
+          text: '进阶',
+          collapsed: false,
+          items: [
+            { text: 'logd日志简介及典型案例分析', link: '/Android/logd日志简介及典型案例分析' },
           ]
         }
 
@@ -116,9 +127,30 @@ export default defineConfig({
         {
           text: 'Kotlin',
           items: [
-            { text: 'Index', link: '/Kotlin/' },
-            { text: 'One', link: '/Kotlin/one' },
-            { text: 'Two', link: '/Kotlin/two' }
+            { text: '数据类', link: '/Kotlin/数据类' },
+            { text: '初始化数组', link: '/Kotlin/初始化数组' },
+            { text: '延迟初始化属性', link: '/Kotlin/延迟初始化属性' },
+            { text: '扩展函数', link: '/Kotlin/扩展函数' },
+            { text: 'sealed类', link: '/Kotlin/sealed类' },
+            { text: '高阶函数', link: '/Kotlin/高阶函数' },
+            { text: '委托', link: '/Kotlin/委托' },
+            { text: 'Lambda表达式', link: '/Kotlin/Lambda表达式' },
+            { text: 'lateinit和lazy', link: '/Kotlin/lateinit和lazy' },
+            { text: '对象表达式和对象声明有什么区别', link: '/Kotlin/对象表达式和对象声明有什么区别' },
+            { text: '顶层函数', link: '/Kotlin/顶层函数' },
+            { text: '可见性修饰符', link: '/Kotlin/可见性修饰符' },
+            { text: 'Jetpack Compose', link: '/Kotlin/Jetpack Compose' },
+            { text: '协程', link: '/Kotlin/协程' },
+            { text: '协程', link: '/Kotlin/协程' },
+            { text: '协程', link: '/Kotlin/协程' },
+            { text: '协程', link: '/Kotlin/协程' },
+            { text: '协程', link: '/Kotlin/协程' },
+            { text: '协程', link: '/Kotlin/协程' },
+            { text: '协程', link: '/Kotlin/协程' },
+            { text: '协程', link: '/Kotlin/协程' },
+            { text: '协程', link: '/Kotlin/协程' },
+            { text: '协程', link: '/Kotlin/协程' },
+                            
           ]
         }
       ],

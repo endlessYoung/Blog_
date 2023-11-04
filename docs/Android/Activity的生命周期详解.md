@@ -5,7 +5,7 @@
 1. **创建阶段**：
    - `onCreate(Bundle savedInstanceState)`：在Activity第一次创建时调用，用于进行一次性的初始化工作，如设置布局、绑定数据等。
    - `onStart()`：在Activity准备好显示给用户之前调用，可以进行一些准备工作。
-
+   
 2. **运行阶段**：
    - `onResume()`：在Activity变得可见并与用户交互之前调用，可以开始处理用户输入。
    - `onPause()`：当Activity部分可见但失去焦点时调用，通常用于保存未保存的数据或释放资源。
@@ -87,3 +87,7 @@ Activity 即将结束（由于用户彻底关闭 Activity 或由于系统为 Act
 
 onDestroy() 回调应释放先前的回调（例如 onStop()）尚未释放的所有资源。
 
+# 八、onNewIntent()
+
+当新的 Intent 传递给现有的活动实例时，它会被调用。在 Android 中，Intent 用于请求操作、在组件之间传递数据（如活动、服务和广播接收器），以及启动其他活动。
+如果一个Activity已经启动过，并且存在当前应用的Activity任务栈中，启动模式为singleTask，singleInstance或singleTop，那么在此启动或回到这个Activity的时候，不会创建新的实例，也就是不会执行onCreate方法，而是执行OnNewIntent方法。
