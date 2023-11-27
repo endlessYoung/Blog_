@@ -50,6 +50,8 @@ export default defineConfig({
             { text: '日志详解', link: '/Android/日志详解' },
             { text: 'Intent', link: '/Android/Intent' },
             { text: 'Binder', link: '/Android/Binder' },
+            { text: 'AlarmManager', link: '/Android/AlarmManager' },
+            { text: 'SurfaceView', link: '/Android/SurfaceView' },
           
           ]
         },
@@ -91,6 +93,7 @@ export default defineConfig({
             { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
             { text: '实践-手机所有应用', link: '/Android/实践-手机所有应用' },
             { text: 'OpenGL-纹理', link: '/Android/OpenGL-纹理' },
+            { text: '实践-路径动画', link: '/Android/实践-路径动画' },
           ]
         },
         {
