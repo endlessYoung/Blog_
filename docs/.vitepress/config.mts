@@ -90,10 +90,10 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '实践-亮度调节', link: '/Android/实践-亮度调节' },
-            { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
             { text: '实践-手机所有应用', link: '/Android/实践-手机所有应用' },
             { text: 'OpenGL-纹理', link: '/Android/OpenGL-纹理' },
             { text: '实践-路径动画', link: '/Android/实践-路径动画' },
+            { text: '实践-WorkerManager', link: '/Android/实践-WorkerManager' },
           ]
         },
         {
@@ -101,6 +101,15 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'logd日志简介及典型案例分析', link: '/Android/logd日志简介及典型案例分析' },
+          ]
+        },
+        {
+          text: 'OpenGL ES',
+          collapsed: false,
+          items: [
+            { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
+            { text: '坐标系统', link: '/Android/OpenGL ES坐标系统' },
+            { text: '纹理', link: '/Android/OpenGL-纹理' },
           ]
         }
 
