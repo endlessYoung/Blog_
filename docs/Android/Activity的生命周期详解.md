@@ -91,3 +91,7 @@ onDestroy() 回调应释放先前的回调（例如 onStop()）尚未释放的�
 
 当新的 Intent 传递给现有的活动实例时，它会被调用。在 Android 中，Intent 用于请求操作、在组件之间传递数据（如活动、服务和广播接收器），以及启动其他活动。
 如果一个Activity已经启动过，并且存在当前应用的Activity任务栈中，启动模式为singleTask，singleInstance或singleTop，那么在此启动或回到这个Activity的时候，不会创建新的实例，也就是不会执行onCreate方法，而是执行OnNewIntent方法。
+
+::: tip
+一个Activity退出后重进，触发的生命周期顺序：onPause、onstop、onSaveInstanceState、ondestory、oncreate、onStart、onRestoreInstanceState、onResume。
+:::

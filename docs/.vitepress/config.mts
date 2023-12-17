@@ -28,6 +28,7 @@ export default defineConfig({
       { text: 'Python', link: '/Python/1' },
       { text: 'C', link: '/C/1' },
       { text: 'C++', link: '/C++/1' },
+      { text: 'Linux', link: '/Linux/Index' },
     ],
 
     sidebar: {
@@ -38,18 +39,27 @@ export default defineConfig({
           items: [
             { text: 'Android简介', link: '/Android/Android简介' },
             { text: '活动(Activity)', link: '/Android/Activity' },
+            { text: 'LinearLayout', link: '/Android/LinearLayout' },
+            { text: 'RelativieLayout', link: '/Android/RelativieLayout' },
+            { text: 'ConstraintLayout', link: '/Android/ConstraintLayout' },
+            { text: 'FrameLayout', link: '/Android/FrameLayout' },
+            { text: 'TableLayout', link: '/Android/TableLayout' },
+            { text: 'GridLayout', link: '/Android/GridLayout' },
             { text: '服务(Service)', link: '/Android/Service' },
             { text: '广播(BroadcastReceiver)', link: '/Android/BroadcastReceiver' },
             { text: '内容提供器(ContentProvider)', link: '/Android/ContentProvider' },
             { text: 'Activity栈', link: '/Android/Activity栈' },
             { text: 'Activity的生命周期详解', link: '/Android/Activity的生命周期详解' },
             { text: '进程和应用生命周期', link: '/Android/进程和应用生命周期' },
+            { text: '异步任务与多线程', link: '/Android/异步任务与多线程' },
             { text: 'Parcelable和Bundle', link: '/Android/Parcelable和Bundle' },
             { text: 'Service的启动方式', link: '/Android/Service的启动方式' },
             { text: 'Service生命周期', link: '/Android/Service生命周期' },
             { text: '日志详解', link: '/Android/日志详解' },
             { text: 'Intent', link: '/Android/Intent' },
+            { text: 'Fragment', link: '/Android/Fragment' },
             { text: 'Binder', link: '/Android/Binder' },
+            { text: 'Handler', link: '/Android/Handler' },
             { text: 'AlarmManager', link: '/Android/AlarmManager' },
             { text: 'SurfaceView', link: '/Android/SurfaceView' },
           
@@ -101,6 +111,15 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'logd日志简介及典型案例分析', link: '/Android/logd日志简介及典型案例分析' },
+            { text: 'Intent发送数据的上限', link: '/Android/Intent发送数据的上限' },
+            { text: 'Looper死循环为什么不会导致应用卡死', link: '/Android/Looper死循环为什么不会导致应用卡死' },
+            { text: '使用Handler的postDelay消息队列有什么变化', link: '/Android/使用Handler的postDelay消息队列有什么变化' },
+            { text: '如何保证多个handler线程安全', link: '/Android/如何保证多个handler线程安全' },
+            { text: 'Binder驱动在哪限制', link: '/Android/Binder驱动在哪限制' },
+            { text: 'Lifecycle状态机的作用', link: '/Android/Lifecycle状态机的作用' },
+            { text: 'LiveData核心原理', link: '/Android/LiveData核心原理' },
+            { text: 'LiveDataBus', link: '/Android/LiveDataBus' },
+            { text: 'Hook技术', link: '/Android/Hook技术' },
           ]
         },
         {
@@ -193,6 +212,16 @@ export default defineConfig({
             { text: 'Index', link: '/C++/' },
             { text: 'One', link: '/C++/one' },
             { text: 'Two', link: '/C++/two' }
+          ]
+        }
+      ],
+      '/Linux/': [
+        {
+          text: 'Linux',
+          items: [
+            { text: 'Index', link: '/Linux/' },
+            { text: 'One', link: '/Linux/one' },
+            { text: 'Two', link: '/Linux/two' }
           ]
         }
       ],
