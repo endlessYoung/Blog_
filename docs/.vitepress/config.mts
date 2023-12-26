@@ -62,6 +62,7 @@ export default defineConfig({
             { text: 'Handler', link: '/Android/Handler' },
             { text: 'AlarmManager', link: '/Android/AlarmManager' },
             { text: 'SurfaceView', link: '/Android/SurfaceView' },
+            { text: 'AIDL', link: '/Android/AIDL' },
           
           ]
         },
@@ -99,11 +100,13 @@ export default defineConfig({
           text: '实践',
           collapsed: false,
           items: [
-            { text: '实践-亮度调节', link: '/Android/实践-亮度调节' },
-            { text: '实践-手机所有应用', link: '/Android/实践-手机所有应用' },
+            { text: '亮度调节', link: '/Android/实践-亮度调节' },
+            { text: '手机所有应用', link: '/Android/实践-手机所有应用' },
             { text: 'OpenGL-纹理', link: '/Android/OpenGL-纹理' },
-            { text: '实践-路径动画', link: '/Android/实践-路径动画' },
-            { text: '实践-WorkerManager', link: '/Android/实践-WorkerManager' },
+            { text: '路径动画', link: '/Android/实践-路径动画' },
+            { text: 'WorkerManager', link: '/Android/实践-WorkerManager' },
+            { text: 'recyclerview分组', link: '/Android/实践-recyclerview分组' },
+            { text: 'Widget', link: '/Android/实践-Widget' },
           ]
         },
         {
