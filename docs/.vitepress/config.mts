@@ -23,7 +23,7 @@ export default defineConfig({
       { text: 'Examples', link: '/markdown-examples' },
       { text: 'Android', link: '/Android/Activity' },
       { text: 'JS', link: '/JS/1' },
-      { text: 'Java', link: '/Java/1' },
+      { text: 'Java', link: '/Java/Integer1000与100的比较' },
       { text: 'Kotlin', link: '/Kotlin/数据类' },
       { text: 'Python', link: '/Python/1' },
       { text: 'C', link: '/C/1' },
@@ -63,6 +63,7 @@ export default defineConfig({
             { text: 'AlarmManager', link: '/Android/AlarmManager' },
             { text: 'SurfaceView', link: '/Android/SurfaceView' },
             { text: 'AIDL', link: '/Android/AIDL' },
+            { text: 'SharedPreference', link: '/Android/SharedPreference' },
           
           ]
         },
@@ -151,9 +152,9 @@ export default defineConfig({
         {
           text: 'Java',
           items: [
-            { text: 'Index', link: '/Java/' },
+            { text: 'Integer1000与100的比较', link: '/Java/Integer1000与100的比较' },
             { text: 'One', link: '/Java/one' },
-            { text: 'Two', link: '/Java/two' }
+            { text: 'Two', link: '/Java/two' },
           ]
         }
       ],
