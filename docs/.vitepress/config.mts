@@ -153,8 +153,8 @@ export default defineConfig({
           text: 'Java',
           items: [
             { text: 'Integer1000与100的比较', link: '/Java/Integer1000与100的比较' },
-            { text: 'One', link: '/Java/one' },
-            { text: 'Two', link: '/Java/two' },
+            { text: '动态代理', link: '/Java/动态代理' },
+            { text: '反射', link: '/Java/反射' },
           ]
         }
       ],
