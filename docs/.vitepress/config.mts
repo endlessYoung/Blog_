@@ -64,6 +64,7 @@ export default defineConfig({
             { text: 'SurfaceView', link: '/Android/SurfaceView' },
             { text: 'AIDL', link: '/Android/AIDL' },
             { text: 'SharedPreference', link: '/Android/SharedPreference' },
+            { text: 'LiveData', link: '/Android/LiveData' },
           
           ]
         },
@@ -179,7 +180,7 @@ export default defineConfig({
             { text: '协程', link: '/Kotlin/协程' },
             { text: 'Object关键字', link: '/Kotlin/Object关键字' },
             { text: 'Kotlin中的挂起函数', link: '/Kotlin/Kotlin中的挂起函数' },
-            { text: '协程', link: '/Kotlin/协程' },
+            { text: '集合', link: '/Kotlin/集合' },
             { text: '协程', link: '/Kotlin/协程' },
             { text: '协程', link: '/Kotlin/协程' },
             { text: '协程', link: '/Kotlin/协程' },
