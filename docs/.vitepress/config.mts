@@ -125,6 +125,7 @@ export default defineConfig({
             { text: 'LiveData核心原理', link: '/Android/LiveData核心原理' },
             { text: 'LiveDataBus', link: '/Android/LiveDataBus' },
             { text: 'Hook技术', link: '/Android/Hook技术' },
+            { text: 'AMS剖析', link: '/Android/AMS剖析' },
           ]
         },
         {
