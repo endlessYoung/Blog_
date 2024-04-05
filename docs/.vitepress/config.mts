@@ -65,14 +65,13 @@ export default defineConfig({
             { text: 'AIDL', link: '/Android/AIDL' },
             { text: 'SharedPreference', link: '/Android/SharedPreference' },
             { text: 'LiveData', link: '/Android/LiveData' },
-          
           ]
         },
         {
-          text: '服务(Service)',
+          text: '调试',
           collapsed: false,
           items: [
-            { text: '活动', link: '/Android/Activity' },
+            { text: 'dumpsys', link: '/Android/dumpsys' },
             { text: '服务', link: '/Android/one' },
             { text: '广播', link: '/Android/two' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
