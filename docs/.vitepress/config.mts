@@ -65,16 +65,24 @@ export default defineConfig({
             { text: 'AIDL', link: '/Android/AIDL' },
             { text: 'SharedPreference', link: '/Android/SharedPreference' },
             { text: 'LiveData', link: '/Android/LiveData' },
+            { text: '事件分发机制', link: '/Android/事件分发机制' },
+            { text: '进程保活', link: '/Android/进程保活' },
+            { text: 'Context', link: '/Android/Context' },
+            { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
+            { text: '安卓中的IPC通信方式', link: '/Android/安卓中的IPC通信方式' },
+            { text: 'SurfaceFlinger', link: '/Android/SurfaceFlinger' },
+            { text: 'SurfaceFlinger', link: '/Android/SurfaceFlinger' },
           ]
         },
         {
-          text: '调试',
+          text: 'debug与调试',
           collapsed: false,
           items: [
             { text: 'dumpsys', link: '/Android/dumpsys' },
-            { text: '服务', link: '/Android/one' },
-            { text: '广播', link: '/Android/two' },
-            { text: '安卓类加载器', link: '/Android/安卓类加载器' },
+            { text: 'ANR问题简析', link: '/Android/ANR问题简析' },
+            { text: 'Watchdog', link: '/Android/Watchdog' },
+            { text: 'ADB', link: '/Android/ADB' },
+
           ]
         },
         {
