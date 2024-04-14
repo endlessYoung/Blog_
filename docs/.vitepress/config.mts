@@ -39,6 +39,7 @@ export default defineConfig({
           items: [
             { text: 'Android简介', link: '/Android/Android简介' },
             { text: '活动(Activity)', link: '/Android/Activity' },
+            { text: 'Activity的启动模式', link: '/Android/Activity的启动模式' },
             { text: 'LinearLayout', link: '/Android/LinearLayout' },
             { text: 'RelativieLayout', link: '/Android/RelativieLayout' },
             { text: 'ConstraintLayout', link: '/Android/ConstraintLayout' },
@@ -71,7 +72,7 @@ export default defineConfig({
             { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
             { text: '安卓中的IPC通信方式', link: '/Android/安卓中的IPC通信方式' },
             { text: 'SurfaceFlinger', link: '/Android/SurfaceFlinger' },
-            { text: 'SurfaceFlinger', link: '/Android/SurfaceFlinger' },
+            { text: 'PhoneWindow', link: '/Android/PhoneWindow' },
           ]
         },
         {
@@ -82,14 +83,15 @@ export default defineConfig({
             { text: 'ANR问题简析', link: '/Android/ANR问题简析' },
             { text: 'Watchdog', link: '/Android/Watchdog' },
             { text: 'ADB', link: '/Android/ADB' },
-
+            { text: '深入理解crash问题', link: '/Android/深入理解crash问题' },
+            { text: 'Application为什么不能作为Dialog的context', link: '/Android/Application为什么不能作为Dialog的context' },
           ]
         },
         {
-          text: '广播(BroadcastReceiver)',
+          text: '编译',
           collapsed: false,
           items: [
-            { text: '活动', link: '/Android/Activity' },
+            { text: 'Android.mk', link: '/Android/Android.mk' },
             { text: '服务', link: '/Android/one' },
             { text: '广播', link: '/Android/two' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
