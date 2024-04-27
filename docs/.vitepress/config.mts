@@ -4,7 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Endlessyoung's Blog",
   description: "这是endlessyoung的个人博客",
-  lastUpdated: true, 
+  lastUpdated: true,
   base: '/Blog_/',
   locales: {
     root: {
@@ -147,7 +147,7 @@ export default defineConfig({
           ]
         }
 
-        
+
       ],
       '/JS/': [
         {
@@ -196,7 +196,7 @@ export default defineConfig({
             { text: '协程', link: '/Kotlin/协程' },
             { text: '协程', link: '/Kotlin/协程' },
             { text: '协程', link: '/Kotlin/协程' },
-                            
+
           ]
         }
       ],
