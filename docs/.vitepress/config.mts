@@ -214,11 +214,31 @@ export default defineConfig({
       '/Ai/': [
         {
           text: '机器学习',
+          collapsed: false,
           items: [
-            { text: '监督学习', link: '/Ai/监督学习入门' },
+            { text: '监督学习', link: '/Ai/监督学习' },
             { text: '非监督学习', link: '/Ai/非监督学习' },
+            { text: '梯度下降', link: '/Ai/梯度下降' },
+            { text: 'Hard sigmoid和soft sigmoid', link: '/Ai/Hard sigmoid和soft sigmoid' },
+            { text: 'Rectified Linear Unit', link: '/Ai/Rectified Linear Unit' },
+            { text: '深度神经网络', link: '/Ai/深度神经网络' },
+            { text: '过拟合', link: '/Ai/过拟合' },
+          ],
+        },
+        {
+          text: 'Pytorch',
+          collapsed: false,
+          items: [
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
           ],
         }
+
       ],
       '/C/': [
         {
