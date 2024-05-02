@@ -1,4 +1,93 @@
 import { defineConfig } from 'vitepress'
+import markdownItKatex from 'markdown-it-katex'
+const customElements = [
+  'math',
+  'maction',
+  'maligngroup',
+  'malignmark',
+  'menclose',
+  'merror',
+  'mfenced',
+  'mfrac',
+  'mi',
+  'mlongdiv',
+  'mmultiscripts',
+  'mn',
+  'mo',
+  'mover',
+  'mpadded',
+  'mphantom',
+  'mroot',
+  'mrow',
+  'ms',
+  'mscarries',
+  'mscarry',
+  'mscarries',
+  'msgroup',
+  'mstack',
+  'mlongdiv',
+  'msline',
+  'mstack',
+  'mspace',
+  'msqrt',
+  'msrow',
+  'mstack',
+  'mstack',
+  'mstyle',
+  'msub',
+  'msup',
+  'msubsup',
+  'mtable',
+  'mtd',
+  'mtext',
+  'mtr',
+  'munder',
+  'munderover',
+  'semantics',
+  'math',
+  'mi',
+  'mn',
+  'mo',
+  'ms',
+  'mspace',
+  'mtext',
+  'menclose',
+  'merror',
+  'mfenced',
+  'mfrac',
+  'mpadded',
+  'mphantom',
+  'mroot',
+  'mrow',
+  'msqrt',
+  'mstyle',
+  'mmultiscripts',
+  'mover',
+  'mprescripts',
+  'msub',
+  'msubsup',
+  'msup',
+  'munder',
+  'munderover',
+  'none',
+  'maligngroup',
+  'malignmark',
+  'mtable',
+  'mtd',
+  'mtr',
+  'mlongdiv',
+  'mscarries',
+  'mscarry',
+  'msgroup',
+  'msline',
+  'msrow',
+  'mstack',
+  'maction',
+  'semantics',
+  'annotation',
+  'annotation-xml'
+]
+
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -6,6 +95,18 @@ export default defineConfig({
   description: "这是endlessyoung的个人博客",
   lastUpdated: true,
   base: '/Blog_/',
+  markdown: {
+    config: (md: any) => {
+      md.use(markdownItKatex)
+    }
+  },
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag: string) => customElements.includes(tag)
+      }
+    }
+  },
   locales: {
     root: {
       label: 'Chinese',
@@ -15,12 +116,12 @@ export default defineConfig({
   lang: 'zh-CN',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }], // 也是放在/public目录中
+    ['link', { rel: 'stylesheet', href:'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css'}]
   ],
   themeConfig: {
     logo: '/panda.png',
     nav: [
       { text: 'Home', link: '/common/common_index' },
-      { text: 'Examples', link: '/markdown-examples' },
       { text: 'Android', link: '/Android/Activity' },
       { text: 'JS', link: '/JS/1' },
       { text: 'Java', link: '/Java/Integer1000与100的比较' },
@@ -223,6 +324,17 @@ export default defineConfig({
             { text: 'Rectified Linear Unit', link: '/Ai/Rectified Linear Unit' },
             { text: '深度神经网络', link: '/Ai/深度神经网络' },
             { text: '过拟合', link: '/Ai/过拟合' },
+            { text: '深度学习', link: '/Ai/深度学习' },
+            { text: '全连接前馈网络(FNN)', link: '/Ai/全连接前馈网络' },
+            { text: '卷积神经网络(CNN)', link: '/Ai/卷积神经网络' },
+            { text: '正向传播和反向传播', link: '/Ai/正向传播和反向传播' },
+            { text: '逻辑回归', link: '/Ai/逻辑回归' },
+            { text: '决策树算法', link: '/Ai/决策树算法' },
+            { text: '聚类算法', link: '/Ai/聚类算法' },
+            { text: '贝叶斯算法', link: '/Ai/贝叶斯算法' },
+            { text: '支持向量机算法', link: '/Ai/支持向量机算法' },
+            { text: '随机森林算法', link: '/Ai/随机森林算法' },
+            { text: '交叉熵', link: '/Ai/交叉熵' },
           ],
         },
         {
