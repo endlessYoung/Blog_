@@ -127,7 +127,7 @@ export default defineConfig({
       { text: 'Java', link: '/Java/Integer1000与100的比较' },
       { text: 'Kotlin', link: '/Kotlin/数据类' },
       { text: 'Python', link: '/Python/1' },
-      { text: 'Ai', link: '/Ai/监督学习' },
+      { text: 'Ai', link: '/Ai/监督学习入门' },
       { text: 'C', link: '/C/1' },
       { text: 'C++', link: '/C++/1' },
       { text: 'Linux', link: '/Linux/Index' },
