@@ -15,4 +15,12 @@
   --vp-button-brand-hover-bg: rgb(47, 84, 235);
 
   --vp-button-brand-active-border: #F6CEEC;
+
+  .vp-doc blockquote {
+    border-radius: 5px;
+    padding: 10px 16px;
+    background-color: var(--vp-badge-danger-bg);
+    position: relative;
+    border-left: 4px solid #e95f59;
+  }
 }

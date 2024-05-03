@@ -116,18 +116,18 @@ export default defineConfig({
   lang: 'zh-CN',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }], // 也是放在/public目录中
-    ['link', { rel: 'stylesheet', href:'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css'}]
+    ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }]
   ],
   themeConfig: {
     logo: '/panda.png',
     nav: [
-      { text: 'Home', link: '/common/common_index' },
+      // { text: 'Home', link: '/Ai/监督学习入门' },
       { text: 'Android', link: '/Android/Activity' },
-      { text: 'JS', link: '/JS/1' },
+      { text: 'Ai', link: '/Ai/监督学习入门' },
       { text: 'Java', link: '/Java/Integer1000与100的比较' },
       { text: 'Kotlin', link: '/Kotlin/数据类' },
       { text: 'Python', link: '/Python/1' },
-      { text: 'Ai', link: '/Ai/监督学习入门' },
+      { text: 'JS', link: '/JS/1' },
       { text: 'C', link: '/C/1' },
       { text: 'C++', link: '/C++/1' },
       { text: 'Linux', link: '/Linux/Index' },
@@ -248,7 +248,58 @@ export default defineConfig({
             { text: '纹理', link: '/Android/OpenGL-纹理' },
           ]
         }
-
+      ],
+      '/Ai/': [
+        {
+          text: '机器学习',
+          collapsed: false,
+          items: [
+            { text: '监督学习', link: '/Ai/监督学习入门' },
+            { text: '非监督学习', link: '/Ai/非监督学习' },
+            { text: '正规方程及其推导', link: '/Ai/正规方程及其推导' },
+            { text: '梯度下降', link: '/Ai/梯度下降' },
+            { text: 'Hard sigmoid和soft sigmoid', link: '/Ai/Hard sigmoid和soft sigmoid' },
+            { text: 'Rectified Linear Unit', link: '/Ai/Rectified Linear Unit' },
+            { text: '深度神经网络', link: '/Ai/深度神经网络' },
+            { text: '过拟合', link: '/Ai/过拟合' },
+            { text: '深度学习', link: '/Ai/深度学习' },
+            { text: '全连接前馈网络(FNN)', link: '/Ai/全连接前馈网络' },
+            { text: '卷积神经网络(CNN)', link: '/Ai/卷积神经网络' },
+            { text: '正向传播和反向传播', link: '/Ai/正向传播和反向传播' },
+            { text: '逻辑回归', link: '/Ai/逻辑回归' },
+            { text: '决策树算法', link: '/Ai/决策树算法' },
+            { text: '聚类算法', link: '/Ai/聚类算法' },
+            { text: '贝叶斯算法', link: '/Ai/贝叶斯算法' },
+            { text: '支持向量机算法', link: '/Ai/支持向量机算法' },
+            { text: '随机森林算法', link: '/Ai/随机森林算法' },
+            { text: '交叉熵', link: '/Ai/交叉熵' },
+          ],
+        },
+        {
+          text: '回归算法',
+          collapsed: false,
+          items: [
+            { text: '线性回归', link: '/Ai/线性回归' },
+            { text: '多项式回归', link: '/Ai/多项式回归' },
+            { text: '岭回归', link: '/Ai/岭回归' },
+            { text: 'Lesso回归', link: '/Ai/Lesso回归' },
+            { text: '支持向量回归(SVR)', link: '/Ai/支持向量回归(SVR)' },
+            { text: '神经网络回归', link: '/Ai/神经网络回归' },
+          ],
+        },
+        {
+          text: 'Pytorch',
+          collapsed: false,
+          items: [
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
+          ],
+        }
 
       ],
       '/JS/': [
@@ -311,46 +362,6 @@ export default defineConfig({
             { text: 'Two', link: '/Python/two' }
           ]
         }
-      ],
-      '/Ai/': [
-        {
-          text: '机器学习',
-          collapsed: false,
-          items: [
-            { text: '监督学习', link: '/Ai/监督学习' },
-            { text: '非监督学习', link: '/Ai/非监督学习' },
-            { text: '梯度下降', link: '/Ai/梯度下降' },
-            { text: 'Hard sigmoid和soft sigmoid', link: '/Ai/Hard sigmoid和soft sigmoid' },
-            { text: 'Rectified Linear Unit', link: '/Ai/Rectified Linear Unit' },
-            { text: '深度神经网络', link: '/Ai/深度神经网络' },
-            { text: '过拟合', link: '/Ai/过拟合' },
-            { text: '深度学习', link: '/Ai/深度学习' },
-            { text: '全连接前馈网络(FNN)', link: '/Ai/全连接前馈网络' },
-            { text: '卷积神经网络(CNN)', link: '/Ai/卷积神经网络' },
-            { text: '正向传播和反向传播', link: '/Ai/正向传播和反向传播' },
-            { text: '逻辑回归', link: '/Ai/逻辑回归' },
-            { text: '决策树算法', link: '/Ai/决策树算法' },
-            { text: '聚类算法', link: '/Ai/聚类算法' },
-            { text: '贝叶斯算法', link: '/Ai/贝叶斯算法' },
-            { text: '支持向量机算法', link: '/Ai/支持向量机算法' },
-            { text: '随机森林算法', link: '/Ai/随机森林算法' },
-            { text: '交叉熵', link: '/Ai/交叉熵' },
-          ],
-        },
-        {
-          text: 'Pytorch',
-          collapsed: false,
-          items: [
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-          ],
-        }
-
       ],
       '/C/': [
         {
