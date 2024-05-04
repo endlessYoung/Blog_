@@ -94,6 +94,9 @@ export default defineConfig({
   title: "Endlessyoung's Blog",
   description: "这是endlessyoung的个人博客",
   lastUpdated: true,
+  sitemap: {
+    hostname: 'https://endlessyoung.github.io/Blog_/',
+  },
   base: '/Blog_/',
   markdown: {
     config: (md: any) => {
@@ -115,7 +118,7 @@ export default defineConfig({
   },
   lang: 'zh-CN',
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }], // 也是放在/public目录中
+    ['link', { rel: 'icon', href: '/Blog_/favicon.ico' }], // 也是放在/public目录中
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }]
   ],
   themeConfig: {
