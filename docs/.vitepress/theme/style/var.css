@@ -16,11 +16,43 @@
 
   --vp-button-brand-active-border: #F6CEEC;
 
+  --vp-custom-block-tip-bg: var(--vp-c-green-soft);
+
   .vp-doc blockquote {
     border-radius: 5px;
     padding: 10px 16px;
     background-color: var(--vp-badge-danger-bg);
     position: relative;
     border-left: 4px solid #e95f59;
+  }
+
+  /* 提示框 */
+  .custom-block.tip {
+    border-color: var(--vp-c-green-2);
+  }
+
+  /* 警告框 */
+  .custom-block.warning {
+    /* border-color: #d97706; */
+    border-color: var(--vp-c-yellow-2);
+  }
+
+  /* 危险框 */
+  .custom-block.danger {
+    /* border-color: #f43f5e; */
+    border-color: var(--vp-c-red-2);
+  }
+
+  article {
+    border-radius: 20px;
+    background-color: blueviolet;
+    transform-origin: center;
+    -webkit-text-fill-color: white;
+    perspective: 1000px;
+    transition: transform 0.8s;
+  }
+
+  article:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
   }
 }
