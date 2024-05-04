@@ -252,11 +252,12 @@ export default defineConfig({
       '/Ai/': [
         {
           text: '机器学习',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '监督学习', link: '/Ai/监督学习入门' },
             { text: '非监督学习', link: '/Ai/非监督学习' },
             { text: '数据归一化', link: '/Ai/数据归一化' },
+            { text: '数据降维', link: '/Ai/数据降维' },
             { text: '正规方程及其推导', link: '/Ai/正规方程及其推导' },
             { text: '梯度下降', link: '/Ai/梯度下降' },
             { text: 'Hard sigmoid和soft sigmoid', link: '/Ai/Hard sigmoid和soft sigmoid' },
@@ -277,7 +278,7 @@ export default defineConfig({
         },
         {
           text: '回归算法',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '线性回归', link: '/Ai/线性回归' },
             { text: '多项式回归', link: '/Ai/多项式回归' },
@@ -294,11 +295,11 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '聚类算法', link: '/Ai/聚类算法' },
-            { text: '聚类算法', link: '/Ai/聚类算法' },
-            { text: '聚类算法', link: '/Ai/聚类算法' },
-            { text: '聚类算法', link: '/Ai/聚类算法' },
-            { text: '聚类算法', link: '/Ai/聚类算法' },
-            { text: '聚类算法', link: '/Ai/聚类算法' },
+            { text: 'K-means', link: '/Ai/K-means' },
+            { text: 'DESCAN', link: '/Ai/DESCAN' },
+            { text: '层次聚类', link: '/Ai/层次聚类' },
+            { text: '谱聚类', link: '/Ai/谱聚类' },
+            { text: '高斯混合模型', link: '/Ai/高斯混合模型' },
           ],
         },
         {
@@ -369,7 +370,15 @@ export default defineConfig({
       ],
       '/Python/': [
         {
-          text: 'Python',
+          text: 'numpy',
+          items: [
+            { text: 'Index', link: '/Python/' },
+            { text: 'One', link: '/Python/one' },
+            { text: 'Two', link: '/Python/two' }
+          ]
+        },
+        {
+          text: 'ski-learn',
           items: [
             { text: 'Index', link: '/Python/' },
             { text: 'One', link: '/Python/one' },
