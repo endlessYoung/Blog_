@@ -375,13 +375,21 @@ export default defineConfig({
         {
           text: 'numpy',
           items: [
-            { text: 'Index', link: '/Python/' },
+            { text: 'numpy的常用方法', link: '/Python/numpy的常用方法' },
             { text: 'One', link: '/Python/one' },
             { text: 'Two', link: '/Python/two' }
           ]
         },
         {
           text: 'ski-learn',
+          items: [
+            { text: 'Index', link: '/Python/' },
+            { text: 'One', link: '/Python/one' },
+            { text: 'Two', link: '/Python/two' }
+          ]
+        },
+        {
+          text: 'pytorch',
           items: [
             { text: 'Index', link: '/Python/' },
             { text: 'One', link: '/Python/one' },
