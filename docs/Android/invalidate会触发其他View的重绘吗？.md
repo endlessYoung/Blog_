@@ -1,0 +1,7 @@
+# invalidate会触发其他View的重绘吗？
+
+在Android中，调用某个View的invalidate()方法并不会直接触发其他View的重绘。invalidate()的作用是标记当前View为“脏”状态，意味着这个View需要重新绘制。系统随后会在合适的时机（通常是UI线程的下一个绘制周期）调用该View的onDraw()方法来重绘它自己。这个过程只影响当前View，并不直接涉及到其他View。
+
+然而，如果多个View相互重叠或者在一个ViewGroup（如LinearLayout、RelativeLayout等）中，那么父ViewGroup在重绘时可能会导致其包含的所有子View也间接地被重绘。这是因为ViewGroup在接收到重绘指令时，通常会递归地调用其所有子View的draw()方法，即使这些子View没有被单独标记为需要重绘。但这种重绘是作为整体视图树绘制流程的一部分，而非invalidate()直接引起的。
+
+另外，如果在某个View的onDraw()方法中修改了相邻或相关View的属性（例如尺寸、位置或可见性），这可能间接导致那些View也需要重绘，但这依然是由于状态改变而非invalidate()调用本身的影响。因此，尽管invalidate()本身不会立即触发其他View的重绘，它可以通过引发一系列连锁反应最终影响到其他View的绘制行为。

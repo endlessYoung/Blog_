@@ -140,7 +140,7 @@ export default defineConfig({
       '/Android/': [
         {
           text: 'Android基础',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Android简介', link: '/Android/Android简介' },
             { text: '活动(Activity)', link: '/Android/Activity' },
@@ -182,7 +182,7 @@ export default defineConfig({
         },
         {
           text: 'debug与调试',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'dumpsys', link: '/Android/dumpsys' },
             { text: 'ANR问题简析', link: '/Android/ANR问题简析' },
@@ -194,22 +194,39 @@ export default defineConfig({
         },
         {
           text: '编译',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Android.mk', link: '/Android/Android.mk' },
-            { text: '服务', link: '/Android/one' },
-            { text: '广播', link: '/Android/two' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
           ]
         },
         {
-          text: '内容提供器(ContentProvider)',
+          text: 'JNI',
+          collapsed: true,
+          items: [
+            { text: '初识JNI', link: '/Android/初识JNI' },
+            { text: '安卓类加载器', link: '/Android/安卓类加载器' },
+          ]
+        },
+        {
+          text: 'Framework',
           collapsed: false,
           items: [
-            { text: '活动', link: '/Android/Activity' },
-            { text: '服务', link: '/Android/one' },
-            { text: '广播', link: '/Android/two' },
-            { text: '安卓类加载器', link: '/Android/安卓类加载器' },
+            { text: 'Android系统启动流程', link: '/Android/Android系统启动流程' },
+            { text: 'init进程在启动其他服务后可以退出吗？', link: '/Android/init进程在启动其他服务后可以退出吗？' },
+            { text: 'AMS如何启动App进程', link: '/Android/AMS如何启动App进程' },
+            { text: 'AMS和WMS的关系', link: '/Android/AMS和WMS的关系' },
+            { text: 'Zygote进程的fork', link: '/Android/zygote进程的fork' },
+            { text: 'SystemServer进程的意义', link: '/Android/SystemServer进程的意义' },
+            { text: 'Zygote采用socket的原因', link: '/Android/Zygote采用socket的原因' },
+            { text: 'AMS对App进程启动和管理的方案', link: '/Android/AMS对App进程启动和管理的方案' },
+            { text: 'setContentView之后发生了什么', link: '/Android/setContentView之后发生了什么' },
+            { text: 'StartActivity之后发生了什么', link: '/Android/StartActivity之后发生了什么' },
+            { text: 'invalidate会触发其他View的重绘吗？', link: '/Android/invalidate会触发其他view的重绘吗？' },
+            { text: 'Activity如何与Window与View进行分工合作的？', link: '/Android/Activity如何与Window与View进行分工合作的？' },
+            { text: 'View的绘制过程都是用的同一个canvas吗？', link: '/Android/View的绘制过程都是用的同一个canvas吗？' },
+            { text: 'onResume中获取宽高有效吗？', link: '/Android/onResume中获取宽高有效吗？' },
+            { text: '渲染机制', link: '/Android/渲染机制' },
           ]
         },
         {
@@ -342,7 +359,8 @@ export default defineConfig({
       ],
       '/Kotlin/': [
         {
-          text: 'Kotlin',
+          text: 'kotlin基础',
+          collapsed: true,
           items: [
             { text: '数据类', link: '/Kotlin/数据类' },
             { text: '初始化数组', link: '/Kotlin/初始化数组' },
@@ -362,12 +380,12 @@ export default defineConfig({
             { text: 'Object关键字', link: '/Kotlin/Object关键字' },
             { text: 'Kotlin中的挂起函数', link: '/Kotlin/Kotlin中的挂起函数' },
             { text: '集合', link: '/Kotlin/集合' },
+          ]
+        }, 
+        {
+          text: '协程',
+          items: [
             { text: '协程', link: '/Kotlin/协程' },
-            { text: '协程', link: '/Kotlin/协程' },
-            { text: '协程', link: '/Kotlin/协程' },
-            { text: '协程', link: '/Kotlin/协程' },
-            { text: '协程', link: '/Kotlin/协程' },
-
           ]
         }
       ],
