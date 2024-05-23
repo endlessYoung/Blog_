@@ -130,6 +130,7 @@ export default defineConfig({
       { text: 'Java', link: '/Java/Integer1000与100的比较' },
       { text: 'Kotlin', link: '/Kotlin/数据类' },
       { text: 'Python', link: '/Python/1' },
+      { text: 'SQL', link: '/SQL/全文搜索' },
       { text: 'JS', link: '/JS/1' },
       { text: 'C', link: '/C/1' },
       { text: 'C++', link: '/C++/1' },
@@ -164,7 +165,6 @@ export default defineConfig({
             { text: '日志详解', link: '/Android/日志详解' },
             { text: 'Intent', link: '/Android/Intent' },
             { text: 'Fragment', link: '/Android/Fragment' },
-            { text: 'Binder', link: '/Android/Binder' },
             { text: 'Handler', link: '/Android/Handler' },
             { text: 'AlarmManager', link: '/Android/AlarmManager' },
             { text: 'SurfaceView', link: '/Android/SurfaceView' },
@@ -172,12 +172,8 @@ export default defineConfig({
             { text: 'SharedPreference', link: '/Android/SharedPreference' },
             { text: 'LiveData', link: '/Android/LiveData' },
             { text: '事件分发机制', link: '/Android/事件分发机制' },
-            { text: '进程保活', link: '/Android/进程保活' },
             { text: 'Context', link: '/Android/Context' },
             { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
-            { text: '安卓中的IPC通信方式', link: '/Android/安卓中的IPC通信方式' },
-            { text: 'SurfaceFlinger', link: '/Android/SurfaceFlinger' },
-            { text: 'PhoneWindow', link: '/Android/PhoneWindow' },
           ]
         },
         {
@@ -227,6 +223,12 @@ export default defineConfig({
             { text: 'View的绘制过程都是用的同一个canvas吗？', link: '/Android/View的绘制过程都是用的同一个canvas吗？' },
             { text: 'onResume中获取宽高有效吗？', link: '/Android/onResume中获取宽高有效吗？' },
             { text: '渲染机制', link: '/Android/渲染机制' },
+            { text: 'SurfaceFlinger', link: '/Android/SurfaceFlinger' },
+            { text: 'PhoneWindow', link: '/Android/PhoneWindow' },
+            { text: '安卓中的IPC通信方式', link: '/Android/安卓中的IPC通信方式' },
+            { text: 'Binder', link: '/Android/Binder' },
+            { text: '进程保活', link: '/Android/进程保活' },
+
           ]
         },
         {
@@ -354,6 +356,7 @@ export default defineConfig({
             { text: 'Integer1000与100的比较', link: '/Java/Integer1000与100的比较' },
             { text: '动态代理', link: '/Java/动态代理' },
             { text: '反射', link: '/Java/反射' },
+            { text: 'volatile和synchronize的区别', link: '/Java/volatile和synchronize的区别' },
           ]
         }
       ],
@@ -362,7 +365,23 @@ export default defineConfig({
           text: 'kotlin基础',
           collapsed: true,
           items: [
+            { text: '元组', link: '/Kotlin/元组' },
+            { text: '集合', link: '/Kotlin/集合' },
+            { text: '范围表达式', link: '/Kotlin/范围表达式' },
+            { text: '编译时常量', link: '/Kotlin/编译时常量' },
+            { text: '主构造函数和次构造函数', link: '/Kotlin/主构造函数和次构造函数' },
+            { text: '泛型', link: '/Kotlin/泛型' },
+            { text: '协变和逆变', link: '/Kotlin/协变和逆变' },
+            { text: '类型擦除', link: '/Kotlin/类型擦除' },
+            { text: '序列', link: '/Kotlin/序列' },
+            { text: '类别名', link: '/Kotlin/类别名' },
+            { text: '操作符重载', link: '/Kotlin/操作符重载' },
+            { text: '解构声明', link: '/Kotlin/解构声明' },
             { text: '数据类', link: '/Kotlin/数据类' },
+            { text: '内联函数', link: '/Kotlin/内联函数' },
+            { text: '中缀函数', link: '/Kotlin/中缀函数' },
+            { text: 'Any和Unit以及Nothing', link: '/Kotlin/Any和Unit以及Nothing' },
+            { text: '作用域函数', link: '/Kotlin/作用域函数' },
             { text: '初始化数组', link: '/Kotlin/初始化数组' },
             { text: '延迟初始化属性', link: '/Kotlin/延迟初始化属性' },
             { text: '扩展函数', link: '/Kotlin/扩展函数' },
@@ -380,16 +399,31 @@ export default defineConfig({
             { text: 'Object关键字', link: '/Kotlin/Object关键字' },
             { text: 'Kotlin中的挂起函数', link: '/Kotlin/Kotlin中的挂起函数' },
             { text: '集合', link: '/Kotlin/集合' },
+            { text: '尾递归', link: '/Kotlin/尾递归' },
           ]
         }, 
         {
           text: '协程',
           items: [
             { text: '协程', link: '/Kotlin/协程' },
+            { text: '通道', link: '/Kotlin/通道' },
+            { text: 'Flow', link: '/Kotlin/Flow' },
+            { text: 'Mutex', link: '/Kotlin/Mutex' },
           ]
         }
       ],
       '/Python/': [
+        {
+          text: 'python基础',
+          items: [
+            { text: '列表推导式', link: '/Python/列表推导式' },
+            { text: '海象运算符', link: '/Python/海象运算符' },
+            { text: '切片', link: '/Python/切片' },
+            { text: 'range函数', link: '/Python/range函数' },
+            { text: '字典', link: '/Python/字典' },
+            { text: '数据类', link: '/Python/数据类' },
+          ]
+        },
         {
           text: 'numpy',
           items: [
@@ -412,6 +446,14 @@ export default defineConfig({
             { text: 'Index', link: '/Python/' },
             { text: 'One', link: '/Python/one' },
             { text: 'Two', link: '/Python/two' }
+          ]
+        }
+      ],
+      '/SQL/': [
+        {
+          text: 'SQL',
+          items: [
+            { text: '全文搜索', link: '/SQL/全文搜索' },
           ]
         }
       ],
