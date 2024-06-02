@@ -210,6 +210,9 @@ export default defineConfig({
           text: 'Framework',
           collapsed: false,
           items: [
+            { text: '智能指针', link: '/Android/智能指针' },
+            { text: 'Parcel', link: '/Android/Parcel' },
+            { text: 'ServiceManager', link: '/Android/ServiceManager' },
             { text: 'Android系统启动流程', link: '/Android/Android系统启动流程' },
             { text: 'init进程在启动其他服务后可以退出吗？', link: '/Android/init进程在启动其他服务后可以退出吗？' },
             { text: 'AMS如何启动App进程', link: '/Android/AMS如何启动App进程' },
@@ -404,7 +407,7 @@ export default defineConfig({
           items: [
             { text: '元组', link: '/Kotlin/元组' },
             { text: '集合', link: '/Kotlin/集合' },
-            { text: '函数式API', link: '/Kotlin/函数式API' },
+            { text: '作用域函数', link: '/Kotlin/作用域函数' },
             { text: '范围表达式', link: '/Kotlin/范围表达式' },
             { text: '编译时常量', link: '/Kotlin/编译时常量' },
             { text: '主构造函数和次构造函数', link: '/Kotlin/主构造函数和次构造函数' },
@@ -419,7 +422,6 @@ export default defineConfig({
             { text: '内联函数', link: '/Kotlin/内联函数' },
             { text: '中缀函数', link: '/Kotlin/中缀函数' },
             { text: 'Any和Unit以及Nothing', link: '/Kotlin/Any和Unit以及Nothing' },
-            { text: '作用域函数', link: '/Kotlin/作用域函数' },
             { text: '初始化数组', link: '/Kotlin/初始化数组' },
             { text: '延迟初始化属性', link: '/Kotlin/延迟初始化属性' },
             { text: '扩展函数', link: '/Kotlin/扩展函数' },
@@ -431,7 +433,6 @@ export default defineConfig({
             { text: '对象表达式和对象声明有什么区别', link: '/Kotlin/对象表达式和对象声明有什么区别' },
             { text: '顶层函数', link: '/Kotlin/顶层函数' },
             { text: '可见性修饰符', link: '/Kotlin/可见性修饰符' },
-            { text: 'Jetpack Compose', link: '/Kotlin/Jetpack Compose' },
             { text: 'by lazy和lazy', link: '/Kotlin/by lazy和lazy' },
             { text: '协程', link: '/Kotlin/协程' },
             { text: 'Object关键字', link: '/Kotlin/Object关键字' },
@@ -447,6 +448,12 @@ export default defineConfig({
             { text: '通道', link: '/Kotlin/通道' },
             { text: 'Flow', link: '/Kotlin/Flow' },
             { text: 'Mutex', link: '/Kotlin/Mutex' },
+          ]
+        },
+        {
+          text: 'Jetpack Compose',
+          items: [
+            { text: 'Jetpack Compose', link: '/Kotlin/Jetpack Compose' },
           ]
         }
       ],
