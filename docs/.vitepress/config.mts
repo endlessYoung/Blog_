@@ -164,7 +164,6 @@ export default defineConfig({
             { text: 'Service生命周期', link: '/Android/Service生命周期' },
             { text: '各种Service的区别', link: '/Android/各种Service的区别' },
             { text: 'Jobservice', link: '/Android/Jobservice' },
-            { text: '日志详解', link: '/Android/日志详解' },
             { text: 'Intent', link: '/Android/Intent' },
             { text: 'Fragment', link: '/Android/Fragment' },
             { text: 'Handler', link: '/Android/Handler' },
@@ -233,7 +232,22 @@ export default defineConfig({
             { text: '安卓中的IPC通信方式', link: '/Android/安卓中的IPC通信方式' },
             { text: 'Binder', link: '/Android/Binder' },
             { text: '进程保活', link: '/Android/进程保活' },
-
+          ]
+        },
+        {
+          text: 'Surface',
+          collapsed: false,
+          items: [
+            { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
+          ]
+        },        
+        {
+          text: '安卓日志系统',
+          collapsed: false,
+          items: [
+            { text: '日志详解', link: '/Android/日志详解' },
+            { text: 'logd日志简介及典型案例分析', link: '/Android/logd日志简介及典型案例分析' },
+            { text: 'EventLog日志', link: '/Android/EventLog日志' },
           ]
         },
         {
@@ -253,7 +267,6 @@ export default defineConfig({
           text: '进阶',
           collapsed: false,
           items: [
-            { text: 'logd日志简介及典型案例分析', link: '/Android/logd日志简介及典型案例分析' },
             { text: 'Intent发送数据的上限', link: '/Android/Intent发送数据的上限' },
             { text: 'Looper死循环为什么不会导致应用卡死', link: '/Android/Looper死循环为什么不会导致应用卡死' },
             { text: '使用Handler的postDelay消息队列有什么变化', link: '/Android/使用Handler的postDelay消息队列有什么变化' },
