@@ -209,6 +209,7 @@ export default defineConfig({
           text: 'Framework',
           collapsed: false,
           items: [
+            { text: 'AOSP架构', link: '/Android/AOSP架构' },
             { text: '智能指针', link: '/Android/智能指针' },
             { text: 'Parcel', link: '/Android/Parcel' },
             { text: 'ServiceManager', link: '/Android/ServiceManager' },
@@ -235,9 +236,14 @@ export default defineConfig({
           ]
         },
         {
-          text: 'Surface',
+          text: '图形渲染',
           collapsed: false,
           items: [
+            { text: '图形渲染', link: '/Android/图形渲染' },
+            { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
+            { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
+            { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
+            { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
           ]
         },        
@@ -248,6 +254,10 @@ export default defineConfig({
             { text: '日志详解', link: '/Android/日志详解' },
             { text: 'logd日志简介及典型案例分析', link: '/Android/logd日志简介及典型案例分析' },
             { text: 'EventLog日志', link: '/Android/EventLog日志' },
+            { text: 'MainLog日志', link: '/Android/MainLog日志' },
+            { text: 'RadioLog日志', link: '/Android/RadioLog日志' },
+            { text: 'SystemLog日志', link: '/Android/SystemLog日志' },
+            { text: 'CrashLog日志', link: '/Android/CrashLog日志' },
           ]
         },
         {
