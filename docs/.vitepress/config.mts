@@ -152,6 +152,7 @@ export default defineConfig({
             { text: 'FrameLayout', link: '/Android/FrameLayout' },
             { text: 'TableLayout', link: '/Android/TableLayout' },
             { text: 'GridLayout', link: '/Android/GridLayout' },
+            { text: 'BottomNavigationView', link: '/Android/BottomNavigationView' },
             { text: '服务(Service)', link: '/Android/Service' },
             { text: '广播(BroadcastReceiver)', link: '/Android/BroadcastReceiver' },
             { text: '内容提供器(ContentProvider)', link: '/Android/ContentProvider' },
@@ -171,7 +172,10 @@ export default defineConfig({
             { text: 'SurfaceView', link: '/Android/SurfaceView' },
             { text: 'AIDL', link: '/Android/AIDL' },
             { text: 'SharedPreference', link: '/Android/SharedPreference' },
-            { text: 'LiveData', link: '/Android/LiveData' },
+            { text: 'DataBinding', link: '/Android/DataBinding' },
+            { text: 'ViewBinding', link: '/Android/ViewBinding' },
+            { text: 'RxBinding', link: '/Android/RxBinding' },
+            { text: 'ViewModel 和 LiveData', link: '/Android/ViewModel 和 LiveData' },
             { text: '事件分发机制', link: '/Android/事件分发机制' },
             { text: 'Context', link: '/Android/Context' },
             { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
@@ -246,7 +250,7 @@ export default defineConfig({
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
           ]
-        },        
+        },
         {
           text: '安卓日志系统',
           collapsed: false,
@@ -296,6 +300,17 @@ export default defineConfig({
             { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
             { text: '坐标系统', link: '/Android/OpenGL ES坐标系统' },
             { text: '纹理', link: '/Android/OpenGL-纹理' },
+          ]
+        },
+        {
+          text: 'Gradle',
+          collapsed: false,
+          items: [
+            { text: 'build.gradle', link: '/Android/build.gradle' },
+            { text: 'build.gradle.kts', link: '/Android/build.gradle.kts' },
+            { text: 'proguard-rules.pro', link: '/Android/proguard-rules.pro' },
+            { text: 'settings.gradle', link: '/Android/settings.gradle' },
+            { text: 'settings.gradle.kts', link: '/Android/settings.gradle.kts' },
           ]
         }
       ],
@@ -386,7 +401,7 @@ export default defineConfig({
             { text: '动态代理', link: '/Java/动态代理' },
             { text: '反射', link: '/Java/反射' },
           ]
-        },        
+        },
         {
           text: 'Java并发',
           collapsed: false,
@@ -404,22 +419,22 @@ export default defineConfig({
             { text: 'Daemon线程', link: '/Java/Daemon线程' },
             { text: '线程间通信', link: '/Java/线程间通信' },
             { text: '线程池', link: '/Java/线程池' },
-            { text: 'Lock接口', link: '/Java/Lock接口' }, 
-            { text: '队列同步器', link: '/Java/队列同步器' }, 
-            { text: '排他锁', link: '/Java/排他锁' }, 
-            { text: 'LockSupport', link: '/Java/LockSupport' }, 
-            { text: 'Condition接口', link: '/Java/Condition接口' }, 
-            { text: 'ConcurrentHashMap', link: '/Java/ConcurrentHashMap' }, 
-            { text: 'ConcurrentLinkedQueue', link: '/Java/ConcurrentLinkedQueue' }, 
-            { text: 'Java的阻塞队列', link: '/Java/Java的阻塞队列' }, 
-            { text: 'CountDownLatch', link: '/Java/CountDownLatch' }, 
-            { text: 'CyclicBarrier', link: '/Java/CyclicBarrier' }, 
-            { text: 'Semaphore', link: '/Java/Semaphore' }, 
-            { text: 'Exchanger', link: '/Java/Exchanger' }, 
-            { text: 'Executor框架', link: '/Java/Executor框架' }, 
-            { text: 'Callable和Runnable区别', link: '/Java/Callable和Runnable区别' }, 
-            { text: 'Future接口', link: '/Java/Future接口' }, 
-            { text: 'FutureTask', link: '/Java/FutureTask' }, 
+            { text: 'Lock接口', link: '/Java/Lock接口' },
+            { text: '队列同步器', link: '/Java/队列同步器' },
+            { text: '排他锁', link: '/Java/排他锁' },
+            { text: 'LockSupport', link: '/Java/LockSupport' },
+            { text: 'Condition接口', link: '/Java/Condition接口' },
+            { text: 'ConcurrentHashMap', link: '/Java/ConcurrentHashMap' },
+            { text: 'ConcurrentLinkedQueue', link: '/Java/ConcurrentLinkedQueue' },
+            { text: 'Java的阻塞队列', link: '/Java/Java的阻塞队列' },
+            { text: 'CountDownLatch', link: '/Java/CountDownLatch' },
+            { text: 'CyclicBarrier', link: '/Java/CyclicBarrier' },
+            { text: 'Semaphore', link: '/Java/Semaphore' },
+            { text: 'Exchanger', link: '/Java/Exchanger' },
+            { text: 'Executor框架', link: '/Java/Executor框架' },
+            { text: 'Callable和Runnable区别', link: '/Java/Callable和Runnable区别' },
+            { text: 'Future接口', link: '/Java/Future接口' },
+            { text: 'FutureTask', link: '/Java/FutureTask' },
           ]
         }
       ],
@@ -463,7 +478,7 @@ export default defineConfig({
             { text: '集合', link: '/Kotlin/集合' },
             { text: '尾递归', link: '/Kotlin/尾递归' },
           ]
-        }, 
+        },
         {
           text: '协程',
           items: [
