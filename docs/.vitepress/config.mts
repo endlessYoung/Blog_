@@ -144,6 +144,7 @@ export default defineConfig({
           collapsed: true,
           items: [
             { text: 'Android简介', link: '/Android/Android简介' },
+            { text: 'Manifest详解', link: '/Android/Manifest详解' },
             { text: '活动(Activity)', link: '/Android/Activity' },
             { text: 'Activity的启动模式', link: '/Android/Activity的启动模式' },
             { text: 'LinearLayout', link: '/Android/LinearLayout' },
