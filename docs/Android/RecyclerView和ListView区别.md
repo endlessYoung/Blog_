@@ -1,0 +1,34 @@
+# RecyclerView和ListView区别
+
+## 1. 简要区别
+1. ViewHolder
+ListView 需要自定义ViewHolder,判断convertView是否为null，setTag()与getTag()的使用;RecyclerView有规定好的ViewHolder。
+2. 布局不同
+ListView 只支持垂直方向的，而RecyclerView，它里面的LayoutManager（布局管理类），有横向、竖向、瀑布流、网格等复杂的布局。
+3. 数据更新
+ListView 数据刷新指的是全部数据刷新。RecyclerView支持局部数据刷新
+注:ListView 提供了 setEmptyView 该 API 来让我们处理 Adapter 中数据为空的情况；Recyclerview没有提供。
+4. 适配器
+ListView的适配器继承ArrayAdapter;RecycleView的适配器继承RecyclerAdapter,并将范类指定为子项对象类.ViewHolder(内部类)。
+5. item 事件
+ListView是在主方法中ListView对象的setOnItemClickListener方法；RecyclerView则是在子项具体的View中去注册事件。
+6. 缓存不同
+Recyclerview 四级缓存 是由三个类共同作用完成的，Recycler、RecycledViewPool和ViewCacheExtension。
+Listview 二级缓存 通过 ActiveViews和ScrapViews
+
+## 2.Recyclerview 缓存
+一级缓存：屏幕内缓存，屏幕内缓存指在屏幕中显示的ViewHolder，ViewHolder会缓存在AttachedScrap、ChangedScrap中
+
+1. AttachedScrap：未与RecyclerView分离的ViewHolder列表
+2. ChangedScrap：数据已经改变的viewHolder列表
+
+二级缓存：屏幕外缓存，当列表滑动出了屏幕时，ViewHolder会被缓存在 CachedViews ，其大小由ViewCacheMax决定，默认DEFAULT_CACHE_SIZE为2，可通过Recyclerview.setItemViewCacheSize()动态设置。
+
+三级缓存：RecycledViewPool， RecycledViewPool类是用来缓存ViewHolder用，如果多个RecyclerView之间用setRecycledViewPool(RecycledViewPool)设置同一个RecycledViewPool，他们就可以共享ViewHolder。
+
+四级缓存：ViewCacheExtension开发人员可自定义的一层缓存，是虚拟类ViewCacheExtension的一个实例，开发人员可实现方法getViewForPositionAndType来实现自己的缓存。
+
+## ListView 缓存
+一级缓存：ActiveViews 活动等view，这些view是布局过程开始屏幕上的view。layout开始时这个数组被填充，layout结束，ActiveViews中的view移动到ScrapViews。ActiveViews代表了一个连续范围的views，其第一个view的位置存储在FirstActivePosition变量中。
+
+二级缓存：ScrapViews 废弃的view，无序的被adapter的convertView使用的view的集合ScrapViews是多个list组成的数组，数组的长度为viewTypeCount，每个item是个list，所以每个list缓存不同类型item布局的view

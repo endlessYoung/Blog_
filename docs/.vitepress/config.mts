@@ -126,15 +126,17 @@ export default defineConfig({
     nav: [
       // { text: 'Home', link: '/Ai/监督学习入门' },
       { text: 'Android', link: '/Android/Activity' },
-      { text: 'Ai', link: '/Ai/监督学习入门' },
+      { text: '数据结构和算法', link: '/数据结构和算法/合并数组' },
       { text: 'Java', link: '/Java/Integer1000与100的比较' },
       { text: 'Kotlin', link: '/Kotlin/数据类' },
       { text: 'Python', link: '/Python/1' },
       { text: 'SQL', link: '/SQL/全文搜索' },
+      { text: 'Ai', link: '/Ai/监督学习入门' },
       { text: 'JS', link: '/JS/1' },
       { text: 'C', link: '/C/1' },
       { text: 'C++', link: '/C++/1' },
       { text: 'Linux', link: '/Linux/Index' },
+
     ],
 
     sidebar: {
@@ -153,6 +155,15 @@ export default defineConfig({
             { text: 'FrameLayout', link: '/Android/FrameLayout' },
             { text: 'TableLayout', link: '/Android/TableLayout' },
             { text: 'GridLayout', link: '/Android/GridLayout' },
+            { text: 'SparseArray', link: '/Android/SparseArray' },
+            { text: 'RecyclerView和ListView区别', link: '/Android/RecyclerView和ListView区别' },
+            { text: 'RecyclerView知识点汇总', link: '/Android/RecyclerView知识点汇总' },
+            { text: 'DecorView', link: '/Android/DecorView' },
+            { text: 'ViewRoot', link: '/Android/ViewRoot' },
+            { text: 'Toast', link: '/Android/Toast' },
+            { text: 'DialogFragment', link: '/Android/DialogFragment' },
+            { text: 'PopupWindow', link: '/Android/PopupWindow' },
+            { text: 'Snackbar', link: '/Android/Snackbar' },
             { text: 'BottomNavigationView', link: '/Android/BottomNavigationView' },
             { text: '服务(Service)', link: '/Android/Service' },
             { text: '广播(BroadcastReceiver)', link: '/Android/BroadcastReceiver' },
@@ -180,6 +191,7 @@ export default defineConfig({
             { text: '事件分发机制', link: '/Android/事件分发机制' },
             { text: 'Context', link: '/Android/Context' },
             { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
+            { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
           ]
         },
         {
@@ -192,6 +204,7 @@ export default defineConfig({
             { text: 'ADB', link: '/Android/ADB' },
             { text: '深入理解crash问题', link: '/Android/深入理解crash问题' },
             { text: 'Application为什么不能作为Dialog的context', link: '/Android/Application为什么不能作为Dialog的context' },
+            { text: 'App卡顿优化', link: '/Android/App卡顿优化' },
           ]
         },
         {
@@ -232,6 +245,7 @@ export default defineConfig({
             { text: 'Activity如何与Window与View进行分工合作的？', link: '/Android/Activity如何与Window与View进行分工合作的？' },
             { text: 'View的绘制过程都是用的同一个canvas吗？', link: '/Android/View的绘制过程都是用的同一个canvas吗？' },
             { text: 'onResume中获取宽高有效吗？', link: '/Android/onResume中获取宽高有效吗？' },
+            { text: 'Activity、Window、DecorView 的关系', link: '/Android/Activity、Window、DecorView 的关系' },
             { text: '渲染机制', link: '/Android/渲染机制' },
             { text: 'SurfaceFlinger', link: '/Android/SurfaceFlinger' },
             { text: 'PhoneWindow', link: '/Android/PhoneWindow' },
@@ -246,8 +260,8 @@ export default defineConfig({
           items: [
             { text: '图形渲染', link: '/Android/图形渲染' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
-            { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
-            { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
+            { text: 'WindowSession', link: '/Android/WindowSession' },
+            { text: 'Activity、View、Window三者之间的关系', link: '/Android/Activity、View、Window三者之间的关系' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
           ]
@@ -390,6 +404,15 @@ export default defineConfig({
             { text: 'Index', link: '/JS/' },
             { text: 'One', link: '/JS/one' },
             { text: 'Two', link: '/JS/two' }
+          ]
+        }
+      ],
+      '/数据结构和算法/': [
+        {
+          text: '简单题',
+          items: [
+            { text: '合并数组', link: '/数据结构和算法/合并数组' },
+            { text: '移除元素', link: '/数据结构和算法/移除元素' },
           ]
         }
       ],
