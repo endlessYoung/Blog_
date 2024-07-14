@@ -216,6 +216,14 @@ export default defineConfig({
           ]
         },
         {
+          text: '性能优化-ui',
+          collapsed: true,
+          items: [
+            { text: 'ListView性能优化', link: '/Android/ListView性能优化' },
+            { text: 'RecyclerView性能优化', link: '/Android/RecyclerView性能优化' },
+          ]
+        },
+        {
           text: 'JNI',
           collapsed: true,
           items: [
@@ -474,6 +482,7 @@ export default defineConfig({
             { text: '编译时常量', link: '/Kotlin/编译时常量' },
             { text: '主构造函数和次构造函数', link: '/Kotlin/主构造函数和次构造函数' },
             { text: '泛型', link: '/Kotlin/泛型' },
+            { text: 'reified', link: '/Kotlin/reified' },
             { text: '协变和逆变', link: '/Kotlin/协变和逆变' },
             { text: '类型擦除', link: '/Kotlin/类型擦除' },
             { text: '序列', link: '/Kotlin/序列' },
