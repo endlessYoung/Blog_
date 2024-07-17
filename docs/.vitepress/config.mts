@@ -179,6 +179,7 @@ export default defineConfig({
             { text: 'Jobservice', link: '/Android/Jobservice' },
             { text: 'Intent', link: '/Android/Intent' },
             { text: 'Fragment', link: '/Android/Fragment' },
+            { text: 'Fragment转场动画', link: '/Android/Fragment转场动画' },
             { text: 'Handler', link: '/Android/Handler' },
             { text: 'AlarmManager', link: '/Android/AlarmManager' },
             { text: 'SurfaceView', link: '/Android/SurfaceView' },
@@ -190,8 +191,18 @@ export default defineConfig({
             { text: 'ViewModel 和 LiveData', link: '/Android/ViewModel 和 LiveData' },
             { text: '事件分发机制', link: '/Android/事件分发机制' },
             { text: 'Context', link: '/Android/Context' },
+            { text: 'AssestManager', link: '/Android/AssestManager' },
             { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
-            { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
+          ]
+        },
+        {
+          text: '组件通信',
+          collapsed: true,
+          items: [
+            { text: 'Activity和Fragment的低耦合通信', link: '/Android/Activity和Fragment的低耦合通信' },
+            { text: 'Android与Service通信', link: '/Android/Android与Service通信' },
+            { text: 'ViewModel通信方案', link: '/Android/ViewModel通信方案' },
+            { text: '事件总线EventBus', link: '/Android/事件总线EventBus' },
           ]
         },
         {
@@ -271,7 +282,9 @@ export default defineConfig({
             { text: 'WindowSession', link: '/Android/WindowSession' },
             { text: 'Activity、View、Window三者之间的关系', link: '/Android/Activity、View、Window三者之间的关系' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
-            { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
+            { text: 'Skia', link: '/Android/Skia' },
+            { text: 'OpenGL ES', link: '/Android/OpenGL ES' },
+            { text: 'vulkan', link: '/Android/vulkan' },
           ]
         },
         {
