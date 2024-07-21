@@ -265,10 +265,10 @@ export default defineConfig({
             { text: 'View的绘制过程都是用的同一个canvas吗？', link: '/Android/View的绘制过程都是用的同一个canvas吗？' },
             { text: 'onResume中获取宽高有效吗？', link: '/Android/onResume中获取宽高有效吗？' },
             { text: 'Activity、Window、DecorView 的关系', link: '/Android/Activity、Window、DecorView 的关系' },
-            { text: '渲染机制', link: '/Android/渲染机制' },
             { text: 'SurfaceFlinger', link: '/Android/SurfaceFlinger' },
             { text: 'PhoneWindow', link: '/Android/PhoneWindow' },
             { text: '安卓中的IPC通信方式', link: '/Android/安卓中的IPC通信方式' },
+            { text: 'AsyncTask ', link: '/Android/AsyncTask ' },
             { text: 'Binder', link: '/Android/Binder' },
             { text: '进程保活', link: '/Android/进程保活' },
           ]
@@ -278,6 +278,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '图形渲染', link: '/Android/图形渲染' },
+            { text: '渲染机制', link: '/Android/渲染机制' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
             { text: 'WindowSession', link: '/Android/WindowSession' },
             { text: 'Activity、View、Window三者之间的关系', link: '/Android/Activity、View、Window三者之间的关系' },
@@ -285,6 +286,27 @@ export default defineConfig({
             { text: 'Skia', link: '/Android/Skia' },
             { text: 'OpenGL ES', link: '/Android/OpenGL ES' },
             { text: 'vulkan', link: '/Android/vulkan' },
+          ]
+        },
+        {
+          text: '序列化',
+          collapsed: false,
+          items: [
+            { text: 'Parcelable', link: '/Android/Parcelable' },
+            { text: 'ProtocolBuffers', link: '/Android/ProtocolBuffers' },
+          ]
+        },
+        {
+          text: '安全',
+          collapsed: false,
+          items: [
+            { text: '混淆机制', link: '/Android/混淆机制' },
+            { text: '签名机制', link: '/Android/签名机制' },
+            { text: '加固技术', link: '/Android/加固技术' },
+            { text: '常见的漏洞', link: '/Android/常见的漏洞' },
+            { text: '反破解技术', link: '/Android/反破解技术' },
+            { text: '反编译技术', link: '/Android/反编译技术' },
+            { text: '敏感信息隐藏技术', link: '/Android/敏感信息隐藏技术' },
           ]
         },
         {
@@ -347,6 +369,15 @@ export default defineConfig({
             { text: 'proguard-rules.pro', link: '/Android/proguard-rules.pro' },
             { text: 'settings.gradle', link: '/Android/settings.gradle' },
             { text: 'settings.gradle.kts', link: '/Android/settings.gradle.kts' },
+          ]
+        },
+        {
+          text: 'NDK',
+          collapsed: false,
+          items: [
+            { text: 'ABI', link: '/Android/ABI' },
+            { text: 'JNI', link: '/Android/JNI' },
+            { text: 'so文件', link: '/Android/so文件' },
           ]
         }
       ],
