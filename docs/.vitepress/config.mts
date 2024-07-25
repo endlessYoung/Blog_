@@ -260,6 +260,7 @@ export default defineConfig({
             { text: 'AMS对App进程启动和管理的方案', link: '/Android/AMS对App进程启动和管理的方案' },
             { text: 'setContentView之后发生了什么', link: '/Android/setContentView之后发生了什么' },
             { text: 'StartActivity之后发生了什么', link: '/Android/StartActivity之后发生了什么' },
+            { text: 'Activity启动过程', link: '/Android/Activity启动过程' },
             { text: 'invalidate会触发其他View的重绘吗？', link: '/Android/invalidate会触发其他view的重绘吗？' },
             { text: 'Activity如何与Window与View进行分工合作的？', link: '/Android/Activity如何与Window与View进行分工合作的？' },
             { text: 'View的绘制过程都是用的同一个canvas吗？', link: '/Android/View的绘制过程都是用的同一个canvas吗？' },
@@ -279,8 +280,10 @@ export default defineConfig({
           items: [
             { text: '图形渲染', link: '/Android/图形渲染' },
             { text: '渲染机制', link: '/Android/渲染机制' },
+            { text: '深入理解图形渲染的关键角色和关系', link: '/Android/深入理解图形渲染的关键角色和关系' },
+            { text: 'WindowManagerService', link: '/Android/WindowManagerService' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
-            { text: 'WindowSession', link: '/Android/WindowSession' },
+            { text: 'HWC的合成策略', link: '/Android/HWC的合成策略' },
             { text: 'Activity、View、Window三者之间的关系', link: '/Android/Activity、View、Window三者之间的关系' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
             { text: 'Skia', link: '/Android/Skia' },
@@ -301,6 +304,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '混淆机制', link: '/Android/混淆机制' },
+            { text: 'v1和v2签名机制', link: '/Android/v1和v2签名机制' },
             { text: '签名机制', link: '/Android/签名机制' },
             { text: '加固技术', link: '/Android/加固技术' },
             { text: '常见的漏洞', link: '/Android/常见的漏洞' },
