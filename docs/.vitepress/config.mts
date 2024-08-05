@@ -615,6 +615,12 @@ export default defineConfig({
       ],
       '/SQL/': [
         {
+          text: 'SQL基础',
+          items: [
+            { text: 'SQL简介', link: '/SQL/SQL简介' },
+          ]
+        },
+        {
           text: 'SQL',
           items: [
             { text: '全文搜索', link: '/SQL/全文搜索' },
