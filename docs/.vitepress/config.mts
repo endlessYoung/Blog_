@@ -192,6 +192,7 @@ export default defineConfig({
             { text: '事件分发机制', link: '/Android/事件分发机制' },
             { text: 'Context', link: '/Android/Context' },
             { text: 'AssestManager', link: '/Android/AssestManager' },
+            { text: 'MediaPlayer', link: '/Android/MediaPlayer' },
             { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
           ]
         },
