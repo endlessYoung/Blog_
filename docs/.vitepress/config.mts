@@ -273,6 +273,7 @@ export default defineConfig({
             { text: 'AsyncTask ', link: '/Android/AsyncTask ' },
             { text: 'Binder', link: '/Android/Binder' },
             { text: '进程保活', link: '/Android/进程保活' },
+            { text: 'Activity中viewtree的创建过程', link: '/Android/Activity中viewtree的创建过程' },
           ]
         },
         {
