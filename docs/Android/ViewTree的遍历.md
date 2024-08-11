@@ -1,0 +1,29 @@
+# ViewTree的遍历
+
+如果整个UI界面只是由单一的View对象来描述的，那么它既可以占据整个屏幕空间，也可以有选择地在屏幕上任何一片区域上显示。不过这种理想的情况是不存在的。通常我们面对的View层级都比较深，涉及的view对象比较多。此时系统就要综合来考虑各个view提出的需求。比如他们都想占据整个屏幕，或者都从零点坐标开始绘制。ViewTree的遍历机制就要公平处理这些问题。
+
+View体系中的遍历就是系统综合考量个元素请求的过程。当遍历结束后，各个View元素就能得到系统的最终分配结果。Android系统要求所有元素都服从它的安排，否则很可能会产生位置的错误。分配结果最少会包含两方面的内容，即View对象的尺寸带下和位置，再加上View自身的UI内容就构成了UI显示的三要素。
+
+应用程序在以下情况会遍历ViewTree：
+
+1. 应用程序刚启动时
+应用程序启动后会逐步构造出自己的整颗ViewTree，然后进行一次全面的遍历
+
+源码
+
+在setView中调用的requestLayout就是执行第一次遍历的触发源。这个函数将通过向Choregrapher注册一个CALL_BACK_TRAVERSAL回调事件来间接驱动Layout的执行，最终的遍历工作由performTraversals来完成。
+
+2. 外部事件
+对于应用程序来说，外部事件才是驱动ViewRoot工作的主要触发源。比如用户产生的触摸、按键等事件，经过层层传递最终分配到应用进程中。这些事件除了可以改变应用程序的内部状态外，还可能影响到UI界面的显示。
+
+3. 内部事件
+比如定时执行的刷新是，比如当一个view的GONE和VISIBLE。都涉及到界面的调整和重绘。
+
+比如：requestLayout、setLayoutParams、invalidate、dispatchAppVisibility。
+
+## 2. 遍历流程
+
+UI显示的三要素主要是尺寸、位置和内容，它们在遍历过程中分别对应以下三个函数：
+1. performMeasure
+2. performLayout
+3. performDraw

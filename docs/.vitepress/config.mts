@@ -274,6 +274,9 @@ export default defineConfig({
             { text: 'Binder', link: '/Android/Binder' },
             { text: '进程保活', link: '/Android/进程保活' },
             { text: 'Activity中viewtree的创建过程', link: '/Android/Activity中viewtree的创建过程' },
+            { text: 'WMS中窗口的注册', link: '/Android/WMS中窗口的注册' },
+            { text: 'ViewRoot的基本工作方式', link: '/Android/ViewRoot的基本工作方式' },
+            { text: 'ViewTree的遍历', link: '/Android/ViewTree的遍历' },
           ]
         },
         {

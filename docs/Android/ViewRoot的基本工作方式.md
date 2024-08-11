@@ -1,0 +1,16 @@
+# ViewRoot的基本工作方式
+
+每一颗ViewTree只对应一个ViewRoot。它将和WindowManagerService进行一系列的通信，包括窗口注册，大小调整等，ViewRoot主要的触发源有两种：
+1. ViewTree内部的请求
+比如某个View对象需要更新UI时，它会通过invalidate或者其他方式发起请求。随后这些请求会沿着ViewTree层层往上递进，最终到达ViewRoot，ViewRoot再根据一系列的实际情况来采取相应措施，比如是否发起一次遍历，是否需要通知WMS等。
+2. 外部的状态更新
+WMS会回调ViewRoot通知界面大小改变、触摸事件、按键事件等。
+
+不论是内部的请求还是外部的请求，通常情况下，ViewRoot并不会直接处理，而是先把消息入队后再依次处理。ViewRoot内部定义了ViewRootHandler类来对这些消息进行统一处理。有意思的是，这个Handler实际上是和主线程的MessageQueue挂钩的，这也就验证了ViewRoot相关的操作确实是再主线程中进行的。正因为此，我们在ViewRootHandler中执行的具体事件处理要注意不要有耗时的操作，否则很可能会阻塞主线程，引发ANR。
+
+ViewRoot的工作流程如图
+
+图
+
+各种外部和内部请求都会首先入队到程序主线程的MessageQueue中，再由ViewRoot具体处理。这样做避免了应用程序因长时间处理某个事件而导致的响应速度降低。
+
