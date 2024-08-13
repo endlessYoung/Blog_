@@ -249,6 +249,10 @@ export default defineConfig({
           items: [
             { text: 'AOSP架构', link: '/Android/AOSP架构' },
             { text: '智能指针', link: '/Android/智能指针' },
+            { text: 'Android进程和线程', link: '/Android/Android进程和线程' },
+            { text: 'Handler、MessageQueue和Looper', link: '/Android/Handler、MessageQueue和Looper' },
+
+
             { text: 'Parcel', link: '/Android/Parcel' },
             { text: 'ServiceManager', link: '/Android/ServiceManager' },
             { text: 'Android系统启动流程', link: '/Android/Android系统启动流程' },
