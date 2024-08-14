@@ -214,6 +214,7 @@ export default defineConfig({
             { text: 'ANR问题简析', link: '/Android/ANR问题简析' },
             { text: 'Watchdog', link: '/Android/Watchdog' },
             { text: 'ADB', link: '/Android/ADB' },
+            { text: 'AndroidTest编译Provider冲突问题', link: '/Android/AndroidTest编译Provider冲突问题' },
             { text: '深入理解crash问题', link: '/Android/深入理解crash问题' },
             { text: 'Application为什么不能作为Dialog的context', link: '/Android/Application为什么不能作为Dialog的context' },
             { text: 'App卡顿优化', link: '/Android/App卡顿优化' },
@@ -251,6 +252,7 @@ export default defineConfig({
             { text: '智能指针', link: '/Android/智能指针' },
             { text: 'Android进程和线程', link: '/Android/Android进程和线程' },
             { text: 'Handler、MessageQueue和Looper', link: '/Android/Handler、MessageQueue和Looper' },
+            { text: 'ActivityThread线程(UI主线程)', link: '/Android/ActivityThread线程(UI主线程)' },
 
 
             { text: 'Parcel', link: '/Android/Parcel' },
