@@ -257,6 +257,9 @@ export default defineConfig({
             { text: 'Thread类', link: '/Android/Thread类' },
 
 
+            { text: 'ActivityManagerService', link: '/Android/ActivityManagerService' },
+
+
             { text: 'Parcel', link: '/Android/Parcel' },
             { text: 'ServiceManager', link: '/Android/ServiceManager' },
             { text: 'Android系统启动流程', link: '/Android/Android系统启动流程' },
