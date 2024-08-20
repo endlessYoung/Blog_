@@ -54,3 +54,35 @@ enum Activtiy {
 一句话描述:AMS是通过ActivityStack来记录、管理系统中的Activity和其他组件的状态，并提供查询功能的一个系统服务。
 
 AMS是系统进程的一部分，运行在一个独立的线程中。其主要的工作就是管理、记录和查询。类似于户籍办，办理登记和查询。AMS的任务只是保管Activity的状态信息，而像Activity中描述的UI界面如何显示是WindowManagerService和SurfaceFlinger完成的。
+
+## 3. startActivity流程
+
+startActivity用于启动一个Activit, 具体是什么Activity则是AMS通过系统中安装的所有程序包进行intent匹配得到的，并不局限于调用当前包的范围。
+startActivity方法的调用流程：Activity1 -> startActivity@ContextImpl.java -> execStartActivity@Insturmentation.java -> startActivity@ActivityManagerService.java 
+
+先介绍5个非常相近startActivity方法：
+1. startActivity@ActivityManagerService.java
+2. startActivityAsUser@ActivityManagerService.java
+3. startActivityMayWait@ActivityStack.java
+4. startActivityLocked@ActivityStack.java
+5. startActivityUnheckedLocked@ActivityStack.java
+
+这几个函数存在先后调用的关系。下面是源码
+
+**需要填补**
+
+## 4. ActivityTask
+
+ActivityTask运用的是栈的管理方式，在AMS中就是众多Task的集合。Android提供了一系列的Flag标志来允许用户对Task进行实时调整。
+
+### 4.1 管理ActivityTask
+
+应用可以通过两种方法来影响ActivityTask的默认行为。
+
+**方法1：在Activity标签中指定属性**
+
+## 5. Instrumentation机制
+
+
+
+**方法2：使用Intent标志**
