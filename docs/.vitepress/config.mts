@@ -179,6 +179,7 @@ export default defineConfig({
             { text: 'Jobservice', link: '/Android/Jobservice' },
             { text: 'Intent', link: '/Android/Intent' },
             { text: 'Fragment', link: '/Android/Fragment' },
+            { text: 'Fragment几种不同的commit方法', link: '/Android/Fragment几种不同的commit方法' },
             { text: 'Fragment转场动画', link: '/Android/Fragment转场动画' },
             { text: 'Handler', link: '/Android/Handler' },
             { text: 'AlarmManager', link: '/Android/AlarmManager' },

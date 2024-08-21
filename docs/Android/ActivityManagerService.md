@@ -81,8 +81,33 @@ ActivityTask运用的是栈的管理方式，在AMS中就是众多Task的集合�
 
 **方法1：在Activity标签中指定属性**
 
-## 5. Instrumentation机制
-
-
+- android:taskAffinity
+- android:launchMode
+- android:allowTaskReparenting
+- android:clearTaskOnLaunch
+- android:alwaysRetainTaskState
+- android:finishOnTaskLaunch
 
 **方法2：使用Intent标志**
+- FLAG_ACTIVITY_NEW_TASK
+- FLAG_ACTIVITY_SINGLE_TOP
+- FLAG_ACTIVITY_CLEAR_TOP
+- FLAG_ACTIVITY_NO_HISTORY
+- FLAG_ACTIVITY_MULTIPLE_TASK
+- FLAG_ACTIVITY_EXCLUDES_FROM_RECENTS
+- FLAG_ACTIVTIY_BROUGHT_TO_FRONT
+- FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+- FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET
+- FLAG_ACTIVITY_NO_USER_ACTION
+- FLAG_ACTIVITY_REORDER_TO_FRONT
+- FLAG_ACTIVITY_NO_ANIMATION
+- FLAG_ACTIVITY_CLEAR_TASK
+- FLAG_ACTIVITY_TASK_ON_HOME
+
+## 5. Instrumentation机制
+
+Instrumentation不仅可以自动化测试，而且可以使两个APK运行在同一个进程中，从而达到资源共享的目的。
+
+Android在/system/bin下提供了很多中介程序来允许外部用户间接使用SystemService，例如pm、am等。
+
+Instrumentation提供了允许用户获取应用与系统之间的交互流程的机制。
