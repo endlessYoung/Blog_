@@ -533,7 +533,17 @@ export default defineConfig({
             { text: 'Future接口', link: '/Java/Future接口' },
             { text: 'FutureTask', link: '/Java/FutureTask' },
           ]
-        }
+        },
+        {
+          text: 'JVM',
+          collapsed: false,
+          items: [
+            { text: 'JVM概述', link: '/Java/JVM概述' },
+            { text: 'JVM分区', link: '/Java/JVM分区' },
+            { text: 'String的intern方法', link: '/Java/String的intern方法' },
+            { text: '对象初始化流程', link: '/Java/对象初始化流程' },
+          ]
+        },
       ],
       '/Kotlin/': [
         {
