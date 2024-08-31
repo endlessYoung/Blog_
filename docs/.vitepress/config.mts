@@ -259,6 +259,7 @@ export default defineConfig({
 
 
             { text: 'ActivityManagerService', link: '/Android/ActivityManagerService' },
+            { text: 'WindowManagerService', link: '/Android/WindowManagerService' },
 
 
             { text: 'Parcel', link: '/Android/Parcel' },
