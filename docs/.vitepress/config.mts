@@ -173,7 +173,7 @@ export default defineConfig({
             { text: '进程和应用生命周期', link: '/Android/进程和应用生命周期' },
             { text: '异步任务与多线程', link: '/Android/异步任务与多线程' },
             { text: 'Parcelable和Bundle', link: '/Android/Parcelable和Bundle' },
-            { text: 'Service的启动方式', link: '/Android/Service的启动方式' },
+            { text: 'Service的启动方式和区别', link: '/Android/Service的启动方式和区别' },
             { text: 'Service生命周期', link: '/Android/Service生命周期' },
             { text: '各种Service的区别', link: '/Android/各种Service的区别' },
             { text: 'Jobservice', link: '/Android/Jobservice' },
@@ -195,6 +195,8 @@ export default defineConfig({
             { text: 'AssestManager', link: '/Android/AssestManager' },
             { text: 'MediaPlayer', link: '/Android/MediaPlayer' },
             { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
+            { text: '自定义View', link: '/Android/自定义View' },
+            { text: '创建有参ViewModel', link: '/Android/创建有参ViewModel' },
           ]
         },
         {
@@ -228,6 +230,8 @@ export default defineConfig({
           items: [
             { text: 'Android.mk', link: '/Android/Android.mk' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
+            { text: 'APK打包流程', link: '/Android/APK打包流程' },
+            { text: 'pageSize', link: '/Android/pageSize' },
           ]
         },
         {
@@ -255,6 +259,12 @@ export default defineConfig({
             { text: 'Android进程和线程', link: '/Android/Android进程和线程' },
             { text: 'Handler、MessageQueue和Looper', link: '/Android/Handler、MessageQueue和Looper' },
             { text: 'ActivityThread线程(UI主线程)', link: '/Android/ActivityThread线程(UI主线程)' },
+            { text: '为什么主线程可以直接new Handler', link: '/Android/为什么主线程可以直接new Handler' },
+            { text: 'Handler.postDelayed()消息时间准确吗？', link: '/Android/Handler.postDelayed()消息时间准确吗？' },
+            { text: 'IdleHandler', link: '/Android/IdleHandler' },
+            { text: '同步屏障', link: '/Android/同步屏障' },
+            { text: 'Handler内存泄漏如何解决？', link: '/Android/Handler内存泄漏如何解决？' },
+            { text: '如何创建Message？', link: '/Android/如何创建Message？' },
             { text: 'Thread类', link: '/Android/Thread类' },
 
 

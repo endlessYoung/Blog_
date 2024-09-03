@@ -1,4 +1,4 @@
-# Service的启动方式
+# Service的启动方式和区别
 
 （1）Started Service被开启的service通过其他组件调用startService()被创建，这种service可以无限地运行下去，必须调用stopSelf()方法或者其他组件调用stopService()方法来停止它，当service被停止时，系统会销毁它
 
