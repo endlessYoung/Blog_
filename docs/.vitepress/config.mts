@@ -190,13 +190,14 @@ export default defineConfig({
             { text: 'ViewBinding', link: '/Android/ViewBinding' },
             { text: 'RxBinding', link: '/Android/RxBinding' },
             { text: 'ViewModel 和 LiveData', link: '/Android/ViewModel 和 LiveData' },
+            { text: '创建有参ViewModel', link: '/Android/创建有参ViewModel' },
             { text: '事件分发机制', link: '/Android/事件分发机制' },
             { text: 'Context', link: '/Android/Context' },
             { text: 'AssestManager', link: '/Android/AssestManager' },
             { text: 'MediaPlayer', link: '/Android/MediaPlayer' },
             { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
             { text: '自定义View', link: '/Android/自定义View' },
-            { text: '创建有参ViewModel', link: '/Android/创建有参ViewModel' },
+            { text: 'DataStore', link: '/Android/DataStore' },
           ]
         },
         {
