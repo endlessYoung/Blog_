@@ -604,8 +604,13 @@ export default defineConfig({
           items: [
             { text: '协程', link: '/Kotlin/协程' },
             { text: '通道', link: '/Kotlin/通道' },
-            { text: 'Flow', link: '/Kotlin/Flow' },
             { text: 'Mutex', link: '/Kotlin/Mutex' },
+          ]
+        },
+        {
+          text: 'Flow',
+          items: [
+            { text: 'Flow', link: '/Kotlin/Flow' },
           ]
         },
         {
