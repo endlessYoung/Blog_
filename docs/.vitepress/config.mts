@@ -685,7 +685,8 @@ export default defineConfig({
         {
           text: 'C++',
           items: [
-            { text: 'Index', link: '/C++/' },
+            { text: '头文件的声明规范', link: '/C++/头文件的声明规范' },
+            { text: '模板', link: '/C++/模板' },
             { text: 'One', link: '/C++/one' },
             { text: 'Two', link: '/C++/two' }
           ]
