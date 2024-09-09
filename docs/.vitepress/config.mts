@@ -214,6 +214,8 @@ export default defineConfig({
           text: 'debug与调试',
           collapsed: true,
           items: [
+            { text: '安卓常见的内存泄漏点', link: '/Android/安卓常见的内存泄漏点' },
+            { text: 'Fragment找不到id对应view', link: '/Android/Fragment找不到id对应view' },
             { text: 'dumpsys', link: '/Android/dumpsys' },
             { text: 'ANR问题简析', link: '/Android/ANR问题简析' },
             { text: 'Watchdog', link: '/Android/Watchdog' },
