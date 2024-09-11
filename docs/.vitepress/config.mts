@@ -572,7 +572,7 @@ export default defineConfig({
             { text: '主构造函数和次构造函数', link: '/Kotlin/主构造函数和次构造函数' },
             { text: '泛型', link: '/Kotlin/泛型' },
             { text: 'reified', link: '/Kotlin/reified' },
-            { text: '协变和逆变', link: '/Kotlin/协变和逆变' },
+            { text: '逆变和协变', link: '/Kotlin/逆变和协变' },
             { text: '类型擦除', link: '/Kotlin/类型擦除' },
             { text: '序列', link: '/Kotlin/序列' },
             { text: '类别名', link: '/Kotlin/类别名' },
