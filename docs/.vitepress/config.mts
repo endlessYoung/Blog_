@@ -605,6 +605,7 @@ export default defineConfig({
           text: '协程',
           items: [
             { text: '协程', link: '/Kotlin/协程' },
+            { text: '协程作用域', link: '/Kotlin/协程作用域' },
             { text: '通道', link: '/Kotlin/通道' },
             { text: 'Mutex', link: '/Kotlin/Mutex' },
           ]
