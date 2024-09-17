@@ -143,7 +143,7 @@ export default defineConfig({
       '/Android/': [
         {
           text: 'Android基础',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Android简介', link: '/Android/Android简介' },
             { text: 'Manifest详解', link: '/Android/Manifest详解' },
@@ -198,11 +198,15 @@ export default defineConfig({
             { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
             { text: '自定义View', link: '/Android/自定义View' },
             { text: 'DataStore', link: '/Android/DataStore' },
+            { text: 'LruCache', link: '/Android/LruCache' },
+            { text: '如何重用布局', link: '/Android/如何重用布局' },
+            { text: '使用merge减少include布局所造成的布局层次', link: '/Android/使用merge减少include布局所造成的布局层次' },
+            { text: 'AutoCompleteTextView的使用', link: '/Android/AutoCompleteTextView的使用' },
           ]
         },
         {
           text: '组件通信',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Activity和Fragment的低耦合通信', link: '/Android/Activity和Fragment的低耦合通信' },
             { text: 'Android与Service通信', link: '/Android/Android与Service通信' },
@@ -212,7 +216,7 @@ export default defineConfig({
         },
         {
           text: 'debug与调试',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '安卓常见的内存泄漏点', link: '/Android/安卓常见的内存泄漏点' },
             { text: 'Fragment找不到id对应view', link: '/Android/Fragment找不到id对应view' },
@@ -228,8 +232,18 @@ export default defineConfig({
           ]
         },
         {
+          text: '常见三方库',
+          collapsed: false,
+          items: [
+            { text: '三方库面试题', link: '/Android/三方库面试题' },
+            { text: 'LeakCanary', link: '/Android/LeakCanary' },
+            { text: 'OkHttp', link: '/Android/OkHttp' },
+            { text: 'retrofit', link: '/Android/retrofit' },
+          ]
+        },
+        {
           text: '编译',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Android.mk', link: '/Android/Android.mk' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
@@ -239,7 +253,7 @@ export default defineConfig({
         },
         {
           text: '性能优化-ui',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'ListView性能优化', link: '/Android/ListView性能优化' },
             { text: 'RecyclerView性能优化', link: '/Android/RecyclerView性能优化' },
@@ -247,7 +261,7 @@ export default defineConfig({
         },
         {
           text: 'JNI',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '初识JNI', link: '/Android/初识JNI' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
