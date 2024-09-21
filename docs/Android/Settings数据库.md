@@ -1,0 +1,3 @@
+# Settings数据库
+
+settings相关的数据最后是存在xml中，app层面都是通过SettingProvider调用到systemserver进程进行保存2、xml中写入相关字符时候，对字符长度有限制，是65535，一旦比这个大则会写入异常。

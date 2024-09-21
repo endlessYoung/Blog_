@@ -202,6 +202,7 @@ export default defineConfig({
             { text: '如何重用布局', link: '/Android/如何重用布局' },
             { text: '使用merge减少include布局所造成的布局层次', link: '/Android/使用merge减少include布局所造成的布局层次' },
             { text: 'AutoCompleteTextView的使用', link: '/Android/AutoCompleteTextView的使用' },
+            { text: 'Settings数据库', link: '/Android/Settings数据库' },
           ]
         },
         {
