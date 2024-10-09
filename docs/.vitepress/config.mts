@@ -203,6 +203,7 @@ export default defineConfig({
             { text: '使用merge减少include布局所造成的布局层次', link: '/Android/使用merge减少include布局所造成的布局层次' },
             { text: 'AutoCompleteTextView的使用', link: '/Android/AutoCompleteTextView的使用' },
             { text: 'Settings数据库', link: '/Android/Settings数据库' },
+            { text: 'WorkerManager', link: '/Android/WorkerManager' },
           ]
         },
         {
@@ -571,6 +572,11 @@ export default defineConfig({
             { text: 'JVM分区', link: '/Java/JVM分区' },
             { text: 'String的intern方法', link: '/Java/String的intern方法' },
             { text: '对象初始化流程', link: '/Java/对象初始化流程' },
+            { text: 'GC算法', link: '/Java/GC算法' },
+            { text: '伊甸园区算法', link: '/Java/伊甸园区算法' },
+            { text: '分代模型的六种垃圾回收器', link: '/Java/分代模型的六种垃圾回收器' },
+            { text: '浮动垃圾', link: '/Java/浮动垃圾' },
+            { text: '三色标记算法', link: '/Java/三色标记算法' },
           ]
         },
       ],
