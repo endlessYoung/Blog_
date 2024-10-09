@@ -395,11 +395,12 @@ export default defineConfig({
             { text: '使用Handler的postDelay消息队列有什么变化', link: '/Android/使用Handler的postDelay消息队列有什么变化' },
             { text: '如何保证多个handler线程安全', link: '/Android/如何保证多个handler线程安全' },
             { text: 'Binder驱动在哪限制', link: '/Android/Binder驱动在哪限制' },
-            { text: 'Lifecycle状态机的作用', link: '/Android/Lifecycle状态机的作用' },
-            { text: 'LiveData核心原理', link: '/Android/LiveData核心原理' },
+            { text: 'Lifecycle状态机', link: '/Android/Lifecycle状态机' },
+            { text: 'LiveData', link: '/Android/LiveData' },
             { text: 'LiveDataBus', link: '/Android/LiveDataBus' },
             { text: 'Hook技术', link: '/Android/Hook技术' },
             { text: 'AMS剖析', link: '/Android/AMS剖析' },
+            { text: 'Android一个APP里面最少有几个线程', link: '/Android/Android一个APP里面最少有几个线程' },
           ]
         },
         {
