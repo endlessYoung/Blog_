@@ -518,6 +518,12 @@ export default defineConfig({
             { text: '合并数组', link: '/数据结构和算法/合并数组' },
             { text: '移除元素', link: '/数据结构和算法/移除元素' },
           ]
+        },
+        {
+          text: '位运算',
+          items: [
+            { text: '异或运算', link: '/数据结构和算法/异或运算' },
+          ]
         }
       ],
       '/Java/': [
