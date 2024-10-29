@@ -371,7 +371,7 @@ export default defineConfig({
             { text: 'RadioLog日志', link: '/Android/RadioLog日志' },
             { text: 'SystemLog日志', link: '/Android/SystemLog日志' },
             { text: 'CrashLog日志', link: '/Android/CrashLog日志' },
-            { text: 'Anr日志', link: '/Android/Anr日志简介' },
+            { text: 'Anr日志简介', link: '/Android/Anr日志简介' },
           ]
         },
         {
