@@ -204,6 +204,9 @@ export default defineConfig({
             { text: 'AutoCompleteTextView的使用', link: '/Android/AutoCompleteTextView的使用' },
             { text: 'Settings数据库', link: '/Android/Settings数据库' },
             { text: 'WorkerManager', link: '/Android/WorkerManager' },
+            { text: '如何实现应用重启', link: '/Android/如何实现应用重启' },
+            { text: '一个App会创建多少个Application对象', link: '/Android/一个App会创建多少个Application对象' },
+            { text: 'Android文件系统', link: '/Android/Android文件系统' },
           ]
         },
         {
@@ -541,6 +544,7 @@ export default defineConfig({
           text: 'Java并发',
           collapsed: false,
           items: [
+            { text: 'ThreadLocal', link: '/Java/ThreadLocal' },
             { text: '线程安全性', link: '/Java/线程安全性' },
             { text: '原子性', link: '/Java/原子性' },
             { text: '原子操作类', link: '/Java/原子操作类' },
@@ -549,6 +553,7 @@ export default defineConfig({
             { text: 'Mutex', link: '/Java/Mutex' },
             { text: 'ReentrantLock', link: '/Java/ReentrantLock' },
             { text: 'happens-before', link: '/Java/happens-before' },
+            { text: '队列', link: '/Java/队列' },
             { text: '线程优先级', link: '/Java/线程优先级' },
             { text: '线程的状态', link: '/Java/线程的状态' },
             { text: 'Daemon线程', link: '/Java/Daemon线程' },
@@ -569,7 +574,8 @@ export default defineConfig({
             { text: 'Executor框架', link: '/Java/Executor框架' },
             { text: 'Callable和Runnable区别', link: '/Java/Callable和Runnable区别' },
             { text: 'Future接口', link: '/Java/Future接口' },
-            { text: 'FutureTask', link: '/Java/FutureTask' },
+            { text: 'Future接口', link: '/Java/Future接口' },
+            { text: 'CompletableFuture', link: '/Java/CompletableFuture' },
           ]
         },
         {
