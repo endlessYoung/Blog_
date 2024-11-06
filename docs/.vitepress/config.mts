@@ -641,6 +641,8 @@ export default defineConfig({
           items: [
             { text: '协程', link: '/Kotlin/协程' },
             { text: '协程作用域', link: '/Kotlin/协程作用域' },
+            { text: '协程生命周期', link: '/Kotlin/协程生命周期' },
+            { text: '协程的异常处理', link: '/Kotlin/协程的异常处理' },
             { text: '通道', link: '/Kotlin/通道' },
             { text: 'Mutex', link: '/Kotlin/Mutex' },
           ]
