@@ -394,6 +394,7 @@ export default defineConfig({
           text: '进阶',
           collapsed: false,
           items: [
+            { text: '安卓常见架构', link: '/Android/安卓常见架构' },
             { text: 'Intent发送数据的上限', link: '/Android/Intent发送数据的上限' },
             { text: 'Looper死循环为什么不会导致应用卡死', link: '/Android/Looper死循环为什么不会导致应用卡死' },
             { text: '使用Handler的postDelay消息队列有什么变化', link: '/Android/使用Handler的postDelay消息队列有什么变化' },
