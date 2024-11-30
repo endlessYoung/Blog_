@@ -234,6 +234,7 @@ export default defineConfig({
             { text: '深入理解crash问题', link: '/Android/深入理解crash问题' },
             { text: 'Application为什么不能作为Dialog的context', link: '/Android/Application为什么不能作为Dialog的context' },
             { text: 'App卡顿优化', link: '/Android/App卡顿优化' },
+            { text: '帧率和卡顿监控方案', link: '/Android/帧率和卡顿监控方案' },
           ]
         },
         {
