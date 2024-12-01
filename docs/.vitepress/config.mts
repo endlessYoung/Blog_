@@ -203,7 +203,7 @@ export default defineConfig({
             { text: '使用merge减少include布局所造成的布局层次', link: '/Android/使用merge减少include布局所造成的布局层次' },
             { text: 'AutoCompleteTextView的使用', link: '/Android/AutoCompleteTextView的使用' },
             { text: 'Settings数据库', link: '/Android/Settings数据库' },
-            { text: 'WorkerManager', link: '/Android/WorkerManager' },
+            { text: 'WorkManager', link: '/Android/WorkManager' },
             { text: '如何实现应用重启', link: '/Android/如何实现应用重启' },
             { text: '一个App会创建多少个Application对象', link: '/Android/一个App会创建多少个Application对象' },
             { text: 'Android文件系统', link: '/Android/Android文件系统' },
@@ -289,6 +289,7 @@ export default defineConfig({
             { text: 'Handler内存泄漏如何解决？', link: '/Android/Handler内存泄漏如何解决？' },
             { text: '如何创建Message？', link: '/Android/如何创建Message？' },
             { text: 'Thread类', link: '/Android/Thread类' },
+            { text: 'Notification从发送到显示的流程简析', link: '/Android/Notification从发送到显示的流程简析' },
 
 
             { text: 'ActivityManagerService', link: '/Android/ActivityManagerService' },
@@ -386,7 +387,7 @@ export default defineConfig({
             { text: '手机所有应用', link: '/Android/实践-手机所有应用' },
             { text: 'OpenGL-纹理', link: '/Android/OpenGL-纹理' },
             { text: '路径动画', link: '/Android/实践-路径动画' },
-            { text: 'WorkerManager', link: '/Android/实践-WorkerManager' },
+            { text: 'WorkManager', link: '/Android/实践-WorkManager' },
             { text: 'recyclerview分组', link: '/Android/实践-recyclerview分组' },
             { text: 'Widget', link: '/Android/实践-Widget' },
           ]

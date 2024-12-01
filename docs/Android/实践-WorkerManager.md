@@ -1,8 +1,8 @@
-# 实践-WorkerManager
+# 实践-WorkManager
 
 WorkManager 是 Android 中用于处理后台任务的现代 API。它是 Jetpack 架构组件的一部分，提供了一个灵活、强大且易于使用的方式，用于执行可延迟、可靠和重复的异步任务。
 
-## MyWorkerManager
+## MyWorkManager
 ``` java
 package com.example.jobservicetest;
 

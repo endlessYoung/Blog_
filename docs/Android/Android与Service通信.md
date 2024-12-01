@@ -1,16 +1,22 @@
 # Android与Service通信
 
-1. 使用 Intent 启动 Service
+## 1. 使用 `Intent` 启动 `Service`
 这是最简单和常见的一种方式，适用于需要一次性操作或简单的后台任务。
 
 在 Activity 中启动 Service：
-java
-复制代码
+
+::: code-group
+``` java
 Intent serviceIntent = new Intent(this, MyService.class);
 startService(serviceIntent);
+```
+:::
+
+
 在 Service 中处理请求：
-java
-复制代码
+
+::: code-group
+``` java
 public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -18,12 +24,16 @@ public class MyService extends Service {
         return START_STICKY;
     }
 }
-2. 使用 Binder 进行绑定 Service
-如果需要与 Service 进行更复杂的交互，可以通过 Binder 实现绑定 Service，并调用 Service 中的方法。
+```
+:::
+
+## 2. 使用 `Binder` 进行绑定 `Service`
+如果需要与 `Service` 进行更复杂的交互，可以通过 `Binder` 实现绑定 Service，并调用 `Service` 中的方法。
 
 绑定 Service：
-java
-复制代码
+
+::: code-group
+``` java
 private MyService.MyBinder binder;
 private boolean bound = false;
 
@@ -58,9 +68,13 @@ protected void onStop() {
         bound = false;
     }
 }
+```
+:::
+
 在 Service 中定义 Binder：
-java
-复制代码
+
+::: code-group
+``` java
 public class MyService extends Service {
     private final IBinder binder = new MyBinder();
 
@@ -80,12 +94,16 @@ public class MyService extends Service {
         // 执行操作
     }
 }
-3. 使用 BroadcastReceiver 进行通信
-如果 Service 仅需要向 Activity 发送简单的通知或数据更新，可以使用 BroadcastReceiver。
+```
+:::
+
+## 3. 使用 `BroadcastReceiver` 进行通信
+如果 Service 仅需要向 Activity 发送简单的通知或数据更新，可以使用 `BroadcastReceiver`。
 
 在 Activity 中注册 BroadcastReceiver：
-java
-复制代码
+
+::: code-group
+``` java
 private BroadcastReceiver receiver = new BroadcastReceiver() {
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -105,9 +123,13 @@ protected void onPause() {
     super.onPause();
     unregisterReceiver(receiver);
 }
+```
+:::
+
 在 Service 中发送广播：
-java
-复制代码
+
+::: code-group
+``` java
 public class MyService extends Service {
     public static final String ACTION_UPDATE = "com.example.app.UPDATE";
 
@@ -118,10 +140,14 @@ public class MyService extends Service {
         sendBroadcast(intent);
     }
 }
-4. 使用 EventBus 进行解耦通信
+```
+:::
+
+## 4. 使用 `EventBus` 进行解耦通信
 如前所述，可以使用 EventBus 进行组件之间的解耦通信。具体用法可以参考前面关于 EventBus 的说明。
 
-注意事项
-线程安全: 注意在不同线程中进行通信时的线程安全问题，确保数据的正确性和应用的稳定性。
-生命周期管理: 确保在适当的生命周期方法中注册和取消注册组件，以避免内存泄漏。
-异步操作: Service 中的耗时操作应该在后台线程中执行，以避免阻塞主线程导致应用无响应。
+## 5. 注意事项
+
+> 1. **线程安全**: 注意在不同线程中进行通信时的线程安全问题，确保数据的正确性和应用的稳定性。
+> 2. **生命周期管理**: 确保在适当的生命周期方法中注册和取消注册组件，以避免内存泄漏。
+> 3. **异步操作**: Service 中的耗时操作应该在后台线程中执行，以避免阻塞主线程导致应用无响应。
