@@ -407,6 +407,7 @@ export default defineConfig({
             { text: 'Hook技术', link: '/Android/Hook技术' },
             { text: 'AMS剖析', link: '/Android/AMS剖析' },
             { text: 'Android一个APP里面最少有几个线程', link: '/Android/Android一个APP里面最少有几个线程' },
+            { text: 'Vsync机制', link: '/Android/Vsync机制' },
           ]
         },
         {
