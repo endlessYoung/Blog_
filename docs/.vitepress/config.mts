@@ -525,6 +525,7 @@ export default defineConfig({
           items: [
             { text: '合并数组', link: '/数据结构和算法/合并数组' },
             { text: '移除元素', link: '/数据结构和算法/移除元素' },
+            { text: '二分查找', link: '/数据结构和算法/二分查找' },
           ]
         },
         {
