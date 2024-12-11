@@ -401,6 +401,7 @@ export default defineConfig({
             { text: 'Looper死循环为什么不会导致应用卡死', link: '/Android/Looper死循环为什么不会导致应用卡死' },
             { text: '使用Handler的postDelay消息队列有什么变化', link: '/Android/使用Handler的postDelay消息队列有什么变化' },
             { text: '如何保证多个handler线程安全', link: '/Android/如何保证多个handler线程安全' },
+            { text: '如何实现定时器', link: '/Android/如何实现定时器' },
             { text: 'Binder驱动在哪限制', link: '/Android/Binder驱动在哪限制' },
             { text: 'Lifecycle状态机', link: '/Android/Lifecycle状态机' },
             { text: 'LiveData', link: '/Android/LiveData' },
@@ -646,7 +647,9 @@ export default defineConfig({
           items: [
             { text: '协程', link: '/Kotlin/协程' },
             { text: '协程作用域', link: '/Kotlin/协程作用域' },
-            { text: '协程生命周期', link: '/Kotlin/协程生命周期' },
+            { text: '协程Job', link: '/Kotlin/协程Job' },
+            { text: '协程Job', link: '/Kotlin/协程Job' },
+            { text: 'coroutineContext', link: '/Kotlin/coroutineContext' },
             { text: '协程的异常处理', link: '/Kotlin/协程的异常处理' },
             { text: '通道', link: '/Kotlin/通道' },
             { text: 'Mutex', link: '/Kotlin/Mutex' },
