@@ -207,6 +207,7 @@ export default defineConfig({
             { text: '如何实现应用重启', link: '/Android/如何实现应用重启' },
             { text: '一个App会创建多少个Application对象', link: '/Android/一个App会创建多少个Application对象' },
             { text: 'Android文件系统', link: '/Android/Android文件系统' },
+            { text: '获取位置信息', link: '/Android/获取位置信息' },
           ]
         },
         {
@@ -283,7 +284,7 @@ export default defineConfig({
             { text: 'Handler、MessageQueue和Looper', link: '/Android/Handler、MessageQueue和Looper' },
             { text: 'ActivityThread线程(UI主线程)', link: '/Android/ActivityThread线程(UI主线程)' },
             { text: '为什么主线程可以直接new Handler', link: '/Android/为什么主线程可以直接new Handler' },
-            { text: 'Handler.postDelayed()消息时间准确吗？', link: '/Android/Handler.postDelayed()消息时间准确吗？' },
+            { text: 'Handler.postDelayed()消息时间准确吗', link: '/Android/Handler.postDelayed()消息时间准确吗' },
             { text: 'IdleHandler', link: '/Android/IdleHandler' },
             { text: '同步屏障', link: '/Android/同步屏障' },
             { text: 'Handler内存泄漏如何解决？', link: '/Android/Handler内存泄漏如何解决？' },
