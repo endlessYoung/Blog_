@@ -412,6 +412,8 @@ export default defineConfig({
             { text: 'Android一个APP里面最少有几个线程', link: '/Android/Android一个APP里面最少有几个线程' },
             { text: 'Vsync机制', link: '/Android/Vsync机制' },
             { text: '实现定时循环', link: '/Android/实现定时循环' },
+            { text: '安卓性能优化', link: '/Android/安卓性能优化' },
+            { text: '封装阻塞的任务队列', link: '/Android/封装阻塞的任务队列' },
           ]
         },
         {
