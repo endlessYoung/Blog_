@@ -253,17 +253,19 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Android.mk', link: '/Android/Android.mk' },
+            { text: 'Android.bp', link: '/Android/Android.bp' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
             { text: 'APK打包流程', link: '/Android/APK打包流程' },
             { text: 'pageSize', link: '/Android/pageSize' },
           ]
         },
         {
-          text: '性能优化-ui',
+          text: '性能优化',
           collapsed: false,
           items: [
             { text: 'ListView性能优化', link: '/Android/ListView性能优化' },
             { text: 'RecyclerView性能优化', link: '/Android/RecyclerView性能优化' },
+            { text: 'AndroidPerfetto', link: '/Android/AndroidPerfetto' },
           ]
         },
         {
@@ -414,6 +416,13 @@ export default defineConfig({
             { text: '实现定时循环', link: '/Android/实现定时循环' },
             { text: '安卓性能优化', link: '/Android/安卓性能优化' },
             { text: '封装阻塞的任务队列', link: '/Android/封装阻塞的任务队列' },
+          ]
+        },
+        {
+          text: '安卓与设计模式',
+          collapsed: false,
+          items: [
+            { text: '策略模式实现状态校验', link: '/Android/策略模式实现状态校验' },
           ]
         },
         {
