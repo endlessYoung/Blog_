@@ -185,6 +185,7 @@ export default defineConfig({
             { text: 'AlarmManager', link: '/Android/AlarmManager' },
             { text: 'SurfaceView', link: '/Android/SurfaceView' },
             { text: 'AIDL', link: '/Android/AIDL' },
+            { text: 'AIDL的关键字', link: '/Android/AIDL的关键字' },
             { text: 'SharedPreference', link: '/Android/SharedPreference' },
             { text: 'DataBinding', link: '/Android/DataBinding' },
             { text: 'ViewBinding', link: '/Android/ViewBinding' },
@@ -322,6 +323,9 @@ export default defineConfig({
             { text: '安卓中的IPC通信方式', link: '/Android/安卓中的IPC通信方式' },
             { text: 'AsyncTask ', link: '/Android/AsyncTask ' },
             { text: 'Binder', link: '/Android/Binder' },
+            { text: 'App进程为什么天生支持Binder通信', link: '/Android/App进程为什么天生支持Binder通信' },
+            { text: 'writeStrongBinder与readStrongBinder的作用和原理', link: '/Android/writeStrongBinder与readStrongBinder的作用和原理' },
+            { text: '客户端调用Binder接口后抛出的DeadObjectException', link: '/Android/客户端调用Binder接口后抛出的DeadObjectException' },
             { text: '进程保活', link: '/Android/进程保活' },
             { text: 'Activity中viewtree的创建过程', link: '/Android/Activity中viewtree的创建过程' },
             { text: 'WMS中窗口的注册', link: '/Android/WMS中窗口的注册' },
@@ -557,6 +561,7 @@ export default defineConfig({
             { text: 'Integer1000与100的比较', link: '/Java/Integer1000与100的比较' },
             { text: '动态代理', link: '/Java/动态代理' },
             { text: '反射', link: '/Java/反射' },
+            { text: 'HashMap的高级用法', link: '/Java/HashMap的高级用法' },
           ]
         },
         {
