@@ -209,6 +209,7 @@ export default defineConfig({
             { text: '一个App会创建多少个Application对象', link: '/Android/一个App会创建多少个Application对象' },
             { text: 'Android文件系统', link: '/Android/Android文件系统' },
             { text: '获取位置信息', link: '/Android/获取位置信息' },
+            { text: '安卓进程通信的方法', link: '/Android/安卓进程通信的方法' },
           ]
         },
         {
