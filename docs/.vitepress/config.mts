@@ -247,7 +247,7 @@ export default defineConfig({
             { text: '三方库面试题', link: '/Android/三方库面试题' },
             { text: 'LeakCanary', link: '/Android/LeakCanary' },
             { text: 'OkHttp', link: '/Android/OkHttp' },
-            { text: 'retrofit', link: '/Android/retrofit' },
+            { text: 'Retrofit', link: '/Android/Retrofit' },
           ]
         },
         {
