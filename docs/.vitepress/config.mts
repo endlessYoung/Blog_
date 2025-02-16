@@ -425,6 +425,7 @@ export default defineConfig({
             { text: '实现定时循环', link: '/Android/实现定时循环' },
             { text: '安卓性能优化', link: '/Android/安卓性能优化' },
             { text: '封装阻塞的任务队列', link: '/Android/封装阻塞的任务队列' },
+            { text: '后台显示toast方案', link: '/Android/后台显示toast方案' },
           ]
         },
         {
