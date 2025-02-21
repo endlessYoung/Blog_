@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>LeakCanary&#x539f;&#x7406;&#x5206;&#x6790;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="leakcanary原理分析">LeakCanary原理分析</h1>
+<h2 id="1-leakcanary的组成">1. LeakCanary的组成：</h2>
+<h3 id="总结架构层级"><strong>总结架构层级</strong></h3>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>核心组件/类</th>
+<th>功能关联</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>监控模块</td>
+<td>ActivityDestroyWatcher</td>
+<td>监听组件生命周期</td>
+</tr>
+<tr>
+<td>对象观察模块</td>
+<td>ObjectWatcher</td>
+<td>跟踪弱引用和引用队列</td>
+</tr>
+<tr>
+<td>堆转储模块</td>
+<td>HeapDumper</td>
+<td>生成堆快照文件</td>
+</tr>
+<tr>
+<td>堆分析模块</td>
+<td>Shark/HeapAnalyzer</td>
+<td>解析泄漏路径</td>
+</tr>
+<tr>
+<td>结果展示模块</td>
+<td>DisplayLeakService</td>
+<td>展示泄漏详情</td>
+</tr>
+<tr>
+<td>基础设施模块</td>
+<td>MainProcessAppWatcherInstaller</td>
+<td>自动初始化和配置管理</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-leakcanary监听泄漏的核心原理">2. LeakCanary监听泄漏的核心原理</h2>
+<p><code>LeakCanary</code> 的核心原理是利用Java的 <code>弱引用</code> 和 <code>引用队列</code>。弱引用的特性是当对象只有弱引用时，GC就会回收它。LeakCanary通过监听 <code>Activity</code> 或 <code>Fragment</code> 、<code>ViewModel</code>、<code>RootView</code>、<code>Service</code>的销毁，然后创建对应的弱引用，并关联一个引用队列。如果在Activity销毁后，弱引用没有被加入队列，说明可能泄漏了。</p>
+<p><img src="file:///d:\Front end projects\blog\Vitepress_Blog\docs\Android\image-92.png" alt="alt text">
+<img src="file:///d:\Front end projects\blog\Vitepress_Blog\docs\Android\image-93.png" alt="alt text"></p>
+<p>举一个通俗的比喻：你在快递站寄出了一个包裹（Activity/Fragment），正常的流程应该是：</p>
+<ol>
+<li>你寄出后，快递员（GC）来及时取走（回收内存）</li>
+<li>如果有包裹长时间未被取走（内存泄漏），就发出报警。</li>
+</ol>
+<p>在这个过程中，<code>LeakCanary</code> 的检测机制就像快递站的监控系统：</p>
+<ul>
+<li>标记包裹：每个包裹贴上[弱引用]标签（容易被撕掉，代表容易被回收）</li>
+<li>定期检查：过段时间检查标签是否还在（未被回收）</li>
+<li>报警分析：如果标签仍在，说明快递员没来取（GC未回收），触发报警并分析原因。</li>
+</ul>
+<p>早期的版本需要在应用 <code>Application</code> 的 <code>onCreate</code> 中处理 <code>LeakCanary</code> 的初始化, 在新版本中为了降低接入的成本，将 <code>LeakCanary</code> 的初始化放在了库定义的 <code>AppWatcherInstaller</code> 中，原理是利用 <code>ContentProvider</code> 的 <code>onCreate</code> 的初始化时机早于 <code>Application</code> 中的 <code>onCreate</code>(晚于 <code>Application</code> 的 <code>attchBaseContext</code>)。</p>
+<h2 id="3-技术原理详解">3. 技术原理详解</h2>
+<ol>
+<li>标记阶段：监听销毁 + 创建弱引用
+<ul>
+<li>监听对象的销毁：通过 <code>ActivityLifecycleCallbacks</code> 监听Activity/Fragment的 <code>onDestory()</code> 事件
+::: code-group</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-kotlin"><span class="hljs-comment">// Application</span>
+<span class="hljs-meta">@HiltAndroidApp</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LeakCanaryApp</span> : <span class="hljs-type">Application</span></span>() {
+
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">super</span>.onCreate()
+    registerActivityLifecycleCallbacks(ActivityProviderCallbacks())
+  }
+}
+
+<span class="hljs-comment">// ActivityProviderCallbacks</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ActivityProviderCallbacks</span> : <span class="hljs-type">ActivityLifecycleCallbacks {</span></span>
+
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onActivityCreated</span><span class="hljs-params">(
+    activity: <span class="hljs-type">Activity</span>,
+    savedInstanceState: <span class="hljs-type">Bundle</span>?
+  )</span></span> {
+    CurrentActivityProvider.onActivityCreated(activity)
+  }
+
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onActivityDestroyed</span><span class="hljs-params">(activity: <span class="hljs-type">Activity</span>)</span></span> {
+    CurrentActivityProvider.onActivityDestroyed(activity)
+  }
+
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onActivityStarted</span><span class="hljs-params">(activity: <span class="hljs-type">Activity</span>)</span></span> = <span class="hljs-built_in">Unit</span>
+
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onActivityResumed</span><span class="hljs-params">(activity: <span class="hljs-type">Activity</span>)</span></span> = <span class="hljs-built_in">Unit</span>
+
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onActivityPaused</span><span class="hljs-params">(activity: <span class="hljs-type">Activity</span>)</span></span> = <span class="hljs-built_in">Unit</span>
+
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onActivityStopped</span><span class="hljs-params">(activity: <span class="hljs-type">Activity</span>)</span></span> = <span class="hljs-built_in">Unit</span>
+
+  <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onActivitySaveInstanceState</span><span class="hljs-params">(activity: <span class="hljs-type">Activity</span>, outState: <span class="hljs-type">Bundle</span>)</span></span> = <span class="hljs-built_in">Unit</span>
+}
+</code></pre>
+<p>:::</p>
+<ul>
+<li>创建弱引用标记：在对象销毁时，<code>LeakCanary</code> 会为它创建一个带有唯一标识的弱引用，并关联到一个引用队列（<code>ReferenceQueue</code>）</li>
+</ul>
+<ol start="2">
+<li>追踪阶段：延迟检查 + 强制GC
+<ul>
+<li>延迟等待：销毁后等待5秒（让GC有机会回收对象）</li>
+<li>主动触发GC：若发现弱引用未进入队列（未被回收），手动触发一次GC再次确认。</li>
+<li>确认泄漏：两次检查后对象仍然未被回收，则判定未内存泄漏。</li>
+</ul>
+</li>
+<li>分析阶段：转储内存 + 逆向追踪
+<ul>
+<li>生成内存快照：调用 <code>Debug.dumpHprofData()</code> 生成 <code>.hprof</code> 文件。</li>
+<li>解析引用链：使用 <code>Shark</code> 库分析快照，找到泄漏对象的GC Root（如静态变量、线程等）的强引用路径，精确定位泄漏点。</li>
+</ul>
+</li>
+<li>通知栏发送可视化路径：发送通知提醒开发者存在内存泄漏，并展示泄漏路径。</li>
+</ol>
+<p>源码解析详见：
+<a href="LeakCanary%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.html" title="可选标题">LeakCanary源码分析</a></p>
+
+            
+            
+        </body>
+        </html>

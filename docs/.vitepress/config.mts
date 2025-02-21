@@ -249,7 +249,8 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '三方库面试题', link: '/Android/三方库面试题' },
-            { text: 'LeakCanary', link: '/Android/LeakCanary' },
+            { text: 'LeakCanary原理分析', link: '/Android/LeakCanary原理分析' },
+            { text: 'LeakCanary源码分析', link: '/Android/LeakCanary源码分析' },
             { text: 'OkHttp', link: '/Android/OkHttp' },
             { text: 'Retrofit', link: '/Android/Retrofit' },
           ]
