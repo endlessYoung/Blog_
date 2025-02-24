@@ -403,6 +403,7 @@ export default defineConfig({
             { text: 'WorkManager', link: '/Android/实践-WorkManager' },
             { text: 'recyclerview分组', link: '/Android/实践-recyclerview分组' },
             { text: 'Widget', link: '/Android/实践-Widget' },
+            { text: '启动相机的方法', link: '/Android/启动相机的方法' },
           ]
         },
         {
