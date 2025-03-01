@@ -404,6 +404,7 @@ export default defineConfig({
             { text: 'recyclerview分组', link: '/Android/实践-recyclerview分组' },
             { text: 'Widget', link: '/Android/实践-Widget' },
             { text: '启动相机的方法', link: '/Android/启动相机的方法' },
+            { text: '相机扭曲的解决办法', link: '/Android/相机扭曲的解决办法' },
           ]
         },
         {
