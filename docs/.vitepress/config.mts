@@ -120,7 +120,8 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', href: '/Blog_/favicon.ico' }], // 也是放在/public目录中
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }],
-    ['meta', { name: 'msvalidate.01', content: 'C134079F38DF28B5CB2B9AE952C0CBC7' }]
+    ['meta', { name: 'msvalidate.01', content: 'C134079F38DF28B5CB2B9AE952C0CBC7' }],
+    ['meta', { name: 'google-site-verification', content: 'bNLBnwMb4Bl-KmTweCSRTZaLa4ZRD2Z7YgqTjpUU-Hw' }]
   ],
   themeConfig: {
     logo: '/panda.png',
