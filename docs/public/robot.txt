@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://endlessyoung.github.io/Blog_/sitemap.xml
