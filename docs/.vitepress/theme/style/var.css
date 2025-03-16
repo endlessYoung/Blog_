@@ -45,14 +45,24 @@
 
   article {
     border-radius: 20px;
-    background-color: blueviolet;
+    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    animation: gradientShift 2s linear infinite;
+    background-size: 200% 200%;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     transform-origin: center;
+    backdrop-filter: blur(15px) saturate(150%);
     -webkit-text-fill-color: white;
-    perspective: 1000px;
-    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    perspective: 1200px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    transition: transform 0.3s ease-out;
   }
 
-  article:hover {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  .VPFeature {
+    background: none;
+    border: none;
   }
 }
