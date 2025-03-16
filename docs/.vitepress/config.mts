@@ -126,6 +126,7 @@ export default defineConfig({
   ],
   themeConfig: {
     logo: '/panda.png',
+    darkModeSwitchLabel: "🌓",
     nav: [
       // { text: 'Home', link: '/Ai/监督学习入门' },
       { text: 'Android', link: '/Android/Activity' },

@@ -2,7 +2,7 @@
   "devDependencies": {
     "@documate/documate": "^0.2.1",
     "markdown-it-katex": "^2.0.3",
-    "vitepress": "^1.6.3",
+    "vitepress": "^2.0.0-alpha.4",
     "@types/node": "^20.11.0"
   },
   "scripts": {
