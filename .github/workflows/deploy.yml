@@ -64,3 +64,14 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4  # 升级到最新版本
+
+      - name: Submit URL to IndexNow
+        run: |
+          API_KEY="208c12af10454a61a4ef6e0fcd59aec0"
+          BLOG_URL="https://endlessyoung.github.io/Blog_/"
+          curl -X POST "https://www.bing.com/indexnow" -H "Content-Type: application/json" -d '{
+            "host": "'$BLOG_URL'",
+            "key": "'$API_KEY'",
+            "keyLocation": "'$BLOG_URL'/208c12af10454a61a4ef6e0fcd59aec0.txt",
+            "urlList": ["'$BLOG_URL'"]
+          }'
