@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, SiteData } from 'vitepress'
 import markdownItKatex from 'markdown-it-katex'
 const customElements = [
   'math',
@@ -93,7 +93,6 @@ const customElements = [
 export default defineConfig({
   title: "Endlessyoung's Blog",
   description: "这是endlessyoung的个人博客",
-  lastUpdated: true,
   sitemap: {
     hostname: 'https://endlessyoung.github.io/Blog_/',
   },
@@ -108,7 +107,7 @@ export default defineConfig({
       compilerOptions: {
         isCustomElement: (tag: string) => customElements.includes(tag)
       }
-    }
+    },
   },
   locales: {
     root: {
@@ -127,6 +126,15 @@ export default defineConfig({
   themeConfig: {
     logo: '/panda.png',
     darkModeSwitchLabel: "🌓",
+    lastUpdated: {
+      text: 'Updated at',
+      formatOptions: {
+        dateStyle: 'full',
+        timeStyle: 'medium'
+      }
+    },
+    lightModeSwitchTitle: "Switch to light theme",
+    darkModeSwitchTitle: "Switch to dark theme",
     nav: [
       // { text: 'Home', link: '/Ai/监督学习入门' },
       { text: 'Android', link: '/Android/Activity' },

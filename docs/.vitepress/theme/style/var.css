@@ -1,11 +1,8 @@
 :root {
-  /* 标题字体颜色 */
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: linear-gradient(135deg, #43CBFF 10%, #9708CC 100%);
-  /* 图片背景颜色 */
   --vp-home-hero-image-background-image: linear-gradient(135deg, #43CBFF 10%, #9708CC 100%);
   --vp-home-hero-image-filter: blur(150px);
-  /* brand按钮 */
   --vp-button-brand-border: white;
   --vp-button-brand-text: white;
   --vp-button-brand-bg: rgb(47, 84, 235);
@@ -26,20 +23,15 @@
     border-left: 4px solid #e95f59;
   }
 
-  /* 提示框 */
   .custom-block.tip {
     border-color: var(--vp-c-green-2);
   }
 
-  /* 警告框 */
   .custom-block.warning {
-    /* border-color: #d97706; */
     border-color: var(--vp-c-yellow-2);
   }
 
-  /* 危险框 */
   .custom-block.danger {
-    /* border-color: #f43f5e; */
     border-color: var(--vp-c-red-2);
   }
 

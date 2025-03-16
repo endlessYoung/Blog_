@@ -1,7 +1,7 @@
-import { log } from "console";
-
 export function initCardTransform() {
     const articles = document.querySelectorAll("article"); // 获取所有的 article 元素
+
+    console.log("articles", articles);
 
     articles.forEach((article) => {
         article.addEventListener("mousemove", (e: MouseEvent) => {
