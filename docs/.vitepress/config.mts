@@ -441,6 +441,7 @@ export default defineConfig({
             { text: '安卓性能优化', link: '/Android/安卓性能优化' },
             { text: '封装阻塞的任务队列', link: '/Android/封装阻塞的任务队列' },
             { text: '后台显示toast方案', link: '/Android/后台显示toast方案' },
+            { text: '多进程模式', link: '/Android/多进程模式' },
           ]
         },
         {
