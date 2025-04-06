@@ -442,6 +442,7 @@ export default defineConfig({
             { text: '封装阻塞的任务队列', link: '/Android/封装阻塞的任务队列' },
             { text: '后台显示toast方案', link: '/Android/后台显示toast方案' },
             { text: '多进程模式', link: '/Android/多进程模式' },
+            { text: 'Bitmap优化', link: '/Android/Bitmap优化' },
           ]
         },
         {
@@ -606,6 +607,7 @@ export default defineConfig({
             { text: 'Daemon线程', link: '/Java/Daemon线程' },
             { text: '线程间通信', link: '/Java/线程间通信' },
             { text: '线程池', link: '/Java/线程池' },
+            { text: 'ForkJoinPool', link: '/Java/ForkJoinPool' },
             { text: 'Lock接口', link: '/Java/Lock接口' },
             { text: '队列同步器', link: '/Java/队列同步器' },
             { text: '排他锁', link: '/Java/排他锁' },
@@ -696,6 +698,7 @@ export default defineConfig({
             { text: '协程的异常处理', link: '/Kotlin/协程的异常处理' },
             { text: '通道', link: '/Kotlin/通道' },
             { text: 'Mutex', link: '/Kotlin/Mutex' },
+            { text: '高并发场景下的协程调度与调优', link: '/Kotlin/高并发场景下的协程调度与调优' },
           ]
         },
         {
