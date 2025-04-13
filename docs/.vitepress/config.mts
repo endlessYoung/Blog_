@@ -142,6 +142,7 @@ export default defineConfig({
       { text: 'Java', link: '/Java/Integer1000与100的比较' },
       { text: 'Kotlin', link: '/Kotlin/数据类' },
       { text: 'Python', link: '/Python/1' },
+      { text: 'Flutter', link: '/Flutter/dart语言简介' },
       { text: 'SQL', link: '/SQL/全文搜索' },
       { text: 'Ai', link: '/Ai/监督学习入门' },
       { text: 'JS', link: '/JS/1' },
@@ -749,6 +750,15 @@ export default defineConfig({
             { text: 'One', link: '/Python/one' },
             { text: 'Two', link: '/Python/two' }
           ]
+        }
+      ],
+      '/Flutter/': [
+        {
+          text: 'dart语言简介',
+          items: [
+            { text: 'dart语言简介', link: '/Flutter/dart语言简介' },
+          ],
+          collapsed: false
         }
       ],
       '/SQL/': [
