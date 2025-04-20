@@ -474,6 +474,14 @@ export default defineConfig({
           ]
         },
         {
+          text: 'Compose',
+          collapsed: false,
+          items: [
+            { text: 'compose的gradle配置', link: '/Android/compose的gradle配置' },
+
+          ]
+        },
+        {
           text: 'NDK',
           collapsed: false,
           items: [
