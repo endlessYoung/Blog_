@@ -705,8 +705,9 @@ export default defineConfig({
             { text: '协程Job', link: '/Kotlin/协程Job' },
             { text: 'coroutineContext', link: '/Kotlin/coroutineContext' },
             { text: '协程的异常处理', link: '/Kotlin/协程的异常处理' },
-            { text: '通道', link: '/Kotlin/通道' },
+            { text: 'Channel', link: '/Kotlin/Channel' },
             { text: 'Mutex', link: '/Kotlin/Mutex' },
+            { text: '协程上下文', link: '/Kotlin/协程上下文' },
             { text: '高并发场景下的协程调度与调优', link: '/Kotlin/高并发场景下的协程调度与调优' },
           ]
         },
