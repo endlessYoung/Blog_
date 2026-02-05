@@ -16,20 +16,20 @@ export default {
   Layout: {
     setup() {
       const route = useRoute()
-      
+
       // 保存滚动位置
       onMounted(() => {
         const handleScroll = () => {
           scrollPositions[route.path] = window.scrollY
         }
-        
+
         window.addEventListener('scroll', handleScroll)
-        
+
         return () => {
           window.removeEventListener('scroll', handleScroll)
         }
       })
-      
+
       // 恢复滚动位置
       onMounted(() => {
         nextTick(() => {
@@ -39,7 +39,7 @@ export default {
           }
         })
       })
-      
+
       try {
         onMounted(() => {
           initCardTransform();
