@@ -2,8 +2,7 @@
   "devDependencies": {
     "@documate/documate": "^0.2.1",
     "markdown-it-katex": "^2.0.3",
-    "vitepress": "^2.0.0-alpha.4",
-    "@types/node": "^20.11.0"
+    "vitepress": "^2.0.0-alpha.16"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs --port 3000",
@@ -13,7 +12,7 @@
   },
   "dependencies": {
     "@documate/vue": "^0.3.1",
-    "vue": "^3.4.0"
+    "vue": "^3.5.0"
   },
-  "packageManager": "pnpm@8.15.0"
+  "packageManager": "pnpm@9.0.0"
 }

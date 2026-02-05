@@ -1,27 +1,186 @@
-/* .vitepress\theme\style\vp-code-group.css */
+/* VitePress 代码块美化样式 */
 
-/* 代码块tab */
-.vp-code-group .tabs {
-    padding-top: 30px;
+/* 代码块整体容器 */
+.vp-code-group {
+    color: var(--vp-c-black-soft);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    overflow: hidden;
+    margin: 16px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
 
-/* 代码块tab-顶部小圆点 */
+.vp-code-group:hover {
+    box-shadow: 0 8px 30px 0 rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+/* 代码块tab顶部 - Mac风格窗口控制按钮 */
+.vp-code-group .tabs {
+    padding-top: 35px;
+    padding-left: 12px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+/* 代码块tab - 顶部小圆点 (Mac风格) */
 .vp-code-group .tabs::before {
-    background: #fc625d;
+    background: #ff5f57;
     border-radius: 50%;
-    box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+    box-shadow: 20px 0 #ffbd2e, 40px 0 #28c940;
     content: ' ';
     height: 12px;
     width: 12px;
     left: 12px;
-    margin-top: -20px;
+    margin-top: -25px;
     position: absolute;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
 
+.vp-code-group:hover .tabs::before {
+    opacity: 1;
+}
 
-/* 代码组 */
-.vp-code-group {
-    color: var(--vp-c-black-soft);
-    border-radius: 8px;
-    box-shadow: 0 10px 30px 0 rgb(0 0 0 / 40%);
+/* Tab 按钮样式 */
+.vp-code-group .tabs button {
+    position: relative;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    margin-right: 4px;
+}
+
+.vp-code-group .tabs button:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.vp-code-group .tabs button.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+    background: rgba(102, 126, 234, 0.08);
+}
+
+/* 代码内容区域 */
+.vp-code-group .blocks .block {
+    padding: 16px;
+}
+
+/* 代码块内部 */
+.vp-code-group pre {
+    margin: 0;
+    padding: 16px;
+    background: transparent !important;
+    border: none;
+    border-radius: 0;
+}
+
+.vp-code-group code {
+    color: #e0e7ff;
+    font-size: 14px;
+    font-family: 'Fira Code', 'Monaco', 'Courier New', monospace;
+    line-height: 1.6;
+}
+
+/* 代码高亮 - 语法着色 */
+.vp-code-group .shiki {
+    background: transparent !important;
+}
+
+/* 单个代码块 */
+.vp-doc div[class*="language-"] {
+    position: relative;
+    margin: 16px 0;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.vp-doc div[class*="language-"]:hover {
+    box-shadow: 0 8px 30px 0 rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+/* 代码块语言标签 */
+.vp-doc div[class*="language-"]::before {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    z-index: 3;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(102, 126, 234, 0.2);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+/* 代码块内容 */
+.vp-doc div[class*="language-"] code {
+    color: #e0e7ff;
+    font-size: 14px;
+    font-family: 'Fira Code', 'Monaco', 'Courier New', monospace;
+    line-height: 1.6;
+    padding: 16px;
+    display: block;
+    overflow: auto;
+}
+
+/* 代码块复制按钮 */
+.copy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 3;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    background: rgba(102, 126, 234, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.copy:hover {
+    background: rgba(102, 126, 234, 0.2);
+    color: #667eea;
+    border-color: #667eea;
+}
+
+.copy.copied {
+    background: rgba(81, 207, 102, 0.2);
+    color: #51cf66;
+    border-color: #51cf66;
+}
+
+/* 深色模式优化 */
+:root.dark .vp-code-group {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.vp-doc .highlight {
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: #667eea;
+    font-weight: 500;
 }

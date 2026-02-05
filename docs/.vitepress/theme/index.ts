@@ -3,7 +3,7 @@ import './style/var.css'
 import './style/vp-code-group.css';
 
 import '@documate/vue/dist/style.css'
-import { h, onMounted, nextTick } from 'vue'
+import { h, onMounted, nextTick, watch } from 'vue'
 import Documate from '@documate/vue'
 import { initCardTransform } from './cardTransform'
 import { useRoute } from 'vitepress'
@@ -47,6 +47,8 @@ export default {
       } catch (error) {
         console.error('Error during setup:', error);
       }
+
+      // Watch route to potentially handle visibility if needed, but CSS is preferred.
     },
     render() {
       return h(Theme.Layout, null, {
@@ -57,4 +59,3 @@ export default {
     },
   },
 }
-

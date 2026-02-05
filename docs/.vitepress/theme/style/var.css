@@ -1,60 +1,455 @@
+/* Base HTML Setup */
+html {
+  transition: background-color 0.5s;
+  overflow-x: hidden;
+}
+
+/* Layer -2: Static Background Image */
+html::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/way-of-the-war.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.33;
+  z-index: -2;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+
+/* Layer -1: Ambient Animated Blobs */
+html::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 15% 50%, rgba(102, 126, 234, 0.15), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(118, 75, 162, 0.15), transparent 25%);
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(40px);
+  animation: blobBounce 20s infinite alternate;
+}
+
+/* Dark Mode Background Adaptation */
+.dark html::before {
+  opacity: 0.1;
+  filter: grayscale(0.6) blur(2px);
+}
+
+.dark html::after {
+  background:
+    radial-gradient(circle at 15% 50%, rgba(88, 101, 242, 0.1), transparent 30%),
+    radial-gradient(circle at 85% 30%, rgba(162, 75, 118, 0.1), transparent 30%);
+}
+
+body {
+  position: relative;
+  z-index: 0;
+  background: transparent !important;
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+}
+
+/* Global Scrollbar & Selection */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(102, 126, 234, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 126, 234, 0.8);
+}
+
+::selection {
+  background: rgba(102, 126, 234, 0.3);
+  color: inherit;
+}
+
+/* CSS Variables */
 :root {
+  /* Text Colors - High Contrast */
+  --vp-c-text-1: #000000;
+  --vp-c-text-2: #222222;
+  --vp-c-text-3: #444444;
+
+  /* Theme Colors */
+  --vp-c-primary: #5865F2;
+  --vp-c-primary-light: #7289DA;
+  --vp-c-primary-dark: #4752C4;
+  --vp-c-secondary: #1E90FF;
+  --vp-c-accent: #FF6B6B;
+  --vp-c-success: #51CF66;
+  --vp-c-warning: #FFD93D;
+  --vp-c-danger: #FF6B6B;
+
+  /* Gradients */
+  --vp-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --vp-gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+
+  /* Home Hero */
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(135deg, #43CBFF 10%, #9708CC 100%);
-  --vp-home-hero-image-background-image: linear-gradient(135deg, #43CBFF 10%, #9708CC 100%);
+  --vp-home-hero-name-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --vp-home-hero-image-background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --vp-home-hero-image-filter: blur(150px);
-  --vp-button-brand-border: white;
-  --vp-button-brand-text: white;
-  --vp-button-brand-bg: rgb(47, 84, 235);
 
-  --vp-button-brand-hover-border: #43CBFF;
+  /* Button Colors */
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: #fff;
+  --vp-button-brand-bg: var(--vp-c-primary);
+  --vp-button-brand-hover-border: var(--vp-c-primary-light);
   --vp-button-brand-hover-text: #fff;
-  --vp-button-brand-hover-bg: rgb(47, 84, 235);
+  --vp-button-brand-hover-bg: var(--vp-c-primary-light);
+  --vp-button-brand-active-border: var(--vp-c-primary-dark);
 
-  --vp-button-brand-active-border: #F6CEEC;
+  /* Shadows */
+  --vp-shadow-1: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --vp-shadow-2: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --vp-shadow-glow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
 
-  --vp-custom-block-tip-bg: var(--vp-c-green-soft);
+/* Dark Mode Variables */
+.dark {
+  --vp-c-text-1: #ffffff;
+  --vp-c-text-2: #e5e5e5;
+  --vp-c-text-3: #d4d4d4;
 
-  .vp-doc blockquote {
-    border-radius: 5px;
-    padding: 10px 16px;
-    background-color: var(--vp-badge-danger-bg);
-    position: relative;
-    border-left: 4px solid #e95f59;
+  --vp-shadow-1: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --vp-shadow-2: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --vp-shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+/* =========================================
+   Hero Section Animations
+   ========================================= */
+.VPHero .name {
+  background: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientText 6s linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.3));
+}
+
+.VPHero .text {
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.VPHero .text::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -8px;
+  left: 0;
+  background: var(--vp-c-primary);
+  transition: width 0.3s ease;
+}
+
+.VPHero:hover .text::after {
+  width: 100%;
+}
+
+.VPHero .image-bg {
+  animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+.VPHero .image-container {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Button Glow Effect */
+.VPButton.brand {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px 0 rgba(102, 126, 234, 0.39);
+}
+
+.VPButton.brand:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.23);
+}
+
+.VPButton.brand::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.VPButton.brand:hover::after {
+  left: 100%;
+  transition: 0.5s;
+}
+
+/* =========================================
+   Feature Cards - Premium Glassmorphism
+   ========================================= */
+.VPFeature {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(12px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: var(--vp-shadow-1);
+  overflow: hidden;
+  position: relative;
+}
+
+.dark .VPFeature {
+  background: rgba(40, 40, 45, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.VPFeature:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--vp-shadow-2), var(--vp-shadow-glow);
+  border-color: rgba(102, 126, 234, 0.5);
+  background: rgba(255, 255, 255, 0.8) !important;
+}
+
+.dark .VPFeature:hover {
+  background: rgba(60, 60, 70, 0.8) !important;
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+.VPFeature .icon {
+  font-size: 32px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+}
+
+.VPFeature:hover .icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Staggered Animation for Cards */
+.VPHome .VPFeature {
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.VPHome .VPFeature:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.VPHome .VPFeature:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.VPHome .VPFeature:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.VPHome .VPFeature:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.VPHome .VPFeature:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.VPHome .VPFeature:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+/* =========================================
+   Components (Sidebar, Navbar, Footer)
+   ========================================= */
+.VPSidebar,
+.VPNavBar,
+.VPFooter {
+  backdrop-filter: blur(20px) !important;
+  transition: all 0.3s ease;
+}
+
+.VPSidebar {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.VPNavBar {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.VPFooter {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .VPSidebar,
+.dark .VPNavBar,
+.dark .VPFooter {
+  background-color: rgba(30, 30, 32, 0.7) !important;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Doc Content */
+.VPDoc {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--vp-shadow-1);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.dark .VPDoc {
+  background: rgba(30, 30, 32, 0.6);
+}
+
+/* =========================================
+   Link Animations - Fluid Gradient Underline (Global)
+   ========================================= */
+/* Target ALL links except Buttons, Social Icons, and Header Anchors */
+a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.header-anchor) {
+  position: relative !important;
+  text-decoration: none !important;
+  color: var(--vp-c-text-1) !important;
+  padding-bottom: 2px;
+  transition: color 0.3s ease;
+}
+
+/* The Magic Underline - Pseudo element */
+a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.header-anchor)::after {
+  content: '' !important;
+  position: absolute !important;
+  width: 0 !important;
+  height: 2px !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  /* Single Theme Blue - No Gradient */
+  background: var(--vp-c-primary) !important;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 2px;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10;
+}
+
+/* Hover State - Trigger Animation */
+a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.header-anchor):hover::after {
+  width: 100% !important;
+}
+
+/* Text Color on Hover - Keep it Theme Color (Black/White) */
+a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.header-anchor):hover {
+  color: var(--vp-c-text-1) !important;
+}
+
+/* =========================================
+   Animations Keyframes
+   ========================================= */
+@keyframes gradientText {
+  0% {
+    background-position: 0% 50%;
   }
 
-  .custom-block.tip {
-    border-color: var(--vp-c-green-2);
+  50% {
+    background-position: 100% 50%;
   }
 
-  .custom-block.warning {
-    border-color: var(--vp-c-yellow-2);
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes blobBounce {
+  0% {
+    transform: translate(0, 0) scale(1);
   }
 
-  .custom-block.danger {
-    border-color: var(--vp-c-red-2);
+  50% {
+    transform: translate(20px, -20px) scale(1.1);
   }
 
-  article {
-    border-radius: 20px;
-    background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-    animation: gradientShift 2s linear infinite;
-    background-size: 200% 200%;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    transform-origin: center;
-    backdrop-filter: blur(15px) saturate(150%);
-    -webkit-text-fill-color: white;
-    transform-style: preserve-3d;
-    transform: rotateY(0deg);
-    perspective: 1200px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    transition: transform 0.3s ease-out;
+  100% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
   }
 
-  .VPFeature {
-    background: none;
-    border: none;
+  50% {
+    transform: translateY(-10px);
   }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulseGlow {
+  0% {
+    opacity: 0.5;
+    filter: blur(40px);
+  }
+
+  100% {
+    opacity: 0.8;
+    filter: blur(50px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Code Blocks Polish */
+.shiki {
+  border-radius: 12px !important;
+  box-shadow: var(--vp-shadow-2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vp-doc blockquote {
+  border-left: 4px solid var(--vp-c-primary);
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 0 8px 8px 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 16px;
 }
