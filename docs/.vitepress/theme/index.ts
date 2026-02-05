@@ -3,14 +3,43 @@ import './style/var.css'
 import './style/vp-code-group.css';
 
 import '@documate/vue/dist/style.css'
-import { h, onMounted } from 'vue'
+import { h, onMounted, nextTick } from 'vue'
 import Documate from '@documate/vue'
 import { initCardTransform } from './cardTransform'
+import { useRoute } from 'vitepress'
+
+// 存储滚动位置
+const scrollPositions: Record<string, number> = {}
 
 export default {
   ...Theme,
   Layout: {
     setup() {
+      const route = useRoute()
+      
+      // 保存滚动位置
+      onMounted(() => {
+        const handleScroll = () => {
+          scrollPositions[route.path] = window.scrollY
+        }
+        
+        window.addEventListener('scroll', handleScroll)
+        
+        return () => {
+          window.removeEventListener('scroll', handleScroll)
+        }
+      })
+      
+      // 恢复滚动位置
+      onMounted(() => {
+        nextTick(() => {
+          const savedPosition = scrollPositions[route.path]
+          if (savedPosition !== undefined) {
+            window.scrollTo(0, savedPosition)
+          }
+        })
+      })
+      
       try {
         onMounted(() => {
           initCardTransform();
@@ -28,3 +57,4 @@ export default {
     },
   },
 }
+
