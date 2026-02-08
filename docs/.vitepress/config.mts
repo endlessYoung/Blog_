@@ -98,8 +98,38 @@ export default defineConfig({
   },
   base: '/Blog_/',
   markdown: {
+    languageAlias: {
+      'aidl': 'java',
+      'kotlinscripts': 'kotlin',
+      'gradle': 'groovy'
+    },
     config: (md: any) => {
       md.use(markdownItKatex)
+      const fence = md.renderer.rules.fence
+      md.renderer.rules.fence = (tokens: any, idx: number, options: any, env: any, self: any) => {
+        const token = tokens[idx]
+        const info = token.info ? token.info.trim().split(/\s+/)[0] : ''
+        const html = fence ? fence(tokens, idx, options, env, self) : self.renderToken(tokens, idx, options)
+        if (html.includes('data-lang=') || html.includes('data-language=')) {
+          return html
+        }
+        let lang = info
+        if (!lang) {
+          const classMatch = html.match(/language-([a-z0-9_-]+)/i)
+          if (classMatch) {
+            lang = classMatch[1]
+          }
+        }
+        if (!lang) {
+          return html
+        }
+        const replacedDouble = html.replace(/<div class="[^"]*language-[^"]*"/, (match) => `${match} data-lang="${lang}"`)
+        if (replacedDouble !== html) {
+          return replacedDouble
+        }
+        const replacedSingle = html.replace(/<div class='[^']*language-[^']*'/, (match) => `${match} data-lang="${lang}"`)
+        return replacedSingle
+      }
     }
   },
   vue: {
@@ -135,6 +165,18 @@ export default defineConfig({
     },
     lightModeSwitchTitle: "Switch to light theme",
     darkModeSwitchTitle: "Switch to dark theme",
+    comment: {
+      serverURL: 'http://localhost:8360',
+      lang: 'zh-cn',
+      reaction: true,
+      search: true,
+      placeholder: '欢迎留下你的评论...',
+      emoji: [
+        '//unpkg.com/@waline/emojis@1.2.0/weibo',
+        '//unpkg.com/@waline/emojis@1.2.0/bilibili',
+        '//unpkg.com/@waline/emojis@1.2.0/tieba',
+      ]
+    },
     nav: [
       // { text: 'Home', link: '/Ai/监督学习入门' },
       { text: 'Android', link: '/Android/Activity' },

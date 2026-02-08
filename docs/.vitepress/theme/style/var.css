@@ -41,8 +41,8 @@ html::after {
 
 /* Dark Mode Background Adaptation */
 .dark html::before {
-  opacity: 0.1;
-  filter: grayscale(0.6) blur(2px);
+  opacity: 0.15;
+  filter: grayscale(0.4);
 }
 
 .dark html::after {
@@ -96,7 +96,7 @@ body {
   --vp-c-text-2: #222222;
   --vp-c-text-3: #444444;
 
-  /* Theme Colors */
+  /* Theme Colors - Blue for Hero */
   --vp-c-primary: #5865F2;
   --vp-c-primary-light: #7289DA;
   --vp-c-primary-dark: #4752C4;
@@ -106,11 +106,11 @@ body {
   --vp-c-warning: #FFD93D;
   --vp-c-danger: #FF6B6B;
 
-  /* Gradients */
+  /* Gradients - Blue for Hero */
   --vp-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --vp-gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 
-  /* Home Hero */
+  /* Home Hero - Keep Blue */
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --vp-home-hero-image-background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -315,6 +315,34 @@ body {
   border-color: rgba(255, 255, 255, 0.05);
 }
 
+/* =========================================
+   Navigation Bar Links - Black & White
+   ========================================= */
+.VPNavBar a {
+  color: #333333 !important;
+  text-decoration: none !important;
+}
+
+.VPNavBar a::after {
+  background: #333333 !important;
+}
+
+.VPNavBar a:hover {
+  color: #000000 !important;
+}
+
+.dark .VPNavBar a {
+  color: #e0e0e0 !important;
+}
+
+.dark .VPNavBar a::after {
+  background: #e0e0e0 !important;
+}
+
+.dark .VPNavBar a:hover {
+  color: #ffffff !important;
+}
+
 /* Doc Content */
 .VPDoc {
   background: rgba(255, 255, 255, 0.8);
@@ -331,42 +359,72 @@ body {
 }
 
 /* =========================================
-   Link Animations - Fluid Gradient Underline (Global)
+   Link Animations - Fluid Gradient Underline (Global - Blue for Home)
    ========================================= */
-/* Target ALL links except Buttons, Social Icons, and Header Anchors */
-a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.header-anchor) {
+/* Target ALL links except Buttons and Social Icons - DEFAULT BLUE */
+a:not(.VPButton):not(.social-link):not(.VPSocialLink) {
   position: relative !important;
   text-decoration: none !important;
-  color: var(--vp-c-text-1) !important;
+  color: var(--vp-c-primary);
   padding-bottom: 2px;
-  transition: color 0.3s ease;
 }
 
 /* The Magic Underline - Pseudo element */
-a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.header-anchor)::after {
+a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   content: '' !important;
   position: absolute !important;
   width: 0 !important;
   height: 2px !important;
   bottom: 0 !important;
   left: 0 !important;
-  /* Single Theme Blue - No Gradient */
-  background: var(--vp-c-primary) !important;
+  /* Direct color fallback + variable */
+  background: #5865F2;
+  background: linear-gradient(90deg, var(--vp-c-primary, #5865F2), var(--vp-c-accent, #FF6B6B)) !important;
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   border-radius: 2px;
   visibility: visible !important;
   opacity: 1 !important;
   z-index: 10;
+  /* Ensure it's on top */
 }
 
 /* Hover State - Trigger Animation */
-a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.header-anchor):hover::after {
+a:not(.VPButton):not(.social-link):not(.VPSocialLink):hover::after {
   width: 100% !important;
 }
 
-/* Text Color on Hover - Keep it Theme Color (Black/White) */
-a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.header-anchor):hover {
-  color: var(--vp-c-text-1) !important;
+/* Text Color Change on Hover */
+a:not(.VPButton):not(.social-link):not(.VPSocialLink):hover {
+  color: var(--vp-c-primary-dark, #4752C4) !important;
+}
+
+/* =========================================
+   Black & White Links for Tech Categories
+   (Override for: Android, Java, Data Structures)
+   ========================================= */
+/* Sidebar items - Black/White */
+.VPSidebarItem a {
+  color: #333333 !important;
+}
+
+.VPSidebarItem a::after {
+  background: #333333 !important;
+}
+
+.VPSidebarItem a:hover {
+  color: #000000 !important;
+}
+
+.dark .VPSidebarItem a {
+  color: #e0e0e0 !important;
+}
+
+.dark .VPSidebarItem a::after {
+  background: #e0e0e0 !important;
+}
+
+.dark .VPSidebarItem a:hover {
+  color: #ffffff !important;
 }
 
 /* =========================================
@@ -446,10 +504,195 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.header-anchor):hover 
 }
 
 .vp-doc blockquote {
-  border-left: 4px solid var(--vp-c-primary);
-  background: rgba(102, 126, 234, 0.1);
+  border-left: 4px solid #333333;
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 0 8px 8px 0;
   margin-left: 0;
   margin-right: 0;
   padding: 16px;
+}
+
+/* =========================================
+   Article Content - Black & White Theme
+   ========================================= */
+/* Article links - Black for light mode, Gray for dark mode */
+.vp-doc a:not(.VPButton):not(.social-link):not(.VPSocialLink) {
+  color: #333333 !important;
+}
+
+.dark .vp-doc a:not(.VPButton):not(.social-link):not(.VPSocialLink) {
+  color: #e0e0e0 !important;
+}
+
+/* Article link underline - Black/Gray instead of blue */
+.vp-doc a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
+  background: #333333 !important;
+}
+
+.dark .vp-doc a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
+  background: #e0e0e0 !important;
+}
+
+/* Headings - Clear black text */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6 {
+  color: #000000;
+}
+
+.dark .vp-doc h1,
+.dark .vp-doc h2,
+.dark .vp-doc h3,
+.dark .vp-doc h4,
+.dark .vp-doc h5,
+.dark .vp-doc h6 {
+  color: #ffffff;
+}
+
+/* Article body text - Black/White */
+.vp-doc p,
+.vp-doc li {
+  color: #222222;
+}
+
+.dark .vp-doc p,
+.dark .vp-doc li {
+  color: #e5e5e5;
+}
+
+/* Code blocks - Black & white theme for articles */
+.vp-doc .shiki {
+  background: #f5f5f5 !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.dark .vp-doc .shiki {
+  background: #2d2d2d !important;
+  border: 1px solid #444444 !important;
+}
+
+/* =========================================
+   Hide code block label 
+   ========================================= */
+/* Hide ONLY the <label data-title="..."> element, keep span.lang */
+.vp-code-group label[data-title],
+.vp-code label[data-title] {
+  display: none !important;
+}
+
+/* Make sure span.lang is visible */
+.vp-code span.lang,
+.shiki-container span.lang {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* =========================================
+   Specific Categories - Black & White Only
+    (Android, Java, Data Structures)
+   ========================================= */
+/* Force black/white links for content articles */
+.vp-doc main a,
+.vp-doc .content a,
+[class*="Android"] a,
+[class*="Java"] a,
+[class*="数据结构"] a {
+  color: #333333 !important;
+  text-decoration: none !important;
+}
+
+.vp-doc main a::after,
+.vp-doc .content a::after,
+[class*="Android"] a::after,
+[class*="Java"] a::after,
+[class*="数据结构"] a::after {
+  background: #333333 !important;
+}
+
+.vp-doc main a:hover,
+.vp-doc .content a:hover,
+[class*="Android"] a:hover,
+[class*="Java"] a:hover,
+[class*="数据结构"] a:hover {
+  color: #000000 !important;
+}
+
+.dark .vp-doc main a,
+.dark .vp-doc .content a,
+.dark [class*="Android"] a,
+.dark [class*="Java"] a,
+.dark [class*="数据结构"] a {
+  color: #e0e0e0 !important;
+}
+
+.dark .vp-doc main a::after,
+.dark .vp-doc .content a::after,
+.dark [class*="Android"] a::after,
+.dark [class*="Java"] a::after,
+.dark [class*="数据结构"] a::after {
+  background: #e0e0e0 !important;
+}
+
+.dark .vp-doc main a:hover,
+.dark .vp-doc .content a:hover,
+.dark [class*="Android"] a:hover,
+.dark [class*="Java"] a:hover,
+.dark [class*="数据结构"] a:hover {
+  color: #ffffff !important;
+}
+
+/* =========================================
+   Hide Header Anchor # Symbol
+   ========================================= */
+.vp-doc h1 .header-anchor,
+.vp-doc h2 .header-anchor,
+.vp-doc h3 .header-anchor,
+.vp-doc h4 .header-anchor,
+.vp-doc h5 .header-anchor,
+.vp-doc h6 .header-anchor {
+  display: none !important;
+}
+
+/* =========================================
+   Table of Contents (Right Aside) - Black & White
+   ========================================= */
+.vp-doc-aside a,
+.aside a,
+.table-of-contents a {
+  color: #333333 !important;
+  text-decoration: none !important;
+}
+
+.vp-doc-aside a::after,
+.aside a::after,
+.table-of-contents a::after {
+  background: #333333 !important;
+}
+
+.vp-doc-aside a:hover,
+.aside a:hover,
+.table-of-contents a:hover {
+  color: #000000 !important;
+}
+
+.dark .vp-doc-aside a,
+.dark .aside a,
+.dark .table-of-contents a {
+  color: #e0e0e0 !important;
+}
+
+.dark .vp-doc-aside a::after,
+.dark .aside a::after,
+.dark .table-of-contents a::after {
+  background: #e0e0e0 !important;
+}
+
+.dark .vp-doc-aside a:hover,
+.dark .aside a:hover,
+.dark .table-of-contents a:hover {
+  color: #ffffff !important;
 }

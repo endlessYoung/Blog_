@@ -3,10 +3,11 @@ import './style/var.css'
 import './style/vp-code-group.css';
 
 import '@documate/vue/dist/style.css'
-import { h, onMounted, nextTick, watch } from 'vue'
+import { h, onMounted, nextTick } from 'vue'
 import Documate from '@documate/vue'
 import { initCardTransform } from './cardTransform'
 import { useRoute } from 'vitepress'
+import Comments from './components/Comments.vue'
 
 // 存储滚动位置
 const scrollPositions: Record<string, number> = {}
@@ -52,10 +53,10 @@ export default {
     },
     render() {
       return h(Theme.Layout, null, {
-        'nav-bar-content-before': () => h(Documate, {
-          endpoint: 'https://izbdbdndfp.us.aircode.run/ask',
-        }),
-      });
+        'nav-bar-content-before': () =>
+          h(Documate, { endpoint: 'https://izbdbdndfp.us.aircode.run/ask' }),
+        'doc-after': () => h(Comments)
+      })
     },
   },
 }
