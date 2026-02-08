@@ -283,6 +283,14 @@ export default defineConfig({
           ]
         },
         {
+          text: 'Jetpack Compose',
+          collapsed: false,
+          items: [
+            { text: 'Compose Gradle 配置', link: '/Android/Compose的gradle配置' },
+            { text: 'Compose 状态管理', link: '/Android/ComposeStateManagement' },
+          ]
+        },
+        {
           text: 'debug与调试',
           collapsed: false,
           items: [
