@@ -287,8 +287,10 @@ export default defineConfig({
           text: 'Jetpack Compose',
           collapsed: false,
           items: [
-            { text: 'Compose Gradle 配置', link: '/Android/Compose的gradle配置' },
-            { text: 'Compose 状态管理', link: '/Android/ComposeStateManagement' },
+            { text: 'Compose Gradle 配置', link: '/Android/Compose/Compose的gradle配置' },
+            { text: 'Compose 状态管理', link: '/Android/Compose/ComposeStateManagement' },
+            { text: 'Compose 布局系统 & Modifier', link: '/Android/Compose/Compose布局系统 & Modifier' },
+
           ]
         },
         {
@@ -523,14 +525,6 @@ export default defineConfig({
             { text: 'proguard-rules.pro', link: '/Android/proguard-rules.pro' },
             { text: 'settings.gradle', link: '/Android/settings.gradle' },
             { text: 'settings.gradle.kts', link: '/Android/settings.gradle.kts' },
-          ]
-        },
-        {
-          text: 'Compose',
-          collapsed: false,
-          items: [
-            { text: 'compose的gradle配置', link: '/Android/compose的gradle配置' },
-
           ]
         },
         {
@@ -769,12 +763,6 @@ export default defineConfig({
             { text: 'Flow', link: '/Kotlin/Flow' },
           ]
         },
-        {
-          text: 'Jetpack Compose',
-          items: [
-            { text: 'Jetpack Compose', link: '/Kotlin/Jetpack Compose' },
-          ]
-        }
       ],
       '/Python/': [
         {
