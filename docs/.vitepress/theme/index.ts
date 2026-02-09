@@ -8,6 +8,7 @@ import Documate from '@documate/vue'
 import { initCardTransform } from './cardTransform'
 import { useRoute } from 'vitepress'
 import Comments from './components/Comments.vue'
+import ArticleMetadata from './components/ArticleMetadata.vue'
 
 // 存储滚动位置
 const scrollPositions: Record<string, number> = {}
@@ -55,6 +56,7 @@ export default {
       return h(Theme.Layout, null, {
         'nav-bar-content-before': () =>
           h(Documate, { endpoint: 'https://izbdbdndfp.us.aircode.run/ask' }),
+        'doc-before': () => h(ArticleMetadata),
         'doc-after': () => h(Comments)
       })
     },

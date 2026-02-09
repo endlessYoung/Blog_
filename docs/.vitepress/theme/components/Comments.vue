@@ -55,6 +55,7 @@ const mount = async () => {
     search: comment.search,
     emoji: comment.emoji,
     placeholder: comment.placeholder,
+    pageview: true,
     path: route.path
   })
 }

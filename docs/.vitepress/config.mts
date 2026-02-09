@@ -1,5 +1,6 @@
 import { defineConfig, SiteData } from 'vitepress'
 import markdownItKatex from 'markdown-it-katex'
+
 const customElements = [
   'math',
   'maction',
