@@ -75,3 +75,15 @@ jobs:
             "keyLocation": "'$BLOG_URL'/208c12af10454a61a4ef6e0fcd59aec0.txt",
             "urlList": ["'$BLOG_URL'"]
           }'
+
+      - name: Submit Sitemap to Google
+        run: |
+          BLOG_URL="https://endlessyoung.github.io/Blog_/"
+          SITEMAP_URL="https://endlessyoung.github.io/Blog_/sitemap.xml"
+          curl -X GET "https://www.google.com/ping?sitemap=$SITEMAP_URL" || echo "Google ping completed (may take time to process)"
+      
+      - name: Submit Sitemap to Bing Webmaster
+        run: |
+          SITEMAP_URL="https://endlessyoung.github.io/Blog_/sitemap.xml"
+          curl -X GET "https://www.bing.com/indexnow?url=$SITEMAP_URL" || echo "Bing sitemap submitted"
+          
