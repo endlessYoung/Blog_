@@ -1,5 +1,6 @@
 ---
 layout: home
+pageClass: home-landing
 
 hero:
   name: Endlessyoung

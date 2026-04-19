@@ -1,254 +1,768 @@
-/* VitePress 代码块美化样式 */
+/* 博客代码块：对齐 docs/public/code-card-template.html 深色 TypeScript 卡（第二张参考图）：#0a0a0a 底、zinc 顶栏与 gutter、全圆药丸、幽灵 Copy */
 
-/* 代码块整体容器 */
+:root {
+  /* 浅色参考：顶栏 zinc-200、正文 zinc-100（略浅于顶栏，仅靠色差分界，无硬线） */
+  --cc-card-bg-light: #f4f4f5;
+  /* 与 code-card-template.html dark:bg-[#0a0a0a] 一致（第二张参考图整体底） */
+  --cc-card-bg-dark: #0a0a0a;
+  --cc-body-light: #f4f4f5;
+  --cc-body-dark: transparent;
+  /* dark: zinc-900/95 叠在 #0a0a0a 上 */
+  --cc-toolbar-light: #e4e4e7;
+  --cc-toolbar-dark: color-mix(in srgb, #18181b 95%, var(--cc-card-bg-dark));
+  --cc-border-light: #d4d4d8;
+  /* 模板 dark:border-zinc-800 */
+  --cc-border-dark: #27272a;
+  --cc-pill-border-dark: #3f3f46;
+  /* 模板 dark:bg-zinc-800 */
+  --cc-pill-bg-dark: #27272a;
+  /* 模板 dark:text-zinc-400 */
+  --cc-copy-muted: #a1a1aa;
+  --cc-chrome-h: 52px;
+  --cc-gutter-w: 48px;
+  --cc-ring-light: rgba(0, 0, 0, 0.04);
+  --cc-ring-dark: rgba(255, 255, 255, 0.06);
+  /* 模板 gutter：dark:bg-zinc-900/50 + dark:text-zinc-600 */
+  --cc-gutter-bg-dark: rgba(24, 24, 27, 0.5);
+  --cc-gutter-text-dark: #52525b;
+  /* 浅色行号区：模板 bg-zinc-50/60 感，与正文无竖线 */
+  --cc-gutter-bg-light: rgba(250, 250, 250, 0.72);
+  --cc-gutter-text-light: #a1a1aa;
+  /* 浅色 Copy 药丸：比顶栏略深一点的 zinc */
+  --cc-copy-pill-light: #d4d4d8;
+  --cc-copy-pill-light-hover: #c4c4c8;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --cc-chrome-h: 56px;
+  }
+}
+
+/* 仅画顶栏与正文分界（顶栏底色由下方 linear-gradient 提供，避免与 pre 叠层形成「双条」） */
+.vp-doc div[class*='language-']::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--cc-chrome-h);
+  height: 1px;
+  background: var(--cc-border-light);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.dark .vp-doc div[class*='language-']::before {
+  background: var(--cc-border-dark);
+}
+
+/* 浅色：顶栏与正文仅靠底色区分，不要 1px 分割条 */
+html:not(.dark) .vp-doc div[class*='language-']::before {
+  height: 0 !important;
+  background: transparent !important;
+}
+
+/* 外壳：顶栏 + 正文用渐变一次铺完（对齐 template 两行结构） */
+.vp-doc div[class*='language-'] {
+  position: relative;
+  margin: 1.5rem 0 !important;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--cc-border-light);
+  background: linear-gradient(
+    180deg,
+    var(--cc-toolbar-light) 0,
+    var(--cc-toolbar-light) var(--cc-chrome-h),
+    var(--cc-card-bg-light) var(--cc-chrome-h) 100%
+  );
+  box-shadow:
+    0 0 0 1px var(--cc-ring-light),
+    0 20px 25px -5px rgba(15, 23, 42, 0.08),
+    0 8px 10px -6px rgba(15, 23, 42, 0.06);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .vp-doc div[class*='language-'] {
+    border-radius: 1.5rem;
+  }
+}
+
+.vp-doc div[class*='language-']:hover {
+  border-color: #d4d4d8;
+}
+
+.dark .vp-doc div[class*='language-'] {
+  border-color: var(--cc-border-dark);
+  background: linear-gradient(
+    180deg,
+    var(--cc-toolbar-dark) 0,
+    var(--cc-toolbar-dark) var(--cc-chrome-h),
+    var(--cc-card-bg-dark) var(--cc-chrome-h) 100%
+  );
+  box-shadow:
+    0 0 0 1px var(--cc-ring-dark),
+    0 20px 40px rgba(0, 0, 0, 0.55);
+}
+
+.dark .vp-doc div[class*='language-']:hover {
+  border-color: #3f3f46;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* 语言药丸 = 模板 rounded-2xl border dark:bg-zinc-800 */
+.vp-doc div[class*='language-']>span.lang {
+  position: absolute !important;
+  top: calc((var(--cc-chrome-h) - 34px) / 2) !important;
+  left: 1rem !important;
+  right: auto !important;
+  z-index: 6;
+  display: inline-flex !important;
+  align-items: center;
+  margin: 0 !important;
+  height: 34px;
+  padding: 0 12px 0 14px !important;
+  max-width: min(260px, calc(100% - 120px));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--tech-font-ui, ui-sans-serif, system-ui, sans-serif) !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  color: #27272a !important;
+  background: #ffffff !important;
+  border: 1px solid #e4e4e7 !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  opacity: 1 !important;
+  line-height: 1 !important;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .vp-doc div[class*='language-']>span.lang {
+    left: 1.25rem !important;
+  }
+}
+
+html:not(.dark) .vp-doc div[class*='language-']>span.lang {
+  border-color: #d4d4d8 !important;
+}
+
+.dark .vp-doc div[class*='language-']>span.lang {
+  color: #fafafa !important;
+  background: var(--cc-pill-bg-dark) !important;
+  border-color: var(--cc-pill-border-dark) !important;
+  box-shadow: none !important;
+}
+
+.dark .vp-doc div[class*='language-']>span.lang:hover {
+  border-color: rgba(139, 92, 246, 0.45) !important;
+  background: rgba(46, 16, 101, 0.35) !important;
+}
+
+/* 小 chevron ≈ fa-chevron-down 10px opacity-60 */
+.vp-doc div[class*='language-']>span.lang::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 7px;
+  margin-top: -1px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+.vp-doc [class*='language-']:hover>button.copy+span.lang,
+.vp-doc [class*='language-']>button.copy:focus+span.lang {
+  opacity: 1 !important;
+}
+
+/* Copy = 模板 ghost：text-zinc-500 / dark:text-zinc-400，hover 铺底 + 字变白 */
+.vp-doc div[class*='language-']>button.copy {
+  position: absolute !important;
+  top: calc((var(--cc-chrome-h) - 36px) / 2) !important;
+  right: 0.75rem !important;
+  z-index: 7 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.5rem !important;
+  width: auto !important;
+  min-width: unset !important;
+  height: 36px !important;
+  padding: 0 0.75rem 0 30px !important;
+  border-radius: 1rem !important;
+  border: none !important;
+  background-color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-position: 10px 50% !important;
+  background-size: 16px 16px !important;
+  opacity: 1 !important;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease !important;
+}
+
+@media (min-width: 640px) {
+  .vp-doc div[class*='language-']>button.copy {
+    right: 1rem !important;
+    padding: 0 1rem 0 30px !important;
+  }
+}
+
+.vp-doc div[class*='language-']>button.copy:hover {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.dark .vp-doc div[class*='language-']>button.copy {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.dark .vp-doc div[class*='language-']>button.copy:hover {
+  background-color: #27272a !important;
+}
+
+/* 浅色：Copy 为浅灰药丸（参考图），与顶栏 #e4e4e7 区分 */
+html:not(.dark) .vp-doc div[class*='language-']>button.copy {
+  border-radius: 9999px !important;
+  background-color: var(--cc-copy-pill-light) !important;
+  border: 1px solid #c4c4c8 !important;
+}
+
+html:not(.dark) .vp-doc div[class*='language-']>button.copy:hover {
+  background-color: var(--cc-copy-pill-light-hover) !important;
+}
+
+html:not(.dark) .vp-doc div[class*='language-']>button.copy::after {
+  color: #52525b !important;
+}
+
+html:not(.dark) .vp-doc div[class*='language-']>button.copy:hover::after {
+  color: #27272a !important;
+}
+
+html:not(.dark) .vp-doc div[class*='language-']>button.copy.copied,
+html:not(.dark) .vp-doc div[class*='language-']>button.copy:hover.copied {
+  border-radius: 9999px !important;
+}
+
+.vp-doc div[class*='language-']>button.copy::before,
+.vp-doc div[class*='language-']>button.copy:hover::before,
+.vp-doc div[class*='language-']>button.copy.copied::before,
+.vp-doc div[class*='language-']>button.copy:hover.copied::before {
+  content: none !important;
+  display: none !important;
+}
+
+.vp-doc div[class*='language-']>button.copy.copied,
+.vp-doc div[class*='language-']>button.copy:hover.copied {
+  border-radius: 1rem !important;
+}
+
+.vp-doc div[class*='language-']>button.copy::after {
+  content: 'Copy';
+  font-family: var(--tech-font-ui, ui-sans-serif, system-ui, sans-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #71717a;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.dark .vp-doc div[class*='language-']>button.copy::after {
+  color: var(--cc-copy-muted);
+}
+
+.dark .vp-doc div[class*='language-']>button.copy:hover::after {
+  color: #fafafa;
+}
+
+.vp-doc div[class*='language-']>button.copy.copied::after {
+  content: 'Copied!';
+  font-weight: 600;
+  color: #059669;
+}
+
+.dark .vp-doc div[class*='language-']>button.copy.copied::after {
+  color: #34d399;
+}
+
+.dark .vp-doc div[class*='language-']>button.copy:hover.copied::after {
+  color: #34d399;
+}
+
+.vp-doc div[class*='language-']>button.copy.copied {
+  animation: cc-copied-pop 0.45s ease;
+}
+
+@keyframes cc-copied-pop {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 代码区：用 margin-top 让出顶栏；垂直 padding 对齐模板 pre 的 py-4 / sm:py-5 */
+.vp-doc div[class*='language-']>pre {
+  position: relative;
+  z-index: 2;
+  margin-top: var(--cc-chrome-h) !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+  padding: 1rem 0 1rem !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.dark .vp-doc div[class*='language-']>pre {
+  background: transparent !important;
+}
+
+@media (min-width: 640px) {
+  .vp-doc div[class*='language-']>pre {
+    padding: 1.25rem 0 1.25rem !important;
+  }
+}
+
+/* 浅色：正文区略松的上下留白（参考图） */
+html:not(.dark) .vp-doc div[class*='language-']>pre {
+  padding: 1.25rem 0 1.25rem !important;
+}
+
+@media (min-width: 640px) {
+  html:not(.dark) .vp-doc div[class*='language-']>pre {
+    padding: 1.5rem 0 1.5rem !important;
+  }
+}
+
+.vp-doc div[class*='language-']>pre::before,
+.vp-doc div[class*='language-']>pre::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 勿对 code 强设 color，避免覆盖 Shiki 行内配色 */
+.vp-doc div[class*='language-'] code,
+.vp-doc div[class*='language-'] pre code {
+  display: block;
+  width: fit-content;
+  min-width: 100%;
+  padding: 0 0.75rem 0 0.75rem !important;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.6 !important;
+}
+
+@media (min-width: 640px) {
+  .vp-doc div[class*='language-'] code,
+  .vp-doc div[class*='language-'] pre code {
+    padding: 0 1.5rem 0 1rem !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+.vp-doc div[class*='language-'] .shiki {
+  background: transparent !important;
+}
+
+.vp-doc div[class*='language-'] .has-focused-lines .line:not(.has-focus) {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* 行号 gutter：模板 pl-3 pr-2 py-4 / sm:py-5 + border-r zinc-800 */
+.vp-doc div[class*='language-'].line-numbers-mode {
+  padding-left: var(--cc-gutter-w) !important;
+}
+
+.vp-doc div[class*='language-'].line-numbers-mode .line-numbers-wrapper {
+  left: 0 !important;
+  top: var(--cc-chrome-h) !important;
+  bottom: 0 !important;
+  width: var(--cc-gutter-w) !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  padding-right: 0.5rem !important;
+  padding-left: 0.75rem !important;
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  border-right: 1px solid var(--cc-border-light) !important;
+  background: var(--cc-gutter-bg-light) !important;
+  color: var(--cc-gutter-text-light) !important;
+  z-index: 4 !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 640px) {
+  .vp-doc div[class*='language-'].line-numbers-mode .line-numbers-wrapper {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+    padding-right: 0.75rem !important;
+    padding-left: 1rem !important;
+  }
+}
+
+.dark .vp-doc div[class*='language-'].line-numbers-mode .line-numbers-wrapper {
+  border-right-color: var(--cc-border-dark) !important;
+  background: var(--cc-gutter-bg-dark) !important;
+  color: var(--cc-gutter-text-dark) !important;
+}
+
+html:not(.dark) .vp-doc div[class*='language-'].line-numbers-mode .line-numbers-wrapper {
+  border-right: none !important;
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+}
+
+@media (min-width: 640px) {
+  html:not(.dark) .vp-doc div[class*='language-'].line-numbers-mode .line-numbers-wrapper {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+}
+
+/* 去掉历史上 var.css / 全局给 .shiki 的描边与投影（含 class 在 code 上的情况），避免底部整宽「第二道边」 */
+.vp-doc div[class*='language-'] pre.shiki,
+.dark .vp-doc div[class*='language-'] pre.shiki,
+.vp-doc div[class*='language-'] pre code.shiki,
+.dark .vp-doc div[class*='language-'] pre code.shiki {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+/* 横向滚动条：默认轨道贴底会像一条灰带；轨道透明、thumb 弱化 */
+.vp-doc div[class*='language-'] pre {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(113, 113, 122, 0.4) transparent;
+}
+
+.vp-doc div[class*='language-'] pre::-webkit-scrollbar {
+  height: 5px;
+}
+
+.vp-doc div[class*='language-'] pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.vp-doc div[class*='language-'] pre::-webkit-scrollbar-thumb {
+  background: rgba(113, 113, 122, 0.35);
+  border-radius: 999px;
+}
+
+/* —— 多 Tab 代码组：整卡与单块围栏同色，不再叠 toolbar / block 第二底色（避免上下色条） —— */
 .vp-code-group {
-    color: var(--vp-c-text-1);
-    border-radius: 10px;
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
-    background: var(--vp-c-bg-alt);
-    overflow: hidden;
-    margin: 16px 0;
-    border: 1px solid var(--vp-c-divider);
-    transition: all 0.3s ease;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--cc-border-light);
+  background: var(--cc-card-bg-light);
+  box-shadow:
+    0 0 0 1px var(--cc-ring-light),
+    0 20px 25px -5px rgba(15, 23, 42, 0.08);
 }
 
-/* 单个代码块 */
-.vp-doc div[class*="language-"] {
-    position: relative;
-    margin: 16px 0;
-    background: var(--vp-c-bg-alt);
-    border-radius: 10px;
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--vp-c-divider);
-    overflow: hidden;
-    transition: all 0.3s ease;
+@media (min-width: 640px) {
+  .vp-code-group {
+    border-radius: 1.5rem;
+  }
 }
 
-/* 代码块语言标签 */
-.vp-doc div[class*="language-"]::before {
-    position: absolute;
-    top: 8px;
-    right: 52px;
-    z-index: 3;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--vp-c-text-2);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    background: var(--vp-c-bg-soft);
-    padding: 4px 8px;
-    border-radius: 4px;
-    content: attr(data-language);
-    opacity: 0;
-    transform: translateY(-2px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.vp-doc div[class*="language-"][data-lang]::before {
-    content: attr(data-lang);
-}
-
-.vp-doc div[class*="language-"]:hover::before {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.vp-code-group .blocks .block:hover div[class*="language-"]::before {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 代码块内容 */
-.vp-doc div[class*="language-"] code {
-    color: var(--vp-c-text-1);
-    font-size: 14px;
-    font-family: 'Fira Code', 'Monaco', 'Courier New', monospace;
-    line-height: 1.6;
-    padding: 16px;
-    display: block;
-    overflow: auto;
-}
-
-/* 代码块复制按钮 */
-.copy {
-    position: absolute;
-    top: 8px;
-    right: 48px;
-    z-index: 3;
-    border: 1px solid var(--vp-c-divider);
-    border-radius: 4px;
-    width: 32px;
-    height: 32px;
-    background: var(--vp-c-bg-soft);
-    color: var(--vp-c-text-2);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    opacity: 0;
-}
-
-.vp-doc div[class*="language-"]:hover .copy {
-    opacity: 1;
-}
-
-.copy:hover {
-    background: var(--vp-c-bg-mute);
-    color: var(--vp-c-text-1);
-    border-color: var(--vp-c-primary);
-}
-
-.copy.copied {
-    background: var(--vp-c-green-soft);
-    color: var(--vp-c-green-1);
-    border-color: var(--vp-c-green-1);
-}
-
-/* 深色模式优化 */
-.dark .vp-doc div[class*="language-"] {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-.dark .vp-doc div[class*="language-"]::before {
-    color: rgba(255, 255, 255, 0.5);
-    background: rgba(102, 126, 234, 0.2);
-}
-
-.dark .vp-doc div[class*="language-"] code {
-    color: #e0e7ff;
-}
-
-.dark .copy {
-    background: rgba(102, 126, 234, 0.1);
-    color: rgba(255, 255, 255, 0.6);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-/* 代码块tab顶部 - Mac风格窗口控制按钮 */
-.vp-code-group .tabs {
-    padding-top: 35px;
-    padding-left: 12px;
-    background: var(--vp-c-bg);
-    border-bottom: 1px solid var(--vp-c-divider);
-    position: relative;
-}
-
-/* 代码块tab - 顶部小圆点 (Mac风格) */
-.vp-code-group .tabs::before {
-    background: #ff5f57;
-    border-radius: 50%;
-    box-shadow: 20px 0 #ffbd2e, 40px 0 #28c940;
-    content: ' ';
-    height: 12px;
-    width: 12px;
-    left: 12px;
-    margin-top: -25px;
-    position: absolute;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-}
-
-
-/* Tab 按钮样式 */
-.vp-code-group .tabs button {
-    position: relative;
-    padding: 10px 16px;
-    border: none;
-    background: transparent;
-    color: var(--vp-c-text-2);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-bottom: 2px solid transparent;
-    margin-right: 4px;
-}
-
-.vp-code-group .tabs button:hover {
-    color: var(--vp-c-text-1);
-}
-
-.vp-code-group .tabs button.active {
-    color: var(--vp-c-primary);
-    border-bottom-color: var(--vp-c-primary);
-    background: var(--vp-c-bg-soft);
-}
-
-/* 代码内容区域 */
-.vp-code-group .blocks .block {
-    padding: 0;
-    background: var(--vp-c-bg-alt);
-}
-
-.vp-code-group .blocks .block div[class*="language-"] {
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
-    border: none;
-    background: transparent;
-}
-
-/* 代码块内部 */
-.vp-code-group pre {
-    margin: 0;
-    padding: 16px;
-    background: transparent !important;
-    border: none;
-    border-radius: 0;
-}
-
-.vp-code-group code {
-    color: var(--vp-c-text-1);
-    font-size: 14px;
-    font-family: 'Fira Code', 'Monaco', 'Courier New', monospace;
-    line-height: 1.6;
-}
-
-/* 代码高亮 - 语法着色 */
-.vp-code-group .shiki {
-    background: transparent !important;
-}
-
-/* 深色模式下的特殊处理 */
 .dark .vp-code-group {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--cc-border-dark);
+  background: var(--cc-card-bg-dark);
+  box-shadow:
+    0 0 0 1px var(--cc-ring-dark),
+    0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* VP 默认：radio + label；.tabs 带负 margin 与 inset 分割线 —— 不覆盖会残留与卡片不一致的顶栏色条 */
+.vp-code-group .tabs {
+  position: relative;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 10px 12px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* 与模板顶栏 zinc-50/95 一致（勿透明，否则会透出整卡底色） */
+  background: var(--cc-toolbar-light) !important;
+  border-bottom: 1px solid var(--cc-border-light);
+  box-shadow: none !important;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 .dark .vp-code-group .tabs {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
+  background: var(--cc-toolbar-dark) !important;
+  border-bottom-color: var(--cc-border-dark);
 }
 
-.dark .vp-code-group .tabs button {
-    color: rgba(255, 255, 255, 0.6);
+/* 浅色 code-group：顶栏与正文无硬分割线；选中 tab 为白丸 */
+html:not(.dark) .vp-code-group .tabs {
+  border-bottom: none !important;
 }
 
-.dark .vp-code-group .tabs button:hover {
-    color: rgba(255, 255, 255, 0.9);
+html:not(.dark) .vp-code-group .tabs label {
+  border-radius: 9999px !important;
+  border-bottom-left-radius: 9999px !important;
+  border-bottom-right-radius: 9999px !important;
+  border: 1px solid transparent !important;
+  border-bottom: 1px solid transparent !important;
 }
 
-.dark .vp-code-group .tabs button.active {
-    color: var(--vp-c-text-1);
-    border-bottom-color: var(--vp-c-primary);
-    background: rgba(255, 255, 255, 0.06);
+html:not(.dark) .vp-code-group .tabs label:hover {
+  background: rgba(255, 255, 255, 0.45) !important;
+}
+
+html:not(.dark) .vp-code-group .tabs input:checked + label {
+  color: #18181b !important;
+  background: #ffffff !important;
+  border: 1px solid #d4d4d8 !important;
+  border-radius: 9999px !important;
+  border-bottom: 1px solid #d4d4d8 !important;
+  border-bottom-color: #d4d4d8 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+}
+
+.vp-code-group .tabs::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* 与 VP 默认 label::after 底边条二选一 */
+.vp-code-group .tabs label::after {
+  content: none !important;
+  display: none !important;
+}
+
+.vp-code-group .tabs label {
+  position: relative;
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 0;
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  line-height: 1.25 !important;
+  font-family: var(--tech-font-ui, ui-sans-serif, system-ui, sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  color: #52525b;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dark .vp-code-group .tabs label {
+  color: #a1a1aa;
+}
+
+.vp-code-group .tabs label:hover {
+  color: #18181b;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.dark .vp-code-group .tabs label:hover {
+  color: #fafafa;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.vp-code-group .tabs input:checked + label {
+  color: #4f46e5;
+  border-color: #e4e4e7;
+  border-bottom-color: transparent;
+  background: transparent !important;
+  box-shadow: inset 0 -2px 0 #6366f1;
+}
+
+.dark .vp-code-group .tabs input:checked + label {
+  color: #e9d5ff;
+  border-color: #3f3f46;
+  border-bottom-color: transparent;
+  background: transparent !important;
+  box-shadow: inset 0 -2px 0 #a78bfa;
+}
+
+/* .blocks 的子节点就是各 tab 的 div.language-*（无 .block 包裹），必须用本选择器覆盖全局 margin/渐变 */
+.vp-code-group .blocks {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+.vp-code-group .blocks .block {
+  padding: 0;
+  margin: 0 !important;
+  background: transparent !important;
 }
 
 .dark .vp-code-group .blocks .block {
-    background: transparent;
+  background: transparent !important;
 }
 
-.dark .vp-code-group code {
-    color: #e0e7ff;
+/* 内层与单块围栏一致：顶 zinc 条 + 正文卡底色（单 tab 时 .tabs 隐藏，靠此条对齐模板） */
+.vp-code-group .blocks div[class*='language-'] {
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: linear-gradient(
+    180deg,
+    var(--cc-toolbar-light) 0,
+    var(--cc-toolbar-light) var(--cc-chrome-h),
+    var(--cc-card-bg-light) var(--cc-chrome-h) 100%
+  ) !important;
 }
 
+.dark .vp-code-group .blocks div[class*='language-'] {
+  background: linear-gradient(
+    180deg,
+    var(--cc-toolbar-dark) 0,
+    var(--cc-toolbar-dark) var(--cc-chrome-h),
+    var(--cc-card-bg-dark) var(--cc-chrome-h) 100%
+  ) !important;
+}
+
+/* 多 tab：顶栏只在 .tabs，内层不要再铺一层 zinc（否则顶区双色阶） */
+.vp-code-group:has(.tabs label:nth-of-type(2)) .blocks div[class*='language-'] {
+  background: var(--cc-card-bg-light) !important;
+}
+
+.dark .vp-code-group:has(.tabs label:nth-of-type(2)) .blocks div[class*='language-'] {
+  background: var(--cc-card-bg-dark) !important;
+}
+
+.vp-code-group .blocks div[class*='language-']::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* 多 tab：顶栏已有标题，隐藏块内药丸避免重复 */
+.vp-code-group:has(.tabs label:nth-of-type(2)) .blocks div[class*='language-']>span.lang {
+  display: none !important;
+}
+
+/* 单 tab：与单块围栏一致，不显示 radio 顶栏，只保留块内药丸 + Copy */
+.vp-code-group:not(:has(.tabs label:nth-of-type(2))) .tabs {
+  display: none !important;
+}
+
+.vp-code-group .blocks div[class*='language-']>button.copy {
+  top: calc((var(--cc-chrome-h) - 36px) / 2) !important;
+  right: 0.75rem !important;
+}
+
+/* 与单块围栏一致：用顶栏高度让出 Copy 行，去掉整块 3rem+ 的 padding 死空 */
+.vp-code-group pre {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.vp-code-group .blocks div[class*='language-']>pre {
+  margin-top: var(--cc-chrome-h) !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+  padding: 1rem 0 1rem !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+@media (min-width: 640px) {
+  .vp-code-group .blocks div[class*='language-']>pre {
+    padding: 1.25rem 0 1.25rem !important;
+  }
+}
+
+html:not(.dark) .vp-code-group .blocks div[class*='language-']>pre {
+  padding: 1.25rem 0 1.25rem !important;
+}
+
+@media (min-width: 640px) {
+  html:not(.dark) .vp-code-group .blocks div[class*='language-']>pre {
+    padding: 1.5rem 0 1.5rem !important;
+  }
+}
+
+.vp-code-group pre::before,
+.vp-code-group pre::after {
+  content: none !important;
+  display: none !important;
+}
+
+.vp-code-group [class*='language-']>pre code {
+  padding: 0 0.75rem !important;
+}
+
+@media (min-width: 640px) {
+  .vp-code-group [class*='language-']>pre code {
+    padding: 0 1rem !important;
+  }
+}
+
+.vp-code-group code {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 0.8125rem;
+  line-height: 1.625;
+}
+
+.vp-code-group .shiki {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.vp-code-group .blocks div[class*='language-'].line-numbers-mode .line-numbers-wrapper {
+  top: var(--cc-chrome-h) !important;
+}
+
+/* 划词高亮 */
 .vp-doc .highlight {
-    background: rgba(102, 126, 234, 0.1);
-    border-radius: 4px;
-    padding: 2px 6px;
-    color: #667eea;
-    font-weight: 500;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-weight: 500;
+  background: rgba(102, 126, 234, 0.14);
+  color: #7c3aed;
+}
+
+.dark .vp-doc .highlight {
+  background: rgba(167, 139, 250, 0.14);
+  color: #e9d5ff;
 }

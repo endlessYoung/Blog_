@@ -90,6 +90,53 @@ const customElements = [
 ]
 
 
+const isProduction = process.env.NODE_ENV === 'production'
+
+/** 代码块顶栏语言展示（与 code-card-template 一致）；键为小写 */
+const markdownLanguageLabel: Record<string, string> = {
+  xml: 'XML',
+  java: 'Java',
+  kotlin: 'Kotlin',
+  groovy: 'Groovy',
+  gradle: 'Gradle',
+  js: 'JavaScript',
+  ts: 'TypeScript',
+  tsx: 'TSX',
+  jsx: 'JSX',
+  py: 'Python',
+  python: 'Python',
+  cpp: 'C++',
+  c: 'C',
+  cs: 'C#',
+  go: 'Go',
+  rs: 'Rust',
+  swift: 'Swift',
+  md: 'Markdown',
+  mdc: 'MDC',
+  vue: 'Vue',
+  html: 'HTML',
+  css: 'CSS',
+  scss: 'SCSS',
+  sql: 'SQL',
+  sh: 'Shell',
+  bash: 'Bash',
+  yaml: 'YAML',
+  yml: 'YAML',
+  json: 'JSON',
+  toml: 'TOML',
+  ini: 'INI',
+  aidl: 'AIDL',
+}
+
+function prettifyFenceLang(lang: string) {
+  const k = lang.toLowerCase()
+  return markdownLanguageLabel[k] ?? lang.replace(/[_-]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+}
+
+function escapeHtmlText(s: string) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;')
+}
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Endlessyoung's Blog",
@@ -97,39 +144,52 @@ export default defineConfig({
   sitemap: {
     hostname: 'https://endlessyoung.github.io/Blog_/',
   },
-  base: '/Blog_/',
+  base: isProduction ? '/Blog_/' : '/',
   markdown: {
+    // Shiki：Dracula 与参考 IDE 卡片的霓虹粉/青绿/黄配色一致（外层再用 CSS 压成 #0b0e14 底）
+    theme: {
+      light: 'github-light',
+      dark: 'dracula'
+    },
     languageAlias: {
       'aidl': 'java',
       'kotlinscripts': 'kotlin',
       'gradle': 'groovy'
     },
+    languageLabel: markdownLanguageLabel,
+    /** 与 code-card-template 一致：左侧行号 gutter */
+    lineNumbers: true,
     config: (md: any) => {
       md.use(markdownItKatex)
       const fence = md.renderer.rules.fence
       md.renderer.rules.fence = (tokens: any, idx: number, options: any, env: any, self: any) => {
         const token = tokens[idx]
-        const info = token.info ? token.info.trim().split(/\s+/)[0] : ''
+        const rawInfo = token.info ? String(token.info).trim() : ''
+        const info = rawInfo.split(/\s+/)[0] || ''
         const html = fence ? fence(tokens, idx, options, env, self) : self.renderToken(tokens, idx, options)
-        if (html.includes('data-lang=') || html.includes('data-language=')) {
-          return html
-        }
+
         let lang = info
         if (!lang) {
           const classMatch = html.match(/language-([a-z0-9_-]+)/i)
-          if (classMatch) {
-            lang = classMatch[1]
-          }
+          if (classMatch?.[1]) lang = classMatch[1]
         }
-        if (!lang) {
-          return html
+        if (!lang) return html
+
+        const label = prettifyFenceLang(lang)
+        let out = html
+        /* VP 在行号模式下会生成 class="language- line-numbers-mode"，需补全 language-xxx */
+        out = out.replace(/class="language-\s+/g, `class="language-${lang} `)
+        out = out.replace(/class='language-\s+/g, `class='language-${lang} `)
+        out = out.replace(/\bclass="language-"/g, `class="language-${lang}"`)
+        out = out.replace(/\bclass='language-'/g, `class='language-${lang}'`)
+        out = out.replace(/<span class="lang"><\/span>/gi, `<span class="lang">${escapeHtmlText(label)}</span>`)
+
+        if (!out.includes('data-lang=') && !out.includes('data-language=')) {
+          const replacedDouble = out.replace(/<div class="([^"]*language-[^"]*)"/, `<div class="$1" data-lang="${lang}"`)
+          if (replacedDouble !== out) out = replacedDouble
+          else out = out.replace(/<div class='([^']*language-[^']*)'/, `<div class='$1' data-lang="${lang}"`)
         }
-        const replacedDouble = html.replace(/<div class="[^"]*language-[^"]*"/, (match) => `${match} data-lang="${lang}"`)
-        if (replacedDouble !== html) {
-          return replacedDouble
-        }
-        const replacedSingle = html.replace(/<div class='[^']*language-[^']*'/, (match) => `${match} data-lang="${lang}"`)
-        return replacedSingle
+        return out
       }
     }
   },
@@ -149,6 +209,15 @@ export default defineConfig({
   lang: 'zh-CN',
   head: [
     ['link', { rel: 'icon', href: '/Blog_/favicon.ico' }], // 也是放在/public目录中
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    [
+      'link',
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@450;600&family=Orbitron:wght@600;800&display=swap'
+      }
+    ],
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }],
     ['meta', { name: 'msvalidate.01', content: 'C134079F38DF28B5CB2B9AE952C0CBC7' }],
     ['meta', { name: 'google-site-verification', content: 'bNLBnwMb4Bl-KmTweCSRTZaLa4ZRD2Z7YgqTjpUU-Hw' }],

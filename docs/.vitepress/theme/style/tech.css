@@ -1,0 +1,1641 @@
+:root {
+  --tech-font-ui: 'Inter', ui-sans-serif, system-ui, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --tech-font-display: 'Inter', var(--tech-font-ui);
+  --tech-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* 暗色：原 :root 中的霓虹与 VP 变量（勿再挂在 :root，否则浅色切换无效） */
+html.dark {
+  color-scheme: dark;
+  --tech-c-bg: #050508;
+  --tech-c-bg-soft: rgba(255, 255, 255, 0.04);
+  --tech-c-panel: rgba(12, 12, 16, 0.72);
+  --tech-c-neon-cyan: #22d3ee;
+  --tech-c-neon-magenta: #e879f9;
+  --tech-neon-pink: #ec4899;
+  --tech-neon-purple: #c084fc;
+  --tech-neon-pink-glow: rgba(236, 72, 153, 0.45);
+  --tech-neon-purple-glow: rgba(192, 132, 252, 0.35);
+  --tech-c-border: rgba(255, 255, 255, 0.1);
+  --tech-c-border-strong: rgba(34, 211, 238, 0.35);
+  --tech-c-text: #fafafa;
+  --tech-c-text-soft: #a1a1aa;
+  --tech-c-accent: #22d3ee;
+  --tech-c-glow: rgba(34, 211, 238, 0.35);
+  --vp-c-bg: transparent;
+  --vp-c-bg-soft: rgba(255, 255, 255, 0.04);
+  --vp-c-bg-alt: rgba(255, 255, 255, 0.03);
+  --vp-c-text-1: var(--tech-c-text);
+  --vp-c-text-2: #d4d4d8;
+  --vp-c-text-3: #a1a1aa;
+  --vp-c-brand-1: #22d3ee;
+  --vp-c-brand-2: #67e8f9;
+  --vp-c-brand-3: #a78bfa;
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(100deg, #f4f4f5 0%, #e4e4e7 40%, #22d3ee 100%);
+  --vp-home-hero-image-background-image: radial-gradient(
+    circle at center,
+    rgba(34, 211, 238, 0.35),
+    rgba(167, 139, 250, 0.08) 55%,
+    transparent 72%
+  );
+  --vp-home-hero-image-filter: blur(80px);
+  --vp-button-brand-bg: #ffffff;
+  --vp-button-brand-hover-bg: #f4f4f5;
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-text: #0a0a0a;
+}
+
+/* 浅色：正文 zinc、强调色略收，与 code 卡 zinc 系一致 */
+html:not(.dark) {
+  color-scheme: light;
+  --tech-c-bg: #f4f4f5;
+  --tech-c-bg-soft: rgba(0, 0, 0, 0.04);
+  --tech-c-panel: rgba(255, 255, 255, 0.92);
+  --tech-c-neon-cyan: #0891b2;
+  --tech-c-neon-magenta: #a855f7;
+  --tech-neon-pink: #db2777;
+  --tech-neon-purple: #7c3aed;
+  --tech-neon-pink-glow: rgba(219, 39, 119, 0.22);
+  --tech-neon-purple-glow: rgba(124, 58, 237, 0.2);
+  --tech-c-border: rgba(0, 0, 0, 0.08);
+  --tech-c-border-strong: rgba(8, 145, 178, 0.35);
+  --tech-c-text: #18181b;
+  --tech-c-text-soft: #52525b;
+  --tech-c-accent: #0e7490;
+  --tech-c-glow: rgba(8, 145, 178, 0.2);
+  --vp-c-bg: transparent;
+  --vp-c-bg-soft: rgba(0, 0, 0, 0.03);
+  --vp-c-bg-alt: rgba(0, 0, 0, 0.02);
+  --vp-c-text-1: #18181b;
+  --vp-c-text-2: #27272a;
+  --vp-c-text-3: #52525b;
+  --vp-c-brand-1: #0e7490;
+  --vp-c-brand-2: #06b6d4;
+  --vp-c-brand-3: #7c3aed;
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(100deg, #18181b 0%, #3f3f46 30%, #0e7490 100%);
+  --vp-home-hero-image-background-image: radial-gradient(
+    circle at center,
+    rgba(6, 182, 212, 0.22),
+    rgba(124, 58, 237, 0.06) 55%,
+    transparent 72%
+  );
+  --vp-home-hero-image-filter: blur(80px);
+  --vp-button-brand-bg: #18181b;
+  --vp-button-brand-hover-bg: #27272a;
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-text: #fafafa;
+}
+
+html,
+body {
+  background: transparent;
+}
+
+html::before,
+html::after {
+  display: none;
+}
+
+body {
+  font-family: var(--tech-font-ui);
+  font-weight: 500;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'ss01' on, 'cv01' on;
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+}
+
+::selection {
+  background: rgba(121, 231, 255, 0.28);
+  color: #f6fdff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(6, 16, 32, 0.88);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(236, 72, 153, 0.45), rgba(168, 85, 247, 0.4), rgba(34, 211, 238, 0.45));
+  border-radius: 999px;
+}
+
+.Layout {
+  background: linear-gradient(180deg, rgba(5, 5, 8, 0.15) 0%, rgba(5, 5, 8, 0.88) 100%);
+}
+
+.VPNav,
+.VPNavBar,
+.VPSidebar,
+.VPFooter {
+  background: rgba(5, 5, 8, 0.55) !important;
+  backdrop-filter: blur(16px) saturate(130%);
+}
+
+.VPNavBar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.4),
+    inset 0 -1px 0 rgba(236, 72, 153, 0.12);
+}
+
+.VPNavBar .title {
+  font-family: var(--tech-font-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-transform: none;
+  text-shadow: none;
+}
+
+.VPSidebar {
+  border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.VPFooter {
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* 顶栏分类：默认即足够亮（避免被 var.css 里 .dark .VPNavBar a 压暗） */
+.dark .VPNavBar a.VPNavBarMenuLink {
+  color: #dddde8 !important;
+  font-weight: 500;
+}
+
+.dark .VPNavBar a.VPNavBarMenuLink:hover,
+.dark .VPNavBar a.VPNavBarMenuLink.active {
+  color: #ffffff !important;
+  text-shadow:
+    0 0 16px var(--tech-neon-pink-glow),
+    0 0 28px var(--tech-neon-purple-glow) !important;
+}
+
+.VPNavBar .title,
+.VPSidebar a,
+.VPFooter,
+.vp-doc,
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6,
+.vp-doc p,
+.vp-doc li,
+.vp-doc blockquote,
+.vp-doc-aside a,
+.table-of-contents a {
+  color: var(--tech-c-text) !important;
+}
+
+.VPSidebar a:hover,
+.vp-doc a:hover,
+.vp-doc-aside a:hover,
+.table-of-contents a:hover {
+  color: var(--tech-c-accent) !important;
+  text-shadow: none;
+}
+
+a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
+  background: linear-gradient(90deg, #22d3ee, #a78bfa) !important;
+}
+
+.VPHero {
+  position: relative;
+  padding-top: 48px;
+}
+
+.VPHero .container {
+  gap: 36px;
+}
+
+.VPHero .main {
+  position: relative;
+  padding: 34px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  background: rgba(12, 12, 18, 0.45);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+}
+
+.VPHero .main::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(118deg, transparent 0 40%, rgba(34, 211, 238, 0.04) 50%, transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%);
+  transform: translateX(-46%);
+  animation: heroScan 14s linear infinite;
+  opacity: 0.55;
+}
+
+.VPHero .name {
+  background-size: 200% auto;
+  animation: heroGradient 12s linear infinite;
+  letter-spacing: -0.02em;
+  filter: drop-shadow(0 0 24px rgba(34, 211, 238, 0.15));
+}
+
+.VPHero .text {
+  color: #fafafa;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.VPHero .tagline {
+  color: var(--tech-c-text-soft);
+  max-width: 620px;
+}
+
+.VPHero .actions {
+  gap: 16px;
+}
+
+.VPButton {
+  border-radius: 9999px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+.VPButton.brand {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--tech-font-ui);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  font-weight: 600;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.VPButton.brand::before,
+.VPButton.alt::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+  transform: translateX(-110%);
+  transition: transform 0.5s ease;
+}
+
+.VPButton.brand:hover,
+.VPButton.alt:hover {
+  transform: translateY(-2px);
+}
+
+.VPButton.brand:hover::before,
+.VPButton.alt:hover::before {
+  transform: translateX(110%);
+}
+
+.VPButton.alt {
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #e4e4e7 !important;
+  font-family: var(--tech-font-ui);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.VPHome .VPFeatures {
+  position: relative;
+  margin-top: 12px;
+  padding-top: 0;
+}
+
+.VPHome .items {
+  gap: 20px;
+}
+
+.VPFeature {
+  position: relative;
+  min-height: 200px;
+  padding: 26px 24px !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  border-radius: 20px !important;
+  background:
+    linear-gradient(165deg, rgba(12, 10, 24, 0.88), rgba(6, 12, 26, 0.78)) !important;
+  backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  transform-style: preserve-3d;
+  transition:
+    border-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  will-change: transform;
+}
+
+.VPFeature::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    145deg,
+    rgba(34, 211, 238, 0.07) 0%,
+    transparent 48%,
+    rgba(167, 139, 250, 0.05) 100%
+  );
+  opacity: 0.65;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.VPFeature:hover {
+  border-color: rgba(34, 211, 238, 0.25) !important;
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(34, 211, 238, 0.1);
+}
+
+.VPFeature:hover::before {
+  opacity: 0.95;
+}
+
+.VPFeature .icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(6, 8, 20, 0.65);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transform: translateZ(20px);
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+.VPFeature:hover .icon {
+  border-color: rgba(34, 211, 238, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 20px rgba(34, 211, 238, 0.12);
+}
+
+.VPFeature .title {
+  color: #f3fbff !important;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  transform: translateZ(18px);
+}
+
+.VPFeature .details {
+  color: rgba(215, 232, 248, 0.72) !important;
+  line-height: 1.72;
+  transform: translateZ(14px);
+}
+
+.VPHome .VPFeature {
+  opacity: 0;
+  animation: featureReveal 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.VPHome .VPFeature:nth-child(1) { animation-delay: 0.08s; }
+.VPHome .VPFeature:nth-child(2) { animation-delay: 0.16s; }
+.VPHome .VPFeature:nth-child(3) { animation-delay: 0.24s; }
+.VPHome .VPFeature:nth-child(4) { animation-delay: 0.32s; }
+.VPHome .VPFeature:nth-child(5) { animation-delay: 0.4s; }
+.VPHome .VPFeature:nth-child(6) { animation-delay: 0.48s; }
+
+/* 文档主栏：与页面底色融合为「一层」，只保留舒适内边距与清晰字色 */
+.VPDoc.has-aside .content-container,
+.VPDoc .content-container {
+  background: transparent !important;
+}
+
+.vp-doc {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 8px 4px 48px !important;
+  max-width: 52rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vp-doc h1 {
+  color: #fafafa !important;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.vp-doc p,
+.vp-doc li,
+.vp-doc td,
+.vp-doc th {
+  color: #d4d4d8 !important;
+}
+
+.vp-doc strong {
+  color: #f4f4f5 !important;
+}
+
+.vp-doc blockquote {
+  border-left: 3px solid rgba(34, 211, 238, 0.35);
+  background: rgba(255, 255, 255, 0.03);
+  color: #d4d4d8 !important;
+}
+
+/* 与 IDE 代码卡深色底一致（略深于 Dracula 默认 #282a36）；Code Card 围栏块由 vp-code-group 接管 */
+.dark .vp-doc .shiki {
+  background: #0b0e14 !important;
+  border: 1px solid rgba(139, 233, 253, 0.14) !important;
+  border-radius: 12px !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 121, 198, 0.06),
+    0 12px 40px rgba(0, 0, 0, 0.45) !important;
+}
+
+.dark .vp-doc div[class*='language-'] pre.shiki {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 防止任意父级透明度/滤镜让部分行「发虚」 */
+.dark .vp-doc pre.shiki,
+.dark .vp-doc pre.shiki span {
+  opacity: 1 !important;
+}
+
+.vp-doc h2,
+.vp-doc h3 {
+  position: relative;
+}
+
+.vp-doc h2::after,
+.vp-doc h3::after {
+  content: '';
+  display: block;
+  width: 96px;
+  height: 2px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.9), rgba(167, 139, 250, 0.55), transparent);
+}
+
+@keyframes heroGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes heroScan {
+  0% {
+    transform: translateX(-46%);
+  }
+
+  100% {
+    transform: translateX(58%);
+  }
+}
+
+@keyframes featureReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 960px) {
+  .VPHero {
+    padding-top: 20px;
+  }
+
+  .VPHero .main {
+    padding: 24px 20px;
+    border-radius: 22px;
+  }
+
+  .VPFeature {
+    min-height: auto;
+  }
+
+  .vp-doc {
+    padding: 8px 0 40px !important;
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .VPHero .main::after,
+  .VPHero .name,
+  .VPHome .VPFeature {
+    animation: none !important;
+  }
+
+  .home-landing .VPHero .tagline::after,
+  .VPContent.is-home .VPHero .tagline::after {
+    animation: none !important;
+    opacity: 1;
+  }
+
+  .VPContent.is-home .VPHero,
+  .VPContent.is-home .VPHero .main,
+  .VPContent.is-home .VPHero .text,
+  .VPContent.is-home .VPHero.has-image .image,
+  .VPContent.is-home .home-metrics__inner,
+  .VPContent.is-home .home-sec-head,
+  .VPContent.is-home .VPFeatures,
+  .VPContent.is-home .VPFeature .box,
+  .VPContent.is-home .home-cta .home-cta__card {
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .VPContent.is-home .VPHome::before {
+    display: none !important;
+  }
+}
+
+/* 首页专用：分区节奏 + 双栏 Hero 对齐 */
+.home-landing .VPHome {
+  margin-bottom: 56px;
+}
+
+@media (min-width: 768px) {
+  .home-landing .VPHome {
+    margin-bottom: 80px;
+  }
+}
+
+/* 首页：Hero 与下方专栏区垂直节奏（与指标条 padding 一起留白） */
+.VPContent.is-home .VPHero {
+  padding-bottom: 4px;
+}
+
+@media (min-width: 768px) {
+  .VPContent.is-home .VPHero {
+    padding-bottom: 10px;
+  }
+}
+
+.VPContent.is-home .home-sec-head {
+  padding-top: 10px;
+}
+
+@media (min-width: 768px) {
+  .VPContent.is-home .home-sec-head {
+    padding-top: 14px;
+  }
+}
+
+.home-landing .VPHero.has-image .container,
+.VPContent.is-home .VPHero.has-image .container {
+  align-items: stretch;
+  gap: clamp(20px, 4.5vw, 56px);
+  text-align: left !important;
+}
+
+.home-landing .VPHero.has-image .name,
+.home-landing .VPHero.has-image .text,
+.home-landing .VPHero.has-image .tagline,
+.VPContent.is-home .VPHero.has-image .name,
+.VPContent.is-home .VPHero.has-image .text,
+.VPContent.is-home .VPHero.has-image .tagline {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.home-landing .VPHero .heading,
+.VPContent.is-home .VPHero .heading {
+  align-items: flex-start !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 960px) {
+  .home-landing .VPHero.has-image .main {
+    max-width: 640px;
+  }
+
+  .home-landing .VPHero.has-image .name,
+  .home-landing .VPHero.has-image .text {
+    max-width: 100%;
+  }
+
+  .home-landing .VPHero.has-image .tagline {
+    max-width: 38rem;
+  }
+
+  .home-landing .VPHero.has-image .image {
+    min-height: min(320px, 52vh);
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* 首页 Hero 文案：蓝紫霓虹科技风（上行渐变名，下行亮紫 + 靛蓝外光） */
+.home-landing .VPHero .name.clip,
+.VPContent.is-home .VPHero .name.clip {
+  /* 勿用 background 简写：会重置 background-clip，浅色覆盖后易变成「实心色块」 */
+  background-color: transparent !important;
+  background-image: linear-gradient(
+    102deg,
+    #eef2ff 0%,
+    #ddd6fe 22%,
+    #a5b4fc 52%,
+    #c084fc 78%,
+    #e879f9 100%
+  ) !important;
+  background-size: 220% auto;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: heroGradient 14s linear infinite;
+  font-size: clamp(1.65rem, 3.2vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  width: 100%;
+  max-width: 100% !important;
+  filter:
+    drop-shadow(0 0 22px rgba(129, 140, 248, 0.5))
+    drop-shadow(0 0 44px rgba(192, 132, 252, 0.28));
+}
+
+.home-landing .VPHero .text,
+.VPContent.is-home .VPHero .text {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 100% !important;
+  margin-top: 0.42em;
+  padding-bottom: 22px;
+  font-size: clamp(1.35rem, 2.85vw, 2.15rem);
+  line-height: 1.22;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #d8b4fe !important;
+  -webkit-text-fill-color: #d8b4fe !important;
+  text-shadow:
+    0 0 20px rgba(167, 139, 250, 0.85),
+    0 0 48px rgba(129, 140, 248, 0.62),
+    0 0 92px rgba(192, 132, 252, 0.38),
+    0 0 120px rgba(99, 102, 241, 0.2);
+}
+
+/* 覆盖 var.css：副标题下划线始终与文案同宽，避免 hover 才拉长造成「短一截」 */
+.home-landing .VPHero .text::after,
+.VPContent.is-home .VPHero .text::after {
+  content: '' !important;
+  display: block !important;
+  position: absolute !important;
+  left: 0 !important;
+  bottom: 4px !important;
+  width: 100% !important;
+  height: 2px !important;
+  background: linear-gradient(
+    90deg,
+    rgba(99, 102, 241, 0.95),
+    rgba(129, 140, 248, 0.88),
+    rgba(192, 132, 252, 0.65),
+    rgba(236, 72, 153, 0.35)
+  ) !important;
+  transition: none !important;
+  opacity: 1 !important;
+}
+
+.home-landing .VPHero:hover .text::after,
+.VPContent.is-home .VPHero:hover .text::after {
+  width: 100% !important;
+}
+
+.dark .home-landing .VPHero .tagline,
+.dark .VPContent.is-home .VPHero .tagline {
+  color: rgba(212, 212, 216, 0.82) !important;
+  -webkit-text-fill-color: rgba(212, 212, 216, 0.82) !important;
+}
+
+.home-landing .VPHero .tagline,
+.VPContent.is-home .VPHero .tagline {
+  width: 100%;
+  max-width: 100% !important;
+  font-weight: 500;
+}
+
+.home-landing .VPHero .tagline::after,
+.VPContent.is-home .VPHero .tagline::after {
+  content: '|';
+  margin-left: 2px;
+  color: #c084fc;
+  font-weight: 300;
+  text-shadow: 0 0 12px rgba(192, 132, 252, 0.65);
+  animation: taglineCursor 1s step-end infinite;
+}
+
+@keyframes taglineCursor {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* 首页 Hero 主卡：参考 LetAiCode 风 — 内网格、顶青径向光、霓虹边、玻璃底 */
+.home-landing .VPHero .main,
+.VPContent.is-home .VPHero .main {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(34, 211, 238, 0.28);
+  background:
+    radial-gradient(ellipse 110% 70% at 18% -8%, rgba(34, 211, 238, 0.22), transparent 52%),
+    radial-gradient(ellipse 70% 55% at 108% 108%, rgba(167, 139, 250, 0.12), transparent 48%),
+    linear-gradient(168deg, rgba(12, 16, 24, 0.92) 0%, rgba(5, 6, 12, 0.96) 52%, rgba(8, 10, 18, 0.94) 100%);
+  backdrop-filter: blur(22px) saturate(155%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 0 1px rgba(34, 211, 238, 0.12) inset,
+    0 0 60px rgba(34, 211, 238, 0.12),
+    0 0 100px rgba(167, 139, 250, 0.06),
+    0 32px 100px rgba(0, 0, 0, 0.58),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(34, 211, 238, 0.06);
+}
+
+.home-landing .VPHero .main::before,
+.VPContent.is-home .VPHero .main::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 8%, rgba(0, 0, 0, 0.55), transparent 72%);
+  opacity: 0.55;
+}
+
+.home-landing .VPHero .main > *,
+.VPContent.is-home .VPHero .main > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-landing .VPHero .main::after,
+.VPContent.is-home .VPHero .main::after {
+  z-index: 0;
+  opacity: 0.28;
+  mix-blend-mode: screen;
+}
+
+/* 首页 Hero 按钮：抵消 VitePress .actions 负 margin / .action 内边距，强制同高同基线 */
+.home-landing .VPHero .actions,
+.VPContent.is-home .VPHero .actions {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  margin: 0 !important;
+  padding-top: 26px !important;
+  gap: 12px !important;
+}
+
+.home-landing .VPHero.has-image .actions,
+.VPContent.is-home .VPHero.has-image .actions {
+  justify-content: flex-start !important;
+}
+
+.home-landing .VPHero .action,
+.VPContent.is-home .VPHero .action {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.home-landing .VPHero .action a.VPButton,
+.home-landing .VPHero .action .VPButton,
+.VPContent.is-home .VPHero .action a.VPButton,
+.VPContent.is-home .VPHero .action .VPButton,
+.home-landing .home-cta__actions a.VPButton,
+.VPContent.is-home .home-cta__actions a.VPButton {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  padding: 0 24px !important;
+  line-height: 1 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  border-radius: 9999px !important;
+  vertical-align: middle;
+}
+
+.home-landing .VPHero .VPButton.brand::before,
+.home-landing .VPHero .VPButton.brand::after,
+.home-landing .VPHero .VPButton.alt::before,
+.VPContent.is-home .VPHero .VPButton.brand::before,
+.VPContent.is-home .VPHero .VPButton.brand::after,
+.VPContent.is-home .VPHero .VPButton.alt::before,
+.home-landing .home-cta .VPButton.brand::before,
+.home-landing .home-cta .VPButton.brand::after,
+.home-landing .home-cta .VPButton.alt::before,
+.VPContent.is-home .home-cta .VPButton.brand::before,
+.VPContent.is-home .home-cta .VPButton.brand::after,
+.VPContent.is-home .home-cta .VPButton.alt::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* 双按钮统一为「青霓虹 + 玻璃」主从关系，贴近参考图二 */
+.home-landing .VPHero .VPButton.brand,
+.VPContent.is-home .VPHero .VPButton.brand,
+.home-landing .home-cta .VPButton.brand,
+.VPContent.is-home .home-cta .VPButton.brand {
+  color: #ecfeff !important;
+  border: 1px solid rgba(45, 212, 191, 0.55) !important;
+  background: linear-gradient(
+    145deg,
+    rgba(34, 211, 238, 0.28) 0%,
+    rgba(8, 20, 28, 0.75) 48%,
+    rgba(12, 10, 28, 0.82) 100%
+  ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 28px rgba(34, 211, 238, 0.22),
+    0 10px 32px rgba(0, 0, 0, 0.45) !important;
+}
+
+.home-landing .VPHero .VPButton.alt,
+.VPContent.is-home .VPHero .VPButton.alt,
+.home-landing .home-cta .VPButton.alt,
+.VPContent.is-home .home-cta .VPButton.alt {
+  color: rgba(241, 245, 249, 0.92) !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  background: linear-gradient(180deg, rgba(16, 18, 28, 0.55) 0%, rgba(6, 8, 16, 0.72) 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 0 1px rgba(34, 211, 238, 0.08),
+    0 10px 32px rgba(0, 0, 0, 0.42) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+.home-landing .VPHero .VPButton.brand:hover,
+.VPContent.is-home .VPHero .VPButton.brand:hover,
+.home-landing .home-cta .VPButton.brand:hover,
+.VPContent.is-home .home-cta .VPButton.brand:hover {
+  transform: translateY(-2px);
+  border-color: rgba(94, 234, 212, 0.75) !important;
+  color: #ffffff !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 0 40px rgba(34, 211, 238, 0.32),
+    0 14px 40px rgba(0, 0, 0, 0.48) !important;
+}
+
+.home-landing .VPHero .VPButton.alt:hover,
+.VPContent.is-home .VPHero .VPButton.alt:hover,
+.home-landing .home-cta .VPButton.alt:hover,
+.VPContent.is-home .home-cta .VPButton.alt:hover {
+  transform: translateY(-2px);
+  border-color: rgba(34, 211, 238, 0.38) !important;
+  color: #ffffff !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 32px rgba(34, 211, 238, 0.14),
+    0 14px 40px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* 专栏区：密栅格 + 同排卡片等高（网格 stretch，.item/.VPFeature/.box 纵向 flex 铺满） */
+.home-landing .VPFeatures,
+.VPContent.is-home .VPFeatures {
+  margin-top: 0;
+  padding-bottom: 8px;
+}
+
+.home-landing .VPFeatures .items,
+.VPContent.is-home .VPFeatures .items {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px !important;
+  margin: 0 !important;
+  align-items: stretch;
+}
+
+@media (min-width: 520px) {
+  .home-landing .VPFeatures .items,
+  .VPContent.is-home .VPFeatures .items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px !important;
+  }
+}
+
+@media (min-width: 960px) {
+  .home-landing .VPFeatures .items,
+  .VPContent.is-home .VPFeatures .items {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px !important;
+  }
+}
+
+.home-landing .VPFeatures .item,
+.VPContent.is-home .VPFeatures .item {
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.home-landing .VPFeature,
+.VPContent.is-home .VPFeature {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0 !important;
+  height: 100%;
+  padding: 0 !important;
+}
+
+.home-landing .VPFeature .box,
+.VPContent.is-home .VPFeature .box {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0 !important;
+  padding: 16px 14px 16px !important;
+}
+
+.home-landing .VPFeature .details,
+.VPContent.is-home .VPFeature .details {
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding-top: 6px !important;
+}
+
+.home-landing .VPFeature .icon,
+.VPContent.is-home .VPFeature .icon {
+  margin-bottom: 10px !important;
+  width: 44px !important;
+  height: 44px !important;
+}
+
+/* 顶栏底部分割线：粉 → 紫 → 青的细噪光（仅暗色） */
+.dark .VPNavBar .divider-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(236, 72, 153, 0.35) 18%,
+    rgba(192, 132, 252, 0.4) 52%,
+    rgba(34, 211, 238, 0.25) 82%,
+    transparent
+  ) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 首页滚动沉浸：--home-immersion 首屏 / --home-below 专栏 / --home-cta 底部   */
+/* -------------------------------------------------------------------------- */
+
+html {
+  --home-immersion: 0;
+  --home-below: 0;
+  --home-cta: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .VPContent.is-home .VPHome {
+    position: relative;
+  }
+
+  /* 首屏幕布：加深对比 */
+  .VPContent.is-home .VPHome::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(
+      188deg,
+      rgba(5, 5, 8, 0) 0%,
+      rgba(5, 5, 8, calc(var(--home-immersion) * 0.58)) 32%,
+      rgba(5, 5, 8, calc(0.28 + var(--home-immersion) * 0.72)) 100%
+    );
+    opacity: calc(0.22 + var(--home-immersion) * 0.82);
+  }
+
+  /* 首屏 Hero：更强上移、缩小、模糊 */
+  .VPContent.is-home .VPHero {
+    position: relative;
+    z-index: 1;
+    transform:
+      translateY(calc(var(--home-immersion) * -96px))
+      scale(calc(1 - var(--home-immersion) * 0.1));
+    transform-origin: 50% 28%;
+    will-change: transform;
+  }
+
+  /* 禁止对含正文的 .main 使用 filter:blur，否则整卡文字会发虚/像无色 */
+  .VPContent.is-home .VPHero .main {
+    opacity: calc(1 - var(--home-immersion) * 0.18);
+    filter: saturate(calc(1 - var(--home-immersion) * 0.12));
+    transition: box-shadow 0.12s linear, opacity 0.12s linear;
+    box-shadow:
+      0 calc(24px - var(--home-immersion) * 16px) calc(88px - var(--home-immersion) * 44px) rgba(0, 0, 0, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 0 0 1px rgba(236, 72, 153, calc(0.1 + var(--home-immersion) * 0.12)),
+      0 0 calc(72px - var(--home-immersion) * 52px) rgba(192, 132, 252, 0.12);
+  }
+
+  .VPContent.is-home .VPHero .text {
+    text-shadow:
+      0 0 calc(44px - var(--home-immersion) * 36px) rgba(167, 139, 250, 0.38),
+      0 0 calc(88px - var(--home-immersion) * 72px) rgba(129, 140, 248, 0.22),
+      0 0 calc(120px - var(--home-immersion) * 96px) rgba(192, 132, 252, 0.14);
+  }
+
+  .VPContent.is-home .VPHero.has-image .image {
+    transform: translateY(calc(var(--home-immersion) * 72px))
+      scale(calc(1 - var(--home-immersion) * 0.12));
+    opacity: calc(1 - var(--home-immersion) * 0.55);
+    will-change: transform, opacity;
+  }
+
+  /* 指标条：保留轻微动效，避免强模糊/强变淡导致难读 */
+  .VPContent.is-home .home-metrics__inner {
+    transform: translateY(calc(var(--home-immersion) * -18px))
+      scale(calc(1 - var(--home-immersion) * 0.018));
+    opacity: calc(1 - var(--home-immersion) * 0.22);
+    filter: blur(calc(var(--home-immersion) * 1.5px));
+  }
+
+  /* —— 第二屏：专栏标题（随 --home-below 进场）—— */
+  .VPContent.is-home .home-sec-head {
+    position: relative;
+    z-index: 4;
+    transform: translateY(calc((1 - var(--home-below)) * 56px))
+      scale(calc(0.94 + var(--home-below) * 0.06));
+    opacity: calc(0.52 + var(--home-below) * 0.48);
+    filter: blur(calc((1 - var(--home-below)) * 5px));
+    will-change: transform, opacity, filter;
+  }
+
+  .VPContent.is-home .home-sec-head__rule {
+    transform: scaleX(calc(0.35 + var(--home-below) * 0.65));
+    transform-origin: 0 50%;
+    opacity: calc(0.45 + var(--home-below) * 0.55);
+    filter: blur(calc((1 - var(--home-below)) * 3px));
+  }
+
+  /* —— 第二屏：专栏卡片网格整体 —— */
+  .VPContent.is-home .VPFeatures {
+    position: relative;
+    z-index: 4;
+    margin-top: 12px;
+    transform: translateY(calc((1 - var(--home-below)) * 72px))
+      scale(calc(0.92 + var(--home-below) * 0.08));
+    opacity: calc(0.5 + var(--home-below) * 0.5);
+    will-change: transform, opacity;
+  }
+
+  /* 禁用首页卡片入场动画，改由滚动变量驱动 .box（避免与 3D tilt 抢父级 transform） */
+  .VPContent.is-home .VPHome .VPFeature {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .VPContent.is-home .VPFeature .box {
+    transform-origin: 50% 60%;
+    transition: none;
+  }
+
+  .VPContent.is-home .VPFeature:nth-child(1) .box {
+    transform: translateY(calc((1 - var(--home-below)) * 44px))
+      scale(calc(0.9 + var(--home-below) * 0.1));
+    filter: blur(calc((1 - var(--home-below)) * 7px));
+    opacity: calc(0.58 + var(--home-below) * 0.42);
+  }
+
+  .VPContent.is-home .VPFeature:nth-child(2) .box {
+    transform: translateY(calc((1 - var(--home-below)) * 56px))
+      scale(calc(0.9 + var(--home-below) * 0.1));
+    filter: blur(calc((1 - var(--home-below)) * 6.5px));
+    opacity: calc(0.58 + var(--home-below) * 0.42);
+  }
+
+  .VPContent.is-home .VPFeature:nth-child(3) .box {
+    transform: translateY(calc((1 - var(--home-below)) * 68px))
+      scale(calc(0.9 + var(--home-below) * 0.1));
+    filter: blur(calc((1 - var(--home-below)) * 6px));
+    opacity: calc(0.58 + var(--home-below) * 0.42);
+  }
+
+  .VPContent.is-home .VPFeature:nth-child(4) .box {
+    transform: translateY(calc((1 - var(--home-below)) * 52px))
+      scale(calc(0.9 + var(--home-below) * 0.1));
+    filter: blur(calc((1 - var(--home-below)) * 6px));
+    opacity: calc(0.58 + var(--home-below) * 0.42);
+  }
+
+  .VPContent.is-home .VPFeature:nth-child(5) .box {
+    transform: translateY(calc((1 - var(--home-below)) * 64px))
+      scale(calc(0.9 + var(--home-below) * 0.1));
+    filter: blur(calc((1 - var(--home-below)) * 5.5px));
+    opacity: calc(0.58 + var(--home-below) * 0.42);
+  }
+
+  .VPContent.is-home .VPFeature:nth-child(6) .box {
+    transform: translateY(calc((1 - var(--home-below)) * 76px))
+      scale(calc(0.9 + var(--home-below) * 0.1));
+    filter: blur(calc((1 - var(--home-below)) * 5px));
+    opacity: calc(0.58 + var(--home-below) * 0.42);
+  }
+
+  /*
+   * 浅色：blur 作用在父级会让子文字整体发灰/发白（像白字漂在浅底上）。
+   * 关闭第二屏与指标条的进场 blur/半透明，保留深色下的动效。
+   */
+  html:not(.dark) .VPContent.is-home .home-sec-head {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  html:not(.dark) .VPContent.is-home .home-sec-head__rule {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: scaleX(1) !important;
+  }
+
+  html:not(.dark) .VPContent.is-home .VPFeatures {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  html:not(.dark) .VPContent.is-home .VPFeature .box {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  html:not(.dark) .VPContent.is-home .home-metrics__inner {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  html:not(.dark) .VPContent.is-home .home-cta .home-cta__card {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08) !important;
+  }
+
+  html:not(.dark) .VPContent.is-home .VPHome::before {
+    opacity: 0.14 !important;
+  }
+
+  html:not(.dark) .VPContent.is-home .VPHero .main {
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  html:not(.dark) .VPContent.is-home .VPHero.has-image .image {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  /* —— 底部 CTA 第三段 —— */
+  .VPContent.is-home .home-cta {
+    position: relative;
+    z-index: 4;
+    perspective: 1200px;
+  }
+
+  .VPContent.is-home .home-cta .home-cta__card {
+    transform-origin: 50% 88%;
+    transform: translateY(calc((1 - var(--home-cta)) * 48px))
+      scale(calc(0.93 + var(--home-cta) * 0.07))
+      rotateX(calc((1 - var(--home-cta)) * 4deg));
+    opacity: calc(0.55 + var(--home-cta) * 0.45);
+    filter: blur(calc((1 - var(--home-cta)) * 5px));
+    box-shadow:
+      0 calc(20px - var(--home-cta) * 8px) calc(48px - var(--home-cta) * 18px) rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 255, 255, calc(0.06 + var(--home-cta) * 0.08));
+    transform-style: preserve-3d;
+    will-change: transform, opacity, filter;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 浅色整体壳层（code 卡由 vp-code-group.css 自理，此处不碰围栏）              */
+/* -------------------------------------------------------------------------- */
+
+html:not(.dark) .Layout {
+  background: linear-gradient(180deg, rgba(250, 250, 250, 0.45) 0%, rgba(244, 244, 245, 0.96) 52%, #f4f4f5 100%);
+}
+
+html:not(.dark) .VPNav,
+html:not(.dark) .VPNavBar,
+html:not(.dark) .VPSidebar,
+html:not(.dark) .VPFooter {
+  background: rgba(255, 255, 255, 0.82) !important;
+  backdrop-filter: blur(16px) saturate(140%);
+}
+
+html:not(.dark) .VPNavBar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(8, 145, 178, 0.05);
+}
+
+html:not(.dark) .VPSidebar {
+  border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+html:not(.dark) .VPFooter {
+  border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(8, 145, 178, 0.42),
+    rgba(124, 58, 237, 0.32),
+    rgba(6, 182, 212, 0.38)
+  );
+}
+
+html:not(.dark) ::selection {
+  background: rgba(6, 182, 212, 0.22);
+  color: #0f172a;
+}
+
+html:not(.dark) .VPHero .main {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow:
+    0 24px 80px rgba(15, 23, 42, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+html:not(.dark) .VPHero .main::after {
+  opacity: 0.35;
+}
+
+html:not(.dark) .VPHero .text {
+  color: #18181b !important;
+}
+
+html:not(.dark) .VPHero .tagline {
+  color: var(--tech-c-text-soft) !important;
+}
+
+html:not(.dark) .VPButton.alt {
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  color: #27272a !important;
+}
+
+html:not(.dark) .VPFeature {
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.96), rgba(244, 244, 245, 0.9)) !important;
+  backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+}
+
+html:not(.dark) .VPFeature:hover {
+  border-color: rgba(8, 145, 178, 0.26) !important;
+  box-shadow:
+    0 22px 48px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(8, 145, 178, 0.08);
+}
+
+html:not(.dark) .VPFeature::before {
+  opacity: 0.45;
+}
+
+html:not(.dark) .VPFeature .icon {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+html:not(.dark) .VPFeature .title {
+  color: #18181b !important;
+}
+
+html:not(.dark) .VPFeature .details {
+  color: #27272a !important;
+}
+
+html:not(.dark) .vp-doc h1 {
+  color: #18181b !important;
+}
+
+html:not(.dark) .vp-doc p,
+html:not(.dark) .vp-doc li,
+html:not(.dark) .vp-doc td,
+html:not(.dark) .vp-doc th {
+  color: #3f3f46 !important;
+}
+
+html:not(.dark) .vp-doc strong {
+  color: #18181b !important;
+}
+
+html:not(.dark) .vp-doc blockquote {
+  border-left-color: rgba(8, 145, 178, 0.4);
+  background: rgba(0, 0, 0, 0.03);
+  color: #3f3f46 !important;
+}
+
+/* 首页 Hero 主卡（浅色玻璃 + 青点缀，避免近黑底） */
+html:not(.dark) .home-landing .VPHero .main,
+html:not(.dark) .VPContent.is-home .VPHero .main {
+  border: 1px solid rgba(8, 145, 178, 0.22);
+  background:
+    radial-gradient(ellipse 110% 70% at 18% -8%, rgba(6, 182, 212, 0.14), transparent 52%),
+    radial-gradient(ellipse 70% 55% at 108% 108%, rgba(167, 139, 250, 0.08), transparent 48%),
+    linear-gradient(168deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 244, 245, 0.98) 52%, rgba(250, 250, 250, 0.96) 100%);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(6, 182, 212, 0.08) inset,
+    0 28px 90px rgba(15, 23, 42, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+html:not(.dark) .home-landing .VPHero .main::before,
+html:not(.dark) .VPContent.is-home .VPHero .main::before {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+  opacity: 0.32;
+}
+
+html:not(.dark) .home-landing .VPHero .main::after,
+html:not(.dark) .VPContent.is-home .VPHero .main::after {
+  opacity: 0.12;
+  mix-blend-mode: multiply;
+}
+
+html:not(.dark) .home-landing .VPHero .text,
+html:not(.dark) .VPContent.is-home .VPHero .text {
+  color: #5b21b6 !important;
+  -webkit-text-fill-color: #5b21b6 !important;
+  text-shadow:
+    0 0 28px rgba(129, 140, 248, 0.22),
+    0 0 56px rgba(192, 132, 252, 0.12);
+}
+
+html:not(.dark) .home-landing .VPHero .tagline,
+html:not(.dark) .VPContent.is-home .VPHero .tagline {
+  color: #27272a !important;
+  -webkit-text-fill-color: #27272a !important;
+}
+
+html:not(.dark) .home-landing .VPHero .tagline::after,
+html:not(.dark) .VPContent.is-home .VPHero .tagline::after {
+  text-shadow: 0 0 10px rgba(124, 58, 237, 0.35);
+}
+
+html:not(.dark) .home-landing .VPHero .VPButton.brand,
+html:not(.dark) .VPContent.is-home .VPHero .VPButton.brand,
+html:not(.dark) .home-landing .home-cta .VPButton.brand,
+html:not(.dark) .VPContent.is-home .home-cta .VPButton.brand {
+  color: #ecfeff !important;
+  border: 1px solid rgba(45, 212, 191, 0.5) !important;
+  background: linear-gradient(
+    145deg,
+    rgba(6, 182, 212, 0.88) 0%,
+    rgba(14, 116, 144, 0.94) 48%,
+    rgba(15, 118, 110, 0.92) 100%
+  ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 0 22px rgba(6, 182, 212, 0.18),
+    0 12px 36px rgba(15, 23, 42, 0.1) !important;
+}
+
+html:not(.dark) .home-landing .VPHero .VPButton.alt,
+html:not(.dark) .VPContent.is-home .VPHero .VPButton.alt,
+html:not(.dark) .home-landing .home-cta .VPButton.alt,
+html:not(.dark) .VPContent.is-home .home-cta .VPButton.alt {
+  color: #18181b !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(244, 244, 245, 0.96) 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    0 0 0 1px rgba(6, 182, 212, 0.06),
+    0 12px 32px rgba(15, 23, 42, 0.06) !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.dark) .VPContent.is-home .VPHome::before {
+    background: linear-gradient(
+      188deg,
+      rgba(250, 250, 250, 0) 0%,
+      rgba(244, 244, 245, calc(var(--home-immersion) * 0.65)) 32%,
+      rgba(228, 228, 231, calc(0.22 + var(--home-immersion) * 0.5)) 100%
+    );
+    opacity: calc(0.32 + var(--home-immersion) * 0.42);
+  }
+
+  html:not(.dark) .VPContent.is-home .VPHero .main {
+    box-shadow:
+      0 calc(24px - var(--home-immersion) * 14px) calc(88px - var(--home-immersion) * 40px) rgba(15, 23, 42, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 0 0 1px rgba(6, 182, 212, calc(0.06 + var(--home-immersion) * 0.1)),
+      0 0 calc(72px - var(--home-immersion) * 48px) rgba(124, 58, 237, 0.08);
+  }
+
+  html:not(.dark) .VPContent.is-home .home-cta .home-cta__card {
+    box-shadow:
+      0 calc(20px - var(--home-cta) * 8px) calc(48px - var(--home-cta) * 18px) rgba(15, 23, 42, 0.1),
+      0 0 0 1px rgba(0, 0, 0, calc(0.04 + var(--home-cta) * 0.06));
+  }
+}
+
+/* 浅色首页：品牌小字可读、去掉主卡扫光条带感、指标条浅色底与底留白、专栏描述更深 */
+html:not(.dark) .home-landing .VPHero .name.clip,
+html:not(.dark) .VPContent.is-home .VPHero .name.clip {
+  background-color: transparent !important;
+  background-image: linear-gradient(
+    102deg,
+    #312e81 0%,
+    #4338ca 20%,
+    #0369a1 45%,
+    #6d28d9 72%,
+    #701a75 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.75))
+    drop-shadow(0 0 16px rgba(99, 102, 241, 0.2));
+}
+
+html:not(.dark) .VPHero .main::after,
+html:not(.dark) .home-landing .VPHero .main::after,
+html:not(.dark) .VPContent.is-home .VPHero .main::after {
+  animation: none !important;
+  transform: none !important;
+  opacity: 0.035 !important;
+  mix-blend-mode: normal !important;
+}
+
+html:not(.dark) .VPContent.is-home .VPHero.has-image .container {
+  overflow-x: clip;
+}
+
+html:not(.dark) .VPContent.is-home .VPHero.has-image .image {
+  overflow: hidden;
+}
+
+html:not(.dark) .VPContent.is-home .home-metrics .home-metrics__inner,
+html:not(.dark) .home-landing .home-metrics .home-metrics__inner {
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 244, 245, 0.94) 100%) !important;
+  box-shadow:
+    0 20px 56px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 0 0 1px rgba(6, 182, 212, 0.05) !important;
+}
+
+html:not(.dark) .VPContent.is-home .home-metrics .home-metrics__k,
+html:not(.dark) .home-landing .home-metrics .home-metrics__k {
+  color: #27272a !important;
+}
+
+html:not(.dark) .VPContent.is-home .home-metrics .home-metrics__v,
+html:not(.dark) .home-landing .home-metrics .home-metrics__v {
+  color: #18181b !important;
+}
+
+@media (max-width: 767px) {
+  html:not(.dark) .VPContent.is-home .home-metrics .home-metrics__cell:not(:last-child),
+  html:not(.dark) .home-landing .home-metrics .home-metrics__cell:not(:last-child) {
+    border-bottom-color: rgba(0, 0, 0, 0.06) !important;
+  }
+}
+
+html:not(.dark) .VPContent.is-home .home-metrics,
+html:not(.dark) .home-landing .home-metrics {
+  padding-bottom: 40px !important;
+}
+
+@media (min-width: 640px) {
+  html:not(.dark) .VPContent.is-home .home-metrics,
+  html:not(.dark) .home-landing .home-metrics {
+    padding-bottom: 52px !important;
+  }
+}
+
+/* 浅色：专栏标题勿叠父级 blur；与 scoped 默认 #fafafa 用 !important 抢回字色 */
+html:not(.dark) .VPContent.is-home .home-sec-head,
+html:not(.dark) .home-landing .home-sec-head {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+html:not(.dark) .VPContent.is-home .home-sec-head__title,
+html:not(.dark) .home-landing .home-sec-head__title,
+html:not(.dark) .home-sec-head__title {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+/* 浅色：底栏 CTA 与顶栏链接对比度（与组件内 :global 双保险） */
+html:not(.dark) .VPContent.is-home .home-cta__card,
+html:not(.dark) .home-landing .home-cta__card {
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(244, 244, 245, 0.98) 50%,
+    rgba(250, 250, 250, 0.96) 100%
+  ) !important;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08) !important;
+}
+
+html:not(.dark) .VPContent.is-home .home-cta__title,
+html:not(.dark) .home-landing .home-cta__title {
+  color: #18181b !important;
+}
+
+html:not(.dark) .VPContent.is-home .home-cta__sub,
+html:not(.dark) .home-landing .home-cta__sub {
+  color: #52525b !important;
+}
+
+html:not(.dark) .VPNavBar a.VPNavBarMenuLink {
+  color: #27272a !important;
+}
+
+html:not(.dark) .VPNavBar a.VPNavBarMenuLink:hover,
+html:not(.dark) .VPNavBar a.VPNavBarMenuLink.active {
+  color: #0f172a !important;
+  text-shadow: none !important;
+}
+
+/* 浅色顶栏：含未带 MenuLink 类名的链接、搜索入口等 */
+html:not(.dark) .VPNavBar :where(a):not(.VPButton):not(.VPSocialLink):not(.title) {
+  color: #27272a !important;
+}
+
+html:not(.dark) .VPNavBar :where(a):not(.VPButton):not(.VPSocialLink):not(.title):hover,
+html:not(.dark) .VPNavBar :where(a):not(.VPButton):not(.VPSocialLink):not(.title).active {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .VPFooter,
+html:not(.dark) .VPFooter :where(p, span, div, a) {
+  color: #52525b !important;
+}
+
+html:not(.dark) .VPFooter a:hover {
+  color: #0f172a !important;
+}

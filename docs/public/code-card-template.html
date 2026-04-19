@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="h-full scroll-smooth dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Card</title>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <style>
+    .code-card {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    @keyframes copied-pop {
+      0% {
+        transform: scale(1);
+      }
+
+      40% {
+        transform: scale(1.06);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes toast-in {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    @keyframes toast-out {
+      to {
+        opacity: 0;
+        transform: translate(-50%, 6px);
+      }
+    }
+
+    .anim-copied {
+      animation: copied-pop 0.45s ease;
+    }
+
+    .toast-show {
+      animation: toast-in 0.35s ease forwards;
+    }
+
+    .toast-hide {
+      animation: toast-out 0.3s ease forwards;
+    }
+  </style>
+</head>
+
+<body
+  class="min-h-full bg-zinc-100 text-zinc-900 antialiased transition-colors duration-300 dark:bg-zinc-950 dark:text-zinc-100">
+  <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
+    <div
+      class="code-card relative overflow-hidden rounded-2xl border border-zinc-200/90 bg-white shadow-xl shadow-zinc-900/8 ring-1 ring-black/[0.04] dark:border-zinc-800 dark:bg-[#0a0a0a] dark:shadow-2xl dark:shadow-black/50 dark:ring-white/[0.06] sm:rounded-3xl">
+      <div
+        class="flex items-center justify-between gap-3 border-b border-zinc-200 bg-zinc-50/95 px-4 py-2.5 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/95 sm:px-5 sm:py-3">
+        <div class="relative min-w-0">
+          <button type="button" id="langBtn"
+            class="inline-flex max-w-full items-center gap-2 rounded-2xl border border-zinc-200 bg-white px-3 py-1.5 text-sm font-semibold text-zinc-800 shadow-sm transition hover:border-violet-300 hover:bg-violet-50/90 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:border-violet-500/45 dark:hover:bg-violet-950/35 sm:px-4"
+            aria-expanded="false" aria-haspopup="listbox">
+            <span id="langLabel" class="truncate">TypeScript</span>
+            <i class="fa-solid fa-chevron-down text-[10px] opacity-60"></i>
+          </button>
+          <ul id="langMenu"
+            class="absolute left-0 top-full z-30 mt-1 hidden min-w-[11.5rem] overflow-hidden rounded-xl border border-zinc-200 bg-white py-1 text-sm shadow-xl dark:border-zinc-700 dark:bg-zinc-900"
+            role="listbox">
+            <li><button type="button"
+                class="lang-opt w-full px-3 py-2 text-left hover:bg-violet-50 dark:hover:bg-zinc-800" data-lang="ts"
+                role="option">TypeScript</button></li>
+            <li><button type="button"
+                class="lang-opt w-full px-3 py-2 text-left hover:bg-violet-50 dark:hover:bg-zinc-800" data-lang="js"
+                role="option">JavaScript</button></li>
+            <li><button type="button"
+                class="lang-opt w-full px-3 py-2 text-left hover:bg-violet-50 dark:hover:bg-zinc-800" data-lang="py"
+                role="option">Python</button></li>
+          </ul>
+        </div>
+        <button type="button" id="copyBtn"
+          class="inline-flex shrink-0 items-center gap-2 rounded-2xl px-3 py-1.5 text-sm font-medium text-zinc-500 transition hover:bg-zinc-200/90 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white sm:px-4"
+          aria-label="复制代码">
+          <i class="fa-solid fa-copy text-base" id="copyIcon"></i>
+          <span id="copyText">Copy</span>
+        </button>
+      </div>
+
+      <div class="flex max-h-[min(72vh,540px)] text-[13px] leading-relaxed sm:text-sm sm:leading-relaxed">
+        <div id="gutter"
+          class="select-none border-r border-zinc-200 bg-zinc-50/60 py-4 pl-3 pr-2 text-right text-zinc-400 tabular-nums dark:border-zinc-800 dark:bg-zinc-900/50 dark:text-zinc-600 sm:py-5 sm:pl-4 sm:pr-3"
+          aria-hidden="true"></div>
+        <pre
+          class="flex-1 overflow-auto overscroll-contain py-4 pl-3 pr-4 text-zinc-800 dark:text-[#e6e6e6] sm:py-5 sm:pl-4 sm:pr-6"><code id="codeBlock" class="block font-mono"></code></pre>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" id="themeFab"
+    class="fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-zinc-300 bg-white text-zinc-700 shadow-lg transition hover:scale-105 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
+    title="切换浅色/深色" aria-label="切换浅色/深色">
+    <i class="fa-solid fa-moon dark:hidden"></i>
+    <i class="fa-solid fa-sun hidden text-amber-300 dark:inline"></i>
+  </button>
+
+  <div id="toast"
+    class="pointer-events-none fixed bottom-20 left-1/2 z-50 hidden -translate-x-1/2 rounded-full border border-emerald-400/40 bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-lg dark:border-emerald-500/30 dark:bg-emerald-500"
+    role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      const COMMENT = '// ';
+      const SNIPPETS = {
+        ts: [
+          '<span class="tok-kw">import</span> {<span class="tok-fn">OpenAI, Claude, Gemini</span>} <span class="tok-kw">from</span> <span class="tok-str">\'letaicode\'</span>',
+          '<span class="tok-kw">const</span> <span class="tok-fn">generateCode</span> = <span class="tok-kw">async</span> (prompt: <span class="tok-type">string</span>) <span class="tok-pu">=&gt;</span> {',
+          '  <span class="tok-kw">const</span> result = <span class="tok-kw">await</span> <span class="tok-fn">ai</span>.<span class="tok-fn">complete</span>(prompt)',
+          '',
+          '<span class="tok-cm">' + COMMENT + '</span>',
+          '  <span class="tok-kw">return</span> {',
+          '    code: result.<span class="tok-prop">optimized</span>,',
+          '    language: result',
+          '  }',
+          '}',
+        ],
+        js: [
+          '<span class="tok-kw">import</span> {<span class="tok-fn">OpenAI, Claude, Gemini</span>} <span class="tok-kw">from</span> <span class="tok-str">\'letaicode\'</span>',
+          '<span class="tok-kw">const</span> <span class="tok-fn">generateCode</span> = <span class="tok-kw">async</span> (prompt) <span class="tok-pu">=&gt;</span> {',
+          '  <span class="tok-kw">const</span> result = <span class="tok-kw">await</span> <span class="tok-fn">ai</span>.<span class="tok-fn">complete</span>(prompt)',
+          '',
+          '<span class="tok-cm">' + COMMENT + '</span>',
+          '  <span class="tok-kw">return</span> {',
+          '    code: result.<span class="tok-prop">optimized</span>,',
+          '    language: result',
+          '  }',
+          '}',
+        ],
+        py: [
+          '<span class="tok-kw">from</span> <span class="tok-mod">letaicode</span> <span class="tok-kw">import</span> <span class="tok-fn">OpenAI, Claude, Gemini</span>',
+          '',
+          '<span class="tok-kw">async def</span> <span class="tok-fn">generate_code</span>(prompt: <span class="tok-type">str</span>):',
+          '    result = <span class="tok-kw">await</span> <span class="tok-fn">ai</span>.<span class="tok-fn">complete</span>(prompt)',
+          '',
+          '    <span class="tok-cm"># ✨ AI 正在生成代码 ...</span>',
+          '    <span class="tok-kw">return</span> {',
+          '        <span class="tok-str">\'code\'</span>: result.<span class="tok-prop">optimized</span>,',
+          '        <span class="tok-str">\'language\'</span>: result',
+          '    }',
+        ],
+      };
+      const RAW = {
+        ts: "import { OpenAI, Claude, Gemini } from 'letaicode'\nconst generateCode = async (prompt: string) => {\n  const result = await ai.complete(prompt)\n\n" + COMMENT + "\n  return {\n    code: result.optimized,\n    language: result\n  }\n}",
+        js: "import { OpenAI, Claude, Gemini } from 'letaicode'\nconst generateCode = async (prompt) => {\n  const result = await ai.complete(prompt)\n\n" + COMMENT + "\n  return {\n    code: result.optimized,\n    language: result\n  }\n}",
+        py: "from letaicode import OpenAI, Claude, Gemini\n\nasync def generate_code(prompt: str):\n    result = await ai.complete(prompt)\n\n    # ✨ AI 正在生成代码 ...\n    return {\n        'code': result.optimized,\n        'language': result\n    }\n",
+      };
+      const LANG_NAMES = { ts: 'TypeScript', js: 'JavaScript', py: 'Python' };
+
+      const style = document.createElement('style');
+      style.textContent = `
+        .tok-kw{color:#7c3aed}.tok-fn{color:#4f46e5}.tok-str{color:#059669}.tok-cm{color:#64748b;font-style:italic}
+        .tok-pu{color:#db2777}.tok-type{color:#0369a1}.tok-prop{color:#b45309}.tok-mod{color:#475569}
+        .dark .tok-kw{color:#ff79c6}.dark .tok-fn{color:#8be9fd}.dark .tok-str{color:#f1fa8c}.dark .tok-cm{color:#6272a4;font-style:italic}
+        .dark .tok-pu{color:#ff79c6}.dark .tok-type{color:#bd93f9}.dark .tok-prop{color:#ffb86c}.dark .tok-mod{color:#8be9fd}
+      `;
+      document.head.appendChild(style);
+
+      const gutter = document.getElementById('gutter');
+      const codeBlock = document.getElementById('codeBlock');
+      const langBtn = document.getElementById('langBtn');
+      const langMenu = document.getElementById('langMenu');
+      const langLabel = document.getElementById('langLabel');
+      const copyBtn = document.getElementById('copyBtn');
+      const copyIcon = document.getElementById('copyIcon');
+      const copyText = document.getElementById('copyText');
+      const toast = document.getElementById('toast');
+      const themeFab = document.getElementById('themeFab');
+
+      let current = 'ts';
+
+      function render() {
+        const lines = SNIPPETS[current];
+        gutter.innerHTML = lines.map((_, i) => '<div class="leading-relaxed sm:leading-relaxed">' + (i + 1) + '</div>').join('');
+        codeBlock.innerHTML = lines
+          .map((html) => '<span class="copy-line block whitespace-pre-wrap break-words">' + (html || '\u00a0') + '</span>')
+          .join('');
+        langLabel.textContent = LANG_NAMES[current];
+      }
+
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.remove('hidden', 'toast-hide');
+        void toast.offsetWidth;
+        toast.classList.add('toast-show');
+        clearTimeout(showToast._h);
+        showToast._h = setTimeout(function () {
+          toast.classList.remove('toast-show');
+          toast.classList.add('toast-hide');
+          setTimeout(function () { toast.classList.add('hidden'); }, 280);
+        }, 2200);
+      }
+
+      langBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = !langMenu.classList.contains('hidden');
+        langMenu.classList.toggle('hidden', open);
+        langBtn.setAttribute('aria-expanded', String(!open));
+      });
+      document.addEventListener('click', function () {
+        langMenu.classList.add('hidden');
+        langBtn.setAttribute('aria-expanded', 'false');
+      });
+      langMenu.addEventListener('click', function (e) { e.stopPropagation(); });
+      document.querySelectorAll('.lang-opt').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          current = btn.getAttribute('data-lang');
+          render();
+          langMenu.classList.add('hidden');
+          langBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      function flashCopied() {
+        copyIcon.className = 'fa-solid fa-check text-base text-emerald-600 dark:text-emerald-400';
+        copyText.textContent = 'Copied!';
+        copyBtn.classList.add('anim-copied', 'text-emerald-700', 'dark:text-emerald-300');
+        showToast('已复制到剪贴板');
+        setTimeout(function () {
+          copyIcon.className = 'fa-solid fa-copy text-base';
+          copyText.textContent = 'Copy';
+          copyBtn.classList.remove('anim-copied', 'text-emerald-700', 'dark:text-emerald-300');
+        }, 2000);
+      }
+
+      copyBtn.addEventListener('click', function () {
+        var text = RAW[current];
+        var fallback = function () {
+          var ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(flashCopied).catch(function () {
+            try { fallback(); } catch (e) { }
+            flashCopied();
+          });
+        } else {
+          try { fallback(); } catch (e) { }
+          flashCopied();
+        }
+      });
+
+      themeFab.addEventListener('click', function () {
+        document.documentElement.classList.toggle('dark');
+      });
+
+      render();
+    })();
+  </script>
+</body>
+
+</html>

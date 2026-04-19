@@ -231,26 +231,23 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* 首页卡片 hover 的层次与动效由 tech.css + cardTilt 统一处理，避免与 3D 倾斜抢 transform */
 .VPFeature:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: var(--vp-shadow-2), var(--vp-shadow-glow);
-  border-color: rgba(102, 126, 234, 0.5);
-  background: rgba(255, 255, 255, 0.8) !important;
+  border-color: rgba(102, 126, 234, 0.35);
 }
 
 .dark .VPFeature:hover {
-  background: rgba(60, 60, 70, 0.8) !important;
-  border-color: rgba(102, 126, 234, 0.5);
+  border-color: rgba(102, 126, 234, 0.35);
 }
 
 .VPFeature .icon {
   font-size: 32px;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-  transition: transform 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .VPFeature:hover .icon {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.04);
 }
 
 /* Staggered Animation for Cards */
@@ -343,19 +340,19 @@ body {
   color: #ffffff !important;
 }
 
-/* Doc Content */
+/* Doc Content — 由 tech.css 统一层次，此处避免再套一层浅色/灰底板造成「看不清」的套娃感 */
 .VPDoc {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: var(--vp-shadow-1);
-  margin-top: 20px;
-  margin-bottom: 20px;
+  background: transparent;
+  backdrop-filter: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .dark .VPDoc {
-  background: rgba(30, 30, 32, 0.6);
+  background: transparent;
 }
 
 /* =========================================
@@ -496,11 +493,9 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink):hover {
   }
 }
 
-/* Code Blocks Polish */
+/* Code Blocks Polish：深色只保留圆角与细边，避免再叠一层大投影发「糊」 */
 .shiki {
   border-radius: 12px !important;
-  box-shadow: var(--vp-shadow-2) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .vp-doc blockquote {
@@ -563,28 +558,10 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink):hover {
   color: #e5e5e5;
 }
 
-/* Code blocks - Black & white theme for articles */
-.vp-doc .shiki {
-  background: #f5f5f5 !important;
-  border: 1px solid #e0e0e0 !important;
-}
+/* 正文代码围栏的外壳与底色由 vp-code-group.css 统一绘制；此处不再给 .shiki 叠 border/阴影，
+   否则会在卡片 #0a0a0a 内多出一圈「盒底边」+ 底缝感（与 code-card-template 不一致） */
 
-.dark .vp-doc .shiki {
-  background: #2d2d2d !important;
-  border: 1px solid #444444 !important;
-}
-
-/* =========================================
-   Hide code block label 
-   ========================================= */
-/* Hide ONLY the <label data-title="..."> element, keep span.lang */
-.vp-code-group label[data-title],
-.vp-code label[data-title] {
-  display: none !important;
-}
-
-/* Make sure span.lang is visible */
-.vp-code span.lang,
+/* 勿隐藏 .vp-code-group .tabs 里的 <label>：VP2 的 tab 标题就是它们，隐藏后「title 全没」 */
 .shiki-container span.lang {
   display: block !important;
   visibility: visible !important;
