@@ -248,27 +248,36 @@ export default defineConfig({
       ]
     },
     nav: [
-      // { text: 'Home', link: '/Ai/监督学习入门' },
-      { text: 'Android', link: '/Android/Activity' },
-      { text: '数据结构和算法', link: '/数据结构和算法/合并数组' },
-      { text: 'Java', link: '/Java/Integer1000与100的比较' },
-      { text: 'Kotlin', link: '/Kotlin/数据类' },
-      { text: 'Python', link: '/Python/1' },
+      { text: 'Android', link: '/Android/' },
+      {
+        text: '编程语言',
+        items: [
+          { text: 'Java', link: '/Java/' },
+          { text: 'Kotlin', link: '/Kotlin/' },
+          { text: 'Python', link: '/Python/1' },
+          { text: 'JavaScript', link: '/JS/1' },
+          { text: 'C', link: '/C/1' },
+          { text: 'C++', link: '/C++/1' },
+        ]
+      },
+      { text: 'Ai', link: '/Ai/' },
+      { text: 'Agent', link: '/Agent/' },
+      {
+        text: '数据与算法',
+        items: [
+          { text: '数据结构和算法', link: '/数据结构和算法/合并数组' },
+          { text: 'SQL', link: '/SQL/全文搜索' },
+        ]
+      },
       { text: 'Flutter', link: '/Flutter/dart语言简介' },
-      { text: 'SQL', link: '/SQL/全文搜索' },
-      { text: 'Ai', link: '/Ai/监督学习入门' },
-      { text: 'JS', link: '/JS/1' },
-      { text: 'C', link: '/C/1' },
-      { text: 'C++', link: '/C++/1' },
       { text: 'Linux', link: '/Linux/Index' },
-
     ],
 
     sidebar: {
       '/Android/': [
         {
           text: 'Android基础',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Android简介', link: '/Android/Android简介' },
             { text: 'Manifest详解', link: '/Android/Manifest详解' },
@@ -344,7 +353,7 @@ export default defineConfig({
         },
         {
           text: '组件通信',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Activity和Fragment的低耦合通信', link: '/Android/Activity和Fragment的低耦合通信' },
             { text: 'Android与Service通信', link: '/Android/Android与Service通信' },
@@ -354,7 +363,7 @@ export default defineConfig({
         },
         {
           text: 'Jetpack Compose',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Compose Gradle 配置', link: '/Android/Compose/Compose的gradle配置' },
             { text: 'Compose 状态管理', link: '/Android/Compose/ComposeStateManagement' },
@@ -364,7 +373,7 @@ export default defineConfig({
         },
         {
           text: 'debug与调试',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '安卓常见的内存泄漏点', link: '/Android/安卓常见的内存泄漏点' },
             { text: 'Fragment找不到id对应view', link: '/Android/Fragment找不到id对应view' },
@@ -382,7 +391,7 @@ export default defineConfig({
         },
         {
           text: '常见三方库',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '三方库面试题', link: '/Android/三方库面试题' },
             { text: 'LeakCanary原理分析', link: '/Android/LeakCanary原理分析' },
@@ -393,7 +402,7 @@ export default defineConfig({
         },
         {
           text: '编译',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Android.mk', link: '/Android/Android.mk' },
             { text: 'Android.bp', link: '/Android/Android.bp' },
@@ -404,7 +413,7 @@ export default defineConfig({
         },
         {
           text: '性能优化',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'ListView性能优化', link: '/Android/ListView性能优化' },
             { text: 'RecyclerView性能优化', link: '/Android/RecyclerView性能优化' },
@@ -413,7 +422,7 @@ export default defineConfig({
         },
         {
           text: 'JNI',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '初识JNI', link: '/Android/初识JNI' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
@@ -421,7 +430,7 @@ export default defineConfig({
         },
         {
           text: 'Framework',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'AOSP架构', link: '/Android/AOSP架构' },
             { text: '智能指针', link: '/Android/智能指针' },
@@ -477,7 +486,7 @@ export default defineConfig({
         },
         {
           text: '图形渲染',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '图形渲染', link: '/Android/图形渲染' },
             { text: '渲染机制', link: '/Android/渲染机制' },
@@ -494,7 +503,7 @@ export default defineConfig({
         },
         {
           text: '序列化',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Parcelable', link: '/Android/Parcelable' },
             { text: 'ProtocolBuffers', link: '/Android/ProtocolBuffers' },
@@ -502,7 +511,7 @@ export default defineConfig({
         },
         {
           text: '安全',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '混淆机制', link: '/Android/混淆机制' },
             { text: 'v1和v2签名机制', link: '/Android/v1和v2签名机制' },
@@ -516,7 +525,7 @@ export default defineConfig({
         },
         {
           text: '安卓日志系统',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '日志详解', link: '/Android/日志详解' },
             { text: 'logd日志简介及典型案例分析', link: '/Android/logd日志简介及典型案例分析' },
@@ -530,7 +539,7 @@ export default defineConfig({
         },
         {
           text: '实践',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '亮度调节', link: '/Android/实践-亮度调节' },
             { text: '手机所有应用', link: '/Android/实践-手机所有应用' },
@@ -545,7 +554,7 @@ export default defineConfig({
         },
         {
           text: '进阶',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '安卓常见架构', link: '/Android/安卓常见架构' },
             { text: 'Intent发送数据的上限', link: '/Android/Intent发送数据的上限' },
@@ -571,14 +580,14 @@ export default defineConfig({
         },
         {
           text: '安卓与设计模式',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '策略模式实现状态校验', link: '/Android/策略模式实现状态校验' },
           ]
         },
         {
           text: 'OpenGL ES',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
             { text: '坐标系统', link: '/Android/OpenGL ES坐标系统' },
@@ -587,7 +596,7 @@ export default defineConfig({
         },
         {
           text: 'Gradle',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'build.gradle', link: '/Android/build.gradle' },
             { text: 'build.gradle.kts', link: '/Android/build.gradle.kts' },
@@ -598,7 +607,7 @@ export default defineConfig({
         },
         {
           text: 'NDK',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'ABI', link: '/Android/ABI' },
             { text: 'JNI', link: '/Android/JNI' },
@@ -649,7 +658,7 @@ export default defineConfig({
         },
         {
           text: '聚类算法',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '聚类算法', link: '/Ai/聚类算法' },
             { text: 'K-means', link: '/Ai/K-means' },
@@ -661,7 +670,7 @@ export default defineConfig({
         },
         {
           text: 'Pytorch',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
             { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
@@ -674,9 +683,57 @@ export default defineConfig({
         }
 
       ],
+      '/Agent/': [
+        {
+          text: 'Agent 基础',
+          collapsed: true,
+          items: [
+            { text: 'Agent 开发总览', link: '/Agent/' },
+            { text: 'Agent 基础概念', link: '/Agent/基础概念' },
+            { text: 'Agent 架构模式', link: '/Agent/架构模式' },
+            { text: '提示词工程', link: '/Agent/提示词工程' },
+            { text: 'Function Calling', link: '/Agent/FunctionCalling' },
+            { text: '记忆系统', link: '/Agent/记忆系统' },
+          ]
+        },
+        {
+          text: '框架与工具',
+          collapsed: true,
+          items: [
+            { text: 'LangChain', link: '/Agent/LangChain' },
+            { text: 'LangGraph', link: '/Agent/LangGraph' },
+            { text: 'CrewAI / AutoGen', link: '/Agent/CrewAI-AutoGen' },
+            { text: 'ADK', link: '/Agent/ADK' },
+            { text: 'MCP', link: '/Agent/MCP' },
+            { text: 'Dify', link: '/Agent/Dify' },
+          ]
+        },
+        {
+          text: '知识与推理',
+          collapsed: true,
+          items: [
+            { text: '知识图谱', link: '/Agent/知识图谱' },
+            { text: 'RAG', link: '/Agent/RAG' },
+            { text: 'Agent Skill', link: '/Agent/Skill' },
+            { text: 'Tool Use', link: '/Agent/ToolUse' },
+          ]
+        },
+        {
+          text: '实践进阶',
+          collapsed: true,
+          items: [
+            { text: 'Multi-Agent', link: '/Agent/MultiAgent' },
+            { text: '工作流设计', link: '/Agent/工作流设计' },
+            { text: '评估与监控', link: '/Agent/评估监控' },
+            { text: '可观测性', link: '/Agent/可观测性' },
+            { text: 'Agent 安全', link: '/Agent/Agent安全' },
+          ]
+        }
+      ],
       '/JS/': [
         {
           text: 'JS',
+          collapsed: true,
           items: [
             { text: 'Index', link: '/JS/' },
             { text: 'One', link: '/JS/one' },
@@ -687,6 +744,7 @@ export default defineConfig({
       '/数据结构和算法/': [
         {
           text: '简单题',
+          collapsed: true,
           items: [
             { text: '合并数组', link: '/数据结构和算法/合并数组' },
             { text: '移除元素', link: '/数据结构和算法/移除元素' },
@@ -695,6 +753,7 @@ export default defineConfig({
         },
         {
           text: '位运算',
+          collapsed: true,
           items: [
             { text: '异或运算', link: '/数据结构和算法/异或运算' },
           ]
@@ -703,7 +762,7 @@ export default defineConfig({
       '/Java/': [
         {
           text: 'Java基础',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Integer1000与100的比较', link: '/Java/Integer1000与100的比较' },
             { text: '动态代理', link: '/Java/动态代理' },
@@ -713,7 +772,7 @@ export default defineConfig({
         },
         {
           text: 'Java并发',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'ThreadLocal', link: '/Java/ThreadLocal' },
             { text: '线程安全性', link: '/Java/线程安全性' },
@@ -755,7 +814,7 @@ export default defineConfig({
         },
         {
           text: 'JVM',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'JVM概述', link: '/Java/JVM概述' },
             { text: 'JVM分区', link: '/Java/JVM分区' },
@@ -813,6 +872,7 @@ export default defineConfig({
         },
         {
           text: '协程',
+          collapsed: true,
           items: [
             { text: '协程', link: '/Kotlin/协程' },
             { text: '协程作用域', link: '/Kotlin/协程作用域' },
@@ -828,6 +888,7 @@ export default defineConfig({
         },
         {
           text: 'Flow',
+          collapsed: true,
           items: [
             { text: 'Flow', link: '/Kotlin/Flow' },
           ]
@@ -836,6 +897,7 @@ export default defineConfig({
       '/Python/': [
         {
           text: 'python基础',
+          collapsed: true,
           items: [
             { text: '列表推导式', link: '/Python/列表推导式' },
             { text: '海象运算符', link: '/Python/海象运算符' },
@@ -847,6 +909,7 @@ export default defineConfig({
         },
         {
           text: 'numpy',
+          collapsed: true,
           items: [
             { text: 'numpy的常用方法', link: '/Python/numpy的常用方法' },
             { text: 'One', link: '/Python/one' },
@@ -855,6 +918,7 @@ export default defineConfig({
         },
         {
           text: 'ski-learn',
+          collapsed: true,
           items: [
             { text: 'Index', link: '/Python/' },
             { text: 'One', link: '/Python/one' },
@@ -863,6 +927,7 @@ export default defineConfig({
         },
         {
           text: 'pytorch',
+          collapsed: true,
           items: [
             { text: 'Index', link: '/Python/' },
             { text: 'One', link: '/Python/one' },
@@ -873,21 +938,23 @@ export default defineConfig({
       '/Flutter/': [
         {
           text: 'dart语言简介',
+          collapsed: true,
           items: [
             { text: 'dart语言简介', link: '/Flutter/dart语言简介' },
-          ],
-          collapsed: false
+          ]
         }
       ],
       '/SQL/': [
         {
           text: 'SQL基础',
+          collapsed: true,
           items: [
             { text: 'SQL简介', link: '/SQL/SQL简介' },
           ]
         },
         {
           text: 'SQL',
+          collapsed: true,
           items: [
             { text: '全文搜索', link: '/SQL/全文搜索' },
           ]
@@ -896,6 +963,7 @@ export default defineConfig({
       '/C/': [
         {
           text: 'C',
+          collapsed: true,
           items: [
             { text: 'Index', link: '/C/' },
             { text: 'One', link: '/C/one' },
@@ -906,6 +974,7 @@ export default defineConfig({
       '/C++/': [
         {
           text: 'C++',
+          collapsed: true,
           items: [
             { text: '头文件的声明规范', link: '/C++/头文件的声明规范' },
             { text: '模板', link: '/C++/模板' },
@@ -917,6 +986,7 @@ export default defineConfig({
       '/Linux/': [
         {
           text: 'Linux',
+          collapsed: true,
           items: [
             { text: 'Index', link: '/Linux/' },
             { text: 'One', link: '/Linux/one' },

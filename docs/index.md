@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 📖 开始阅读
-      link: /Android/Activity
+      link: /Android/
     - theme: alt
       text: ⭐ GitHub
       link: https://github.com/endlessYoung
