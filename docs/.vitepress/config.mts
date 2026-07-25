@@ -142,7 +142,7 @@ export default defineConfig({
   title: "Endlessyoung's Blog",
   description: "这是endlessyoung的个人博客",
   sitemap: {
-    hostname: 'https://endlessyoung.github.io/Blog_/',
+    hostname: 'https://endlessyoung.github.io/Blog_',
   },
   base: isProduction ? '/Blog_/' : '/',
   markdown: {
@@ -221,8 +221,41 @@ export default defineConfig({
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }],
     ['meta', { name: 'msvalidate.01', content: 'C134079F38DF28B5CB2B9AE952C0CBC7' }],
     ['meta', { name: 'google-site-verification', content: 'bNLBnwMb4Bl-KmTweCSRTZaLa4ZRD2Z7YgqTjpUU-Hw' }],
-    ['meta', { name: 'robots', content: 'index, follow' }]
+    ['meta', { name: 'robots', content: 'index, follow' }],
+    // Open Graph (global fallbacks; per-page overrides in transformHead)
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:locale', content: 'zh_CN' }],
+    ['meta', { property: 'og:site_name', content: "Endlessyoung's Blog" }],
+    ['meta', { property: 'og:image', content: 'https://endlessyoung.github.io/Blog_/index.png' }],
+    // Twitter Card
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:image', content: 'https://endlessyoung.github.io/Blog_/index.png' }],
   ],
+  transformHead(ctx) {
+    const siteUrl = 'https://endlessyoung.github.io'
+    const base = isProduction ? '/Blog_/' : '/'
+
+    // Build canonical / og:url: strip .md, replace /index.html → /
+    let pagePath = ctx.page.replace(/\.md$/, '.html')
+    if (pagePath === 'index.html' || pagePath.endsWith('/index.html')) pagePath = pagePath.replace(/index\.html$/, '')
+    const url = pagePath ? `${siteUrl}${base}${pagePath}` : `${siteUrl}${base}`
+
+    const fm = ctx.pageData.frontmatter as Record<string, any> | undefined
+    const ogTitle = fm?.title || ctx.title
+    const ogDescription = fm?.description || ctx.description
+    const ogType = ctx.page === 'index.md' ? 'website' : 'article'
+
+    return [
+      ['link', { rel: 'canonical', href: url }],
+      ['meta', { property: 'og:url', content: url }],
+      ['meta', { property: 'og:title', content: ogTitle }],
+      ['meta', { property: 'og:description', content: ogDescription }],
+      ['meta', { property: 'og:type', content: ogType }],
+      ['meta', { name: 'twitter:title', content: ogTitle }],
+      ['meta', { name: 'twitter:description', content: ogDescription }],
+    ]
+  },
+
   themeConfig: {
     logo: '/panda.png',
     darkModeSwitchLabel: "🌓",
