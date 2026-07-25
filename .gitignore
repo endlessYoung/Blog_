@@ -1,3 +1,15 @@
 docs/.vitepress/dist
 docs/.vitepress/cache
 node_modules/
+CLAUDE.*
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+.env.test.local
+.env.test.production
+.env.test.development
+.env.test.staging
+.codex/
+.vscode/
