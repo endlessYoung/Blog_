@@ -17,6 +17,7 @@ concurrency:
 
 jobs:
   build:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -48,6 +49,7 @@ jobs:
           path: docs/.vitepress/dist
 
   deploy:
+    timeout-minutes: 5
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -59,11 +61,17 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+  seo:
+    timeout-minutes: 2
+    needs: deploy
+    runs-on: ubuntu-latest
+    name: Notify search engines
+    steps:
       - name: Submit to IndexNow
-        if: success()
         continue-on-error: true
         run: |
-          curl -X POST "https://www.bing.com/indexnow" \
+          curl -sS --connect-timeout 10 --max-time 30 \
+            -X POST "https://www.bing.com/indexnow" \
             -H "Content-Type: application/json" \
             -d '{
               "host": "endlessyoung.github.io",
@@ -73,8 +81,8 @@ jobs:
             }'
 
       - name: Submit Sitemap to Bing
-        if: success()
         continue-on-error: true
         run: |
-          curl -X GET "https://www.bing.com/ping?sitemap=https://endlessyoung.github.io/Blog_/sitemap.xml" \
-            || echo "Bing ping skipped (may be deprecated)"
+          curl -sS --connect-timeout 10 --max-time 30 \
+            "https://www.bing.com/ping?sitemap=https://endlessyoung.github.io/Blog_/sitemap.xml" \
+            || echo "Bing ping skipped"
