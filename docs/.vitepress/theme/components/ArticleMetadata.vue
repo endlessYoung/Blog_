@@ -1,19 +1,23 @@
 <template>
   <div class="article-metadata" v-if="wordCount > 0">
-    <span class="meta-item" v-if="formattedDate">
-      <span class="icon">📅</span>
-      {{ formattedDate }}
+    <span class="meta-item" v-if="formattedCreated">
+      <span class="icon"><i class="fa-solid fa-calendar-plus"></i></span>
+      创建于 {{ formattedCreated }}
+    </span>
+    <span class="meta-item" v-if="formattedUpdated">
+      <span class="icon"><i class="fa-solid fa-calendar-check"></i></span>
+      更新于 {{ formattedUpdated }}
     </span>
     <span class="meta-item">
-      <span class="icon">⏱️</span>
+      <span class="icon"><i class="fa-solid fa-clock"></i></span>
       {{ readingTime }} 分钟阅读
     </span>
     <span class="meta-item">
-      <span class="icon">📝</span>
+      <span class="icon"><i class="fa-solid fa-file-lines"></i></span>
       {{ wordCount }} 字
     </span>
     <span class="meta-item" v-if="showPageViews">
-      <span class="icon">👁️</span>
+      <span class="icon"><i class="fa-solid fa-eye"></i></span>
       <span class="waline-pageview-count" :data-path="route.path" /> 阅读
     </span>
   </div>
@@ -33,7 +37,19 @@ const showPageViews = computed(() => {
   return theme.value.comment?.pageview !== false
 })
 
-const formattedDate = computed(() => {
+const formattedCreated = computed(() => {
+  const created = page.value.frontmatter?.created
+  if (!created) return ''
+  const d = new Date(created)
+  if (isNaN(d.getTime())) return created
+  return d.toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+})
+
+const formattedUpdated = computed(() => {
   if (!page.value.lastUpdated) return ''
   return new Date(page.value.lastUpdated).toLocaleDateString('zh-CN', {
     year: 'numeric',
@@ -43,7 +59,6 @@ const formattedDate = computed(() => {
 })
 
 const analyzeContent = () => {
-  // Use a timeout to ensure the DOM is fully rendered
   setTimeout(() => {
     const docElement = document.querySelector('.vp-doc')
     if (!docElement) {
@@ -52,13 +67,13 @@ const analyzeContent = () => {
       return
     }
 
-    const content = docElement.innerText || ''
-    const words = content.match(/[\w\d\s,.\u00C0-\u024F]+/gi)
-    const chinese = content.match(/[\u4E00-\u9FA5]/g) || []
-    const count = (words ? words.reduce((acc, word) => acc + word.split(/\s+/).length, 0) : 0) + chinese.length
-    
+    const text = docElement.innerText || ''
+    const latin = (text.match(/[a-zA-Z0-9]+/g) || []).reduce((n, w) => n + w.length, 0)
+    const cjk = (text.match(/[一-鿿㐀-䶿豈-﫿]/g) || []).length
+    const count = latin + cjk
+
     wordCount.value = count
-    readingTime.value = Math.ceil(count / 400) // Assuming 400 words per minute
+    readingTime.value = Math.ceil(count / 400)
   }, 100)
 }
 
