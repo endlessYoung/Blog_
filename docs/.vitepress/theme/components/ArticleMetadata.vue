@@ -18,7 +18,8 @@
     </span>
     <span class="meta-item" v-if="showPageViews">
       <span class="icon"><i class="fa-solid fa-eye"></i></span>
-      <span class="waline-pageview-count" :data-path="route.path" /> 次浏览
+      <span class="waline-pageview-count" :data-path="route.path"></span>
+      <span class="pv-text">次浏览</span>
     </span>
   </div>
 </template>
@@ -101,5 +102,15 @@ watch(() => route.path, () => {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+.waline-pageview-count:empty ~ .pv-text {
+  display: none;
+}
+</style>
+
+<style>
+/* global: Vue scoped can't handle :empty ~ combinator */
+.waline-pageview-count:empty ~ .pv-text {
+  display: none;
 }
 </style>
