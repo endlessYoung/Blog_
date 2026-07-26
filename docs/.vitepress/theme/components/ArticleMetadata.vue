@@ -16,11 +16,11 @@
       <span class="icon"><i class="fa-solid fa-file-lines"></i></span>
       {{ wordCount }} 字
     </span>
-    <span class="meta-item" v-if="showPageViews">
+    <span class="meta-item" v-if="showPageViews && pageViewCount !== null">
       <span class="icon"><i class="fa-solid fa-eye"></i></span>
-      <span class="waline-pageview-count" :data-path="route.path"></span>
-      <span class="pv-text">次浏览</span>
+      {{ pageViewCount }} 次浏览
     </span>
+    <span class="waline-pageview-count" :data-path="route.path" ref="pvEl" style="display:none" data-v-step></span>
   </div>
 </template>
 
@@ -33,6 +33,8 @@ const route = useRoute()
 
 const wordCount = ref(0)
 const readingTime = ref(0)
+const pageViewCount = ref(null)
+const pvEl = ref(null)
 
 const showPageViews = computed(() => {
   return theme.value.comment?.pageview !== false
@@ -80,6 +82,14 @@ const analyzeContent = () => {
 
 onMounted(() => {
   analyzeContent()
+  // Watch Waline pageview count element
+  if (pvEl.value) {
+    const obs = new MutationObserver(() => {
+      const text = pvEl.value?.innerText?.trim()
+      if (text && /^\d+$/.test(text)) pageViewCount.value = parseInt(text)
+    })
+    obs.observe(pvEl.value, { childList: true, characterData: true, subtree: true })
+  }
 })
 
 watch(() => route.path, () => {
@@ -102,15 +112,5 @@ watch(() => route.path, () => {
   display: flex;
   align-items: center;
   gap: 4px;
-}
-.waline-pageview-count:empty ~ .pv-text {
-  display: none;
-}
-</style>
-
-<style>
-/* global: Vue scoped can't handle :empty ~ combinator */
-.waline-pageview-count:empty ~ .pv-text {
-  display: none;
 }
 </style>

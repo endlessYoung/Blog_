@@ -12,6 +12,6 @@
   "type": "commonjs",
   "dependencies": {
     "@waline/vercel": "^1.36.4",
-    "sqlite3": "^5.1.7"
+    "pg": "^8.22.0"
   }
 }

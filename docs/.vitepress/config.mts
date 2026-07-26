@@ -288,7 +288,7 @@ export default defineConfig({
     lightModeSwitchTitle: "Switch to light theme",
     darkModeSwitchTitle: "Switch to dark theme",
     comment: {
-      serverURL: 'http://localhost:8360',
+      serverURL: 'https://waline-service-five.vercel.app',
       lang: 'zh-cn',
       reaction: true,
       search: true,
