@@ -16,11 +16,10 @@
       <span class="icon"><i class="fa-solid fa-file-lines"></i></span>
       {{ wordCount }} 字
     </span>
-    <span class="meta-item" v-if="showPageViews && pageViewCount !== null">
+    <span class="meta-item pageview-item" v-if="showPageViews">
       <span class="icon"><i class="fa-solid fa-eye"></i></span>
-      {{ pageViewCount }} 次浏览
+      <span class="waline-pageview-count" :data-path="route.path"></span>
     </span>
-    <span class="waline-pageview-count" :data-path="route.path" ref="pvEl" style="display:none" data-v-step></span>
   </div>
 </template>
 
@@ -33,8 +32,6 @@ const route = useRoute()
 
 const wordCount = ref(0)
 const readingTime = ref(0)
-const pageViewCount = ref(null)
-const pvEl = ref(null)
 
 const showPageViews = computed(() => {
   return theme.value.comment?.pageview !== false
@@ -82,14 +79,6 @@ const analyzeContent = () => {
 
 onMounted(() => {
   analyzeContent()
-  // Watch Waline pageview count element
-  if (pvEl.value) {
-    const obs = new MutationObserver(() => {
-      const text = pvEl.value?.innerText?.trim()
-      if (text && /^\d+$/.test(text)) pageViewCount.value = parseInt(text)
-    })
-    obs.observe(pvEl.value, { childList: true, characterData: true, subtree: true })
-  }
 })
 
 watch(() => route.path, () => {
@@ -98,6 +87,13 @@ watch(() => route.path, () => {
   })
 })
 </script>
+
+<style>
+/* Waline fills this span with the pageview count; append label when non-empty */
+.pageview-item .waline-pageview-count:not(:empty)::after {
+  content: ' 次浏览';
+}
+</style>
 
 <style scoped>
 .article-metadata {
