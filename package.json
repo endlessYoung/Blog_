@@ -6,7 +6,8 @@
   },
   "scripts": {
     "docs:dev": "vitepress dev docs --port 5173",
-    "docs:build": "vitepress build docs",
+    "docs:created": "node scripts/update-created-dates.js",
+    "docs:build": "pnpm docs:created && vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "documate:upload": "documate upload --verbose"
   },

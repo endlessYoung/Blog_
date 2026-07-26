@@ -1,5 +1,5 @@
 <template>
-  <div class="article-metadata" v-if="wordCount > 0">
+  <div class="article-metadata">
     <span class="meta-item" v-if="formattedCreated">
       <span class="icon"><i class="fa-solid fa-calendar-plus"></i></span>
       创建于 {{ formattedCreated }}
@@ -8,11 +8,11 @@
       <span class="icon"><i class="fa-solid fa-calendar-check"></i></span>
       更新于 {{ formattedUpdated }}
     </span>
-    <span class="meta-item">
+    <span class="meta-item" v-if="readingTime > 0">
       <span class="icon"><i class="fa-solid fa-clock"></i></span>
       {{ readingTime }} 分钟阅读
     </span>
-    <span class="meta-item">
+    <span class="meta-item" v-if="wordCount > 0">
       <span class="icon"><i class="fa-solid fa-file-lines"></i></span>
       {{ wordCount }} 字
     </span>

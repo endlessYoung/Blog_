@@ -1,5 +1,13 @@
 import { defineConfig, SiteData } from 'vitepress'
 import markdownItKatex from 'markdown-it-katex'
+import { readFileSync } from 'fs'
+import { join } from 'path'
+
+const createdDates: Record<string, string> = (() => {
+  try {
+    return JSON.parse(readFileSync(join(__dirname, 'created-dates.json'), 'utf-8'))
+  } catch { return {} }
+})()
 
 const customElements = [
   'math',
@@ -232,6 +240,16 @@ export default defineConfig({
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:image', content: 'https://endlessyoung.github.io/Blog_/index.png' }],
   ],
+  transformPageData(pageData) {
+    // Auto-inject created date from git cache if missing in frontmatter
+    if (!(pageData.frontmatter as Record<string, any>)?.created) {
+      const key = (pageData as any).relativePath || pageData.filePath?.replace(/^.*[\\/]docs[\\/]/, '')
+      if (key && createdDates[key]) {
+        (pageData.frontmatter as any).created = createdDates[key]
+      }
+    }
+  },
+
   transformHead(ctx) {
     const siteUrl = 'https://endlessyoung.github.io'
     const base = isProduction ? '/Blog_/' : '/'
