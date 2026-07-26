@@ -18,7 +18,7 @@
     </span>
     <span class="meta-item" v-if="showPageViews">
       <span class="icon"><i class="fa-solid fa-eye"></i></span>
-      <span class="waline-pageview-count" :data-path="route.path" /> 阅读
+      <span class="waline-pageview-count" :data-path="route.path" /> 次浏览
     </span>
   </div>
 </template>
