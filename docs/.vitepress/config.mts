@@ -156,7 +156,8 @@ export default defineConfig({
   markdown: {
     // Shiki：Dracula 与参考 IDE 卡片的霓虹粉/青绿/黄配色一致（外层再用 CSS 压成 #0b0e14 底）
     theme: {
-      light: 'github-light',
+      // one-light：浅色下关键字/字符串/注释区分更明显（github-light 对比过低，易看成「没高亮」）
+      light: 'one-light',
       dark: 'dracula'
     },
     languageAlias: {
@@ -172,13 +173,17 @@ export default defineConfig({
       const fence = md.renderer.rules.fence
       md.renderer.rules.fence = (tokens: any, idx: number, options: any, env: any, self: any) => {
         const token = tokens[idx]
-        const rawInfo = token.info ? String(token.info).trim() : ''
-        const info = rawInfo.split(/\s+/)[0] || ''
+        // 必须在调用原始 fence（Shiki）之前规范化：` ``` java` 的 info 带前导空格时会被当成未知语言 → 无高亮
+        if (token.info) {
+          token.info = String(token.info).trim().replace(/\s+/g, ' ')
+        }
+        const rawInfo = token.info ? String(token.info) : ''
+        const info = rawInfo.split(/\s+/).find(Boolean) || ''
         const html = fence ? fence(tokens, idx, options, env, self) : self.renderToken(tokens, idx, options)
 
         let lang = info
         if (!lang) {
-          const classMatch = html.match(/language-([a-z0-9_-]+)/i)
+          const classMatch = html.match(/language-([a-z0-9_+-]+)/i)
           if (classMatch?.[1]) lang = classMatch[1]
         }
         if (!lang) return html

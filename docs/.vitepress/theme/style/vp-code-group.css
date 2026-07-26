@@ -114,7 +114,7 @@ html:not(.dark) .vp-doc div[class*='language-']::before {
     0 24px 48px rgba(0, 0, 0, 0.5);
 }
 
-/* 语言药丸 = 模板 rounded-2xl border dark:bg-zinc-800 */
+/* 语言 / Copy：同款药丸。浅色白底描边，深色 zinc 底描边；Copied 再切绿色 */
 .vp-doc div[class*='language-']>span.lang {
   position: absolute !important;
   top: calc((var(--cc-chrome-h) - 34px) / 2) !important;
@@ -137,7 +137,7 @@ html:not(.dark) .vp-doc div[class*='language-']::before {
   text-transform: none !important;
   color: #27272a !important;
   background: #ffffff !important;
-  border: 1px solid #e4e4e7 !important;
+  border: 1px solid #d4d4d8 !important;
   border-radius: 9999px !important;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
   opacity: 1 !important;
@@ -153,10 +153,6 @@ html:not(.dark) .vp-doc div[class*='language-']::before {
   }
 }
 
-html:not(.dark) .vp-doc div[class*='language-']>span.lang {
-  border-color: #d4d4d8 !important;
-}
-
 .dark .vp-doc div[class*='language-']>span.lang {
   color: #fafafa !important;
   background: var(--cc-pill-bg-dark) !important;
@@ -165,34 +161,21 @@ html:not(.dark) .vp-doc div[class*='language-']>span.lang {
 }
 
 .dark .vp-doc div[class*='language-']>span.lang:hover {
-  border-color: rgba(139, 92, 246, 0.45) !important;
-  background: rgba(46, 16, 101, 0.35) !important;
+  border-color: #52525b !important;
+  background: #3f3f46 !important;
 }
 
-/* 小 chevron ≈ fa-chevron-down 10px opacity-60 */
-.vp-doc div[class*='language-']>span.lang::after {
-  content: '';
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  margin-left: 7px;
-  margin-top: -1px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: rotate(45deg);
-  opacity: 0.55;
-  flex-shrink: 0;
-}
+/* chevron 已移除 */
 
 .vp-doc [class*='language-']:hover>button.copy+span.lang,
 .vp-doc [class*='language-']>button.copy:focus+span.lang {
   opacity: 1 !important;
 }
 
-/* Copy = 模板 ghost：text-zinc-500 / dark:text-zinc-400，hover 铺底 + 字变白 */
+/* Copy 与语言标签同款药丸（默认有底，不是 ghost） */
 .vp-doc div[class*='language-']>button.copy {
   position: absolute !important;
-  top: calc((var(--cc-chrome-h) - 36px) / 2) !important;
+  top: calc((var(--cc-chrome-h) - 34px) / 2) !important;
   right: 0.75rem !important;
   z-index: 7 !important;
   display: inline-flex !important;
@@ -201,18 +184,20 @@ html:not(.dark) .vp-doc div[class*='language-']>span.lang {
   gap: 0.5rem !important;
   width: auto !important;
   min-width: unset !important;
-  height: 36px !important;
+  height: 34px !important;
   padding: 0 0.75rem 0 30px !important;
-  border-radius: 1rem !important;
-  border: none !important;
-  background-color: transparent !important;
+  border-radius: 9999px !important;
+  border: 1px solid #d4d4d8 !important;
+  background-color: #ffffff !important;
   background-repeat: no-repeat !important;
   background-position: 10px 50% !important;
   background-size: 16px 16px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
   opacity: 1 !important;
   transition:
     color 0.2s ease,
     background-color 0.2s ease,
+    border-color 0.2s ease,
     transform 0.2s ease !important;
 }
 
@@ -224,40 +209,74 @@ html:not(.dark) .vp-doc div[class*='language-']>span.lang {
 }
 
 .vp-doc div[class*='language-']>button.copy:hover {
-  background-color: rgba(0, 0, 0, 0.06) !important;
+  background-color: #fafafa !important;
+  border-color: #a1a1aa !important;
 }
 
 .dark .vp-doc div[class*='language-']>button.copy {
-  border: none !important;
-  background-color: transparent !important;
+  background-color: var(--cc-pill-bg-dark) !important;
+  border: 1px solid var(--cc-pill-border-dark) !important;
+  box-shadow: none !important;
 }
 
 .dark .vp-doc div[class*='language-']>button.copy:hover {
-  background-color: #27272a !important;
+  background-color: #3f3f46 !important;
+  border-color: #52525b !important;
 }
 
-/* 浅色：Copy 为浅灰药丸（参考图），与顶栏 #e4e4e7 区分 */
-html:not(.dark) .vp-doc div[class*='language-']>button.copy {
-  border-radius: 9999px !important;
-  background-color: var(--cc-copy-pill-light) !important;
-  border: 1px solid #c4c4c8 !important;
-}
-
-html:not(.dark) .vp-doc div[class*='language-']>button.copy:hover {
-  background-color: var(--cc-copy-pill-light-hover) !important;
-}
-
-html:not(.dark) .vp-doc div[class*='language-']>button.copy::after {
+.vp-doc div[class*='language-']>button.copy::after {
   color: #52525b !important;
 }
 
-html:not(.dark) .vp-doc div[class*='language-']>button.copy:hover::after {
+.vp-doc div[class*='language-']>button.copy:hover::after {
   color: #27272a !important;
 }
 
-html:not(.dark) .vp-doc div[class*='language-']>button.copy.copied,
-html:not(.dark) .vp-doc div[class*='language-']>button.copy:hover.copied {
+.dark .vp-doc div[class*='language-']>button.copy::after {
+  color: var(--cc-copy-muted) !important;
+}
+
+.dark .vp-doc div[class*='language-']>button.copy:hover::after {
+  color: #fafafa !important;
+}
+
+/* 浅色：强制使用 Shiki light token；同时重置 fill，避免全局 -webkit-text-fill-color 把高亮涂成单色 */
+html:not(.dark) .vp-doc div[class*='language-'] .shiki,
+html:not(.dark) .vp-doc div[class*='language-'] .shiki span {
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html:not(.dark) .vp-doc div[class*='language-'] .shiki span {
+  color: var(--shiki-light) !important;
+  font-style: var(--shiki-light-font-style, inherit);
+  font-weight: var(--shiki-light-font-weight, inherit);
+  text-decoration: var(--shiki-light-text-decoration, inherit);
+}
+
+/* Copied：浅绿底 + 绿字（深浅色都保留药丸形态） */
+.vp-doc div[class*='language-']>button.copy.copied,
+.vp-doc div[class*='language-']>button.copy:hover.copied {
   border-radius: 9999px !important;
+  background-color: #ecfdf5 !important;
+  border-color: #6ee7b7 !important;
+  box-shadow: 0 1px 2px rgba(16, 185, 129, 0.12) !important;
+}
+
+.dark .vp-doc div[class*='language-']>button.copy.copied,
+.dark .vp-doc div[class*='language-']>button.copy:hover.copied {
+  background-color: rgba(16, 185, 129, 0.18) !important;
+  border-color: rgba(52, 211, 153, 0.45) !important;
+  box-shadow: none !important;
+}
+
+.vp-doc div[class*='language-']>button.copy.copied::after,
+.vp-doc div[class*='language-']>button.copy:hover.copied::after {
+  color: #059669 !important;
+}
+
+.dark .vp-doc div[class*='language-']>button.copy.copied::after,
+.dark .vp-doc div[class*='language-']>button.copy:hover.copied::after {
+  color: #34d399 !important;
 }
 
 .vp-doc div[class*='language-']>button.copy::before,
@@ -268,41 +287,18 @@ html:not(.dark) .vp-doc div[class*='language-']>button.copy:hover.copied {
   display: none !important;
 }
 
-.vp-doc div[class*='language-']>button.copy.copied,
-.vp-doc div[class*='language-']>button.copy:hover.copied {
-  border-radius: 1rem !important;
-}
-
 .vp-doc div[class*='language-']>button.copy::after {
   content: 'Copy';
   font-family: var(--tech-font-ui, ui-sans-serif, system-ui, sans-serif);
   font-size: 0.875rem;
   font-weight: 500;
-  color: #71717a;
   line-height: 1;
   transition: color 0.2s ease;
-}
-
-.dark .vp-doc div[class*='language-']>button.copy::after {
-  color: var(--cc-copy-muted);
-}
-
-.dark .vp-doc div[class*='language-']>button.copy:hover::after {
-  color: #fafafa;
 }
 
 .vp-doc div[class*='language-']>button.copy.copied::after {
   content: 'Copied!';
   font-weight: 600;
-  color: #059669;
-}
-
-.dark .vp-doc div[class*='language-']>button.copy.copied::after {
-  color: #34d399;
-}
-
-.dark .vp-doc div[class*='language-']>button.copy:hover.copied::after {
-  color: #34d399;
 }
 
 .vp-doc div[class*='language-']>button.copy.copied {

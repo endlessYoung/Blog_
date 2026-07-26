@@ -36,6 +36,7 @@
   font-weight: 650;
   letter-spacing: 0.04em;
   color: #fafafa;
+  -webkit-text-fill-color: currentColor;
 }
 
 .home-sec-head__rule {
@@ -44,13 +45,16 @@
   border-radius: 2px;
   background: linear-gradient(90deg, rgba(34, 211, 238, 0.55), rgba(167, 139, 250, 0.35), transparent);
 }
+</style>
 
-:global(html:not(.dark)) .home-sec-head__title {
+<!-- 勿用 :global(html:not(.dark)) 包属性：Vue 会误编译成整页 html 规则，锁死 -webkit-text-fill-color，浅色代码高亮全变灰 -->
+<style>
+html:not(.dark) .home-sec-head__title {
   color: #0f172a !important;
-  -webkit-text-fill-color: #0f172a;
+  -webkit-text-fill-color: currentColor !important;
 }
 
-:global(html:not(.dark)) .home-sec-head__rule {
+html:not(.dark) .home-sec-head__rule {
   background: linear-gradient(90deg, rgba(8, 145, 178, 0.5), rgba(124, 58, 237, 0.3), transparent);
 }
 </style>

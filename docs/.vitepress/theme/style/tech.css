@@ -433,24 +433,25 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   margin-right: auto;
 }
 
-.vp-doc h1 {
+.dark .vp-doc h1 {
   color: #fafafa !important;
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
-.vp-doc p,
-.vp-doc li,
-.vp-doc td,
-.vp-doc th {
+/* 深色正文色必须挂在 .dark 下，避免浅色模式继承近白字色 */
+.dark .vp-doc p,
+.dark .vp-doc li,
+.dark .vp-doc td,
+.dark .vp-doc th {
   color: #d4d4d8 !important;
 }
 
-.vp-doc strong {
+.dark .vp-doc strong {
   color: #f4f4f5 !important;
 }
 
-.vp-doc blockquote {
+.dark .vp-doc blockquote {
   border-left: 3px solid rgba(34, 211, 238, 0.35);
   background: rgba(255, 255, 255, 0.03);
   color: #d4d4d8 !important;
