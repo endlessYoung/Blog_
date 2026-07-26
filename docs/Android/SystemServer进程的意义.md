@@ -1,3 +1,7 @@
+---
+created: 2024-05-19
+---
+
 # SystemServer进程的意义
 
 1. **系统服务的集中管理者**：**SystemServer是Android框架层众多核心服务的宿主**，这些服务包括但不限于`Activity Manager (AMS)`、`Package Manager (PMS)`、`Window Manager (WMS)`、`Power Manager`、`Location Manager`、`Audio Service`等。这些服务构成了Android系统功能的基础，负责`管理应用的生命周期`、`包的安装与卸载`、`窗口的布局与管理`、`电源管理`、`位置服务`、`音频处理`等重要功能。

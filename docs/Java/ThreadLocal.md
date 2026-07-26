@@ -1,3 +1,7 @@
+---
+created: 2024-11-03
+---
+
 # ThreadLocal
 
 ## 1. ThreadLocal是什么

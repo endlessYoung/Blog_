@@ -1,3 +1,7 @@
+---
+created: 2024-04-14
+---
+
 # Application为什么不能作为Dialog的context
 
 Dialog的context只能是Activity，而不能是Application，不然会导致弹窗崩溃：

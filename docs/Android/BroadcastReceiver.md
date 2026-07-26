@@ -1,3 +1,7 @@
+---
+created: 2023-10-05
+---
+
 # BroadcastReceiver
 
 ## 一、什么是BroadcastReceiver

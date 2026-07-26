@@ -1,3 +1,7 @@
+---
+created: 2024-05-23
+---
+
 # onResume中获取宽高有效吗？
 
 View 的测绘绘制流程就是从 `ViewRootImpl#performTraversals()` 开始的，而这个方法的调用是在 onResume() 方法之后，所以在 onCreate() 和 onResume() 方法中拿不到 View 的测量值。

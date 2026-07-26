@@ -1,3 +1,7 @@
+---
+created: 2025-04-21
+---
+
 # Channel
 
 ## 1. 什么是Channel

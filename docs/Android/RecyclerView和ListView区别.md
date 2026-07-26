@@ -1,3 +1,7 @@
+---
+created: 2024-07-08
+---
+
 # RecyclerView和ListView区别
 
 ## 1. 简要区别

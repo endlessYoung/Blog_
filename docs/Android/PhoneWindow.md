@@ -1,3 +1,7 @@
+---
+created: 2024-04-14
+---
+
 # PhoneWindow
 
 Activity和Dialog在显示过程中都创建了`PhoneWindow`对象，而`PopupWindow`和`Toast`却没有。

@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "Bash": {
+      "git:*": "allow",
+      "pnpm:*": "allow",
+      "npm:*": "allow",
+      "node:*": "allow",
+      "ls:*": "allow",
+      "cat:*": "allow",
+      "grep:*": "allow",
+      "sed:*": "allow",
+      "du:*": "allow",
+      "wc:*": "allow",
+      "find:*": "allow",
+      "mkdir:*": "allow",
+      "rm:*": "allow",
+      "head:*": "allow",
+      "echo:*": "allow",
+      "npx:*": "allow"
+    },
+    "Edit": "allow",
+    "Write": "allow",
+    "Read": "allow",
+    "Glob": "allow",
+    "Grep": "allow",
+    "WebSearch": "allow",
+    "WebFetch": "allow"
+  }
+}

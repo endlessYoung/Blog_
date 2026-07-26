@@ -1,3 +1,7 @@
+---
+created: 2024-08-14
+---
+
 # AndroidTest编译Provider冲突问题
 
 ## 1. 故障原因

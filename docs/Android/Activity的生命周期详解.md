@@ -1,3 +1,7 @@
+---
+created: 2023-10-05
+---
+
 # Activity生命周期详解
 
 ## 一、Activity的生命周期

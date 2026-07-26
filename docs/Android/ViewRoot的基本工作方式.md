@@ -1,3 +1,7 @@
+---
+created: 2024-08-11
+---
+
 # ViewRoot的基本工作方式
 
 每一颗ViewTree只对应一个ViewRoot。它将和WindowManagerService进行一系列的通信，包括窗口注册，大小调整等，ViewRoot主要的触发源有两种：

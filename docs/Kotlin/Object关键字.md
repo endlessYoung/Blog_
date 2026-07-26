@@ -1,3 +1,7 @@
+---
+created: 2024-01-01
+---
+
 # Object关键字
 
 ## 1. object 关键字在 Kotlin 中的用途是什么？

@@ -1,3 +1,7 @@
+---
+created: 2024-07-08
+---
+
 # RecyclerView知识点汇总
 
 ## 1. adapter的作用是什么，如何理解adapter的订阅模式

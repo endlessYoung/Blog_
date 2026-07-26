@@ -1,3 +1,7 @@
+---
+created: 2024-07-17
+---
+
 # Android与Service通信
 
 ## 1. 使用 `Intent` 启动 `Service`

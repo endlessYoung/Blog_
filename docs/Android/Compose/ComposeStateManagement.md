@@ -1,3 +1,7 @@
+---
+created: 2026-02-08
+---
+
 # Jetpack Compose 状态管理详解
 
 在 Jetpack Compose 中，**状态 (State)** 是驱动 UI 更新的核心。与传统的 View 体系不同，Compose 是声明式的：UI 是状态的函数。当应用的状态发生变化时，Compose 会重新执行受影响的 Composable 函数（这个过程称为 **重组 (Recomposition)**），从而更新 UI。

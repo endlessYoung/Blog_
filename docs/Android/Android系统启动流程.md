@@ -1,3 +1,7 @@
+---
+created: 2024-05-19
+---
+
 # Android系统启动流程
 
 ![alt text](image-65.png)

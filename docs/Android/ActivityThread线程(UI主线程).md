@@ -1,3 +1,7 @@
+---
+created: 2024-08-14
+---
+
 # ActivityThread线程(UI主线程)
 
 ## 1. ActivityThread和LooperThread的区别和联系

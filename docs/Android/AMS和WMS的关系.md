@@ -1,3 +1,7 @@
+---
+created: 2024-05-19
+---
+
 # AMS和WMS的关系
 
 AMS（Activity Manager Service）和WMS（Window Manager Service）是Android系统中两个核心的服务组件，它们共同协作以管理应用程序的界面显示和生命周期。AMS 和 WMS 的交互主要通过 Binder 机制实现，这允许它们在不同的进程中运：

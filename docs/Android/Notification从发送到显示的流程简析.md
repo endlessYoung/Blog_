@@ -1,3 +1,7 @@
+---
+created: 2024-12-01
+---
+
 # Notification从发送到显示的流程简析
 
 ## 1. Notification架构

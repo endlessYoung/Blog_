@@ -1,3 +1,7 @@
+---
+created: 2024-05-19
+---
+
 # Zygote进程的fork
 
 在Android系统中，Zygote进程是所有Android应用程序进程的母进程。当系统启动时，会**首先启动一个初始化进程Init，Init随后会启动SystemServer进程，而SystemServer进程中会孵化出Zygote进程。Zygote初始化时会预加载大量的Java类和资源**，这样做的目的是为了优化后续应用进程的创建速度。

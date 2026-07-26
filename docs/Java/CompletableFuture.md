@@ -1,3 +1,7 @@
+---
+created: 2024-11-03
+---
+
 # CompletableFuture
 
 `CompletableFuture` 是 Java 8 引入的一个类，属于 `java.util.concurrent` 包，主要用于异步编程和非阻塞操作。它提供了一种更简单和强大的方式来处理异步计算，相较于传统的 Future 类，`CompletableFuture` 提供了更丰富的功能和灵活性。

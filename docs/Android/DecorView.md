@@ -1,3 +1,7 @@
+---
+created: 2024-07-08
+---
+
 # DecorView
 
 ## 1. Activity的创建过程

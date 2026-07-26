@@ -1,3 +1,7 @@
+---
+created: 2024-07-17
+---
+
 # Activity和Fragment的低耦合通信
 
 ## 1. Fragment 与 Activity 之间的通信

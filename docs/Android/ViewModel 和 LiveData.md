@@ -1,3 +1,7 @@
+---
+created: 2024-06-16
+---
+
 # ViewModel 和 LiveData
 
 ## 1. 什么是ViewModel、LiveData
