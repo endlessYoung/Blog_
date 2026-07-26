@@ -12,4 +12,5 @@ CLAUDE.*
 .env.test.development
 .env.test.staging
 .codex/
+.claude/
 .vscode/
