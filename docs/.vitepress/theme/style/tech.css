@@ -4,7 +4,7 @@
   --tech-font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
-/* 暗色：原 :root 中的霓虹与 VP 变量（勿再挂在 :root，否则浅色切换无效） */
+/* ???? :root ????? VP ??????? :root?????????? */
 html.dark {
   color-scheme: dark;
   --tech-c-bg: #050508;
@@ -47,7 +47,7 @@ html.dark {
   --vp-button-brand-text: #0a0a0a;
 }
 
-/* 浅色：正文 zinc、强调色略收，与 code 卡 zinc 系一致 */
+/* ????? zinc???????? code ? zinc ??? */
 html:not(.dark) {
   color-scheme: light;
   --tech-c-bg: #f4f4f5;
@@ -144,6 +144,14 @@ body {
   backdrop-filter: blur(16px) saturate(130%);
 }
 
+/* ?? .VPNav ? backdrop-filter/filter/transform??? position:fixed ?
+   .VPNavScreen ????????????????? 0??????? */
+.VPNav {
+  backdrop-filter: none !important;
+  filter: none !important;
+  transform: none !important;
+}
+
 .VPNavBar {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow:
@@ -167,7 +175,7 @@ body {
   border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
-/* 顶栏分类：默认即足够亮（避免被 var.css 里 .dark .VPNavBar a 压暗） */
+/* ??????????????? var.css ? .dark .VPNavBar a ??? */
 .dark .VPNavBar a.VPNavBarMenuLink {
   color: #dddde8 !important;
   font-weight: 500;
@@ -416,7 +424,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
 .VPHome .VPFeature:nth-child(5) { animation-delay: 0.4s; }
 .VPHome .VPFeature:nth-child(6) { animation-delay: 0.48s; }
 
-/* 文档主栏：与页面底色融合为「一层」，只保留舒适内边距与清晰字色 */
+/* ??????????????????????????????? */
 .VPDoc.has-aside .content-container,
 .VPDoc .content-container {
   background: transparent !important;
@@ -439,7 +447,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   line-height: 1.2;
 }
 
-/* 深色正文色必须挂在 .dark 下，避免浅色模式继承近白字色 */
+/* ????????? .dark ?????????????? */
 .dark .vp-doc p,
 .dark .vp-doc li,
 .dark .vp-doc td,
@@ -457,7 +465,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   color: #d4d4d8 !important;
 }
 
-/* 与 IDE 代码卡深色底一致（略深于 Dracula 默认 #282a36）；Code Card 围栏块由 vp-code-group 接管 */
+/* ? IDE ???????????? Dracula ?? #282a36??Code Card ???? vp-code-group ?? */
 .dark .vp-doc .shiki {
   background: #0b0e14 !important;
   border: 1px solid rgba(139, 233, 253, 0.14) !important;
@@ -474,7 +482,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   box-shadow: none !important;
 }
 
-/* 防止任意父级透明度/滤镜让部分行「发虚」 */
+/* ?????????/?????????? */
 .dark .vp-doc pre.shiki,
 .dark .vp-doc pre.shiki span {
   opacity: 1 !important;
@@ -580,7 +588,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   }
 }
 
-/* 首页专用：分区节奏 + 双栏 Hero 对齐 */
+/* ????????? + ?? Hero ?? */
 .home-landing .VPHome {
   margin-bottom: 56px;
 }
@@ -591,7 +599,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   }
 }
 
-/* 首页：Hero 与下方专栏区垂直节奏（与指标条 padding 一起留白） */
+/* ???Hero ??????????????? padding ????? */
 .VPContent.is-home .VPHero {
   padding-bottom: 4px;
 }
@@ -657,10 +665,10 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   }
 }
 
-/* 首页 Hero 文案：蓝紫霓虹科技风（上行渐变名，下行亮紫 + 靛蓝外光） */
+/* ?? Hero ????????????????????? + ????? */
 .home-landing .VPHero .name.clip,
 .VPContent.is-home .VPHero .name.clip {
-  /* 勿用 background 简写：会重置 background-clip，浅色覆盖后易变成「实心色块」 */
+  /* ?? background ?????? background-clip??????????????? */
   background-color: transparent !important;
   background-image: linear-gradient(
     102deg,
@@ -707,7 +715,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
     0 0 120px rgba(99, 102, 241, 0.2);
 }
 
-/* 覆盖 var.css：副标题下划线始终与文案同宽，避免 hover 才拉长造成「短一截」 */
+/* ?? var.css????????????????? hover ?????????? */
 .home-landing .VPHero .text::after,
 .VPContent.is-home .VPHero .text::after {
   content: '' !important;
@@ -767,7 +775,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   }
 }
 
-/* 首页 Hero 主卡：参考 LetAiCode 风 — 内网格、顶青径向光、霓虹边、玻璃底 */
+/* ?? Hero ????? LetAiCode ? ? ????????????????? */
 .home-landing .VPHero .main,
 .VPContent.is-home .VPHero .main {
   position: relative;
@@ -818,7 +826,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   mix-blend-mode: screen;
 }
 
-/* 首页 Hero 按钮：抵消 VitePress .actions 负 margin / .action 内边距，强制同高同基线 */
+/* ?? Hero ????? VitePress .actions ? margin / .action ??????????? */
 .home-landing .VPHero .actions,
 .VPContent.is-home .VPHero .actions {
   display: flex !important;
@@ -881,7 +889,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   content: none !important;
 }
 
-/* 双按钮统一为「青霓虹 + 玻璃」主从关系，贴近参考图二 */
+/* ?????????? + ?????????????? */
 .home-landing .VPHero .VPButton.brand,
 .VPContent.is-home .VPHero .VPButton.brand,
 .home-landing .home-cta .VPButton.brand,
@@ -941,7 +949,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
     0 14px 40px rgba(0, 0, 0, 0.45) !important;
 }
 
-/* 专栏区：密栅格 + 同排卡片等高（网格 stretch，.item/.VPFeature/.box 纵向 flex 铺满） */
+/* ??????? + ????????? stretch?.item/.VPFeature/.box ?? flex ??? */
 .home-landing .VPFeatures,
 .VPContent.is-home .VPFeatures {
   margin-top: 0;
@@ -1017,7 +1025,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
   height: 44px !important;
 }
 
-/* 顶栏底部分割线：粉 → 紫 → 青的细噪光（仅暗色） */
+/* ????????? ? ? ? ?????????? */
 .dark .VPNavBar .divider-line {
   background: linear-gradient(
     90deg,
@@ -1030,7 +1038,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 首页滚动沉浸：--home-immersion 首屏 / --home-below 专栏 / --home-cta 底部   */
+/* ???????--home-immersion ?? / --home-below ?? / --home-cta ??   */
 /* -------------------------------------------------------------------------- */
 
 html {
@@ -1044,7 +1052,7 @@ html {
     position: relative;
   }
 
-  /* 首屏幕布：加深对比 */
+  /* ????????? */
   .VPContent.is-home .VPHome::before {
     content: '';
     position: fixed;
@@ -1060,7 +1068,7 @@ html {
     opacity: calc(0.22 + var(--home-immersion) * 0.82);
   }
 
-  /* 首屏 Hero：更强上移、缩小、模糊 */
+  /* ?? Hero??????????? */
   .VPContent.is-home .VPHero {
     position: relative;
     z-index: 1;
@@ -1071,7 +1079,7 @@ html {
     will-change: transform;
   }
 
-  /* 禁止对含正文的 .main 使用 filter:blur，否则整卡文字会发虚/像无色 */
+  /* ??????? .main ?? filter:blur??????????/??? */
   .VPContent.is-home .VPHero .main {
     opacity: calc(1 - var(--home-immersion) * 0.18);
     filter: saturate(calc(1 - var(--home-immersion) * 0.12));
@@ -1097,7 +1105,7 @@ html {
     will-change: transform, opacity;
   }
 
-  /* 指标条：保留轻微动效，避免强模糊/强变淡导致难读 */
+  /* ????????????????/??????? */
   .VPContent.is-home .home-metrics__inner {
     transform: translateY(calc(var(--home-immersion) * -18px))
       scale(calc(1 - var(--home-immersion) * 0.018));
@@ -1105,7 +1113,7 @@ html {
     filter: blur(calc(var(--home-immersion) * 1.5px));
   }
 
-  /* —— 第二屏：专栏标题（随 --home-below 进场）—— */
+  /* ?? ?????????? --home-below ????? */
   .VPContent.is-home .home-sec-head {
     position: relative;
     z-index: 4;
@@ -1123,7 +1131,7 @@ html {
     filter: blur(calc((1 - var(--home-below)) * 3px));
   }
 
-  /* —— 第二屏：专栏卡片网格整体 —— */
+  /* ?? ???????????? ?? */
   .VPContent.is-home .VPFeatures {
     position: relative;
     z-index: 4;
@@ -1134,7 +1142,7 @@ html {
     will-change: transform, opacity;
   }
 
-  /* 禁用首页卡片入场动画，改由滚动变量驱动 .box（避免与 3D tilt 抢父级 transform） */
+  /* ??????????????????? .box???? 3D tilt ??? transform? */
   .VPContent.is-home .VPHome .VPFeature {
     animation: none !important;
     opacity: 1 !important;
@@ -1188,8 +1196,8 @@ html {
   }
 
   /*
-   * 浅色：blur 作用在父级会让子文字整体发灰/发白（像白字漂在浅底上）。
-   * 关闭第二屏与指标条的进场 blur/半透明，保留深色下的动效。
+   * ???blur ??????????????/?????????????
+   * ???????????? blur/?????????????
    */
   html:not(.dark) .VPContent.is-home .home-sec-head {
     opacity: 1 !important;
@@ -1242,7 +1250,7 @@ html {
     transform: none !important;
   }
 
-  /* —— 底部 CTA 第三段 —— */
+  /* ?? ?? CTA ??? ?? */
   .VPContent.is-home .home-cta {
     position: relative;
     z-index: 4;
@@ -1265,7 +1273,7 @@ html {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 浅色整体壳层（code 卡由 vp-code-group.css 自理，此处不碰围栏）              */
+/* ???????code ?? vp-code-group.css ??????????              */
 /* -------------------------------------------------------------------------- */
 
 html:not(.dark) .Layout {
@@ -1392,7 +1400,7 @@ html:not(.dark) .vp-doc blockquote {
   color: #3f3f46 !important;
 }
 
-/* 首页 Hero 主卡（浅色玻璃 + 青点缀，避免近黑底） */
+/* ?? Hero ??????? + ?????????? */
 html:not(.dark) .home-landing .VPHero .main,
 html:not(.dark) .VPContent.is-home .VPHero .main {
   border: 1px solid rgba(8, 145, 178, 0.22);
@@ -1498,7 +1506,7 @@ html:not(.dark) .VPContent.is-home .home-cta .VPButton.alt {
   }
 }
 
-/* 浅色首页：品牌小字可读、去掉主卡扫光条带感、指标条浅色底与底留白、专栏描述更深 */
+/* ??????????????????????????????????????? */
 html:not(.dark) .home-landing .VPHero .name.clip,
 html:not(.dark) .VPContent.is-home .VPHero .name.clip {
   background-color: transparent !important;
@@ -1575,7 +1583,7 @@ html:not(.dark) .home-landing .home-metrics {
   }
 }
 
-/* 浅色：专栏标题勿叠父级 blur；与 scoped 默认 #fafafa 用 !important 抢回字色 */
+/* ??????????? blur?? scoped ?? #fafafa ? !important ???? */
 html:not(.dark) .VPContent.is-home .home-sec-head,
 html:not(.dark) .home-landing .home-sec-head {
   opacity: 1 !important;
@@ -1589,7 +1597,7 @@ html:not(.dark) .home-sec-head__title {
   -webkit-text-fill-color: #0f172a !important;
 }
 
-/* 浅色：底栏 CTA 与顶栏链接对比度（与组件内 :global 双保险） */
+/* ????? CTA ????????????? :global ???? */
 html:not(.dark) .VPContent.is-home .home-cta__card,
 html:not(.dark) .home-landing .home-cta__card {
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
@@ -1622,7 +1630,7 @@ html:not(.dark) .VPNavBar a.VPNavBarMenuLink.active {
   text-shadow: none !important;
 }
 
-/* 浅色顶栏：含未带 MenuLink 类名的链接、搜索入口等 */
+/* ???????? MenuLink ??????????? */
 html:not(.dark) .VPNavBar :where(a):not(.VPButton):not(.VPSocialLink):not(.title) {
   color: #27272a !important;
 }

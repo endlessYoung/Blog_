@@ -149,14 +149,15 @@ function escapeHtmlText(s: string) {
 export default defineConfig({
   title: "Endlessyoung's Blog",
   description: "这是endlessyoung的个人博客",
+  // Cyberpunk / Sci-Fi：默认深色。Hero 霓虹渐变标题与霓虹按钮通过 --vp-home-hero-* / --vp-button-brand-*（见 theme/custom.css）
+  appearance: 'dark',
   sitemap: {
     hostname: 'https://endlessyoung.github.io/Blog_',
   },
   base: isProduction ? '/Blog_/' : '/',
   markdown: {
-    // Shiki：Dracula 与参考 IDE 卡片的霓虹粉/青绿/黄配色一致（外层再用 CSS 压成 #0b0e14 底）
+    // Shiki：深色 Dracula 贴合赛博霓虹；浅色保留 one-light
     theme: {
-      // one-light：浅色下关键字/字符串/注释区分更明显（github-light 对比过低，易看成「没高亮」）
       light: 'one-light',
       dark: 'dracula'
     },
@@ -228,8 +229,39 @@ export default defineConfig({
       'link',
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@450;600&family=Orbitron:wght@600;800&display=swap'
+        href: 'https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap'
       }
+    ],
+    // Hero 霓虹标题 / 霓虹按钮：深浅色双套变量（与 theme/custom.css 双保险）
+    [
+      'style',
+      {},
+      `
+html.dark {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #00f0ff 0%, #7000ff 45%, #00ff66 100%);
+  --vp-button-brand-bg: #00f0ff;
+  --vp-button-brand-hover-bg: #5cffff;
+  --vp-button-brand-text: #0b0f19;
+  --vp-button-brand-border: #00f0ff;
+  --vp-c-brand-1: #00f0ff;
+  --vp-c-brand-2: #7000ff;
+  --vp-c-brand-3: #00ff66;
+}
+html:not(.dark) {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #0e7490 0%, #6d28d9 48%, #047857 100%);
+  --vp-button-brand-bg: #0891b2;
+  --vp-button-brand-hover-bg: #0e7490;
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-border: #0891b2;
+  --vp-c-brand-1: #0891b2;
+  --vp-c-brand-2: #6d28d9;
+  --vp-c-brand-3: #059669;
+  --vp-c-bg: #eef3f8;
+  --vp-c-text-1: #0f172a;
+}
+      `.trim()
     ],
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }],
     ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css' }],
