@@ -28,7 +28,13 @@ export function initHomeScrollImmersion() {
   let raf = 0
   let disposed = false
 
-  const rangeHero = () => Math.min(window.innerHeight * 0.48, 500)
+  /** 小屏 HUD 在主卡下方：拉长行程，轻微滑动时 immersion 仍接近 0 */
+  const rangeHero = () => {
+    const mobile =
+      typeof matchMedia !== 'undefined' && matchMedia('(max-width: 959px)').matches
+    if (mobile) return Math.min(window.innerHeight * 0.78, 720)
+    return Math.min(window.innerHeight * 0.48, 500)
+  }
 
   const apply = () => {
     if (disposed) return

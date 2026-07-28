@@ -99,7 +99,8 @@ export default {
         'layout-top': () => h(TechBackground),
         'home-hero-before': () => h(HomeHeroEyebrow),
         'home-hero-image': () => h(HomeHeroOrb),
-        'home-hero-after': () => h(HomeMetricsStrip),
+        /* 放进 Hero .main 内、按钮下方，填满卡片下半空洞 */
+        'home-hero-actions-after': () => h(HomeMetricsStrip),
         'home-features-before': () => h(HomeSectionHeader),
         'home-features-after': () => h(HomeBottomCta),
         'nav-bar-content-before': () =>

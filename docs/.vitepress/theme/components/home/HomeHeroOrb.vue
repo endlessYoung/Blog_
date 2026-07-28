@@ -561,6 +561,9 @@ onUnmounted(() => {
 
   .home-hud__aura {
     inset: 8% 18% 32% 18%;
+    /* 小屏减弱光晕 blur，避免雷达看起来发糊 */
+    filter: blur(14px);
+    opacity: 0.85;
   }
 
   .home-hud__svg {

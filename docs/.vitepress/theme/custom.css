@@ -339,15 +339,28 @@ html:not(.dark) .VPContent.is-home .VPHero .name.clip {
 html:not(.dark) .VPHero .text,
 html:not(.dark) .home-landing .VPHero .text,
 html:not(.dark) .VPContent.is-home .VPHero .text {
-  color: #0f172a !important;
-  -webkit-text-fill-color: #0f172a !important;
+  /* 浅色 slogan：深色→青→紫缓慢漂移，保持可读、无假暗霓虹 */
+  background-image: linear-gradient(
+    105deg,
+    #0f172a 0%,
+    #1e293b 22%,
+    #0e7490 48%,
+    #5b21b6 72%,
+    #0f172a 100%
+  ) !important;
+  background-size: 220% 100% !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
   text-shadow: none !important;
 }
 
 html:not(.dark) .VPHero .text::after,
 html:not(.dark) .home-landing .VPHero .text::after,
 html:not(.dark) .VPContent.is-home .VPHero .text::after {
-  background: linear-gradient(90deg, #0891b2, #6d28d9, transparent) !important;
+  content: none !important;
+  display: none !important;
 }
 
 .VPHero .tagline {
@@ -366,14 +379,13 @@ html:not(.dark) .home-landing .VPHero .tagline {
 html:not(.dark) .VPHero .main,
 html:not(.dark) .home-landing .VPHero .main,
 html:not(.dark) .VPContent.is-home .VPHero .main {
+  /* 浅色主卡：细边框面板，无整卡强玻璃模糊 */
   border: 1px solid rgba(8, 145, 178, 0.22) !important;
-  background:
-    linear-gradient(165deg, rgba(255, 255, 255, 0.92), rgba(238, 243, 248, 0.88)) !important;
+  backdrop-filter: none !important;
   box-shadow:
-    0 20px 50px rgba(15, 23, 42, 0.08),
-    0 0 0 1px rgba(8, 145, 178, 0.06),
+    0 20px 50px rgba(15, 23, 42, 0.07),
+    0 0 0 1px rgba(8, 145, 178, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(16px) saturate(140%);
 }
 
 .VPButton.brand {
@@ -401,7 +413,8 @@ html:not(.dark) .home-landing .home-cta .VPButton.brand {
   border: 1px solid #0891b2 !important;
   color: #ffffff !important;
   box-shadow:
-    0 8px 24px rgba(8, 145, 178, 0.28),
+    0 0 14px rgba(8, 145, 178, 0.18),
+    0 8px 24px rgba(8, 145, 178, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
 }
 
@@ -533,21 +546,7 @@ html:not(.dark) .VPFeature .icon {
   box-shadow: none !important;
 }
 
-/* 首页指标 / CTA / 专栏标题：浅色可读 */
-html:not(.dark) .home-metrics__inner {
-  border-color: rgba(8, 145, 178, 0.18) !important;
-  background: rgba(255, 255, 255, 0.86) !important;
-  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.06) !important;
-}
-
-html:not(.dark) .home-metrics__k {
-  color: #0891b2 !important;
-}
-
-html:not(.dark) .home-metrics__v {
-  color: #0f172a !important;
-}
-
+/* 首页 CTA / 专栏标题：浅色可读 */
 html:not(.dark) .home-sec-head__title {
   color: #0f172a !important;
   -webkit-text-fill-color: #0f172a !important;
@@ -637,14 +636,31 @@ html:not(.dark) .vp-doc :not(pre) > code {
   .VPButton.alt:hover {
     transform: none !important;
   }
+
+  .home-landing .VPHero .text,
+  .VPContent.is-home .VPHero .text,
+  html:not(.dark) .VPHero .text,
+  .home-landing .VPHero .VPButton.brand,
+  .VPContent.is-home .VPHero .VPButton.brand,
+  html:not(.dark) .home-landing .VPHero .VPButton.brand,
+  .home-landing .VPHero .main::after,
+  .VPContent.is-home .VPHero .main::after {
+    animation: none !important;
+  }
 }
 
-/* Hero 右侧 HUD：移动端给足高度，避免被默认 320 方盒裁切 */
+/* Hero 扫描区：小屏纵向在主卡下方；清掉 VP 默认负 margin / 固定 320 方盒 */
 @media (max-width: 959px) {
+  .home-landing .VPHero.has-image .main,
+  .VPContent.is-home .VPHero.has-image .main {
+    order: 1 !important;
+  }
+
   .home-landing .VPHero.has-image .image,
   .VPContent.is-home .VPHero.has-image .image {
+    order: 2 !important;
     min-height: 0 !important;
-    margin-bottom: 8px !important;
+    margin: 0 !important;
   }
 
   .home-landing .VPHero.has-image .image-container,
@@ -653,5 +669,6 @@ html:not(.dark) .vp-doc :not(pre) > code {
     height: auto !important;
     max-width: 100% !important;
     transform: none !important;
+    animation: none !important;
   }
 }
