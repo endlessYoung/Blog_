@@ -41,11 +41,11 @@
   }
 }
 
-:global(html:not(.dark)) .home-eyebrow__accent {
+:global(html:not(.dark) .home-eyebrow__accent) {
   background: linear-gradient(90deg, transparent, rgba(8, 145, 178, 0.45));
 }
 
-:global(html:not(.dark)) .home-eyebrow__accent--end {
+:global(html:not(.dark) .home-eyebrow__accent--end) {
   background: linear-gradient(90deg, rgba(124, 58, 237, 0.38), transparent);
 }
 </style>

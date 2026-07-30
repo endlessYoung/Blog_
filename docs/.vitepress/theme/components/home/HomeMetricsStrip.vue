@@ -1,13 +1,15 @@
 <template>
-  <section v-if="recent.length" class="home-tx" aria-label="最近传输">
+  <section v-if="recent.length" class="home-tx" aria-label="最新文章">
     <div class="home-tx__head">
+      <span class="home-tx__frame" aria-hidden="true" />
       <span class="home-tx__dot" aria-hidden="true" />
       <span class="home-tx__tag">RECENT TX</span>
-      <span class="home-tx__meta">最近传输 · {{ recent.length }}</span>
+      <span class="home-tx__meta">最新文章 · {{ recent.length }}</span>
     </div>
     <ul class="home-tx__list">
       <li v-for="(item, index) in recent" :key="item.href" class="home-tx__item">
         <a class="home-tx__link" :href="item.href" :title="item.title">
+          <span class="home-tx__status" aria-hidden="true" />
           <span class="home-tx__idx">{{ String(index + 1).padStart(2, '0') }}</span>
           <span class="home-tx__section">{{ item.section }}</span>
           <span class="home-tx__title">{{ item.title }}</span>
@@ -29,7 +31,6 @@ type TxItem = {
   ts: number
 }
 
-/** 与 HomeHeroOrb 相同：扫主要栏目 md */
 const rawDocs = import.meta.glob(
   [
     '/Android/**/*.md',
@@ -58,8 +59,8 @@ const SKIP_FILES = new Set(['index.md', 'readme.md', 'getting-started.md'])
 
 function sectionOf(path: string): string {
   const cleaned = path.replace(/\\/g, '/').split('/').filter((p) => p && p !== '.' && p !== '..')
-  if (cleaned.length >= 2) return cleaned[0]
-  return 'Docs'
+  if (cleaned.length >= 2) return cleaned[0].toUpperCase()
+  return 'DOCS'
 }
 
 function titleFrom(raw: string, fileName: string): string {
@@ -125,52 +126,97 @@ const recent = buildRecent(3)
 </script>
 
 <style scoped>
-/* Hero 卡内底部次级区：贴底填空，不抢 slogan / CTA */
 .home-tx {
   position: relative;
   z-index: 1;
   width: 100%;
   margin-top: auto;
-  padding-top: 12px;
-  padding-bottom: 2px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 10px;
+  padding-bottom: 4px;
+  border-top: 1px solid rgba(34, 211, 238, 0.35);
+  overflow: hidden;
+}
+
+.home-tx::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 3px,
+    rgba(34, 211, 238, 0.07) 3px,
+    rgba(34, 211, 238, 0.07) 4px
+  );
+  animation: homeTxScan 7s linear infinite;
+  opacity: 1;
 }
 
 .home-tx__head {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 8px;
+  padding: 5px 8px 5px 10px;
+  border: 1px solid rgba(34, 211, 238, 0.45);
+  background: rgba(4, 12, 22, 0.85);
+  box-shadow:
+    inset 0 0 20px rgba(34, 211, 238, 0.06),
+    0 0 12px rgba(34, 211, 238, 0.12);
   font-family: var(--tech-font-mono, 'JetBrains Mono', ui-monospace, monospace);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 11px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(161, 161, 170, 0.9);
+  color: rgba(148, 163, 184, 0.95);
+}
+
+/* 角标框 */
+.home-tx__frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(#67e8f9, #67e8f9) 0 0 / 8px 1.5px no-repeat,
+    linear-gradient(#67e8f9, #67e8f9) 0 0 / 1.5px 8px no-repeat,
+    linear-gradient(#c084fc, #c084fc) 100% 0 / 8px 1.5px no-repeat,
+    linear-gradient(#c084fc, #c084fc) 100% 0 / 1.5px 8px no-repeat,
+    linear-gradient(#c084fc, #c084fc) 0 100% / 8px 1.5px no-repeat,
+    linear-gradient(#c084fc, #c084fc) 0 100% / 1.5px 8px no-repeat,
+    linear-gradient(#67e8f9, #67e8f9) 100% 100% / 8px 1.5px no-repeat,
+    linear-gradient(#67e8f9, #67e8f9) 100% 100% / 1.5px 8px no-repeat;
 }
 
 .home-tx__dot {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   flex-shrink: 0;
-  background: rgba(34, 211, 238, 0.75);
-  box-shadow: 0 0 6px rgba(34, 211, 238, 0.25);
-  animation: homeTxPulse 3.6s ease-in-out infinite;
+  background: #22d3ee;
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
+  animation: homeTxPulse 2s ease-in-out infinite;
 }
 
 .home-tx__tag {
-  color: rgba(34, 211, 238, 0.85);
-  font-weight: 600;
+  color: #67e8f9;
+  font-weight: 800;
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.65);
 }
 
 .home-tx__meta {
   margin-left: auto;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: none;
-  color: rgba(113, 113, 122, 0.95);
+  color: #64748b;
+  font-variant-numeric: tabular-nums;
 }
 
 .home-tx__list {
+  position: relative;
+  z-index: 1;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -181,60 +227,82 @@ const recent = buildRecent(3)
 
 .home-tx__link {
   display: grid;
-  grid-template-columns: 1.6em 4.8em minmax(0, 1fr) auto;
+  grid-template-columns: 8px 1.8em 5.2em minmax(0, 1fr) auto;
   align-items: center;
-  gap: 8px;
-  padding: 6px 4px;
-  border-radius: 6px;
+  gap: 7px;
+  padding: 6px 6px;
+  border-radius: 2px;
   text-decoration: none;
   color: inherit;
-  transition: background-color 0.18s ease;
+  transition: background-color 0.15s ease;
 }
 
 .home-tx__link:hover {
-  background: rgba(34, 211, 238, 0.06);
+  background: rgba(34, 211, 238, 0.1);
 }
 
 .home-tx__link:hover .home-tx__title {
-  color: rgba(103, 232, 249, 0.95);
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.35);
+}
+
+.home-tx__status {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  justify-self: center;
+  background: #22d3ee;
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.85);
+  animation: homeTxPulse 2s ease-in-out infinite;
+}
+
+.home-tx__item:nth-child(2) .home-tx__status {
+  animation-delay: 0.35s;
+}
+
+.home-tx__item:nth-child(3) .home-tx__status {
+  animation-delay: 0.7s;
 }
 
 .home-tx__idx,
 .home-tx__section,
 .home-tx__stamp {
   font-family: var(--tech-font-mono, 'JetBrains Mono', ui-monospace, monospace);
-  font-size: 10.5px;
-  letter-spacing: 0.04em;
+  font-size: 11px;
+  letter-spacing: 0.06em;
 }
 
 .home-tx__idx {
-  color: rgba(34, 211, 238, 0.65);
+  color: #22d3ee;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
 }
 
 .home-tx__section {
-  color: rgba(161, 161, 170, 0.92);
+  color: #94a3b8;
   text-transform: uppercase;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-weight: 600;
 }
 
 .home-tx__title {
   min-width: 0;
-  font-family: var(--tech-font-ui, ui-sans-serif, system-ui, sans-serif);
+  font-family: var(--tech-font-mono, 'JetBrains Mono', ui-monospace, monospace);
   font-size: 12.5px;
-  font-weight: 550;
-  line-height: 1.35;
-  color: #e4e4e7;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #f8fafc;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: color 0.18s ease;
+  transition: color 0.15s ease;
 }
 
 .home-tx__stamp {
-  color: rgba(113, 113, 122, 0.95);
+  color: #475569;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -242,22 +310,48 @@ const recent = buildRecent(3)
 @keyframes homeTxPulse {
   0%,
   100% {
-    opacity: 0.45;
-    box-shadow: 0 0 4px rgba(34, 211, 238, 0.15);
+    opacity: 0.35;
+    box-shadow: 0 0 4px rgba(34, 211, 238, 0.3);
   }
   50% {
     opacity: 1;
-    box-shadow: 0 0 8px rgba(34, 211, 238, 0.35);
+    box-shadow: 0 0 12px rgba(34, 211, 238, 0.95);
+  }
+}
+
+@keyframes homeTxScan {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 20px;
+  }
+}
+
+/* 深色小屏：RECENT TX 头栏略提亮（完整选择器进 :global，避免泄漏到 html） */
+@media (max-width: 960px) {
+  :global(html.dark .home-tx__head) {
+    background: rgba(10, 24, 40, 0.88);
+    border-color: rgba(34, 211, 238, 0.55);
+    box-shadow:
+      inset 0 0 24px rgba(34, 211, 238, 0.1),
+      0 0 14px rgba(34, 211, 238, 0.16);
   }
 }
 
 @media (max-width: 639px) {
   .home-tx__link {
-    grid-template-columns: 1.6em minmax(0, 1fr) auto;
+    grid-template-columns: 8px 1.8em minmax(0, 1fr) auto;
     grid-template-areas:
-      'idx section stamp'
-      'idx title title';
+      'status idx section stamp'
+      'status idx title title';
     row-gap: 2px;
+  }
+
+  .home-tx__status {
+    grid-area: status;
+    align-self: start;
+    margin-top: 5px;
   }
 
   .home-tx__idx {
@@ -283,55 +377,79 @@ const recent = buildRecent(3)
   }
 }
 
-:global(html:not(.dark)) .home-tx {
-  border-top-color: rgba(8, 145, 178, 0.14);
+:global(html:not(.dark) .home-tx) {
+  border-top-color: rgba(8, 145, 178, 0.28);
 }
 
-:global(html:not(.dark)) .home-tx__head {
+:global(html:not(.dark) .home-tx::before) {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0,
+    transparent 3px,
+    rgba(8, 145, 178, 0.05) 3px,
+    rgba(8, 145, 178, 0.05) 4px
+  );
+  opacity: 0.5;
+}
+
+:global(html:not(.dark) .home-tx__head) {
+  border-color: rgba(8, 145, 178, 0.3);
+  background: rgba(255, 255, 255, 0.9);
   color: #64748b;
+  box-shadow: none;
 }
 
-:global(html:not(.dark)) .home-tx__tag {
+:global(html:not(.dark) .home-tx__tag) {
   color: #0891b2;
+  text-shadow: none;
 }
 
-:global(html:not(.dark)) .home-tx__meta {
+:global(html:not(.dark) .home-tx__meta) {
   color: #94a3b8;
 }
 
-:global(html:not(.dark)) .home-tx__dot {
-  background: rgba(8, 145, 178, 0.7);
-  box-shadow: 0 0 5px rgba(8, 145, 178, 0.2);
+:global(html:not(.dark) .home-tx__dot),
+:global(html:not(.dark) .home-tx__status) {
+  background: #0891b2;
+  box-shadow: 0 0 6px rgba(8, 145, 178, 0.35);
 }
 
-:global(html:not(.dark)) .home-tx__idx {
+:global(html:not(.dark) .home-tx__idx) {
   color: #0891b2;
+  text-shadow: none;
 }
 
-:global(html:not(.dark)) .home-tx__section {
+:global(html:not(.dark) .home-tx__section) {
   color: #64748b;
 }
 
-:global(html:not(.dark)) .home-tx__title {
+:global(html:not(.dark) .home-tx__title) {
   color: #0f172a;
 }
 
-:global(html:not(.dark)) .home-tx__stamp {
+:global(html:not(.dark) .home-tx__stamp) {
   color: #94a3b8;
 }
 
-:global(html:not(.dark)) .home-tx__link:hover {
+:global(html:not(.dark) .home-tx__link:hover) {
   background: rgba(8, 145, 178, 0.06);
 }
 
-:global(html:not(.dark)) .home-tx__link:hover .home-tx__title {
+:global(html:not(.dark) .home-tx__link:hover .home-tx__title) {
   color: #0e7490;
+  text-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-tx__dot {
+  .home-tx__dot,
+  .home-tx__status,
+  .home-tx::before {
     animation: none;
-    opacity: 0.75;
+  }
+
+  .home-tx__dot,
+  .home-tx__status {
+    opacity: 0.9;
   }
 
   .home-tx__link {

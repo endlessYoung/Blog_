@@ -229,7 +229,8 @@ export default defineConfig({
       'link',
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap'
+        // Hero：Space Grotesk / Noto Sans SC / IBM Plex Mono；全局保留 Inter + JetBrains/Fira
+        href: 'https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=IBM+Plex+Mono:wght@300;400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@600;700&family=Space+Grotesk:wght@500;600;700&display=swap'
       }
     ],
     // Hero 霓虹标题 / 霓虹按钮：深浅色双套变量（与 theme/custom.css 双保险）

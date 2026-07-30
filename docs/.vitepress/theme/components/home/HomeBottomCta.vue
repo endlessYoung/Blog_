@@ -60,6 +60,20 @@ const readUrl = withBase('/Android/Activity')
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 }
 
+@media (max-width: 960px) {
+  /* 完整选择器进 :global，避免 Vue 把样式泄漏到 html.dark */
+  :global(html.dark .home-cta__card) {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: linear-gradient(
+      125deg,
+      rgba(16, 24, 44, 0.88) 0%,
+      rgba(12, 16, 36, 0.9) 50%,
+      rgba(10, 26, 40, 0.82) 100%
+    );
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+  }
+}
+
 @media (min-width: 720px) {
   .home-cta__card {
     flex-direction: row;
@@ -95,17 +109,17 @@ const readUrl = withBase('/Android/Activity')
   flex-shrink: 0;
 }
 
-:global(html:not(.dark)) .home-cta__card {
+:global(html:not(.dark) .home-cta__card) {
   border: 1px solid rgba(0, 0, 0, 0.08);
   background: linear-gradient(125deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 244, 245, 0.98) 50%, rgba(250, 250, 250, 0.95) 100%);
   box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
 }
 
-:global(html:not(.dark)) .home-cta__title {
+:global(html:not(.dark) .home-cta__title) {
   color: #18181b;
 }
 
-:global(html:not(.dark)) .home-cta__sub {
+:global(html:not(.dark) .home-cta__sub) {
   color: #52525b;
 }
 </style>

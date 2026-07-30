@@ -1,7 +1,7 @@
 ---
 created: 2023-10-04
 layout: home
-pageClass: home-landing
+pageClass: home-landing hero-copy-sheen
 
 hero:
   name: Endlessyoung

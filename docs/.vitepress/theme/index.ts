@@ -14,6 +14,7 @@ import Comments from './components/Comments.vue'
 import ArticleMetadata from './components/ArticleMetadata.vue'
 import TechBackground from './components/TechBackground.vue'
 import HomeHeroEyebrow from './components/home/HomeHeroEyebrow.vue'
+import HomeHeroCopySwitch from './components/home/HomeHeroCopySwitch.vue'
 import HomeHeroOrb from './components/home/HomeHeroOrb.vue'
 import HomeMetricsStrip from './components/home/HomeMetricsStrip.vue'
 import HomeSectionHeader from './components/home/HomeSectionHeader.vue'
@@ -97,7 +98,7 @@ export default {
     render() {
       return h(Theme.Layout, null, {
         'layout-top': () => h(TechBackground),
-        'home-hero-before': () => h(HomeHeroEyebrow),
+        'home-hero-before': () => [h(HomeHeroEyebrow), h(HomeHeroCopySwitch)],
         'home-hero-image': () => h(HomeHeroOrb),
         /* 放进 Hero .main 内、按钮下方，填满卡片下半空洞 */
         'home-hero-actions-after': () => h(HomeMetricsStrip),
