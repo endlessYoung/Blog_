@@ -86,3 +86,27 @@ jobs:
           curl -sS --connect-timeout 10 --max-time 30 \
             "https://www.bing.com/ping?sitemap=https://endlessyoung.github.io/Blog_/sitemap.xml" \
             || echo "Bing ping skipped"
+
+      - name: Submit to Baidu active push
+        continue-on-error: true
+        env:
+          BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+        run: |
+          if [ -z "${BAIDU_PUSH_TOKEN}" ]; then
+            echo "BAIDU_PUSH_TOKEN not set, skipping Baidu push"
+            exit 0
+          fi
+          # Collect URLs from the sitemap (fallback to homepage)
+          curl -sS --connect-timeout 10 --max-time 30 \
+            "https://endlessyoung.github.io/Blog_/sitemap.xml" -o sitemap.xml || true
+          if [ -s sitemap.xml ]; then
+            sed -n 's:.*<loc>\([^<]*\)</loc>.*:\1:p' sitemap.xml > urls.txt
+          else
+            echo "https://endlessyoung.github.io/Blog_/" > urls.txt
+          fi
+          echo "Submitting $(wc -l < urls.txt) URLs to Baidu"
+          curl -sS --connect-timeout 10 --max-time 60 \
+            -H "Content-Type: text/plain" \
+            --data-binary @urls.txt \
+            "https://data.zz.baidu.com/urls?site=endlessyoung.github.io&token=${BAIDU_PUSH_TOKEN}" \
+            || echo "Baidu push skipped"
