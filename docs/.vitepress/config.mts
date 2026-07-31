@@ -380,7 +380,7 @@ html:not(.dark) {
       { text: 'Linux', link: '/Linux/Index' },
     ],
 
-    sidebar: {
+        sidebar: {
       '/Android/': [
         {
           text: 'Android基础',
@@ -390,21 +390,10 @@ html:not(.dark) {
             { text: 'Manifest详解', link: '/Android/Manifest详解' },
             { text: '活动(Activity)', link: '/Android/Activity' },
             { text: 'Activity的启动模式', link: '/Android/Activity的启动模式' },
-            { text: 'LinearLayout', link: '/Android/LinearLayout' },
-            { text: 'RelativieLayout', link: '/Android/RelativieLayout' },
-            { text: 'ConstraintLayout', link: '/Android/ConstraintLayout' },
-            { text: 'FrameLayout', link: '/Android/FrameLayout' },
-            { text: 'TableLayout', link: '/Android/TableLayout' },
-            { text: 'GridLayout', link: '/Android/GridLayout' },
             { text: 'SparseArray', link: '/Android/SparseArray' },
             { text: 'RecyclerView和ListView区别', link: '/Android/RecyclerView和ListView区别' },
             { text: 'RecyclerView知识点汇总', link: '/Android/RecyclerView知识点汇总' },
             { text: 'DecorView', link: '/Android/DecorView' },
-            { text: 'ViewRoot', link: '/Android/ViewRoot' },
-            { text: 'Toast', link: '/Android/Toast' },
-            { text: 'DialogFragment', link: '/Android/DialogFragment' },
-            { text: 'PopupWindow', link: '/Android/PopupWindow' },
-            { text: 'Snackbar', link: '/Android/Snackbar' },
             { text: 'BottomNavigationView', link: '/Android/BottomNavigationView' },
             { text: '服务(Service)', link: '/Android/Service' },
             { text: '广播(BroadcastReceiver)', link: '/Android/BroadcastReceiver' },
@@ -412,13 +401,10 @@ html:not(.dark) {
             { text: 'Activity栈', link: '/Android/Activity栈' },
             { text: 'Activity的生命周期详解', link: '/Android/Activity的生命周期详解' },
             { text: '进程和应用生命周期', link: '/Android/进程和应用生命周期' },
-            { text: '异步任务与多线程', link: '/Android/异步任务与多线程' },
             { text: 'Parcelable和Bundle', link: '/Android/Parcelable和Bundle' },
             { text: 'Service的启动方式和区别', link: '/Android/Service的启动方式和区别' },
             { text: 'Service生命周期', link: '/Android/Service生命周期' },
-            { text: '各种Service的区别', link: '/Android/各种Service的区别' },
             { text: 'Service 的bindService与startService混合使用场景', link: '/Android/Service 的bindService与startService混合使用场景' },
-            { text: 'JobService', link: '/Android/JobService' },
             { text: 'JobScheduler', link: '/Android/JobScheduler' },
             { text: 'Intent', link: '/Android/Intent' },
             { text: 'Fragment', link: '/Android/Fragment' },
@@ -433,7 +419,6 @@ html:not(.dark) {
             { text: 'SharedPreference', link: '/Android/SharedPreference' },
             { text: 'DataBinding', link: '/Android/DataBinding' },
             { text: 'ViewBinding', link: '/Android/ViewBinding' },
-            { text: 'RxBinding', link: '/Android/RxBinding' },
             { text: 'ViewModel 和 LiveData', link: '/Android/ViewModel 和 LiveData' },
             { text: '创建有参ViewModel', link: '/Android/创建有参ViewModel' },
             { text: '事件分发机制', link: '/Android/事件分发机制' },
@@ -443,11 +428,7 @@ html:not(.dark) {
             { text: '安卓中的线程和线程池', link: '/Android/安卓中的线程和线程池' },
             { text: '自定义View', link: '/Android/自定义View' },
             { text: 'DataStore', link: '/Android/DataStore' },
-            { text: 'LruCache', link: '/Android/LruCache' },
-            { text: '如何重用布局', link: '/Android/如何重用布局' },
             { text: '如何优化自定义 View 的性能', link: '/Android/如何优化自定义 View 的性能' },
-            { text: '使用merge减少include布局所造成的布局层次', link: '/Android/使用merge减少include布局所造成的布局层次' },
-            { text: 'AutoCompleteTextView的使用', link: '/Android/AutoCompleteTextView的使用' },
             { text: 'Settings数据库', link: '/Android/Settings数据库' },
             { text: 'WorkManager', link: '/Android/WorkManager' },
             { text: '如何实现应用重启', link: '/Android/如何实现应用重启' },
@@ -456,7 +437,9 @@ html:not(.dark) {
             { text: '获取位置信息', link: '/Android/获取位置信息' },
             { text: '安卓进程通信的方法', link: '/Android/安卓进程通信的方法' },
             { text: 'ContentProvider 的线程模型与权限控制', link: '/Android/ContentProvider 的线程模型与权限控制' },
-          ]
+            { text: 'AsyncTask', link: '/Android/AsyncTask' },
+            { text: 'Jobservice', link: '/Android/Jobservice' },
+          ],
         },
         {
           text: '组件通信',
@@ -464,9 +447,8 @@ html:not(.dark) {
           items: [
             { text: 'Activity和Fragment的低耦合通信', link: '/Android/Activity和Fragment的低耦合通信' },
             { text: 'Android与Service通信', link: '/Android/Android与Service通信' },
-            { text: 'ViewModel通信方案', link: '/Android/ViewModel通信方案' },
             { text: '事件总线EventBus', link: '/Android/事件总线EventBus' },
-          ]
+          ],
         },
         {
           text: 'Jetpack Compose',
@@ -475,8 +457,7 @@ html:not(.dark) {
             { text: 'Compose Gradle 配置', link: '/Android/Compose/Compose的gradle配置' },
             { text: 'Compose 状态管理', link: '/Android/Compose/ComposeStateManagement' },
             { text: 'Compose 布局系统 & Modifier', link: '/Android/Compose/Compose布局系统 & Modifier' },
-
-          ]
+          ],
         },
         {
           text: 'debug与调试',
@@ -494,7 +475,8 @@ html:not(.dark) {
             { text: 'Application为什么不能作为Dialog的context', link: '/Android/Application为什么不能作为Dialog的context' },
             { text: 'App卡顿优化', link: '/Android/App卡顿优化' },
             { text: '帧率和卡顿监控方案', link: '/Android/帧率和卡顿监控方案' },
-          ]
+            { text: 'Android ip 命令详解', link: '/Android/Android ip 命令详解' },
+          ],
         },
         {
           text: '常见三方库',
@@ -503,29 +485,25 @@ html:not(.dark) {
             { text: '三方库面试题', link: '/Android/三方库面试题' },
             { text: 'LeakCanary原理分析', link: '/Android/LeakCanary原理分析' },
             { text: 'LeakCanary源码分析', link: '/Android/LeakCanary源码分析' },
-            { text: 'OkHttp', link: '/Android/OkHttp' },
             { text: 'Retrofit', link: '/Android/Retrofit' },
-          ]
+          ],
         },
         {
           text: '编译',
           collapsed: true,
           items: [
             { text: 'Android.mk', link: '/Android/Android.mk' },
-            { text: 'Android.bp', link: '/Android/Android.bp' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
             { text: 'APK打包流程', link: '/Android/APK打包流程' },
             { text: 'pageSize', link: '/Android/pageSize' },
-          ]
+          ],
         },
         {
           text: '性能优化',
           collapsed: true,
           items: [
-            { text: 'ListView性能优化', link: '/Android/ListView性能优化' },
             { text: 'RecyclerView性能优化', link: '/Android/RecyclerView性能优化' },
-            { text: 'AndroidPerfetto', link: '/Android/AndroidPerfetto' },
-          ]
+          ],
         },
         {
           text: 'JNI',
@@ -533,63 +511,44 @@ html:not(.dark) {
           items: [
             { text: '初识JNI', link: '/Android/初识JNI' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
-          ]
+          ],
         },
         {
           text: 'Framework',
           collapsed: true,
           items: [
             { text: 'AOSP架构', link: '/Android/AOSP架构' },
-            { text: '智能指针', link: '/Android/智能指针' },
             { text: 'Android进程和线程', link: '/Android/Android进程和线程' },
             { text: 'Handler、MessageQueue和Looper', link: '/Android/Handler、MessageQueue和Looper' },
             { text: 'ActivityThread线程(UI主线程)', link: '/Android/ActivityThread线程(UI主线程)' },
             { text: '为什么主线程可以直接new Handler', link: '/Android/为什么主线程可以直接new Handler' },
             { text: 'Handler.postDelayed()消息时间准确吗', link: '/Android/Handler.postDelayed()消息时间准确吗' },
-            { text: 'IdleHandler', link: '/Android/IdleHandler' },
-            { text: '同步屏障', link: '/Android/同步屏障' },
-            { text: 'Handler内存泄漏如何解决？', link: '/Android/Handler内存泄漏如何解决？' },
-            { text: '如何创建Message？', link: '/Android/如何创建Message？' },
             { text: 'Thread类', link: '/Android/Thread类' },
             { text: 'Notification从发送到显示的流程简析', link: '/Android/Notification从发送到显示的流程简析' },
-
-
             { text: 'ActivityManagerService', link: '/Android/ActivityManagerService' },
             { text: 'WindowManagerService', link: '/Android/WindowManagerService' },
-
-
-            { text: 'Parcel', link: '/Android/Parcel' },
-            { text: 'ServiceManager', link: '/Android/ServiceManager' },
             { text: 'Android系统启动流程', link: '/Android/Android系统启动流程' },
-            { text: 'init进程在启动其他服务后可以退出吗？', link: '/Android/init进程在启动其他服务后可以退出吗？' },
             { text: 'AMS如何启动App进程', link: '/Android/AMS如何启动App进程' },
             { text: 'AMS和WMS的关系', link: '/Android/AMS和WMS的关系' },
-            { text: 'Zygote进程的fork', link: '/Android/zygote进程的fork' },
             { text: 'SystemServer进程的意义', link: '/Android/SystemServer进程的意义' },
-            { text: 'Zygote采用socket的原因', link: '/Android/Zygote采用socket的原因' },
-            { text: 'AMS对App进程启动和管理的方案', link: '/Android/AMS对App进程启动和管理的方案' },
             { text: 'setContentView之后发生了什么', link: '/Android/setContentView之后发生了什么' },
             { text: 'StartActivity之后发生了什么', link: '/Android/StartActivity之后发生了什么' },
             { text: 'Activity启动过程', link: '/Android/Activity启动过程' },
-            { text: 'invalidate会触发其他View的重绘吗？', link: '/Android/invalidate会触发其他view的重绘吗？' },
-            { text: 'Activity如何与Window与View进行分工合作的？', link: '/Android/Activity如何与Window与View进行分工合作的？' },
             { text: 'View的绘制过程都是用的同一个canvas吗？', link: '/Android/View的绘制过程都是用的同一个canvas吗？' },
             { text: 'onResume中获取宽高有效吗？', link: '/Android/onResume中获取宽高有效吗？' },
-            { text: 'Activity、Window、DecorView 的关系', link: '/Android/Activity、Window、DecorView 的关系' },
             { text: 'SurfaceFlinger', link: '/Android/SurfaceFlinger' },
             { text: 'PhoneWindow', link: '/Android/PhoneWindow' },
-            { text: '安卓中的IPC通信方式', link: '/Android/安卓中的IPC通信方式' },
-            { text: 'AsyncTask ', link: '/Android/AsyncTask ' },
             { text: 'Binder', link: '/Android/Binder' },
             { text: 'App进程为什么天生支持Binder通信', link: '/Android/App进程为什么天生支持Binder通信' },
-            { text: 'writeStrongBinder与readStrongBinder的作用和原理', link: '/Android/writeStrongBinder与readStrongBinder的作用和原理' },
-            { text: '客户端调用Binder接口后抛出的DeadObjectException', link: '/Android/客户端调用Binder接口后抛出的DeadObjectException' },
             { text: '进程保活', link: '/Android/进程保活' },
             { text: 'Activity中viewtree的创建过程', link: '/Android/Activity中viewtree的创建过程' },
             { text: 'WMS中窗口的注册', link: '/Android/WMS中窗口的注册' },
             { text: 'ViewRoot的基本工作方式', link: '/Android/ViewRoot的基本工作方式' },
             { text: 'ViewTree的遍历', link: '/Android/ViewTree的遍历' },
-          ]
+            { text: 'Zygote如何保证加载速度', link: '/Android/Zygote如何保证加载速度' },
+            { text: 'Zygote进程的fork', link: '/Android/Zygote进程的fork' },
+            { text: 'invalidate会触发其他View的重绘吗？', link: '/Android/invalidate会触发其他View的重绘吗？' },
+          ],
         },
         {
           text: '图形渲染',
@@ -601,34 +560,23 @@ html:not(.dark) {
             { text: 'WindowManagerService', link: '/Android/WindowManagerService' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
             { text: 'HWC的合成策略', link: '/Android/HWC的合成策略' },
-            { text: 'Activity、View、Window三者之间的关系', link: '/Android/Activity、View、Window三者之间的关系' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
             { text: 'Skia', link: '/Android/Skia' },
-            { text: 'OpenGL ES', link: '/Android/OpenGL ES' },
             { text: 'vulkan', link: '/Android/vulkan' },
-          ]
+          ],
         },
         {
           text: '序列化',
           collapsed: true,
           items: [
-            { text: 'Parcelable', link: '/Android/Parcelable' },
-            { text: 'ProtocolBuffers', link: '/Android/ProtocolBuffers' },
-          ]
+          ],
         },
         {
           text: '安全',
           collapsed: true,
           items: [
-            { text: '混淆机制', link: '/Android/混淆机制' },
             { text: 'v1和v2签名机制', link: '/Android/v1和v2签名机制' },
-            { text: '签名机制', link: '/Android/签名机制' },
-            { text: '加固技术', link: '/Android/加固技术' },
-            { text: '常见的漏洞', link: '/Android/常见的漏洞' },
-            { text: '反破解技术', link: '/Android/反破解技术' },
-            { text: '反编译技术', link: '/Android/反编译技术' },
-            { text: '敏感信息隐藏技术', link: '/Android/敏感信息隐藏技术' },
-          ]
+          ],
         },
         {
           text: '安卓日志系统',
@@ -642,7 +590,7 @@ html:not(.dark) {
             { text: 'SystemLog日志', link: '/Android/SystemLog日志' },
             { text: 'CrashLog日志', link: '/Android/CrashLog日志' },
             { text: 'Trace日志', link: '/Android/Trace日志' },
-          ]
+          ],
         },
         {
           text: '实践',
@@ -652,12 +600,11 @@ html:not(.dark) {
             { text: '手机所有应用', link: '/Android/实践-手机所有应用' },
             { text: 'OpenGL-纹理', link: '/Android/OpenGL-纹理' },
             { text: '路径动画', link: '/Android/实践-路径动画' },
-            { text: 'WorkManager', link: '/Android/实践-WorkManager' },
             { text: 'recyclerview分组', link: '/Android/实践-recyclerview分组' },
             { text: 'Widget', link: '/Android/实践-Widget' },
             { text: '启动相机的方法', link: '/Android/启动相机的方法' },
             { text: '相机扭曲的解决办法', link: '/Android/相机扭曲的解决办法' },
-          ]
+          ],
         },
         {
           text: '进阶',
@@ -666,14 +613,8 @@ html:not(.dark) {
             { text: '安卓常见架构', link: '/Android/安卓常见架构' },
             { text: 'Intent发送数据的上限', link: '/Android/Intent发送数据的上限' },
             { text: 'Looper死循环为什么不会导致应用卡死', link: '/Android/Looper死循环为什么不会导致应用卡死' },
-            { text: '使用Handler的postDelay消息队列有什么变化', link: '/Android/使用Handler的postDelay消息队列有什么变化' },
-            { text: '如何保证多个handler线程安全', link: '/Android/如何保证多个handler线程安全' },
             { text: '如何实现定时器', link: '/Android/如何实现定时器' },
-            { text: 'Binder驱动在哪限制', link: '/Android/Binder驱动在哪限制' },
-            { text: 'Lifecycle状态机', link: '/Android/Lifecycle状态机' },
             { text: 'LiveData', link: '/Android/LiveData' },
-            { text: 'LiveDataBus', link: '/Android/LiveDataBus' },
-            { text: 'Hook技术', link: '/Android/Hook技术' },
             { text: 'AMS剖析', link: '/Android/AMS剖析' },
             { text: 'Android一个APP里面最少有几个线程', link: '/Android/Android一个APP里面最少有几个线程' },
             { text: 'Vsync机制', link: '/Android/Vsync机制' },
@@ -683,14 +624,14 @@ html:not(.dark) {
             { text: '后台显示toast方案', link: '/Android/后台显示toast方案' },
             { text: '多进程模式', link: '/Android/多进程模式' },
             { text: 'Bitmap优化', link: '/Android/Bitmap优化' },
-          ]
+          ],
         },
         {
           text: '安卓与设计模式',
           collapsed: true,
           items: [
             { text: '策略模式实现状态校验', link: '/Android/策略模式实现状态校验' },
-          ]
+          ],
         },
         {
           text: 'OpenGL ES',
@@ -699,28 +640,20 @@ html:not(.dark) {
             { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
             { text: '坐标系统', link: '/Android/OpenGL ES坐标系统' },
             { text: '纹理', link: '/Android/OpenGL-纹理' },
-          ]
+          ],
         },
         {
           text: 'Gradle',
           collapsed: true,
           items: [
-            { text: 'build.gradle', link: '/Android/build.gradle' },
-            { text: 'build.gradle.kts', link: '/Android/build.gradle.kts' },
-            { text: 'proguard-rules.pro', link: '/Android/proguard-rules.pro' },
-            { text: 'settings.gradle', link: '/Android/settings.gradle' },
-            { text: 'settings.gradle.kts', link: '/Android/settings.gradle.kts' },
-          ]
+          ],
         },
         {
           text: 'NDK',
           collapsed: true,
           items: [
-            { text: 'ABI', link: '/Android/ABI' },
-            { text: 'JNI', link: '/Android/JNI' },
-            { text: 'so文件', link: '/Android/so文件' },
-          ]
-        }
+          ],
+        },
       ],
       '/Ai/': [
         {
@@ -736,7 +669,6 @@ html:not(.dark) {
             { text: 'Hard sigmoid和soft sigmoid', link: '/Ai/Hard sigmoid和soft sigmoid' },
             { text: 'Rectified Linear Unit', link: '/Ai/Rectified Linear Unit' },
             { text: '深度神经网络', link: '/Ai/深度神经网络' },
-            { text: '过拟合', link: '/Ai/过拟合' },
             { text: '正则化', link: '/Ai/正则化方法' },
             { text: '深度学习', link: '/Ai/深度学习' },
             { text: '全连接前馈网络(FNN)', link: '/Ai/全连接前馈网络' },
@@ -744,9 +676,12 @@ html:not(.dark) {
             { text: '正向传播和反向传播', link: '/Ai/正向传播和反向传播' },
             { text: '决策树算法', link: '/Ai/决策树算法' },
             { text: '贝叶斯算法', link: '/Ai/贝叶斯算法' },
-            { text: '支持向量机算法', link: '/Ai/支持向量机算法' },
             { text: '随机森林算法', link: '/Ai/随机森林算法' },
             { text: '交叉熵', link: '/Ai/交叉熵' },
+            { text: '生产式AI的本质', link: '/Ai/AI导论/生产式AI的本质' },
+            { text: '代价函数', link: '/Ai/代价函数' },
+            { text: '极限森林', link: '/Ai/极限森林' },
+            { text: '欠拟合和过拟合', link: '/Ai/欠拟合和过拟合' },
           ],
         },
         {
@@ -771,24 +706,14 @@ html:not(.dark) {
             { text: 'K-means', link: '/Ai/K-means' },
             { text: 'DESCAN', link: '/Ai/DESCAN' },
             { text: '层次聚类', link: '/Ai/层次聚类' },
-            { text: '谱聚类', link: '/Ai/谱聚类' },
-            { text: '高斯混合模型', link: '/Ai/高斯混合模型' },
           ],
         },
         {
           text: 'Pytorch',
           collapsed: true,
           items: [
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
-            { text: 'Pytorch(一)', link: '/Ai/Pytorch(一)' },
           ],
-        }
-
+        },
       ],
       '/Agent/': [
         {
@@ -801,7 +726,7 @@ html:not(.dark) {
             { text: '提示词工程', link: '/Agent/提示词工程' },
             { text: 'Function Calling', link: '/Agent/FunctionCalling' },
             { text: '记忆系统', link: '/Agent/记忆系统' },
-          ]
+          ],
         },
         {
           text: '框架与工具',
@@ -813,7 +738,7 @@ html:not(.dark) {
             { text: 'ADK', link: '/Agent/ADK' },
             { text: 'MCP', link: '/Agent/MCP' },
             { text: 'Dify', link: '/Agent/Dify' },
-          ]
+          ],
         },
         {
           text: '知识与推理',
@@ -823,7 +748,7 @@ html:not(.dark) {
             { text: 'RAG', link: '/Agent/RAG' },
             { text: 'Agent Skill', link: '/Agent/Skill' },
             { text: 'Tool Use', link: '/Agent/ToolUse' },
-          ]
+          ],
         },
         {
           text: '实践进阶',
@@ -834,19 +759,16 @@ html:not(.dark) {
             { text: '评估与监控', link: '/Agent/评估监控' },
             { text: '可观测性', link: '/Agent/可观测性' },
             { text: 'Agent 安全', link: '/Agent/Agent安全' },
-          ]
-        }
+          ],
+        },
       ],
       '/JS/': [
         {
           text: 'JS',
           collapsed: true,
           items: [
-            { text: 'Index', link: '/JS/' },
-            { text: 'One', link: '/JS/one' },
-            { text: 'Two', link: '/JS/two' }
-          ]
-        }
+          ],
+        },
       ],
       '/数据结构和算法/': [
         {
@@ -856,15 +778,15 @@ html:not(.dark) {
             { text: '合并数组', link: '/数据结构和算法/合并数组' },
             { text: '移除元素', link: '/数据结构和算法/移除元素' },
             { text: '二分查找', link: '/数据结构和算法/二分查找' },
-          ]
+          ],
         },
         {
           text: '位运算',
           collapsed: true,
           items: [
             { text: '异或运算', link: '/数据结构和算法/异或运算' },
-          ]
-        }
+          ],
+        },
       ],
       '/Java/': [
         {
@@ -874,50 +796,23 @@ html:not(.dark) {
             { text: 'Integer1000与100的比较', link: '/Java/Integer1000与100的比较' },
             { text: '动态代理', link: '/Java/动态代理' },
             { text: '反射', link: '/Java/反射' },
-            { text: 'HashMap的高级用法', link: '/Java/HashMap的高级用法' },
-          ]
+            { text: 'HashMap', link: '/Java/HashMap' },
+            { text: '类之间的关系', link: '/Java/类之间的关系' },
+          ],
         },
         {
           text: 'Java并发',
           collapsed: true,
           items: [
             { text: 'ThreadLocal', link: '/Java/ThreadLocal' },
-            { text: '线程安全性', link: '/Java/线程安全性' },
-            { text: '原子性', link: '/Java/原子性' },
             { text: 'CAS', link: '/Java/CAS' },
-            { text: '原子操作类', link: '/Java/原子操作类' },
-            { text: '加锁机制', link: '/Java/加锁机制' },
-            { text: '偏向锁', link: '/Java/偏向锁' },
-            { text: 'Mutex', link: '/Java/Mutex' },
-            { text: 'ReentrantLock', link: '/Java/ReentrantLock' },
-            { text: 'happens-before', link: '/Java/happens-before' },
-            { text: '队列', link: '/Java/队列' },
-            { text: '线程优先级', link: '/Java/线程优先级' },
-            { text: '线程的状态', link: '/Java/线程的状态' },
-            { text: 'Daemon线程', link: '/Java/Daemon线程' },
-            { text: '线程间通信', link: '/Java/线程间通信' },
             { text: '线程池', link: '/Java/线程池' },
             { text: 'ForkJoinPool', link: '/Java/ForkJoinPool' },
-            { text: 'Lock接口', link: '/Java/Lock接口' },
-            { text: '队列同步器', link: '/Java/队列同步器' },
-            { text: '排他锁', link: '/Java/排他锁' },
-            { text: 'LockSupport', link: '/Java/LockSupport' },
-            { text: 'Condition接口', link: '/Java/Condition接口' },
-            { text: 'ConcurrentHashMap', link: '/Java/ConcurrentHashMap' },
-            { text: 'ConcurrentLinkedQueue', link: '/Java/ConcurrentLinkedQueue' },
-            { text: 'Java的阻塞队列', link: '/Java/Java的阻塞队列' },
-            { text: 'CountDownLatch', link: '/Java/CountDownLatch' },
-            { text: 'CyclicBarrier', link: '/Java/CyclicBarrier' },
-            { text: 'Semaphore', link: '/Java/Semaphore' },
             { text: 'Java如何保证线程T1，T2，T3 顺序执行', link: '/Java/Java如何保证线程T1，T2，T3 顺序执行' },
-            { text: '线程池核心线程空闲时处于什么状态', link: '/线程池核心线程空闲时处于什么状态' },
-            { text: 'Exchanger', link: '/Java/Exchanger' },
-            { text: 'Executor框架', link: '/Java/Executor框架' },
-            { text: 'Callable和Runnable区别', link: '/Java/Callable和Runnable区别' },
-            { text: 'Future接口', link: '/Java/Future接口' },
-            { text: 'Future接口', link: '/Java/Future接口' },
             { text: 'CompletableFuture', link: '/Java/CompletableFuture' },
-          ]
+            { text: 'volatile和synchronize的区别', link: '/Java/volatile和synchronize的区别' },
+            { text: '线程池核心线程空闲时处于什么状态', link: '/Java/线程池核心线程空闲时处于什么状态' },
+          ],
         },
         {
           text: 'JVM',
@@ -932,7 +827,8 @@ html:not(.dark) {
             { text: '分代模型的六种垃圾回收器', link: '/Java/分代模型的六种垃圾回收器' },
             { text: '浮动垃圾', link: '/Java/浮动垃圾' },
             { text: '三色标记算法', link: '/Java/三色标记算法' },
-          ]
+            { text: '双亲委派机制', link: '/Java/双亲委派机制' },
+          ],
         },
       ],
       '/Kotlin/': [
@@ -940,7 +836,6 @@ html:not(.dark) {
           text: 'kotlin基础',
           collapsed: true,
           items: [
-            { text: '元组', link: '/Kotlin/元组' },
             { text: '集合', link: '/Kotlin/集合' },
             { text: '作用域函数', link: '/Kotlin/作用域函数' },
             { text: '范围表达式', link: '/Kotlin/范围表达式' },
@@ -953,7 +848,6 @@ html:not(.dark) {
             { text: '序列', link: '/Kotlin/序列' },
             { text: '类别名', link: '/Kotlin/类别名' },
             { text: '操作符重载', link: '/Kotlin/操作符重载' },
-            { text: '解构声明', link: '/Kotlin/解构声明' },
             { text: '数据类', link: '/Kotlin/数据类' },
             { text: '内联函数', link: '/Kotlin/内联函数' },
             { text: '中缀函数', link: '/Kotlin/中缀函数' },
@@ -974,8 +868,7 @@ html:not(.dark) {
             { text: 'Object关键字', link: '/Kotlin/Object关键字' },
             { text: 'Kotlin中的挂起函数', link: '/Kotlin/Kotlin中的挂起函数' },
             { text: '集合', link: '/Kotlin/集合' },
-            { text: '尾递归', link: '/Kotlin/尾递归' },
-          ]
+          ],
         },
         {
           text: '协程',
@@ -991,14 +884,15 @@ html:not(.dark) {
             { text: 'Mutex', link: '/Kotlin/Mutex' },
             { text: '协程上下文', link: '/Kotlin/协程上下文' },
             { text: '高并发场景下的协程调度与调优', link: '/Kotlin/高并发场景下的协程调度与调优' },
-          ]
+            { text: '协程生命周期', link: '/Kotlin/协程生命周期' },
+          ],
         },
         {
           text: 'Flow',
           collapsed: true,
           items: [
             { text: 'Flow', link: '/Kotlin/Flow' },
-          ]
+          ],
         },
       ],
       '/Python/': [
@@ -1006,41 +900,27 @@ html:not(.dark) {
           text: 'python基础',
           collapsed: true,
           items: [
-            { text: '列表推导式', link: '/Python/列表推导式' },
-            { text: '海象运算符', link: '/Python/海象运算符' },
-            { text: '切片', link: '/Python/切片' },
-            { text: 'range函数', link: '/Python/range函数' },
-            { text: '字典', link: '/Python/字典' },
-            { text: '数据类', link: '/Python/数据类' },
-          ]
+          ],
         },
         {
           text: 'numpy',
           collapsed: true,
           items: [
             { text: 'numpy的常用方法', link: '/Python/numpy的常用方法' },
-            { text: 'One', link: '/Python/one' },
-            { text: 'Two', link: '/Python/two' }
-          ]
+          ],
         },
         {
           text: 'ski-learn',
           collapsed: true,
           items: [
-            { text: 'Index', link: '/Python/' },
-            { text: 'One', link: '/Python/one' },
-            { text: 'Two', link: '/Python/two' }
-          ]
+          ],
         },
         {
           text: 'pytorch',
           collapsed: true,
           items: [
-            { text: 'Index', link: '/Python/' },
-            { text: 'One', link: '/Python/one' },
-            { text: 'Two', link: '/Python/two' }
-          ]
-        }
+          ],
+        },
       ],
       '/Flutter/': [
         {
@@ -1048,35 +928,32 @@ html:not(.dark) {
           collapsed: true,
           items: [
             { text: 'dart语言简介', link: '/Flutter/dart语言简介' },
-          ]
-        }
+          ],
+        },
       ],
       '/SQL/': [
         {
           text: 'SQL基础',
           collapsed: true,
           items: [
-            { text: 'SQL简介', link: '/SQL/SQL简介' },
-          ]
+            { text: 'SQL简介', link: '/SQL/SQL基础/SQL简介' },
+          ],
         },
         {
           text: 'SQL',
           collapsed: true,
           items: [
             { text: '全文搜索', link: '/SQL/全文搜索' },
-          ]
-        }
+          ],
+        },
       ],
       '/C/': [
         {
           text: 'C',
           collapsed: true,
           items: [
-            { text: 'Index', link: '/C/' },
-            { text: 'One', link: '/C/one' },
-            { text: 'Two', link: '/C/two' }
-          ]
-        }
+          ],
+        },
       ],
       '/C++/': [
         {
@@ -1085,21 +962,16 @@ html:not(.dark) {
           items: [
             { text: '头文件的声明规范', link: '/C++/头文件的声明规范' },
             { text: '模板', link: '/C++/模板' },
-            { text: 'One', link: '/C++/one' },
-            { text: 'Two', link: '/C++/two' }
-          ]
-        }
+          ],
+        },
       ],
       '/Linux/': [
         {
           text: 'Linux',
           collapsed: true,
           items: [
-            { text: 'Index', link: '/Linux/' },
-            { text: 'One', link: '/Linux/one' },
-            { text: 'Two', link: '/Linux/two' }
-          ]
-        }
+          ],
+        },
       ],
     },
 
