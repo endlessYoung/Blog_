@@ -1,4 +1,4 @@
-import { defineConfig, SiteData } from 'vitepress'
+import { defineConfig, HeadConfig, SiteData } from 'vitepress'
 import markdownItKatex from 'markdown-it-katex'
 import { readFileSync, readdirSync, statSync } from 'fs'
 import { join, relative } from 'path'
@@ -405,7 +405,11 @@ html:not(.dark) {
     const ogDescription = fm?.description || ctx.description
     const ogType = ctx.page === 'index.md' ? 'website' : 'article'
 
-    return [
+    const tags = Array.isArray(fm.tags) ? (fm.tags as string[]).join(', ') : ''
+    const created = fm.created ? String(fm.created) : ''
+    const lastUpdatedTs = typeof ctx.pageData.lastUpdated === 'number' ? ctx.pageData.lastUpdated : 0
+    const dateModified = lastUpdatedTs ? new Date(lastUpdatedTs).toISOString() : ''
+    const head: HeadConfig[] = [
       ['link', { rel: 'canonical', href: url }],
       ['meta', { property: 'og:url', content: url }],
       ['meta', { property: 'og:title', content: ogTitle }],
@@ -414,6 +418,36 @@ html:not(.dark) {
       ['meta', { name: 'twitter:title', content: ogTitle }],
       ['meta', { name: 'twitter:description', content: ogDescription }],
     ]
+    if (ctx.page === 'index.md') {
+      head.push(['script', { type: 'application/ld+json' }, JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: "Endlessyoung's Blog",
+        url: `${siteUrl}${base}`,
+        inLanguage: 'zh-CN',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: { '@type': 'EntryPoint', urlTemplate: `${siteUrl}${base}?q={search_term_string}` },
+          'query-input': 'required name=search_term_string',
+        },
+      })])
+    } else {
+      const articleSchema: Record<string, unknown> = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: ogTitle,
+        inLanguage: 'zh-CN',
+        mainEntityOfPage: url,
+        author: { '@type': 'Person', name: 'Endless Young' },
+        publisher: { '@type': 'Organization', name: 'Endless Young' },
+      }
+      if (ogDescription) articleSchema.description = ogDescription
+      if (tags) articleSchema.keywords = tags
+      if (created) articleSchema.datePublished = created
+      if (dateModified) articleSchema.dateModified = dateModified
+      head.push(['script', { type: 'application/ld+json' }, JSON.stringify(articleSchema)])
+    }
+    return head
   },
 
   themeConfig: {
