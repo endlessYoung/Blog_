@@ -1,0 +1,129 @@
+---
+title: 标签：android
+description: 与「android」相关的文章共 119 篇
+hideArticleMeta: true
+---
+
+# 标签：android
+
+共 **119** 篇文章：
+
+- [Compose布局系统与 Modifier](/Android/Compose/Compose布局系统 & Modifier) — 文档级 · 教学级 · 指南级
+- [Jetpack Compose 状态管理详解](/Android/Compose/ComposeStateManagement) — 在 Jetpack Compose 中，状态 (State) 是驱动 UI 更新的核心。与传统的 View 体系不同，Compose 是声明式的：UI 是状态的函数。当应用的状态发生变化时，Compose 会重新执行受影响的 Composable 函数（这个过?
+- [JobScheduler](/Android/JobScheduler) — JobScheduler 是 Android 5.0（API 21）引入的系统级后台任务调度 API，旨在帮助开发者以低功耗、系统友好的方式执行后台任务。它提供条件触发、持久化、系统统一调度等机制，是 Google 在 Doze 模式、App Standby?
+- [Compose的gradle配置](/Android/Compose/Compose的gradle配置) — Jetpack Compose 是一个用于构建原生 Android UI 的现代工具包。它使用声明式函数来构建UI组件，不需要我们使用任何xml布局。
+- [多进程模式](/Android/多进程模式) — 在安卓中使用多进程只有一种方法，就是给四大组件在 AndroidManifest 中指定 android:process 属性，我们无法给一个线程或者一个实体类指定其运行时所在的进程。还有另外一种非常规的多进程方法，那就是通过 JNI 在 Nativte 层中?
+- [Android ip 命令详解](/Android/Android ip 命令详解) — ip 命令用于管理 Android 设备的网络接口、IP 地址、路由等网络配置。Android 使用 toybox 或 busybox 实现 ip 命令，并且可能缺少部分 GNU/Linux 发行版中的功能。
+- [相机扭曲的解决办法](/Android/相机扭曲的解决办法) — 发生相机扭曲的主要原因是surfaceview的宽高比与相机输出图像的最佳宽高比不一致，相机输出图像适配surfaceview的时候被拉伸导致的扭曲。
+- [启动相机的方法](/Android/启动相机的方法) — Camera1 API 是安卓早期的相机接口，尽管它在新版本的 Android 中已被弃用，但它仍然被一些旧设备和应用所使用。
+- [LeakCanary原理分析](/Android/LeakCanary原理分析) — | 模块 | 核心组件/类 | 功能关联 | | ------------ | ------------------------------ | -------------------- | | 监控模块 | ActivityDestroyWatcher |?
+- [Retrofit](/Android/Retrofit) — Retrofit 是一个类型安全的 HTTP 客户端，主要用于与 RESTful API 进行交互，简化了网络请求的流程。
+- [安卓进程通信的方法](/Android/安卓进程通信的方法) — 在 Android 中，进程间通信（IPC，Inter-Process Communication）主要有以下几种方法：
+- [AIDL的关键字](/Android/AIDL的关键字) — 好的，下面是 AIDL 中所有关键字和概念的完整列表：
+- [策略模式实现状态校验](/Android/策略模式实现状态校验) — 在登录校验的场景下，建造者模式可以将每个校验策略当做一个“部件”，通过建造者来逐步构建出一个完整的校验流程。每个部件（策略）可以根据需要进行选择或组合。最终的构建结果是一个包含所选策略的校验器（LoginValidator）。
+- [安卓性能优化](/Android/安卓性能优化) — ANR分析主要是通过查看/data/anr下的log，分析主线程堆栈、cpu、锁信息等。但是这种方法有一定的局限性，很多时候是没有办法查看堆栈信息的，例如有些高版本设备需要root权限才能访问/data/anr/目录。这时候就需要应用来实现卡顿、ANR、死锁的?
+- [封装阻塞的任务队列](/Android/封装阻塞的任务队列) — 多线程环境中，通过队列可以很容易实现数据共享，比如经典的“生产者”和“消费者”模型中，通过队列可以很便利地实现两者之间的数据共享。 假设我们有若干生产者线程，另外又有若干个消费者线程。如果生产者线程需要把准备好的数据共享给消费者线程，利用队列的方式来传递数据，?
+- [获取位置信息](/Android/获取位置信息) — 在安卓中获取位置信息以及后台位置信息通常使用 FusedLocationProviderClient 和 LocationManager。为了在后台获取位置信息，需要结合使用位置服务、WorkManager 或 JobScheduler 等后台任务管理工具来确?
+- [深入理解crash问题](/Android/深入理解crash问题) — 首先，明确崩溃的类型。崩溃问题通常可以分为以下几类：
+- [为什么主线程可以直接new Handler](/Android/为什么主线程可以直接new Handler) — 在 Android 中，Handler 是用来处理线程之间的消息通信和异步操作的一个重要工具，通常它用于在非主线程（如后台线程）中发送消息或执行任务，并确保这些任务最终在主线程中执行。对于 Handler 的使用，有一个重要的问题是为什么在 主线程 中可以直接?
+- [Handler.postDelayed()消息时间准确吗](/Android/Handler.postDelayed()消息时间准确吗) — Handler.postDelayed() 方法用于在延迟一定时间后执行一个任务，它是 Android 中常用的延时执行操作的方式。尽管这种方法在许多场景中非常实用，但它的时间准确性和可靠性可能会受到多种因素的影响。
+- [实现定时循环](/Android/实现定时循环) — 使用 Handler 的 postDelay(Runnable, delayMillis) 方法实现定时任务。 该方法适用于需要在主线程或其他线程中处理短时间间隔任务的场景，例如更新UI或轻量级任务。
+- [帧率和卡顿监控方案](/Android/帧率和卡顿监控方案) — 监控应用的帧率 FPS 是评估应用指标和发现卡顿问题的重要指标。常用的监控应用的FPS的方法有：
+- [Notification从发送到显示的流程简析](/Android/Notification从发送到显示的流程简析) — Notificatio主要由三部分组成：发送/更新/取消通知的应用app、系统通知服务、NotificationManagerService 和 通知监听器 NotificationListenerService。应用可以调用 NotificationMana?
+- [Vsync机制](/Android/Vsync机制) — VSYNC（Vertical Synchronization，垂直同步）是一种图形显示技术，用于在显示屏刷新内容时避免屏幕撕裂（Screen Tearing）现象。它通过将显示设备的刷新率与 GPU（图形处理器）的帧生成速度同步来实现。
+- [WorkManager](/Android/WorkManager) — WorkManager 是一种用于启动永久性工作的Jetpack的API。持久性工作是指能够在应用和系统重启后仍然保持工作调度状态的工作。
+- [安卓常见架构](/Android/安卓常见架构) — 在安卓开发中，常见的架构主要有以下几种，每种架构都有其特点、优缺点以及适用场景。以下是它们的详细介绍：
+- [如何实现应用重启](/Android/如何实现应用重启) — 在一些手游中经常会有资源更新后自动重启应用的功能，这个是怎么实现的呢？
+- [Android文件系统](/Android/Android文件系统) — 好的，让我们更全面地深入 Android 文件系统的各个方面，包括所有主要目录及其用途，以及文件系统的架构和管理。
+- [Trace日志简介](/Android/Trace日志) — 在ANR日志中，重点关注主线程的堆栈跟踪。通常，主线程被阻塞的原因可能包括但不限于：
+- [Android一个APP里面最少有几个线程](/Android/Android一个APP里面最少有几个线程) — Android一个进程里面最少包含5个线程，分别为：
+- [Settings数据库](/Android/Settings数据库) — Settings 是一个存储系统和用户设置的数据库，它主要用于保存设备的配置信息和用户偏好设置。这些设置存储在一个 SQLite 数据库中，并通过 Android 提供的 Settings API 进行访问。settings 相关的数据最后是存在xml中，ap?
+- [三方库面试题](/Android/三方库面试题) — LeakCanary是在发生内存泄漏的时候去dump内存, 有没有在未发生内存泄漏的时候监控内存的手段。
+- [安卓常见的内存泄漏点](/Android/安卓常见的内存泄漏点) — 内存泄漏是指在应用程序运行过程中，由于程序错误或设计不佳，导致无用的内存对象无法被系统及时释放，从而造成内存资源的浪费和应用性能下降的现象。内存泄漏会导致应用程序占用大量的内存资源，降低系统性能，增加系统崩溃的风险，严重影响用户体验，甚至导致应用被系统强制关闭?
+- [Fragment找不到id对应view](/Android/Fragment找不到id对应view) — 在使用 viewbinding 生成页面布局时发现id为btn的自定义view发生crash报错，报错信息：
+- [DataStore](/Android/DataStore) — Jetpack DataStore是一种数据存储方案，可以使用 protocolBuffer 存储 键值对 或者 数据对象。其使用Kotlin 协程和 Flow，以 异步 和 事务一致性 的方式存储数据。推荐从SharedPreference迁移到DataSt?
+- [APK打包流程](/Android/APK打包流程) — APK文件大致分为两个部分：代码 和 资源，所以打包也就分为这两个部分。 简要流程：
+- [Fragment几种不同的commit方法](/Android/Fragment几种不同的commit方法) — FragmentTransaction 是用于在 Android 应用中执行 Fragment 操作的类，如添加、替换、移除等
+- [ActivityManagerService](/Android/ActivityManagerService) — AMS 是Android提供的一个用于管理Activity运行状态的系统进程，也是编写APK应用时使用最频繁的系统服务。
+- [StartActivity之后发生了什么](/Android/StartActivity之后发生了什么) — 由于Android系统是基于Linux的，原则上说它的应用程序并不只是APK这一种类型，换句话说，所有Linux支持的应用程序都可以通过一定方式运行在Android系统上（比如一些系统级的应用程序）
+- [Thread类](/Android/Thread类) — 首先要区分线程和线程类的概念。线程是操作系统CPU资源分配的调度单元，属于抽象的范畴，而线程类实际上是可执行的代码。
+- [ActivityThread线程(UI主线程)](/Android/ActivityThread线程(UI主线程)) — 区别： 普通线程只需要prepare就可以了，而主线程使用的是prepareMainLooper。 prepareMainLooper虽然也需要调用prepare方法，其特殊之处在于该线程不允许退出。除此之外没有本质的区别。 普通线程生成一个与Looper绑定?
+- [AndroidTest编译Provider冲突问题](/Android/AndroidTest编译Provider冲突问题) — 安装AndroidTest的apk时报错信息：
+- [Android进程和线程](/Android/Android进程和线程) — 进程是程序的一个运行实例，以区别于“程序”这一静态的概念；而线程则是CPU调度的基本单位。当前大部分的操作系统都支持多任务运行，这一特性让用户感到计算机好像可以是同时处理很多事情。在只有一个CPU核心的情况下，这种“同时”是一种假象。它是操作系统可以采用分时的?
+- [Handler、MessageQueue和Looper](/Android/Handler、MessageQueue和Looper) — Looper不断获取MessageQueue中的一个Message，然后交给Handler来处理。
+- [ViewRoot的基本工作方式](/Android/ViewRoot的基本工作方式) — 每一颗ViewTree只对应一个ViewRoot。它将和WindowManagerService进行一系列的通信，包括窗口注册，大小调整等，ViewRoot主要的触发源有两种： 比如某个View对象需要更新UI时，它会通过invalidate或者其他方式发起请?
+- [ViewTree的遍历](/Android/ViewTree的遍历) — 如果整个UI界面只是由单一的View对象来描述的，那么它既可以占据整个屏幕空间，也可以有选择地在屏幕上任何一片区域上显示。不过这种理想的情况是不存在的。通常我们面对的View层级都比较深，涉及的view对象比较多。此时系统就要综合来考虑各个view提出的需求。?
+- [WMS中窗口的注册](/Android/WMS中窗口的注册) — 首先先要明确一下PhoneWindow的概念和作用：其继承自Window类，表达了窗口的一种约束机制；而WMS中的Window则是一个抽象的概念，其有一个WindowState用于描述状态。可以简单理解为：PhoneWindow是应用进程端对于“窗口”的描述，?
+- [Activity中viewtree的创建过程](/Android/Activity中viewtree的创建过程) — Activity与其他组件最大的不同，就是其内部拥有完整的界面显示机制，这涉及了ViewRootImpl, Window以及由他们管理的View Tree等。
+- [MediaPlayer](/Android/MediaPlayer) — Idle 状态： 当使用new()方法创建一个MediaPlayer对象或者调用了其reset()方法时，该MediaPlayer对象处于idle状态。这两种方法的一个重要差别就是：如果在这个状态下调用了getDuration()等方法（相当于调用时机不正确）?
+- [深入理解图形渲染的关键角色和关系](/Android/深入理解图形渲染的关键角色和关系) — 在安卓图形渲染过程中，会涉及到以下几个角色，我们可以用一个比喻来形象地描述他们之间的关系，以此来加深对安卓的渲染机制的理解：
+- [Skia：全面解读](/Android/Skia) — Skia是一个高性能的2D图形库，被广泛用于各种操作系统和设备，包括Android、Chrome、Flutter、Firefox等。它提供了强大的绘图能力和跨平台支持，成为许多图形应用的核心组件。
+- [WindowManagerService（WMS）](/Android/WindowManagerService) — 从计算机的IO系统角度分析，WMS至少要完成两个功能：
+- [AsyncTask](/Android/AsyncTask) — AsyncTask 是 Android 开发中用于执行后台操作并在完成后更新 UI 的一种便捷工具。尽管 AsyncTask 曾经是 Android 开发中的重要组成部分，但它在 Android 11 (API Level 30) 中已被弃用。推荐使用其他方式?
+- [事件总线EventBus](/Android/事件总线EventBus) — EventBus 是一个开源的 Android 库，用于简化组件之间的通信和解耦。它实现了发布/订阅模式（Publish/Subscribe），允许不同组件在应用内部通过事件进行通信，而不需要显式地持有对方的引用。以下是关于 EventBus 的基本介绍和如何?
+- [Android与Service通信](/Android/Android与Service通信) — 这是最简单和常见的一种方式，适用于需要一次性操作或简单的后台任务。
+- [AssestManager](/Android/AssestManager) — AssetManager 是 Android 中用于访问应用程序资源（如文本文件、图片、音频文件等）的类。它提供了对应用内部资源的访问接口，通常用于读取和管理应用内的原始资源文件。
+- [Fragment转场动画](/Android/Fragment转场动画) — 使用 FragmentTransaction 的 setCustomAnimations() 方法可以实现自定义转场动画,提交带有动画效果的 Fragment 事务。
+- [RecyclerView性能优化](/Android/RecyclerView性能优化) — RecyclerView 主要有三层缓存
+- [App卡顿优化](/Android/App卡顿优化) — LayoutInflater加载xml布局的过程会在主线程使用IO读取xml布局文件进行xml解析，再根据解析结果利用反射创建布局中的View/ViewGroup对象。 可以用AsyncLayoutInflater异步加载。
+- [DecorView](/Android/DecorView) — AMS管理着Activity生命周期，每当切换Activity状态时通过Binder告诉ActivityThread，ActivityThread通过Handler切换到主线程(UI线程）执行，最终分别调用到我们熟知的onCreate(xx)/onResume?
+- [RecyclerView和ListView区别](/Android/RecyclerView和ListView区别) — ListView 需要自定义ViewHolder,判断convertView是否为null，setTag()与getTag()的使用;RecyclerView有规定好的ViewHolder。 ListView 只支持垂直方向的，而RecyclerView，它里?
+- [RecyclerView知识点汇总](/Android/RecyclerView知识点汇总) — RecyclerView.Adapter - 处理数据集合并负责绑定视图 ViewHolder - 持有所有的用于绑定数据或者需要操作的View LayoutManager - 负责摆放屎图等相关操作 ItemDecoration - 负责绘制item的分割线?
+- [SparseArray](/Android/SparseArray) — Android提供了SparseArray，这也是一种KV形式的数据结构，提供了类似于Map的功能。但是实现方法却和HashMap不一样。它与Map相比，可以说是各有千秋。
+- [BottomNavigationView](/Android/BottomNavigationView) — BottomNavigationView 是 Android 提供的用于底部导航栏的 UI 组件，通常用于在应用中快速切换主要功能模块或页面。它提供了一种简单而直观的方式来导航到不同的目标界面。让我们深入了解 BottomNavigationView 的属性、?
+- [DataBinding](/Android/DataBinding) — DataBinding 是谷歌官方发布的一个框架，顾名思义即为数据绑定，是 MVVM 模式在 Android 上的一种实现，用于降低布局和逻辑的耦合性，使代码逻辑更加清晰。MVVM 相对于 MVP，其实就是将 Presenter 层替换成了 ViewModel?
+- [Manifest详解](/Android/Manifest详解) — 在 Android 应用程序开发中，AndroidManifest.xml 是一个非常重要的文件，它描述了应用的基本信息、组件、权限等。
+- [ViewModel 和 LiveData](/Android/ViewModel 和 LiveData) — 是一个用于管理和存储与用户界面相关的数据的类。它设计用于存储和管理与界面相关的数据，例如 Activity 或 Fragment 的 UI 数据，而不受设备配置变化（如旋转）的影响。
+- [图形渲染](/Android/图形渲染) — 画布是一种绘图 Surface，用于对照位图或 Surface 对象来处理实际位合成。Canvas 包含关于位图、线条、圆形、矩形、文字等的标准计算机绘制方法，并与位图或 Surface 相关联。画布是在屏幕上绘制 2D 对象的最简便方法。基类为 Canvas?
+- [AOSP架构](/Android/AOSP架构) — AOSP 的软件堆栈包含以下层：
+- [EventLog日志](/Android/EventLog日志) — | Num | TagName | 格式 | 功能 | |-------|-------------------------------|-------------------------------------------------------------?
+- [Surface 和 SurfaceHolder](/Android/Surface和SurfaceHolder) — Surface 对象使应用能够渲染要在屏幕上显示的图像。通过 SurfaceHolder 接口，应用可以编辑和控制 Surface。Surface 通过 BufferQueue 机制在生产者和消费者之间传递图像缓冲区。生产者可以是CPU绘图程序（如Canvas?
+- [JobService](/Android/Jobservice) — JobService 是一个安卓系统组件，继承自Sevice（实际为系统托管的特殊服务），用于在满足任务条件时由系统唤醒并运行。是 JobScheduler 派发任务时调用的组件，用于执行具体的后台逻辑。
+- [onResume中获取宽高有效吗？](/Android/onResume中获取宽高有效吗？) — View 的测绘绘制流程就是从 ViewRootImpl#performTraversals() 开始的，而这个方法的调用是在 onResume() 方法之后，所以在 onCreate() 和 onResume() 方法中拿不到 View 的测量值。
+- [渲染机制](/Android/渲染机制) — 在 View 涉及到 UI 更新的方法中，几乎都会在最后调用 View#invalidate() 或者 View#requestLayout()：
+- [AMS和WMS的关系](/Android/AMS和WMS的关系) — AMS（Activity Manager Service）和WMS（Window Manager Service）是Android系统中两个核心的服务组件，它们共同协作以管理应用程序的界面显示和生命周期。AMS 和 WMS 的交互主要通过 Binder 机制实?
+- [AMS如何启动App进程](/Android/AMS如何启动App进程) — Android 系统的 Activity Manager Service（AMS）是一个核心系统服务，负责管理应用程序的生命周期，其中包括启动和管理应用进程。下面是 AMS 如何启动应用进程的简要过程：
+- [Android系统启动流程](/Android/Android系统启动流程) — 从手机开机开始涉及到的关键流程一般可分为以下五个步骤：
+- [invalidate会触发其他View的重绘吗？](/Android/invalidate会触发其他View的重绘吗？) — 在Android中，调用某个View的invalidate()方法并不会直接触发其他View的重绘。invalidate()的作用是标记当前View为“脏”状态，意味着这个View需要重新绘制。系统随后会在合适的时机（通常是UI线程的下一个绘制周期）调用该Vi?
+- [setContentView之后发生了什么](/Android/setContentView之后发生了什么) — setContentView 是 Android 开发中用来设置 Activity 显示界面的核心方法，其背后涉及了一系列复杂的步骤来完成界面的加载和渲染。以下是该方法调用后的大致流程，基于 Android 源码的分析：
+- [SystemServer进程的意义](/Android/SystemServer进程的意义) — 系统服务的集中管理者：SystemServer是Android框架层众多核心服务的宿主，这些服务包括但不限于Activity Manager (AMS)、Package Manager (PMS)、Window Manager (WMS)、Power Mana?
+- [Zygote进程的fork](/Android/Zygote进程的fork) — 在Android系统中，Zygote进程是所有Android应用程序进程的母进程。当系统启动时，会首先启动一个初始化进程Init，Init随后会启动SystemServer进程，而SystemServer进程中会孵化出Zygote进程。Zygote初始化时会预?
+- [Zygote如何保证加载速度](/Android/Zygote如何保证加载速度) — Zygote在启动时确实会加载大量的类和资源，以确保这些基础元素可以被所有后续的应用进程共享，从而加速它们的启动。为了保证加载速度并优化性能，Zygote采取了以下几种策略：
+- [Android.mk](/Android/Android.mk) — Android.mk 是Android 提供的一种makefile 文件,注意用来编译生成（exe，so，a，jar，apk）等文件。
+- [Application为什么不能作为Dialog的context](/Android/Application为什么不能作为Dialog的context) — Dialog的context只能是Activity，而不能是Application，不然会导致弹窗崩溃：
+- [PhoneWindow](/Android/PhoneWindow) — Activity和Dialog在显示过程中都创建了PhoneWindow对象，而PopupWindow和Toast却没有。
+- [进程保活](/Android/进程保活) — 它正在用户与之互动的屏幕顶部运行 Activity（其 onResume() 方法已被调用）。 它具有当前正在运行的 BroadcastReceiver（其 BroadcastReceiver.onReceive() 方法正在执行）。 它有一个 Service?
+- [事件分发机制](/Android/事件分发机制) — 要了解事件分发，那我们先说说什么是事件，其实这里的事件指的就是点击事件，当用户触摸屏幕的时候，将会产生点击事件（Touch事件） Touch事件的相关细节（发生触摸的位置、时间等）被封装成MotionEvent对象
+- [ADB](/Android/ADB) — app入口：adb logcat | grep -i displayed
+- [ANR问题简析](/Android/ANR问题简析) — ANR问题，相信是每位开发日常都会遇到的问题，对于这类问题的分析，按照官方的推荐，或网络博客的总结思路能解决一定的问题，但是多数时候大家的困惑就是应用本逻辑很简单，耗时很短或应用堆栈完全正常，或者或处于空闲状态，可系统为什么就认为接收者发生ANR了呢？下面将之?
+- [Context](/Android/Context) — 它是Android里的一个上帝类，启动四大组件、获取资源、获取类加载器等重要功能都通过Context 来完成，Activity、Service与Application也都派生自Context，Broadcast Receiver与Content Provide?
+- [dumpsys](/Android/dumpsys) — dumpsys是Android提供的系统工具，可以用来查看所有系统服务的信息。 在命令行输入如下命令，就可以罗列出当前所有的系统服务名：
+- [Watchdog](/Android/Watchdog) — Watchdog的中文的“看门狗”，有保护的意思。最早引入Watchdog是在单片机系统中，Linux也引入了Watchdog，在Linux内核下，当Watchdog启动后，便设定了一个定时器，如果在超时时间内没有对/dev/Watchdog进行写操作，则会导?
+- [AMS剖析](/Android/AMS剖析) — 所有的 Android 应用程序都是由 Zygote 进程 fork 而来，在 Zygote 进程中初始化了 Java 运行时，加载了常用的 Java Classes，加载了系统资源等。这些底层基础都会被 Android 应用程序继承。在从 Zygote 中继?
+- [LiveData](/Android/LiveData) — LiveData 是一个持有可观察数据的类，它可以感知组件的生命周期（如 Activity 和 Fragment）。LiveData 能自动管理观察者（即观察数据变化的对象），并确保数据只在可见的 UI 组件上更新，避免内存泄漏。
+- [SharedPreference](/Android/SharedPreference) — SharedPreferences是Android的一个接口类，是Android 数据存储（保存内部）的一种方法。主要以*.xml的形式保存在Android /data/data/com.*包名/shared_prefs下，SharedPreferences?
+- [实践-Widget](/Android/实践-Widget) — widget就是安卓的桌面小组件，可以方便快捷的使用app提供的部分功能。
+- [AIDL](/Android/AIDL) — AIDL全称为 Android Interface Definition Language，中文译为：安卓接口定义语言。可以利用AIDL定义客户端与服务端均认可的编程接口，以便进程间通信(IPC),在安卓中，进程之间存在进程隔离，所以一个进程通常无法访问另一个?
+- [Handler](/Android/Handler) — Handler 用于线程间通信的消息传递机制。Handler其实就是在主线程起一个子线程，子线程运行并生成 Message，Looper 获取Message并传递给Handler，Handler逐个获取子线程中的Message。
+- [Intent发送数据的上限](/Android/Intent发送数据的上限) — Intent携带信息的大小其实是受到Binder的限制（包括Binder的大小和缓存两种限制）。数据以Parcel对象的形式存放在Binder缓存区中。如果数据或返回值比缓存区域大，那么会抛出TransactionTooLargeException异常。
+- [Looper死循环为什么不会导致应用卡死](/Android/Looper死循环为什么不会导致应用卡死) — 导致卡死的是在Ui线程中执行耗时操作导致界面出现掉帧，甚至ANR，Looper.loop()这个操作本身不会导致这个情况。
+- [AlarmManager](/Android/AlarmManager) — AlarmManager 是 Android 中一个用于在特定时间安排应用程序运行的类，可以安排一次性或重复的任务。通常用于设置闹钟、触发后台任务或进行定期更新等场景。
+- [安卓典型日志分析](/Android/logd日志简介及典型案例分析) — 日志接口内容，共分为java层、native层、kernel层等。下面就对每个层级的内容分别进行介绍。
+- [日志详解](/Android/日志详解) — | 日志分类 | 日志说明 | | ------------- | :-----------: | | Log.e | 错误信息：程序崩溃等 | | Log.w | 警告信息 | | Log.i | 一般消息 | | Log.d | 调试信息，打印变量信息 |?
+- [Activity的启动模式](/Android/Activity的启动模式) — 可在AndroidManifest.xml中配置该Activity的LaunchMode为以下配置项。
+- [Intent](/Android/Intent) — 即意图，分为显式意图和隐式意图 | 元素名称 | 设置方法|说明与用途| | --------|-------|---------| | Component|setComponent|组件,指定意图的来源与目标| | Action |setAction |动作?
+- [OpenGL-纹理](/Android/OpenGL-纹理) — 我们已经了解到，我们可以为每个顶点添加颜色来增加图形的细节，从而创建出有趣的图像。但是，如果想让图形看起来更真实，我们就必须有足够多的顶点，从而指定足够多的颜色。这将会产生很多额外开销，因为每个模型都会需求更多的顶点，每个顶点又需求一个颜色属性。
+- [Binder](/Android/Binder) — 在Android系统中，Binder 是一种用于进程间通信（Inter-Process Communication，IPC）的机制。应用程序是由Activity、Service、Broadcast Receiver和Content Provider四种类型的组?
+- [实践-亮度调节](/Android/实践-亮度调节) — 本文档的所有代码均为kotlin
+- [OpenGL ES初步探索](/Android/OpenGL ES初步探索) — 本文中代码均为Kotlin
+- [进程和应用生命周期](/Android/进程和应用生命周期) — 在大多数情况下，每个 Android 应用都在各自的 Linux 进程中运行。当需要运行应用的一些代码时，系统会为应用创建此进程，并使其保持运行，直到不再需要它且系统需要回收其内存以供其他应用使用。
+- [Activity](/Android/Activity) — Activity（活动）是Android应用程序中的一个核心组件，它通常用于表示用户界面的一部分。每个Activity都代表了一个屏幕或用户界面，用户可以与之交互。Activity负责管理用户界面的显示、用户输入的响应以及与其他组件的协作。
+- [Activity生命周期详解](/Android/Activity的生命周期详解) — 它会在系统首次创建 Activity 时触发。Activity 会在创建后进入“已创建”状态。在 onCreate() 方法中，您需执行基本应用启动逻辑，该逻辑在 Activity 的整个生命周期中 只应发生一次。例如，onCreate() 的实现可能会将数据?
+- [Activity栈](/Android/Activity栈) — Android 是通过一种 Activity 栈的方式来管理 Activity 的，一个 Activity 的实例的状态决定它在栈中的位置。处于前台的 Activity 总是在栈的顶端，当前台的 Activity 因为异常或其它原因被销毁时，处于栈第二层的 A?
+- [Android简介](/Android/Android简介) — Android是一种基于Linux内核的综合操作系统，即包括各类底层驱动的开发，也包括使用java语言编写，但运行在Dalvik VM（非 Java 虚拟机，Android 4.4 以后运行在ART上）中编译和执行。
+- [BroadcastReceiver](/Android/BroadcastReceiver) — BroadcastReceiver（广播接收器）是Android应用程序的一个关键组件，用于接收系统广播消息或应用程序内部广播，并在接收到广播时采取适当的操作。广播是一种轻量级的通信机制，用于在应用程序组件之间或系统组件之间传递消息。
+- [ContentProvider](/Android/ContentProvider) — ContentProvider（内容提供器）是Android应用程序的一个核心组件，用于管理和提供应用程序数据，以便其他应用程序可以访问和共享这些数据。ContentProvider允许应用程序将数据存储在共享数据库中，并提供标准接口，以便其他应用程序可以执行?
+- [Parcelable 和 Bundle](/Android/Parcelable和Bundle) — Parcelable 和 Bundle 对象可跨进程边界使用，例如与 IPC/Binder 事务之间，带有 intent 的 Activity 之间等，还可以用来存储跨配置更改的瞬时状态。本页介绍了使用 Parcelable 和 Bundle 对象的建议和最佳?
+- [Service](/Android/Service) — Service（服务）是Android应用程序的一个核心组件，它是一种后台运行的组件，用于执行长时间运行的任务，而不需要用户界面。Service通常用于处理与用户界面无关的操作，如下载文件、播放音乐、处理网络请求等。Service可以在应用程序的生命周期内独立?
+- [Service的启动方式和区别](/Android/Service的启动方式和区别) — （1）Started Service被开启的service通过其他组件调用startService()被创建，这种service可以无限地运行下去，必须调用stopSelf()方法或者其他组件调用stopService()方法来停止它，当service被停止时?
+- [Service生命周期](/Android/Service生命周期) — （1）service整体的生命时间是从onCreate()被调用开始，到onDestroy()方法返回为止。和activity一样，service在onCreate()中进行它的初始化工作，在onDestroy()中释放残留的资源比如，一个音乐播放servic?

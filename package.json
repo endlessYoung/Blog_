@@ -6,9 +6,9 @@
     "vitepress": "^2.0.0-alpha.16"
   },
   "scripts": {
-    "docs:dev": "vitepress dev docs --port 5173",
+    "docs:dev": "node scripts/gen-tags.mjs && vitepress dev docs --port 5173",
     "docs:created": "node scripts/update-created-dates.js",
-    "docs:build": "pnpm docs:created && vitepress build docs",
+    "docs:build": "pnpm docs:created && node scripts/gen-tags.mjs && vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "documate:upload": "documate upload --verbose"
   },

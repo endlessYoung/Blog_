@@ -1,5 +1,5 @@
 <template>
-  <div class="article-metadata">
+  <div v-if="!hideMeta" class="article-metadata">
     <span class="meta-item" v-if="formattedCreated">
       <span class="icon"><i class="fa-solid fa-calendar-plus"></i></span>
       创建于 {{ formattedCreated }}
@@ -36,6 +36,8 @@ const readingTime = ref(0)
 const showPageViews = computed(() => {
   return theme.value.comment?.pageview !== false
 })
+
+const hideMeta = computed(() => !!page.value.frontmatter?.hideArticleMeta)
 
 const formattedCreated = computed(() => {
   const created = page.value.frontmatter?.created

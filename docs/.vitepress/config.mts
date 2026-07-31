@@ -433,7 +433,7 @@ html:not(.dark) {
           'query-input': 'required name=search_term_string',
         },
       })])
-    } else {
+    } else if (!ctx.page.startsWith('tags/')) {
       const articleSchema: Record<string, unknown> = {
         '@context': 'https://schema.org',
         '@type': 'Article',
@@ -535,6 +535,7 @@ html:not(.dark) {
     },
     nav: [
       { text: 'Android', link: '/Android/' },
+      { text: '标签', link: '/tags/' },
       {
         text: '编程语言',
         items: [
