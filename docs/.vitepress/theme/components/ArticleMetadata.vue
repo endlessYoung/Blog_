@@ -1,5 +1,9 @@
 <template>
   <div v-if="!hideMeta" class="article-metadata">
+    <span v-if="isWip" class="meta-item wip-badge">
+      <span class="icon"><i class="fa-solid fa-hammer"></i></span>
+      建设中
+    </span>
     <span class="meta-item" v-if="formattedCreated">
       <span class="icon"><i class="fa-solid fa-calendar-plus"></i></span>
       创建于 {{ formattedCreated }}
@@ -38,6 +42,8 @@ const showPageViews = computed(() => {
 })
 
 const hideMeta = computed(() => !!page.value.frontmatter?.hideArticleMeta)
+
+const isWip = computed(() => !!page.value.frontmatter?.noindex)
 
 const formattedCreated = computed(() => {
   const created = page.value.frontmatter?.created
@@ -110,5 +116,19 @@ watch(() => route.path, () => {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+.wip-badge {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+}
+html.dark .wip-badge {
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.35);
 }
 </style>
