@@ -16,6 +16,7 @@ import Comments from './components/Comments.vue'
 import SeriesNav from './components/SeriesNav.vue'
 import RelatedArticles from './components/RelatedArticles.vue'
 import ImageViewer from './components/ImageViewer.vue'
+import ReadingProgress from './components/ReadingProgress.vue'
 import { initImageViewer } from './imageViewer'
 import ArticleMetadata from './components/ArticleMetadata.vue'
 import TechBackground from './components/TechBackground.vue'
@@ -128,6 +129,7 @@ export default {
         'doc-before': () => h(ArticleMetadata),
         'doc-after': () => [h(SeriesNav), h(RelatedArticles), h(Comments)],
         }),
+        h(ReadingProgress),
         h(ImageViewer),
       ]
     },
