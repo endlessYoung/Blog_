@@ -1,7 +1,8 @@
-import { defineConfig, HeadConfig, SiteData } from 'vitepress'
+import { createMarkdownRenderer, defineConfig, HeadConfig, SiteData } from 'vitepress'
 import markdownItKatex from 'markdown-it-katex'
-import { readFileSync, readdirSync, statSync } from 'fs'
+import { readFileSync, readdirSync, statSync, writeFileSync } from 'fs'
 import { join, relative } from 'path'
+import { Feed } from 'feed'
 
 // ??/??????frontmatter: noindex???? sitemap ???
 const noindexPages = new Set<string>()
@@ -316,7 +317,8 @@ export default defineConfig({
   },
   lang: 'zh-CN',
   head: [
-    ['link', { rel: 'icon', href: '/Blog_/favicon.ico' }], // 也是放在/public目录中
+    ['link', { rel: 'icon', href: '/Blog_/favicon.ico' }],
+    ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/Blog_/feed.xml' }], // 也是放在/public目录中
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     [
@@ -450,6 +452,62 @@ html:not(.dark) {
     return head
   },
 
+  async buildEnd(siteConfig) {
+    const siteUrl = 'https://endlessyoung.github.io'
+    const base = '/Blog_/'
+    const feedUrl = `${siteUrl}${base}`
+    const md = await createMarkdownRenderer(siteConfig.srcDir, siteConfig.markdown, base, siteConfig.logger)
+
+    const feed = new Feed({
+      title: "Endlessyoung's Blog",
+      description: 'Endless Young 的个人技术博客，涵盖 Android、Java、Kotlin、AI/ML、Python 等领域的原创文章。',
+      id: feedUrl,
+      link: feedUrl,
+      language: 'zh-CN',
+      image: `${siteUrl}${base}index.png`,
+      favicon: `${siteUrl}${base}favicon.ico`,
+      copyright: `© ${new Date().getFullYear()} Endless Young`,
+      author: { name: 'Endless Young', link: feedUrl },
+    })
+
+    const articles: Array<{ title: string; url: string; created: string; html: string; excerpt: string; categories: string[] }> = []
+    for (const file of listMarkdownFiles(siteConfig.srcDir)) {
+      const rel = relative(siteConfig.srcDir, file).replace(/\\/g, '/')
+      if (rel === 'index.md' || rel.endsWith('/index.md')) continue
+      const fm = parseArticleFrontmatter(file)
+      if (fm.noindex) continue
+      const title = String(fm.title || '').trim()
+      if (!title) continue
+      const created = String(fm.created || fm.date || createdDates[rel.replace(/\.md$/, '')] || '1970-01-01')
+      const body = readFileSync(file, 'utf-8').replace(/^---[\s\S]*?---\r?\n?/, '')
+      const html = md.render(body)
+      const plain = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+      articles.push({
+        title,
+        url: feedUrl + rel.replace(/\.md$/, '.html'),
+        created,
+        html,
+        excerpt: String(fm.description || '').trim() || plain.slice(0, 200),
+        categories: Array.isArray(fm.categories) ? (fm.categories as string[]).map(String) : [],
+      })
+    }
+
+    articles.sort((a, b) => b.created.localeCompare(a.created))
+    for (const a of articles.slice(0, 50)) {
+      feed.addItem({
+        title: a.title,
+        id: a.url,
+        link: a.url,
+        description: a.excerpt,
+        content: a.html,
+        date: new Date(a.created),
+        author: [{ name: 'Endless Young', link: feedUrl }],
+        category: a.categories.map((c) => ({ name: c })),
+      })
+    }
+
+    writeFileSync(join(siteConfig.outDir, 'feed.xml'), feed.rss2(), 'utf-8')
+  },
   themeConfig: {
     related: relatedIndex,
     logo: '/panda.png',

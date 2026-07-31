@@ -18,6 +18,9 @@ importers:
       '@documate/documate':
         specifier: ^0.2.1
         version: 0.2.1
+      feed:
+        specifier: ^6.0.0
+        version: 6.0.0
       markdown-it-katex:
         specifier: ^2.0.3
         version: 2.0.3
@@ -581,6 +584,10 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
+
+  feed@6.0.0:
+    resolution: {integrity: sha512-rvFOF1POce0ijAKy3tZN5T8PuprgIit/VbMyXJWcoYwcMOTSIJ7NqZb8DTLPJr77yiEO27kidm/fw0kcSIV+ww==}
+    engines: {node: '>=20', pnpm: '>=10'}
 
   focus-trap@8.2.2:
     resolution: {integrity: sha512-qV0g8hRYBqgACcFOH3f9wXc4zPKhr/0z9RI2a6ZijZ72EeBi4g8oBy8zAWuUR1TsMpOzwpUMFvjdasrC41Joug==}
@@ -1202,6 +1209,10 @@ packages:
     resolution: {integrity: sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==}
     engines: {node: '>=12'}
 
+  xml-js@1.6.11:
+    resolution: {integrity: sha512-7rVi2KMfwfWFl+GpPg6m80IVMWXLRjO+PxTq7V2CDhoGak0wzYzFgUY2m4XJ47OGdXd8eLE8EmwfAmdjw7lC1g==}
+    hasBin: true
+
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
@@ -1730,6 +1741,10 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.5
 
+  feed@6.0.0:
+    dependencies:
+      xml-js: 1.6.11
+
   focus-trap@8.2.2:
     dependencies:
       tabbable: 6.5.0
@@ -2158,8 +2173,7 @@ snapshots:
   safer-buffer@2.1.2:
     optional: true
 
-  sax@1.6.1:
-    optional: true
+  sax@1.6.1: {}
 
   shebang-command@2.0.0:
     dependencies:
@@ -2377,5 +2391,9 @@ snapshots:
       ansi-styles: 6.2.3
       string-width: 5.1.2
       strip-ansi: 7.2.0
+
+  xml-js@1.6.11:
+    dependencies:
+      sax: 1.6.1
 
   zwitch@2.0.4: {}
