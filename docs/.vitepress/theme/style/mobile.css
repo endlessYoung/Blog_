@@ -143,11 +143,20 @@
 
   .home-hud__spin--slow,
   .home-hud__spin--mid,
-  .home-hud__scan-line,
   .home-hud__core,
   .home-hud__core-dot,
   .home-hud__feed--hit {
     animation: none !important;
+  }
+
+  /* 小屏不渲染雷达光束 / 声呐波纹 / 扫描亮点，保持静态简洁 */
+  .home-hud__beam,
+  .home-hud__sonar,
+  .home-hud__sonar-ring,
+  .home-hud__blip,
+  .home-hud__blip-ring,
+  .home-hud__blip-dot {
+    display: none !important;
   }
 
   .home-hud__feed {

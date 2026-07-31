@@ -1,6 +1,7 @@
 ---
 created: 2023-10-04
 layout: home
+radar: sonar
 pageClass: home-landing hero-copy-sheen
 
 hero:

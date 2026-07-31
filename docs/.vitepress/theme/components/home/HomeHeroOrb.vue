@@ -1,5 +1,5 @@
 <template>
-  <div class="home-hud">
+  <div class="home-hud" :class="hudClass">
     <div class="home-hud__aura" aria-hidden="true" />
     <svg
       class="home-hud__svg"
@@ -8,6 +8,22 @@
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
+      <defs>
+        <!-- 经典雷达：扇形光束渐变（深/浅色各一份，避免渐变使用 CSS 变量兼容性问题） -->
+        <linearGradient id="hudBeamGradDark" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#00f0ff" stop-opacity="0" />
+          <stop offset="60%" stop-color="#00f0ff" stop-opacity="0.06" />
+          <stop offset="86%" stop-color="#00f0ff" stop-opacity="0.16" />
+          <stop offset="100%" stop-color="#00f0ff" stop-opacity="0.3" />
+        </linearGradient>
+        <linearGradient id="hudBeamGradLight" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#0891b2" stop-opacity="0" />
+          <stop offset="60%" stop-color="#0891b2" stop-opacity="0.07" />
+          <stop offset="86%" stop-color="#0891b2" stop-opacity="0.16" />
+          <stop offset="100%" stop-color="#0891b2" stop-opacity="0.28" />
+        </linearGradient>
+      </defs>
+
       <g class="home-hud__spin home-hud__spin--slow">
         <circle cx="200" cy="200" r="168" class="home-hud__ring" stroke-dasharray="2 10" />
         <circle cx="200" cy="200" r="152" class="home-hud__ring home-hud__ring--soft" />
@@ -29,6 +45,32 @@
         <circle cx="82" cy="200" r="3.5" class="home-hud__node" />
       </g>
 
+      <!-- 版本一：经典雷达扫描（旋转扇形光束 + 高亮前沿） -->
+      <g class="home-hud__beam" aria-hidden="true">
+        <path class="home-hud__beam-wedge" d="M200 200 L200 56 A144 144 0 0 0 117 82 Z" />
+        <line class="home-hud__beam-edge" x1="200" y1="200" x2="200" y2="56" />
+      </g>
+
+      <!-- 版本二：声呐涟漪（中心向外扩散的同心波纹） -->
+      <g class="home-hud__sonar" aria-hidden="true">
+        <circle class="home-hud__sonar-ring" cx="200" cy="200" r="24" />
+        <circle class="home-hud__sonar-ring home-hud__sonar-ring--2" cx="200" cy="200" r="24" />
+        <circle class="home-hud__sonar-ring home-hud__sonar-ring--3" cx="200" cy="200" r="24" />
+      </g>
+
+      <!-- 扫描命中的目标亮点（桌面端由 JS 定时生成） -->
+      <g class="home-hud__blips">
+        <g
+          v-for="blip in blips"
+          :key="blip.id"
+          class="home-hud__blip"
+          :transform="`translate(${blip.x} ${blip.y})`"
+        >
+          <circle class="home-hud__blip-ring" r="3" />
+          <circle class="home-hud__blip-dot" r="3" />
+        </g>
+      </g>
+
       <g class="home-hud__core">
         <polygon
           class="home-hud__hex home-hud__hex--outer"
@@ -43,10 +85,6 @@
         <path class="home-hud__cross" d="M200 168 V232 M168 200 H232" stroke-width="1.2" />
       </g>
 
-      <g class="home-hud__scan">
-        <path class="home-hud__scan-line" d="M200 200 L200 40" stroke-width="1.5" />
-      </g>
-
       <path class="home-hud__bracket" d="M48 88 V56 H80" stroke-width="2" />
       <path class="home-hud__bracket" d="M352 88 V56 H320" stroke-width="2" />
       <path class="home-hud__bracket" d="M48 312 V344 H80" stroke-width="2" />
@@ -56,7 +94,7 @@
     <!-- 假扫描：每隔几秒随机锁定一篇真实文章标题 -->
     <div
       class="home-hud__feed"
-      :class="{ 'home-hud__feed--hit': hitPulse }"
+      :class="{ 'home-hud__feed--hit': hitPulse, 'home-hud__feed--blip': blipPulse }"
       aria-live="polite"
     >
       <div class="home-hud__feed-row">
@@ -85,12 +123,18 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { withBase } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 
 type ScanHit = {
   title: string
   section: string
   href: string
+}
+
+type Blip = {
+  id: number
+  x: number
+  y: number
 }
 
 /**
@@ -179,6 +223,11 @@ function shuffle<T>(arr: T[]): T[] {
   return a
 }
 
+const { frontmatter } = useData()
+/** 首页 frontmatter 里可配置 radar: sonar / sweep（默认 sweep 经典扫描） */
+const radarScheme = computed(() => (frontmatter.value.radar === 'sonar' ? 'sonar' : 'sweep'))
+const hudClass = computed(() => ({ 'home-hud--sonar': radarScheme.value === 'sonar' }))
+
 const allArticles = buildPool()
 /** 洗牌后顺序枚举，一轮结束后再洗牌，保证覆盖全部文章 */
 let deck: ScanHit[] = shuffle(allArticles)
@@ -218,13 +267,57 @@ function pickNext() {
   }, 900)
 }
 
+/* ------------------------------------------------------------------ *
+ * 雷达目标亮点：扫描命中时生成 blip（亮点 + 回波涟漪），并轻闪底部面板  *
+ * ------------------------------------------------------------------ */
+const blips = ref<Blip[]>([])
+const blipPulse = ref(false)
+let blipTimer: ReturnType<typeof setInterval> | null = null
+let blipPulseTimer: ReturnType<typeof setTimeout> | null = null
+let blipSeq = 0
+let beamStart = 0
+/** 与 CSS 中 hudBeamSpin 的周期保持一致（3.8s / 圈） */
+const BEAM_MS = 3800
+
+function currentBeamAngle(): number {
+  if (!beamStart) beamStart = performance.now()
+  return ((performance.now() - beamStart) / BEAM_MS) * 360
+}
+
+function spawnBlip() {
+  const isSonar = radarScheme.value === 'sonar'
+  // 经典扫描：亮点出现在光束前沿稍前方，光束扫过时“发现目标”；声呐：随机方位
+  const angleDeg = isSonar
+    ? Math.random() * 360
+    : currentBeamAngle() + 5 + Math.random() * 35
+  const a = (angleDeg * Math.PI) / 180
+  // 落点分布在中环与外环之间，避免压住中心六边形
+  const dist = 90 + Math.random() * 70
+  const id = ++blipSeq
+  blips.value.push({
+    id,
+    x: 200 + Math.cos(a) * dist,
+    y: 200 + Math.sin(a) * dist,
+  })
+
+  blipPulse.value = true
+  if (blipPulseTimer) clearTimeout(blipPulseTimer)
+  blipPulseTimer = setTimeout(() => {
+    blipPulse.value = false
+  }, 280)
+
+  window.setTimeout(() => {
+    blips.value = blips.value.filter((b) => b.id !== id)
+  }, 1600)
+}
+
 onMounted(() => {
   if (!allArticles.length) {
     statusTag.value = 'EMPTY'
     return
   }
   pickNext()
-  // 小屏：静态展示当前文章链接，不做自动轮播，避免周期性重绘造成闪烁
+  // 小屏：静态展示当前文章链接，不做自动轮播/亮点，避免周期性重绘造成闪烁
   const smallScreen =
     typeof window !== 'undefined' &&
     (window.matchMedia('(max-width: 960px)').matches ||
@@ -234,11 +327,18 @@ onMounted(() => {
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
   timer = setInterval(pickNext, reduced ? 7000 : 2800)
+  // 大屏雷达：定期生成扫描亮点（reduced-motion 时放慢）
+  beamStart = performance.now()
+  blipTimer = setInterval(spawnBlip, reduced ? 2600 : 1150)
+  window.setTimeout(spawnBlip, 650)
 })
 
 onUnmounted(() => {
   if (timer) clearInterval(timer)
   if (pulseTimer) clearTimeout(pulseTimer)
+  if (blipTimer) clearInterval(blipTimer)
+  if (blipPulseTimer) clearTimeout(blipPulseTimer)
+  blips.value = []
 })
 </script>
 
@@ -366,12 +466,82 @@ onUnmounted(() => {
   opacity: 0.7;
 }
 
-.home-hud__scan-line {
-  stroke: var(--hud-cyan);
-  stroke-linecap: round;
-  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.8));
+/* ------------------------------------------------------------------ *
+ * 版本一：经典雷达扫描光束                                             *
+ * ------------------------------------------------------------------ */
+.home-hud__beam {
   transform-origin: 200px 200px;
-  animation: hudScan 4.5s linear infinite;
+  animation: hudBeamSpin 3.8s linear infinite;
+  pointer-events: none;
+}
+
+.home-hud__beam-wedge {
+  fill: url(#hudBeamGradDark);
+}
+
+.home-hud__beam-edge {
+  stroke: var(--hud-cyan);
+  stroke-width: 2;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.8));
+  opacity: 0.9;
+}
+
+/* ------------------------------------------------------------------ *
+ * 版本二：声呐涟漪                                                   *
+ * ------------------------------------------------------------------ */
+.home-hud__sonar {
+  display: none;
+}
+
+.home-hud--sonar .home-hud__sonar {
+  display: block;
+}
+
+.home-hud--sonar .home-hud__beam {
+  display: none;
+}
+
+.home-hud__sonar-ring {
+  stroke: var(--hud-cyan);
+  fill: none;
+  stroke-width: 1.4;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hudSonarRing 3.6s cubic-bezier(0.25, 0.6, 0.3, 1) infinite;
+}
+
+.home-hud__sonar-ring--2 {
+  animation-delay: 1.2s;
+}
+
+.home-hud__sonar-ring--3 {
+  animation-delay: 2.4s;
+}
+
+/* ------------------------------------------------------------------ *
+ * 目标亮点（两种版本共用）                                           *
+ * ------------------------------------------------------------------ */
+.home-hud__blip {
+  animation: hudBlipFade 1.5s ease-out forwards;
+}
+
+.home-hud__blip-ring {
+  stroke: var(--hud-cyan);
+  fill: none;
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hudBlipRing 1.5s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+.home-hud__blip-dot {
+  fill: var(--hud-cyan);
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.9));
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hudBlipDot 0.45s ease-out forwards;
 }
 
 .home-hud__spin {
@@ -421,6 +591,14 @@ onUnmounted(() => {
     0 0 36px rgba(0, 255, 102, 0.18);
   transform: translateY(-2px);
   animation: hudHitFlash 0.85s ease;
+}
+
+/* 亮点命中时面板的轻微闪动 */
+.home-hud__feed--blip {
+  border-color: rgba(0, 240, 255, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(0, 240, 255, 0.2),
+    0 0 24px rgba(0, 240, 255, 0.22);
 }
 
 .home-hud__feed-row {
@@ -498,7 +676,7 @@ onUnmounted(() => {
   }
 }
 
-@keyframes hudScan {
+@keyframes hudBeamSpin {
   to {
     transform: rotate(360deg);
   }
@@ -544,15 +722,80 @@ onUnmounted(() => {
   }
 }
 
+@keyframes hudSonarRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  70% {
+    opacity: 0.18;
+  }
+  100% {
+    transform: scale(6.6);
+    opacity: 0;
+  }
+}
+
+@keyframes hudBlipRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  55% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(9);
+    opacity: 0;
+  }
+}
+
+@keyframes hudBlipDot {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  35% {
+    transform: scale(1.35);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes hudBlipFade {
+  0% {
+    opacity: 1;
+  }
+  72% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-hud__spin--slow,
   .home-hud__spin--mid,
-  .home-hud__scan-line,
+  .home-hud__beam,
+  .home-hud__sonar,
+  .home-hud__sonar-ring,
+  .home-hud__blip,
+  .home-hud__blip-ring,
+  .home-hud__blip-dot,
   .home-hud__aura,
   .home-hud__core,
   .home-hud__core-dot,
   .home-hud__feed--hit {
     animation: none !important;
+  }
+
+  .home-hud__beam,
+  .home-hud__sonar {
+    display: none !important;
   }
 }
 
@@ -648,6 +891,19 @@ html:not(.dark) .home-hud__arc--alt {
   filter: drop-shadow(0 0 4px rgba(109, 40, 217, 0.35));
 }
 
+/* 浅色：光束与亮点换成青色系，避免用深色荧光 */
+html:not(.dark) .home-hud__beam-wedge {
+  fill: url(#hudBeamGradLight);
+}
+
+html:not(.dark) .home-hud__beam-edge {
+  filter: drop-shadow(0 0 5px rgba(8, 145, 178, 0.7));
+}
+
+html:not(.dark) .home-hud__blip-dot {
+  filter: drop-shadow(0 0 6px rgba(8, 145, 178, 0.85));
+}
+
 html:not(.dark) .home-hud__feed-title {
   color: #0f172a;
 }
@@ -659,6 +915,13 @@ html:not(.dark) .home-hud__feed-meta {
 
 html:not(.dark) .home-hud__feed--hit {
   border-color: rgba(5, 150, 105, 0.55);
+}
+
+html:not(.dark) .home-hud__feed--blip {
+  border-color: rgba(8, 145, 178, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(8, 145, 178, 0.18),
+    0 0 20px rgba(8, 145, 178, 0.16);
 }
 
 .VPHero.has-image .image-bg {
