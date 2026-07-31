@@ -1,22 +1,27 @@
 <template>
   <section v-if="recent.length" class="home-tx" aria-label="最新文章">
-    <div class="home-tx__head">
-      <span class="home-tx__frame" aria-hidden="true" />
-      <span class="home-tx__dot" aria-hidden="true" />
-      <span class="home-tx__tag">RECENT TX</span>
-      <span class="home-tx__meta">最新文章 · {{ recent.length }}</span>
+    <div class="home-tx__inner">
+      <div class="home-tx__head">
+        <span class="home-tx__frame" aria-hidden="true" />
+        <span class="home-tx__dot" aria-hidden="true" />
+        <span class="home-tx__tag">RECENT TX</span>
+        <span class="home-tx__sep" aria-hidden="true">/</span>
+        <span class="home-tx__label">最新文章</span>
+        <span class="home-tx__meta">{{ recent.length }}</span>
+      </div>
+      <ul class="home-tx__list">
+        <li v-for="(item, index) in recent" :key="item.href" class="home-tx__item">
+          <a class="home-tx__link" :href="item.href" :title="item.title">
+            <span class="home-tx__status" aria-hidden="true" />
+            <span class="home-tx__idx">{{ String(index + 1).padStart(2, '0') }}</span>
+            <span class="home-tx__section">{{ item.section }}</span>
+            <span class="home-tx__title">{{ item.title }}</span>
+            <span class="home-tx__stamp">{{ item.stamp }}</span>
+            <span class="home-tx__go" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
     </div>
-    <ul class="home-tx__list">
-      <li v-for="(item, index) in recent" :key="item.href" class="home-tx__item">
-        <a class="home-tx__link" :href="item.href" :title="item.title">
-          <span class="home-tx__status" aria-hidden="true" />
-          <span class="home-tx__idx">{{ String(index + 1).padStart(2, '0') }}</span>
-          <span class="home-tx__section">{{ item.section }}</span>
-          <span class="home-tx__title">{{ item.title }}</span>
-          <span class="home-tx__stamp">{{ item.stamp }}</span>
-        </a>
-      </li>
-    </ul>
   </section>
 </template>
 
@@ -112,7 +117,7 @@ function buildRecent(limit = 3): TxItem[] {
     if (!title || title.length < 2) continue
     const { ts, stamp } = dateFrom(String(raw ?? ''))
     list.push({
-      title: title.length > 48 ? `${title.slice(0, 46)}…` : title,
+      title: title.length > 64 ? `${title.slice(0, 62)}…` : title,
       section: sectionOf(norm),
       href: hrefFrom(norm),
       stamp,
@@ -126,18 +131,31 @@ const recent = buildRecent(3)
 </script>
 
 <style scoped>
+/* 独立面板：在主题大卡外，自有容器与层级 */
 .home-tx {
   position: relative;
   z-index: 1;
   width: 100%;
-  margin-top: auto;
-  padding-top: 10px;
-  padding-bottom: 4px;
-  border-top: 1px solid rgba(34, 211, 238, 0.35);
+  margin: 18px auto 0;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.home-tx__inner {
+  position: relative;
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 14px 16px 12px;
+  border: 1px solid rgba(34, 211, 238, 0.38);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #0a1524 0%, #071018 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 28px rgba(0, 0, 0, 0.28);
   overflow: hidden;
 }
 
-.home-tx::before {
+.home-tx__inner::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -147,11 +165,11 @@ const recent = buildRecent(3)
     0deg,
     transparent 0,
     transparent 3px,
-    rgba(34, 211, 238, 0.07) 3px,
-    rgba(34, 211, 238, 0.07) 4px
+    rgba(34, 211, 238, 0.05) 3px,
+    rgba(34, 211, 238, 0.05) 4px
   );
   animation: homeTxScan 7s linear infinite;
-  opacity: 1;
+  opacity: 0.7;
 }
 
 .home-tx__head {
@@ -160,8 +178,8 @@ const recent = buildRecent(3)
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
-  padding: 5px 8px 5px 10px;
+  margin-bottom: 10px;
+  padding: 7px 10px 7px 12px;
   border: 1px solid rgba(34, 211, 238, 0.45);
   background: rgba(4, 12, 22, 0.85);
   box-shadow:
@@ -169,12 +187,11 @@ const recent = buildRecent(3)
     0 0 12px rgba(34, 211, 238, 0.12);
   font-family: var(--tech-font-mono, 'JetBrains Mono', ui-monospace, monospace);
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(148, 163, 184, 0.95);
 }
 
-/* 角标框 */
 .home-tx__frame {
   position: absolute;
   inset: 0;
@@ -206,12 +223,23 @@ const recent = buildRecent(3)
   text-shadow: 0 0 12px rgba(34, 211, 238, 0.65);
 }
 
+.home-tx__sep {
+  color: #475569;
+  letter-spacing: 0;
+}
+
+.home-tx__label {
+  letter-spacing: 0.08em;
+  text-transform: none;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
 .home-tx__meta {
   margin-left: auto;
   letter-spacing: 0.06em;
-  text-transform: none;
-  color: #64748b;
   font-variant-numeric: tabular-nums;
+  color: #64748b;
 }
 
 .home-tx__list {
@@ -222,28 +250,44 @@ const recent = buildRecent(3)
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .home-tx__link {
   display: grid;
-  grid-template-columns: 8px 1.8em 5.2em minmax(0, 1fr) auto;
+  grid-template-columns: 8px 1.8em 5.2em minmax(0, 1fr) auto auto;
   align-items: center;
-  gap: 7px;
-  padding: 6px 6px;
-  border-radius: 2px;
+  gap: 8px;
+  padding: 11px 12px;
+  border-radius: 6px;
+  border: 1px solid transparent;
   text-decoration: none;
   color: inherit;
-  transition: background-color 0.15s ease;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .home-tx__link:hover {
-  background: rgba(34, 211, 238, 0.1);
+  background: rgba(34, 211, 238, 0.12);
+  border-color: rgba(34, 211, 238, 0.28);
+}
+
+.home-tx__link:focus-visible {
+  outline: 2px solid rgba(34, 211, 238, 0.75);
+  outline-offset: 2px;
 }
 
 .home-tx__link:hover .home-tx__title {
   color: #ffffff;
   text-shadow: 0 0 10px rgba(34, 211, 238, 0.35);
+}
+
+.home-tx__link:hover .home-tx__go {
+  color: #67e8f9;
+  opacity: 1;
+  transform: translateX(2px);
 }
 
 .home-tx__status {
@@ -266,7 +310,8 @@ const recent = buildRecent(3)
 
 .home-tx__idx,
 .home-tx__section,
-.home-tx__stamp {
+.home-tx__stamp,
+.home-tx__go {
   font-family: var(--tech-font-mono, 'JetBrains Mono', ui-monospace, monospace);
   font-size: 11px;
   letter-spacing: 0.06em;
@@ -291,9 +336,9 @@ const recent = buildRecent(3)
 .home-tx__title {
   min-width: 0;
   font-family: var(--tech-font-mono, 'JetBrains Mono', ui-monospace, monospace);
-  font-size: 12.5px;
-  font-weight: 600;
-  line-height: 1.3;
+  font-size: 13.5px;
+  font-weight: 650;
+  line-height: 1.35;
   color: #f8fafc;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -302,9 +347,18 @@ const recent = buildRecent(3)
 }
 
 .home-tx__stamp {
-  color: #475569;
+  color: #64748b;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+
+.home-tx__go {
+  color: #475569;
+  opacity: 0.55;
+  transition:
+    color 0.15s ease,
+    opacity 0.15s ease,
+    transform 0.15s ease;
 }
 
 @keyframes homeTxPulse {
@@ -328,8 +382,16 @@ const recent = buildRecent(3)
   }
 }
 
-/* 深色小屏：RECENT TX 头栏略提亮（完整选择器进 :global，避免泄漏到 html） */
 @media (max-width: 960px) {
+  .home-tx {
+    margin-top: 14px;
+    padding: 0 16px;
+  }
+
+  .home-tx__inner {
+    padding: 12px 12px 10px;
+  }
+
   :global(html.dark .home-tx__head) {
     background: rgba(10, 24, 40, 0.88);
     border-color: rgba(34, 211, 238, 0.55);
@@ -344,14 +406,16 @@ const recent = buildRecent(3)
     grid-template-columns: 8px 1.8em minmax(0, 1fr) auto;
     grid-template-areas:
       'status idx section stamp'
-      'status idx title title';
-    row-gap: 2px;
+      'status idx title title'
+      'status idx go go';
+    row-gap: 3px;
+    padding: 12px 10px;
   }
 
   .home-tx__status {
     grid-area: status;
     align-self: start;
-    margin-top: 5px;
+    margin-top: 6px;
   }
 
   .home-tx__idx {
@@ -370,69 +434,113 @@ const recent = buildRecent(3)
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    font-size: 14px;
   }
 
   .home-tx__stamp {
     grid-area: stamp;
   }
+
+  .home-tx__go {
+    grid-area: go;
+    justify-self: start;
+    opacity: 0.8;
+  }
 }
 
-:global(html:not(.dark) .home-tx) {
-  border-top-color: rgba(8, 145, 178, 0.28);
+:global(html:not(.dark) .home-tx__inner) {
+  background: linear-gradient(180deg, #f0f9fb 0%, #e8f4f7 100%);
+  border-color: rgba(8, 145, 178, 0.26);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 6px 20px rgba(15, 23, 42, 0.05);
 }
 
-:global(html:not(.dark) .home-tx::before) {
+:global(html:not(.dark) .home-tx__inner::before) {
   background: repeating-linear-gradient(
     0deg,
     transparent 0,
     transparent 3px,
-    rgba(8, 145, 178, 0.05) 3px,
-    rgba(8, 145, 178, 0.05) 4px
+    rgba(14, 116, 144, 0.035) 3px,
+    rgba(14, 116, 144, 0.035) 4px
   );
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 :global(html:not(.dark) .home-tx__head) {
-  border-color: rgba(8, 145, 178, 0.3);
-  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(8, 145, 178, 0.28);
+  background: rgba(236, 246, 249, 0.95);
   color: #64748b;
   box-shadow: none;
 }
 
+:global(html:not(.dark) .home-tx__frame) {
+  background:
+    linear-gradient(#0e7490, #0e7490) 0 0 / 8px 1.5px no-repeat,
+    linear-gradient(#0e7490, #0e7490) 0 0 / 1.5px 8px no-repeat,
+    linear-gradient(#6d28d9, #6d28d9) 100% 0 / 8px 1.5px no-repeat,
+    linear-gradient(#6d28d9, #6d28d9) 100% 0 / 1.5px 8px no-repeat,
+    linear-gradient(#6d28d9, #6d28d9) 0 100% / 8px 1.5px no-repeat,
+    linear-gradient(#6d28d9, #6d28d9) 0 100% / 1.5px 8px no-repeat,
+    linear-gradient(#0e7490, #0e7490) 100% 100% / 8px 1.5px no-repeat,
+    linear-gradient(#0e7490, #0e7490) 100% 100% / 1.5px 8px no-repeat;
+}
+
 :global(html:not(.dark) .home-tx__tag) {
-  color: #0891b2;
+  color: #0e7490;
   text-shadow: none;
 }
 
-:global(html:not(.dark) .home-tx__meta) {
+:global(html:not(.dark) .home-tx__sep) {
   color: #94a3b8;
 }
 
-:global(html:not(.dark) .home-tx__dot),
-:global(html:not(.dark) .home-tx__status) {
-  background: #0891b2;
-  box-shadow: 0 0 6px rgba(8, 145, 178, 0.35);
+:global(html:not(.dark) .home-tx__label) {
+  color: #475569;
+}
+
+:global(html:not(.dark) .home-tx__meta) {
+  color: #64748b;
+}
+
+:global(html:not(.dark)) .home-tx__dot,
+:global(html:not(.dark)) .home-tx__status {
+  background: #0e7490;
+  box-shadow: none;
+  animation: homeTxPulseLight 2s ease-in-out infinite;
+}
+
+@keyframes homeTxPulseLight {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 :global(html:not(.dark) .home-tx__idx) {
-  color: #0891b2;
+  color: #0e7490;
   text-shadow: none;
 }
 
 :global(html:not(.dark) .home-tx__section) {
-  color: #64748b;
+  color: #475569;
 }
 
 :global(html:not(.dark) .home-tx__title) {
   color: #0f172a;
 }
 
-:global(html:not(.dark) .home-tx__stamp) {
-  color: #94a3b8;
+:global(html:not(.dark) .home-tx__stamp),
+:global(html:not(.dark) .home-tx__go) {
+  color: #64748b;
 }
 
 :global(html:not(.dark) .home-tx__link:hover) {
-  background: rgba(8, 145, 178, 0.06);
+  background: rgba(8, 145, 178, 0.09);
+  border-color: rgba(8, 145, 178, 0.22);
 }
 
 :global(html:not(.dark) .home-tx__link:hover .home-tx__title) {
@@ -440,10 +548,18 @@ const recent = buildRecent(3)
   text-shadow: none;
 }
 
+:global(html:not(.dark) .home-tx__link:hover .home-tx__go) {
+  color: #0e7490;
+}
+
+:global(html:not(.dark) .home-tx__link:focus-visible) {
+  outline-color: rgba(8, 145, 178, 0.7);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-tx__dot,
   .home-tx__status,
-  .home-tx::before {
+  .home-tx__inner::before {
     animation: none;
   }
 
@@ -452,7 +568,8 @@ const recent = buildRecent(3)
     opacity: 0.9;
   }
 
-  .home-tx__link {
+  .home-tx__link,
+  .home-tx__go {
     transition: none;
   }
 }

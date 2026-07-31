@@ -9,6 +9,7 @@ import { h, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import Documate from '@documate/vue'
 import { initCardTilt } from './cardTilt'
 import { initHomeScrollImmersion } from './homeScrollImmersion'
+import { initNavScreenScrollLock } from './navScreenScrollLock'
 import { useData, useRoute } from 'vitepress'
 import Comments from './components/Comments.vue'
 import ArticleMetadata from './components/ArticleMetadata.vue'
@@ -61,6 +62,14 @@ export default {
         console.error('Error during setup:', error);
       }
 
+      let stopNavScrollLock: (() => void) | undefined
+      onMounted(() => {
+        stopNavScrollLock = initNavScreenScrollLock()
+      })
+      onUnmounted(() => {
+        stopNavScrollLock?.()
+      })
+
       let stopHomeImmersion: (() => void) | undefined
       const syncHomeImmersion = () => {
         stopHomeImmersion?.()
@@ -100,8 +109,8 @@ export default {
         'layout-top': () => h(TechBackground),
         'home-hero-before': () => [h(HomeHeroEyebrow), h(HomeHeroCopySwitch)],
         'home-hero-image': () => h(HomeHeroOrb),
-        /* 放进 Hero .main 内、按钮下方，填满卡片下半空洞 */
-        'home-hero-actions-after': () => h(HomeMetricsStrip),
+        /* 主题大卡外独立区块：RECENT / 最新文章 */
+        'home-hero-after': () => h(HomeMetricsStrip),
         'home-features-before': () => h(HomeSectionHeader),
         'home-features-after': () => h(HomeBottomCta),
         'nav-bar-content-before': () =>
