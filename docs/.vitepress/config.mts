@@ -515,6 +515,13 @@ html:not(.dark) {
 
     writeFileSync(join(siteConfig.outDir, 'feed.xml'), feed.rss2(), 'utf-8')
   },
+  vite: {
+    build: {
+      // Large lazy chunks (local search index / async AI search) stay above the
+      // default limit; the eager theme bundle is split via async components.
+      chunkSizeWarningLimit: 1700,
+    },
+  },
   themeConfig: {
     related: relatedIndex,
     logo: '/panda.png',

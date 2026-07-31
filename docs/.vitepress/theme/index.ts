@@ -6,8 +6,8 @@ import './custom.css'
 import './style/mobile.css'
 
 import '@documate/vue/dist/style.css'
-import { h, onMounted, onUnmounted, nextTick, watch } from 'vue'
-import Documate from '@documate/vue'
+import { defineAsyncComponent, h, onMounted, onUnmounted, nextTick, watch } from 'vue'
+const Documate = defineAsyncComponent(() => import('@documate/vue'))
 import { initCardTilt } from './cardTilt'
 import { initHomeScrollImmersion } from './homeScrollImmersion'
 import { initNavScreenScrollLock } from './navScreenScrollLock'

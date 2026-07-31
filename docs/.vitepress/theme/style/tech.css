@@ -411,7 +411,6 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
     color 0.35s ease;
 }
 
-.VPFeature .icon :deep(svg),
 .VPFeature .icon svg {
   display: block;
   width: 22px;
