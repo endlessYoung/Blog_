@@ -560,7 +560,6 @@ html:not(.dark) {
             { text: 'WindowManagerService', link: '/Android/WindowManagerService' },
             { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
             { text: 'HWC的合成策略', link: '/Android/HWC的合成策略' },
-            { text: 'Surface和SurfaceHolder', link: '/Android/Surface和SurfaceHolder' },
             { text: 'Skia', link: '/Android/Skia' },
             { text: 'vulkan', link: '/Android/vulkan' },
           ],
@@ -867,7 +866,6 @@ html:not(.dark) {
             { text: '协程', link: '/Kotlin/协程' },
             { text: 'Object关键字', link: '/Kotlin/Object关键字' },
             { text: 'Kotlin中的挂起函数', link: '/Kotlin/Kotlin中的挂起函数' },
-            { text: '集合', link: '/Kotlin/集合' },
           ],
         },
         {
@@ -876,7 +874,6 @@ html:not(.dark) {
           items: [
             { text: '协程', link: '/Kotlin/协程' },
             { text: '协程作用域', link: '/Kotlin/协程作用域' },
-            { text: '协程Job', link: '/Kotlin/协程Job' },
             { text: '协程Job', link: '/Kotlin/协程Job' },
             { text: 'coroutineContext', link: '/Kotlin/coroutineContext' },
             { text: '协程的异常处理', link: '/Kotlin/协程的异常处理' },

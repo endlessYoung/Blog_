@@ -801,3 +801,12 @@ html:not(.dark) .vp-doc :not(pre) > code {
     animation: none !important;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* Doc footer: hide built-in last-updated & prev/next pager                   */
+/* (covered by ArticleMetadata top meta and SeriesNav series card)            */
+/* -------------------------------------------------------------------------- */
+.VPDocFooter {
+  display: none;
+}
+
