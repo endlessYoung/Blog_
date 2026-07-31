@@ -810,3 +810,9 @@ html:not(.dark) .vp-doc :not(pre) > code {
   display: none;
 }
 
+
+/* Article images are clickable to open the lightbox viewer */
+.vp-doc img {
+  cursor: zoom-in;
+}
+

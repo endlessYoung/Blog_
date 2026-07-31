@@ -14,6 +14,8 @@ import { initNavScreenScrollLock } from './navScreenScrollLock'
 import { useData, useRoute } from 'vitepress'
 import Comments from './components/Comments.vue'
 import SeriesNav from './components/SeriesNav.vue'
+import ImageViewer from './components/ImageViewer.vue'
+import { initImageViewer } from './imageViewer'
 import ArticleMetadata from './components/ArticleMetadata.vue'
 import TechBackground from './components/TechBackground.vue'
 import HomeHeroEyebrow from './components/home/HomeHeroEyebrow.vue'
@@ -72,6 +74,10 @@ export default {
         stopNavScrollLock?.()
       })
 
+      onMounted(() => {
+        initImageViewer()
+      })
+
       let stopHomeImmersion: (() => void) | undefined
       const syncHomeImmersion = () => {
         stopHomeImmersion?.()
@@ -107,7 +113,8 @@ export default {
       })
     },
     render() {
-      return h(Theme.Layout, null, {
+      return [
+        h(Theme.Layout, null, {
         'layout-top': () => h(TechBackground),
         'home-hero-before': () => [h(HomeHeroEyebrow), h(HomeHeroCopySwitch)],
         'home-hero-image': () => h(HomeHeroOrb),
@@ -118,8 +125,10 @@ export default {
         'nav-bar-content-before': () =>
           h(Documate, { endpoint: 'https://izbdbdndfp.us.aircode.run/ask' }),
         'doc-before': () => h(ArticleMetadata),
-        'doc-after': () => [h(SeriesNav), h(Comments)]
-      })
+        'doc-after': () => [h(SeriesNav), h(Comments)],
+        }),
+        h(ImageViewer),
+      ]
     },
   },
 }
