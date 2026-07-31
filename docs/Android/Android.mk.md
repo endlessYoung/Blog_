@@ -28,7 +28,7 @@ Android.mk 基本格式如下
 
 使用Android.mk 可以编译多个目标文件：
 
-![alt text](image-38.png)
+![alt text](image-38.webp)
 
 1. 编译动态库
 
@@ -66,7 +66,7 @@ LOCAL_COPY_HEADERS := hellos.h
 
 ## 4.Android.mk 深入学习二
 
-![alt text](image-39.png)
+![alt text](image-39.webp)
 
 1. 引用静态库
 
@@ -102,7 +102,7 @@ LOCAL_C_INCLUDES = $(INCLUDES)
 
 ## 5.Android.mk 深入学习三
 
-![alt text](image-40.png)
+![alt text](image-40.webp)
 
 1. 编译apk
 

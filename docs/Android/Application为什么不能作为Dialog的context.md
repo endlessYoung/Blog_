@@ -40,7 +40,7 @@ Dialog的context只能是Activity，而不能是Application，不然会导致弹
 Android会在`SystemServiceRegistry`初始化的时候将各种服务以及服务的实现方法注册到这个集合中：
 
 ![alt text](image-53.png)
-![alt text](image-54.png)
+![alt text](image-54.webp)
 
 WindowManager服务的注册方式：
 

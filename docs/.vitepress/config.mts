@@ -266,6 +266,13 @@ export default defineConfig({
     lineNumbers: true,
     config: (md: any) => {
       md.use(markdownItKatex)
+      const defaultImage = md.renderer.rules.image
+      md.renderer.rules.image = (tokens: any, idx: number, options: any, env: any, self: any) => {
+        const token = tokens[idx]
+        token.attrSet('loading', 'lazy')
+        token.attrSet('decoding', 'async')
+        return defaultImage ? defaultImage(tokens, idx, options, env, self) : self.renderToken(tokens, idx, options)
+      }
       const fence = md.renderer.rules.fence
       md.renderer.rules.fence = (tokens: any, idx: number, options: any, env: any, self: any) => {
         const token = tokens[idx]

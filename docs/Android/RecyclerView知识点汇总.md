@@ -17,7 +17,7 @@ ItemDecoration - 负责绘制item的分割线
 ItemAnimator - 为item的一般操作添加动画效果
 
 ![alt text](image-73.png)
-![alt text](image-74.png)
+![alt text](image-74.webp)
 
 adapter的作用是什么
 
