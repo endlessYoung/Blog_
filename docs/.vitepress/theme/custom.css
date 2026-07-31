@@ -5,7 +5,9 @@
  */
 
 :root {
-  --cyber-font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --cyber-font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  --vp-font-family-base: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --vp-font-family-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
   --cyber-grid-size: 30px;
 }
 

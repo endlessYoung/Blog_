@@ -1,17 +1,11 @@
 :root {
-  --tech-font-ui: 'Inter', ui-sans-serif, system-ui, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --tech-font-display: 'Inter', var(--tech-font-ui);
-  --tech-font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  /* Hero 三行：锐利几何无衬线 / 青蓝中文无衬线 / 终端 mono */
-  --tech-font-hero-name: 'Space Grotesk', 'Sora', 'Segoe UI', system-ui, var(--tech-font-display);
-  --tech-font-hero-slogan:
-    'Noto Sans SC',
-    'PingFang SC',
-    'Microsoft YaHei',
-    'Noto Sans CJK SC',
-    ui-sans-serif,
-    sans-serif;
-  --tech-font-hero-tagline: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, monospace;
+  --tech-font-ui: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --tech-font-display: var(--tech-font-ui);
+  --tech-font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Fira Code', Consolas, 'Liberation Mono', monospace;
+  /* Hero 三行：全部走系统字体栈，去掉 Google Fonts 网络字体以加速首屏 */
+  --tech-font-hero-name: 'Segoe UI', system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --tech-font-hero-slogan: system-ui, -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --tech-font-hero-tagline: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
 }
 
 /* ???? :root ????? VP ??????? :root?????????? */

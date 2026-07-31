@@ -326,16 +326,6 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', href: '/Blog_/favicon.ico' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/Blog_/feed.xml' }], // 也是放在/public目录中
-    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
-    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
-    [
-      'link',
-      {
-        rel: 'stylesheet',
-        // Hero：Space Grotesk / Noto Sans SC / IBM Plex Mono；全局保留 Inter + JetBrains/Fira
-        href: 'https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=IBM+Plex+Mono:wght@300;400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@600;700&family=Space+Grotesk:wght@500;600;700&display=swap'
-      }
-    ],
     // Hero 霓虹标题 / 霓虹按钮：深浅色双套变量（与 theme/custom.css 双保险）
     [
       'style',
@@ -367,8 +357,7 @@ html:not(.dark) {
 }
       `.trim()
     ],
-    ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css' }],
-    ['link', { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css' }],
+    ['link', { rel: 'stylesheet', href: '/Blog_/katex.min.css' }],
     ['meta', { name: 'msvalidate.01', content: 'C134079F38DF28B5CB2B9AE952C0CBC7' }],
     ['meta', { name: 'google-site-verification', content: 'bNLBnwMb4Bl-KmTweCSRTZaLa4ZRD2Z7YgqTjpUU-Hw' }],
     ['meta', { name: 'robots', content: 'index, follow' }],
@@ -524,7 +513,7 @@ html:not(.dark) {
   },
   themeConfig: {
     related: relatedIndex,
-    logo: '/panda.png',
+    logo: '/panda.webp',
     darkModeSwitchLabel: "🌓",
     lastUpdated: {
       text: 'Updated at',

@@ -6,8 +6,8 @@ import './custom.css'
 import './style/mobile.css'
 
 import '@documate/vue/dist/style.css'
-import { defineAsyncComponent, h, onMounted, onUnmounted, nextTick, watch } from 'vue'
-const Documate = defineAsyncComponent(() => import('@documate/vue'))
+import { h, onMounted, onUnmounted, nextTick, watch } from 'vue'
+import DocumateLazy from './components/DocumateLazy.vue'
 import { initCardTilt } from './cardTilt'
 import { initHomeScrollImmersion } from './homeScrollImmersion'
 import { initNavScreenScrollLock } from './navScreenScrollLock'
@@ -125,7 +125,7 @@ export default {
         'home-features-before': () => h(HomeSectionHeader),
         'home-features-after': () => h(HomeBottomCta),
         'nav-bar-content-before': () =>
-          h(Documate, { endpoint: 'https://izbdbdndfp.us.aircode.run/ask' }),
+          h(DocumateLazy, { endpoint: 'https://izbdbdndfp.us.aircode.run/ask' }),
         'doc-before': () => h(ArticleMetadata),
         'doc-after': () => [h(SeriesNav), h(RelatedArticles), h(Comments)],
         }),
