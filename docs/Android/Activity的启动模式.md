@@ -1,4 +1,8 @@
 ---
+title: Activity的启动模式
+description: 可在AndroidManifest.xml中配置该Activity的LaunchMode为以下配置项。
+categories: [Android]
+tags: [android, Activity]
 created: 2023-11-05
 ---
 

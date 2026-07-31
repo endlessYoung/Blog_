@@ -1,4 +1,8 @@
 ---
+title: Notification从发送到显示的流程简析
+description: Notificatio主要由三部分组成：发送/更新/取消通知的应用app、系统通知服务、NotificationManagerService 和 通知监听器 NotificationListenerService。应用可以调用 NotificationMana?
+categories: [Android]
+tags: [android, Notification]
 created: 2024-12-01
 ---
 

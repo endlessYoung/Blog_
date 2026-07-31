@@ -1,4 +1,8 @@
 ---
+title: Object关键字
+description: object 关键字在 Kotlin 中用于定义单例对象，即只有一个实例的类。它为该实例的全局访问点的创建提供了便利。
+categories: [Kotlin]
+tags: [kotlin, Object]
 created: 2024-01-01
 ---
 

@@ -1,4 +1,8 @@
 ---
+title: Channel
+description: Channel 是一种热流（Hot Stream） 的通信机制，类似于Go语言中的channel。它允许协程之间进行数据传递和同步。Channel可以被多个生产者和消费者共享，支持双向通信。
+categories: [Kotlin]
+tags: [kotlin, Channel]
 created: 2025-04-21
 ---
 

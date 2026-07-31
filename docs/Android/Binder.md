@@ -1,4 +1,8 @@
 ---
+title: Binder
+description: 在Android系统中，Binder 是一种用于进程间通信（Inter-Process Communication，IPC）的机制。应用程序是由Activity、Service、Broadcast Receiver和Content Provider四种类型的组?
+categories: [Android]
+tags: [android, Binder]
 created: 2023-10-27
 ---
 

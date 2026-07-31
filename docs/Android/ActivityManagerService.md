@@ -1,4 +1,8 @@
 ---
+title: ActivityManagerService
+description: AMS 是Android提供的一个用于管理Activity运行状态的系统进程，也是编写APK应用时使用最频繁的系统服务。
+categories: [Android]
+tags: [android, ActivityManagerService]
 created: 2024-08-19
 ---
 

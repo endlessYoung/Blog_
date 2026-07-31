@@ -1,4 +1,8 @@
 ---
+title: Handler、MessageQueue和Looper
+description: Looper不断获取MessageQueue中的一个Message，然后交给Handler来处理。
+categories: [Android]
+tags: [android, Handler, MessageQueue, Looper]
 created: 2024-08-13
 ---
 

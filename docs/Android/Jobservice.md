@@ -1,4 +1,8 @@
 ---
+title: JobService
+description: JobService 是一个安卓系统组件，继承自Sevice（实际为系统托管的特殊服务），用于在满足任务条件时由系统唤醒并运行。是 JobScheduler 派发任务时调用的组件，用于执行具体的后台逻辑。
+categories: [Android]
+tags: [android, Jobservice]
 created: 2024-05-30
 ---
 

@@ -1,4 +1,8 @@
 ---
+title: Handler
+description: Handler 用于线程间通信的消息传递机制。Handler其实就是在主线程起一个子线程，子线程运行并生成 Message，Looper 获取Message并传递给Handler，Handler逐个获取子线程中的Message。
+categories: [Android]
+tags: [android, Handler]
 created: 2023-12-17
 ---
 

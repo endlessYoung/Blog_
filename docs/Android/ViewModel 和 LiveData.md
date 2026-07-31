@@ -1,4 +1,8 @@
 ---
+title: ViewModel 和 LiveData
+description: 是一个用于管理和存储与用户界面相关的数据的类。它设计用于存储和管理与界面相关的数据，例如 Activity 或 Fragment 的 UI 数据，而不受设备配置变化（如旋转）的影响。
+categories: [Android]
+tags: [android, ViewModel, LiveData]
 created: 2024-06-16
 ---
 

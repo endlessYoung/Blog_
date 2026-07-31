@@ -1,4 +1,8 @@
 ---
+title: ViewTree的遍历
+description: 如果整个UI界面只是由单一的View对象来描述的，那么它既可以占据整个屏幕空间，也可以有选择地在屏幕上任何一片区域上显示。不过这种理想的情况是不存在的。通常我们面对的View层级都比较深，涉及的view对象比较多。此时系统就要综合来考虑各个view提出的需求。?
+categories: [Android]
+tags: [android, ViewTree]
 created: 2024-08-11
 ---
 

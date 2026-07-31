@@ -1,4 +1,8 @@
 ---
+title: volatile和synchronize的区别
+description: volatile 和 synchronized 都是 Java 中用于处理多线程编程的关键字，但它们的作用和机制有所不同
+categories: [Java]
+tags: [java, volatile, synchronize]
 created: 2024-05-23
 ---
 

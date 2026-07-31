@@ -1,4 +1,8 @@
 ---
+title: Retrofit
+description: Retrofit 是一个类型安全的 HTTP 客户端，主要用于与 RESTful API 进行交互，简化了网络请求的流程。
+categories: [Android]
+tags: [android, Retrofit]
 created: 2025-01-22
 ---
 

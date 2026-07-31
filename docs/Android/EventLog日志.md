@@ -1,4 +1,8 @@
 ---
+title: EventLog日志
+description: "| Num | TagName | 格式 | 功能 | |-------|-------------------------------|-------------------------------------------------------------?"
+categories: [Android]
+tags: [android, EventLog]
 created: 2024-06-12
 ---
 

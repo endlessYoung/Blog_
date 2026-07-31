@@ -1,4 +1,8 @@
 ---
+title: Handler.postDelayed()消息时间准确吗
+description: Handler.postDelayed() 方法用于在延迟一定时间后执行一个任务，它是 Android 中常用的延时执行操作的方式。尽管这种方法在许多场景中非常实用，但它的时间准确性和可靠性可能会受到多种因素的影响。
+categories: [Android]
+tags: [android, Handler, postDelayed]
 created: 2024-12-22
 ---
 

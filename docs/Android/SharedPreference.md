@@ -1,4 +1,8 @@
 ---
+title: SharedPreference
+description: SharedPreferences是Android的一个接口类，是Android 数据存储（保存内部）的一种方法。主要以*.xml的形式保存在Android /data/data/com.*包名/shared_prefs下，SharedPreferences?
+categories: [Android]
+tags: [android, SharedPreference]
 created: 2023-12-27
 ---
 

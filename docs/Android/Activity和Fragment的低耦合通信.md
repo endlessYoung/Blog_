@@ -1,4 +1,8 @@
 ---
+title: Activity和Fragment的低耦合通信
+categories: [Android]
+tags: [android, Activity, Fragment]
+noindex: true
 created: 2024-07-17
 ---
 

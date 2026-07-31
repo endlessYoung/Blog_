@@ -1,4 +1,8 @@
 ---
+title: Watchdog
+description: Watchdog的中文的“看门狗”，有保护的意思。最早引入Watchdog是在单片机系统中，Linux也引入了Watchdog，在Linux内核下，当Watchdog启动后，便设定了一个定时器，如果在超时时间内没有对/dev/Watchdog进行写操作，则会导?
+categories: [Android]
+tags: [android, Watchdog]
 created: 2024-04-05
 ---
 

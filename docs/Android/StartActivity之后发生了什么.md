@@ -1,4 +1,8 @@
 ---
+title: StartActivity之后发生了什么
+description: 由于Android系统是基于Linux的，原则上说它的应用程序并不只是APK这一种类型，换句话说，所有Linux支持的应用程序都可以通过一定方式运行在Android系统上（比如一些系统级的应用程序）
+categories: [Android]
+tags: [android, StartActivity]
 created: 2024-08-15
 ---
 

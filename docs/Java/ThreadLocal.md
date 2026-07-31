@@ -1,4 +1,8 @@
 ---
+title: ThreadLocal
+description: ThreadLocal是java提供的一个用于线程本地存储的类。它为每个线程提供独立的变量副本。确保变量再多线程环境下的线程安全。每个线程访问ThreadLocal时，都会有自己专属的变量副本，互不干扰，避免了并发访问时共享变量的竞争问题。
+categories: [Java]
+tags: [java, ThreadLocal]
 created: 2024-11-03
 ---
 

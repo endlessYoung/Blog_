@@ -1,4 +1,8 @@
 ---
+title: DESCAN
+description: DBSCAN（Density-Based Spatial Clustering of Applications with Noise）是一种密度聚类算法，它基于数据点的密度来发现任意形状的簇，并能够识别噪声数据点。DBSCAN 将密度定义为某个点周围的邻域内的?
+categories: [Ai]
+tags: [ai, DESCAN]
 created: 2024-05-05
 ---
 

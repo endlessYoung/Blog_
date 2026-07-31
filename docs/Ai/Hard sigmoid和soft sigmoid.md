@@ -1,4 +1,8 @@
 ---
+title: Hard sigmoid和soft sigmoid
+description: Hard sigmoid 和 soft sigmoid 是两种不同的激活函数，它们在神经网络中常被用作替代的激活函数。
+categories: [Ai]
+tags: [ai, Hard, sigmoid, soft]
 created: 2024-05-02
 ---
 

@@ -1,4 +1,8 @@
 ---
+title: String的intern方法
+description: String的intern方法用于在运行时将字符串添加到内部的字符串池中，并返回字符串池中的引用
+categories: [Java]
+tags: [java, String, intern]
 created: 2024-08-30
 ---
 

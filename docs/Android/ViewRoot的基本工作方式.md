@@ -1,4 +1,8 @@
 ---
+title: ViewRoot的基本工作方式
+description: 每一颗ViewTree只对应一个ViewRoot。它将和WindowManagerService进行一系列的通信，包括窗口注册，大小调整等，ViewRoot主要的触发源有两种： 比如某个View对象需要更新UI时，它会通过invalidate或者其他方式发起请?
+categories: [Android]
+tags: [android, ViewRoot]
 created: 2024-08-11
 ---
 

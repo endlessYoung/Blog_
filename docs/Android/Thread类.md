@@ -1,4 +1,8 @@
 ---
+title: Thread类
+description: 首先要区分线程和线程类的概念。线程是操作系统CPU资源分配的调度单元，属于抽象的范畴，而线程类实际上是可执行的代码。
+categories: [Android]
+tags: [android, Thread]
 created: 2024-08-15
 ---
 

@@ -1,4 +1,8 @@
 ---
+title: Activity
+description: Activity（活动）是Android应用程序中的一个核心组件，它通常用于表示用户界面的一部分。每个Activity都代表了一个屏幕或用户界面，用户可以与之交互。Activity负责管理用户界面的显示、用户输入的响应以及与其他组件的协作。
+categories: [Android]
+tags: [android, Activity]
 created: 2023-10-05
 ---
 

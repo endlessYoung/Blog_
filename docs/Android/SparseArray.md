@@ -1,4 +1,8 @@
 ---
+title: SparseArray
+description: Android提供了SparseArray，这也是一种KV形式的数据结构，提供了类似于Map的功能。但是实现方法却和HashMap不一样。它与Map相比，可以说是各有千秋。
+categories: [Android]
+tags: [android, SparseArray]
 created: 2024-07-08
 ---
 

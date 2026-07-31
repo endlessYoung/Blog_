@@ -1,4 +1,8 @@
 ---
+title: APK打包流程
+description: APK文件大致分为两个部分：代码 和 资源，所以打包也就分为这两个部分。 简要流程：
+categories: [Android]
+tags: [android, APK]
 created: 2024-09-03
 ---
 

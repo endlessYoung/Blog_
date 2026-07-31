@@ -1,4 +1,8 @@
 ---
+title: Manifest详解
+description: 在 Android 应用程序开发中，AndroidManifest.xml 是一个非常重要的文件，它描述了应用的基本信息、组件、权限等。
+categories: [Android]
+tags: [android, Manifest]
 created: 2024-06-16
 ---
 

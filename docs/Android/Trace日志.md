@@ -1,4 +1,8 @@
 ---
+title: Trace日志简介
+description: 在ANR日志中，重点关注主线程的堆栈跟踪。通常，主线程被阻塞的原因可能包括但不限于：
+categories: [Android]
+tags: [android, Trace]
 created: 2024-10-27
 ---
 

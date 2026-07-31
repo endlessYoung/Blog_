@@ -1,4 +1,8 @@
 ---
+title: RecyclerView和ListView区别
+description: "ListView 需要自定义ViewHolder,判断convertView是否为null，setTag()与getTag()的使用;RecyclerView有规定好的ViewHolder。 ListView 只支持垂直方向的，而RecyclerView，它里?"
+categories: [Android]
+tags: [android, RecyclerView, ListView]
 created: 2024-07-08
 ---
 

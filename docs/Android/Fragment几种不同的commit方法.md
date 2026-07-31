@@ -1,4 +1,8 @@
 ---
+title: Fragment几种不同的commit方法
+description: FragmentTransaction 是用于在 Android 应用中执行 Fragment 操作的类，如添加、替换、移除等
+categories: [Android]
+tags: [android, Fragment, commit]
 created: 2024-08-21
 ---
 

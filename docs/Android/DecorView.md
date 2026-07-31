@@ -1,4 +1,8 @@
 ---
+title: DecorView
+description: AMS管理着Activity生命周期，每当切换Activity状态时通过Binder告诉ActivityThread，ActivityThread通过Handler切换到主线程(UI线程）执行，最终分别调用到我们熟知的onCreate(xx)/onResume?
+categories: [Android]
+tags: [android, DecorView]
 created: 2024-07-08
 ---
 

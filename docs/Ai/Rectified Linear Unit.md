@@ -1,4 +1,8 @@
 ---
+title: Rectified Linear Unit
+description: Rectified Linear Unit (ReLU) 是一种常用的神经网络激活函数，它在深度学习中被广泛应用。
+categories: [Ai]
+tags: [ai, Rectified, Linear, Unit]
 created: 2024-05-02
 ---
 

@@ -1,4 +1,8 @@
 ---
+title: JVM分区
+description: JVM内存的管理与分区对于理解Java应用程序的性能、垃圾回收（GC）机制以及内存调优非常关键。JVM内存主要分为以下几个区域，每个区域都有特定的用途和管理机制。
+categories: [Java]
+tags: [java, JVM]
 created: 2024-08-30
 ---
 

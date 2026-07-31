@@ -1,4 +1,8 @@
 ---
+title: WMS中窗口的注册
+description: 首先先要明确一下PhoneWindow的概念和作用：其继承自Window类，表达了窗口的一种约束机制；而WMS中的Window则是一个抽象的概念，其有一个WindowState用于描述状态。可以简单理解为：PhoneWindow是应用进程端对于“窗口”的描述，?
+categories: [Android]
+tags: [android, WMS]
 created: 2024-08-11
 ---
 

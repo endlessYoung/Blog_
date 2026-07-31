@@ -1,4 +1,8 @@
 ---
+title: DataStore
+description: Jetpack DataStore是一种数据存储方案，可以使用 protocolBuffer 存储 键值对 或者 数据对象。其使用Kotlin 协程和 Flow，以 异步 和 事务一致性 的方式存储数据。推荐从SharedPreference迁移到DataSt?
+categories: [Android]
+tags: [android, DataStore]
 created: 2024-09-04
 ---
 

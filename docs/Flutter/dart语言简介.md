@@ -1,4 +1,8 @@
 ---
+title: dart语言简介
+description: Object 是 Dart 所有对象的根基类，也就是说在 Dart 中所有类型都是Object的子类(包括Function和Null)，所以任何类型的数据都可以赋值给Object声明的对象。 dynamic与Object声明的变量都可以赋值任意对象，且后期可以?
+categories: [Flutter]
+tags: [flutter, dart]
 created: 2025-04-13
 ---
 

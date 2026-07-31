@@ -1,4 +1,8 @@
 ---
+title: WindowManagerService（WMS）
+description: 从计算机的IO系统角度分析，WMS至少要完成两个功能：
+categories: [Android]
+tags: [android, WindowManagerService]
 created: 2024-07-26
 ---
 

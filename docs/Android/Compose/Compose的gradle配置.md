@@ -1,4 +1,8 @@
 ---
+title: Compose的gradle配置
+description: Jetpack Compose 是一个用于构建原生 Android UI 的现代工具包。它使用声明式函数来构建UI组件，不需要我们使用任何xml布局。
+categories: [Android]
+tags: [android, Compose, gradle]
 created: 2025-04-20
 ---
 

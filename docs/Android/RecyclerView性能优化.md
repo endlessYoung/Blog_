@@ -1,4 +1,8 @@
 ---
+title: RecyclerView性能优化
+description: RecyclerView 主要有三层缓存
+categories: [Android]
+tags: [android, RecyclerView]
 created: 2024-07-14
 ---
 

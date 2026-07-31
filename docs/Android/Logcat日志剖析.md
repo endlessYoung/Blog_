@@ -1,4 +1,8 @@
 ---
+title: Logcat日志剖析
+categories: [Android]
+tags: [android, Logcat]
+noindex: true
 created: 2024-06-12
 ---
 

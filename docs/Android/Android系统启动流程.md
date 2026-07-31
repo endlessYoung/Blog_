@@ -1,4 +1,8 @@
 ---
+title: Android系统启动流程
+description: 从手机开机开始涉及到的关键流程一般可分为以下五个步骤：
+categories: [Android]
+tags: [android]
 created: 2024-05-19
 ---
 

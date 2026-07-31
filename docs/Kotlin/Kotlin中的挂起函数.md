@@ -1,4 +1,8 @@
 ---
+title: kotlin中的挂起函数
+description: 在Kotlin中，可以使用suspend关键字标记函数，以指示它们可以被暂停和恢复。这些函数是长时间运行的函数，可以在协程中使用，是协程生态系统的核心部分。 许多库（如retrofit、room）在其API中使用这些挂起函数从网络或数据库加载数据。
+categories: [Kotlin]
+tags: [kotlin]
 created: 2024-01-01
 ---
 

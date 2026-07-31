@@ -1,4 +1,8 @@
 ---
+title: Service
+description: Service（服务）是Android应用程序的一个核心组件，它是一种后台运行的组件，用于执行长时间运行的任务，而不需要用户界面。Service通常用于处理与用户界面无关的操作，如下载文件、播放音乐、处理网络请求等。Service可以在应用程序的生命周期内独立?
+categories: [Android]
+tags: [android, Service]
 created: 2023-10-05
 ---
 

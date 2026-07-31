@@ -1,4 +1,8 @@
 ---
+title: Android文件系统
+description: 好的，让我们更全面地深入 Android 文件系统的各个方面，包括所有主要目录及其用途，以及文件系统的架构和管理。
+categories: [Android]
+tags: [android]
 created: 2024-11-03
 ---
 

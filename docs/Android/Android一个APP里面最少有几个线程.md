@@ -1,4 +1,8 @@
 ---
+title: Android一个APP里面最少有几个线程
+description: Android一个进程里面最少包含5个线程，分别为：
+categories: [Android]
+tags: [android, APP]
 created: 2024-10-09
 ---
 

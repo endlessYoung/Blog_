@@ -1,4 +1,8 @@
 ---
+title: AOSP架构
+description: AOSP 的软件堆栈包含以下层：
+categories: [Android]
+tags: [android, AOSP]
 created: 2024-06-12
 ---
 

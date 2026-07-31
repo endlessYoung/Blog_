@@ -1,4 +1,8 @@
 ---
+title: AIDL
+description: "AIDL全称为 Android Interface Definition Language，中文译为：安卓接口定义语言。可以利用AIDL定义客户端与服务端均认可的编程接口，以便进程间通信(IPC),在安卓中，进程之间存在进程隔离，所以一个进程通常无法访问另一个?"
+categories: [Android]
+tags: [android, AIDL]
 created: 2023-12-26
 ---
 

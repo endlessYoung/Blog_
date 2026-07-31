@@ -1,4 +1,8 @@
 ---
+title: Application为什么不能作为Dialog的context
+description: Dialog的context只能是Activity，而不能是Application，不然会导致弹窗崩溃：
+categories: [Android]
+tags: [android, Application, Dialog, context]
 created: 2024-04-14
 ---
 

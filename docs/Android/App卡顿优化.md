@@ -1,4 +1,8 @@
 ---
+title: App卡顿优化
+description: LayoutInflater加载xml布局的过程会在主线程使用IO读取xml布局文件进行xml解析，再根据解析结果利用反射创建布局中的View/ViewGroup对象。 可以用AsyncLayoutInflater异步加载。
+categories: [Android]
+tags: [android, App]
 created: 2024-07-08
 ---
 

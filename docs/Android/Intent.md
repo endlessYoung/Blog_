@@ -1,4 +1,8 @@
 ---
+title: Intent
+description: "即意图，分为显式意图和隐式意图 | 元素名称 | 设置方法|说明与用途| | --------|-------|---------| | Component|setComponent|组件,指定意图的来源与目标| | Action |setAction |动作?"
+categories: [Android]
+tags: [android, Intent]
 created: 2023-11-05
 ---
 

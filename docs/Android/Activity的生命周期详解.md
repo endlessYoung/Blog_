@@ -1,4 +1,8 @@
 ---
+title: Activity生命周期详解
+description: 它会在系统首次创建 Activity 时触发。Activity 会在创建后进入“已创建”状态。在 onCreate() 方法中，您需执行基本应用启动逻辑，该逻辑在 Activity 的整个生命周期中 只应发生一次。例如，onCreate() 的实现可能会将数据?
+categories: [Android]
+tags: [android, Activity]
 created: 2023-10-05
 ---
 

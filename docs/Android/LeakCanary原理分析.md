@@ -1,4 +1,8 @@
 ---
+title: LeakCanary原理分析
+description: "| 模块 | 核心组件/类 | 功能关联 | | ------------ | ------------------------------ | -------------------- | | 监控模块 | ActivityDestroyWatcher |?"
+categories: [Android]
+tags: [android, LeakCanary]
 created: 2025-02-21
 ---
 

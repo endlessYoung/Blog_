@@ -1,4 +1,8 @@
 ---
+title: RecyclerView知识点汇总
+description: RecyclerView.Adapter - 处理数据集合并负责绑定视图 ViewHolder - 持有所有的用于绑定数据或者需要操作的View LayoutManager - 负责摆放屎图等相关操作 ItemDecoration - 负责绘制item的分割线?
+categories: [Android]
+tags: [android, RecyclerView]
 created: 2024-07-08
 ---
 

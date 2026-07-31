@@ -1,4 +1,8 @@
 ---
+title: Settings数据库
+description: Settings 是一个存储系统和用户设置的数据库，它主要用于保存设备的配置信息和用户偏好设置。这些设置存储在一个 SQLite 数据库中，并通过 Android 提供的 Settings API 进行访问。settings 相关的数据最后是存在xml中，ap?
+categories: [Android]
+tags: [android, Settings]
 created: 2024-09-22
 ---
 

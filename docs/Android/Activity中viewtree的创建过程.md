@@ -1,4 +1,8 @@
 ---
+title: Activity中viewtree的创建过程
+description: "Activity与其他组件最大的不同，就是其内部拥有完整的界面显示机制，这涉及了ViewRootImpl, Window以及由他们管理的View Tree等。"
+categories: [Android]
+tags: [android, Activity, viewtree]
 created: 2024-08-08
 ---
 

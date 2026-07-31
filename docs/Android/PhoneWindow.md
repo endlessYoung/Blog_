@@ -1,4 +1,8 @@
 ---
+title: PhoneWindow
+description: Activity和Dialog在显示过程中都创建了PhoneWindow对象，而PopupWindow和Toast却没有。
+categories: [Android]
+tags: [android, PhoneWindow]
 created: 2024-04-14
 ---
 

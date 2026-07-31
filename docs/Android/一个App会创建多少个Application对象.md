@@ -1,4 +1,8 @@
 ---
+title: 一个App会创建多少个Application对象
+categories: [Android]
+tags: [android, App, Application]
+noindex: true
 created: 2024-11-03
 ---
 

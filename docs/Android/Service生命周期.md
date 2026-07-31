@@ -1,4 +1,8 @@
 ---
+title: Service生命周期
+description: （1）service整体的生命时间是从onCreate()被调用开始，到onDestroy()方法返回为止。和activity一样，service在onCreate()中进行它的初始化工作，在onDestroy()中释放残留的资源比如，一个音乐播放servic?
+categories: [Android]
+tags: [android, Service]
 created: 2023-10-05
 ---
 

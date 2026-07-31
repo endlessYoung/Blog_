@@ -1,4 +1,8 @@
 ---
+title: Intent发送数据的上限
+description: Intent携带信息的大小其实是受到Binder的限制（包括Binder的大小和缓存两种限制）。数据以Parcel对象的形式存放在Binder缓存区中。如果数据或返回值比缓存区域大，那么会抛出TransactionTooLargeException异常。
+categories: [Android]
+tags: [android, Intent]
 created: 2023-12-17
 ---
 

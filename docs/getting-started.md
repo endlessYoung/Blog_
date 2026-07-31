@@ -1,4 +1,8 @@
 ---
+title: Runtime API Examples
+description: This page demonstrates usage of some of the runtime APIs provided by VitePress.
+tags: [getting, started]
+noindex: true
 created: 2023-10-04
 outline: deep
 ---

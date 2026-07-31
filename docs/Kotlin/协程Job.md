@@ -1,4 +1,8 @@
 ---
+title: 协程Job
+description: "Job 是协程的生命周期管理者。每一个协程都有一个关联的 Job, Job 可以用来控制协程的 执行、取消、等待等操作。"
+categories: [Kotlin]
+tags: [kotlin, Job]
 created: 2024-12-11
 ---
 

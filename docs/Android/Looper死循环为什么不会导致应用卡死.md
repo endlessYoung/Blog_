@@ -1,4 +1,8 @@
 ---
+title: Looper死循环为什么不会导致应用卡死
+description: 导致卡死的是在Ui线程中执行耗时操作导致界面出现掉帧，甚至ANR，Looper.loop()这个操作本身不会导致这个情况。
+categories: [Android]
+tags: [android, Looper]
 created: 2023-12-17
 ---
 

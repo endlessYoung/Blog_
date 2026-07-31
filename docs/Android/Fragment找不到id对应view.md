@@ -1,4 +1,8 @@
 ---
+title: Fragment找不到id对应view
+description: 在使用 viewbinding 生成页面布局时发现id为btn的自定义view发生crash报错，报错信息：
+categories: [Android]
+tags: [android, Fragment, id, view]
 created: 2024-09-09
 ---
 

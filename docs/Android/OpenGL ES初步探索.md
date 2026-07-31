@@ -1,4 +1,8 @@
 ---
+title: OpenGL ES初步探索
+description: 本文中代码均为Kotlin
+categories: [Android]
+tags: [android, OpenGL, ES]
 created: 2023-10-12
 ---
 

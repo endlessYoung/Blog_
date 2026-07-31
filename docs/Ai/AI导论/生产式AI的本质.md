@@ -1,4 +1,8 @@
 ---
+title: 生成式AI导论：从“文字接龙”说起
+description: LLM（大型语言模型，如 ChatGPT、Gemini、Claude、DeepSeek 等）的核心机制其实非常简单——就是文字接龙。
+categories: [Ai]
+tags: [ai, AI导论]
 created: 2026-04-19
 ---
 

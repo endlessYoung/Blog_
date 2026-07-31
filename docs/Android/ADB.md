@@ -1,4 +1,8 @@
 ---
+title: ADB
+description: app入口：adb logcat | grep -i displayed
+categories: [Android]
+tags: [android, ADB]
 created: 2024-04-05
 ---
 

@@ -1,4 +1,8 @@
 ---
+title: Activity栈
+description: Android 是通过一种 Activity 栈的方式来管理 Activity 的，一个 Activity 的实例的状态决定它在栈中的位置。处于前台的 Activity 总是在栈的顶端，当前台的 Activity 因为异常或其它原因被销毁时，处于栈第二层的 A?
+categories: [Android]
+tags: [android, Activity]
 created: 2023-10-05
 ---
 

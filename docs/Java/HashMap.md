@@ -1,4 +1,8 @@
 ---
+title: HashMap的高级用法
+description: 在 HashMap 中，负载因子用于决定何时需要增加 HashMap 的容量。默认的负载因子是 0.75，也就是说，当哈希表的元素数量达到容量的 75% 时，它会自动扩容。
+categories: [Java]
+tags: [java, HashMap]
 created: 2025-01-09
 ---
 

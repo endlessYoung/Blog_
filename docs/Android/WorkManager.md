@@ -1,4 +1,8 @@
 ---
+title: WorkManager
+description: WorkManager 是一种用于启动永久性工作的Jetpack的API。持久性工作是指能够在应用和系统重启后仍然保持工作调度状态的工作。
+categories: [Android]
+tags: [android, WorkManager]
 created: 2024-12-01
 ---
 

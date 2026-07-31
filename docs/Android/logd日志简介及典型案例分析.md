@@ -1,4 +1,8 @@
 ---
+title: 安卓典型日志分析
+description: 日志接口内容，共分为java层、native层、kernel层等。下面就对每个层级的内容分别进行介绍。
+categories: [Android]
+tags: [android, logd]
 created: 2023-11-05
 ---
 

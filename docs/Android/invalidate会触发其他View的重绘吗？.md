@@ -1,4 +1,8 @@
 ---
+title: invalidate会触发其他View的重绘吗？
+description: 在Android中，调用某个View的invalidate()方法并不会直接触发其他View的重绘。invalidate()的作用是标记当前View为“脏”状态，意味着这个View需要重新绘制。系统随后会在合适的时机（通常是UI线程的下一个绘制周期）调用该Vi?
+categories: [Android]
+tags: [android, invalidate, View]
 created: 2024-05-19
 ---
 

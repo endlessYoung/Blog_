@@ -1,4 +1,8 @@
 ---
+title: AndroidTest编译Provider冲突问题
+description: 安装AndroidTest的apk时报错信息：
+categories: [Android]
+tags: [android, AndroidTest, Provider]
 created: 2024-08-14
 ---
 

@@ -1,4 +1,8 @@
 ---
+title: ActivityThread线程(UI主线程)
+description: 区别： 普通线程只需要prepare就可以了，而主线程使用的是prepareMainLooper。 prepareMainLooper虽然也需要调用prepare方法，其特殊之处在于该线程不允许退出。除此之外没有本质的区别。 普通线程生成一个与Looper绑定?
+categories: [Android]
+tags: [android, ActivityThread, UI]
 created: 2024-08-14
 ---
 

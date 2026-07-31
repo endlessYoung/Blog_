@@ -1,4 +1,8 @@
 ---
+title: Android简介
+description: Android是一种基于Linux内核的综合操作系统，即包括各类底层驱动的开发，也包括使用java语言编写，但运行在Dalvik VM（非 Java 虚拟机，Android 4.4 以后运行在ART上）中编译和执行。
+categories: [Android]
+tags: [android]
 created: 2023-10-05
 ---
 

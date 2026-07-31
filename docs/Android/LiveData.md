@@ -1,4 +1,8 @@
 ---
+title: LiveData
+description: LiveData 是一个持有可观察数据的类，它可以感知组件的生命周期（如 Activity 和 Fragment）。LiveData 能自动管理观察者（即观察数据变化的对象），并确保数据只在可见的 UI 组件上更新，避免内存泄漏。
+categories: [Android]
+tags: [android, LiveData]
 created: 2024-01-04
 ---
 

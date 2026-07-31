@@ -1,4 +1,8 @@
 ---
+title: dumpsys
+description: dumpsys是Android提供的系统工具，可以用来查看所有系统服务的信息。 在命令行输入如下命令，就可以罗列出当前所有的系统服务名：
+categories: [Android]
+tags: [android, dumpsys]
 created: 2024-04-05
 ---
 

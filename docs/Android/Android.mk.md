@@ -1,4 +1,8 @@
 ---
+title: Android.mk
+description: "Android.mk 是Android 提供的一种makefile 文件,注意用来编译生成（exe，so，a，jar，apk）等文件。"
+categories: [Android]
+tags: [android, mk]
 created: 2024-04-14
 ---
 

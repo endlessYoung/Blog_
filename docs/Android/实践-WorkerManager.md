@@ -1,4 +1,8 @@
 ---
+title: 实践-WorkManager
+categories: [Android]
+tags: [android, WorkerManager]
+noindex: true
 created: 2023-12-13
 ---
 

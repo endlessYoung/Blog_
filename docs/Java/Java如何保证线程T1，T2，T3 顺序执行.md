@@ -1,4 +1,8 @@
 ---
+title: Java如何保证线程T1，T2，T3 顺序执行
+description: Thread.join() 方法会使当前线程等待另一个线程执行完毕后再继续执行。通过在 T1、T2、T3 之间调用 join()，可以确保线程按顺序执行。
+categories: [Java]
+tags: [java, T1, T2, T3]
 created: 2025-01-15
 ---
 

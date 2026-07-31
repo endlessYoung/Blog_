@@ -1,4 +1,8 @@
 ---
+title: SQL简介
+description: SQL（Structured Query Language）是一种用于管理和操作关系数据库的标准语言，包括数据查询、数据插入、数据更新、数据删除、数据库结构创建和修改等功能。
+categories: [SQL]
+tags: [sql, SQL基础]
 created: 2024-08-05
 ---
 

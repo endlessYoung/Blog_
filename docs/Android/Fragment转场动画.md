@@ -1,4 +1,8 @@
 ---
+title: Fragment转场动画
+description: "使用 FragmentTransaction 的 setCustomAnimations() 方法可以实现自定义转场动画,提交带有动画效果的 Fragment 事务。"
+categories: [Android]
+tags: [android, Fragment]
 created: 2024-07-17
 ---
 

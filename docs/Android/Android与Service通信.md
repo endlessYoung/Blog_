@@ -1,4 +1,8 @@
 ---
+title: Android与Service通信
+description: 这是最简单和常见的一种方式，适用于需要一次性操作或简单的后台任务。
+categories: [Android]
+tags: [android, Service]
 created: 2024-07-17
 ---
 

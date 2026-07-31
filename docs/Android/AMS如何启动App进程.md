@@ -1,4 +1,8 @@
 ---
+title: AMS如何启动App进程
+description: Android 系统的 Activity Manager Service（AMS）是一个核心系统服务，负责管理应用程序的生命周期，其中包括启动和管理应用进程。下面是 AMS 如何启动应用进程的简要过程：
+categories: [Android]
+tags: [android, AMS, App]
 created: 2024-05-19
 ---
 

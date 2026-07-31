@@ -1,4 +1,8 @@
 ---
+title: JVM
+description: Java虚拟机（JVM）是Java程序的运行时环境，它抽象了底层硬件和操作系统的差异，使得Java程序可以在不同平台上运行。JVM的“分布”可以理解为JVM在不同操作系统和硬件平台上的实现，以及JVM的结构和各个部分的功能分布。
+categories: [Java]
+tags: [java, JVM]
 created: 2024-08-30
 ---
 

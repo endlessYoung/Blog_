@@ -1,4 +1,8 @@
 ---
+title: 深入理解crash问题
+description: 首先，明确崩溃的类型。崩溃问题通常可以分为以下几类：
+categories: [Android]
+tags: [android, crash]
 created: 2024-12-22
 ---
 

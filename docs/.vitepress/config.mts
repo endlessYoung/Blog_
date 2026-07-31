@@ -3,6 +3,8 @@ import markdownItKatex from 'markdown-it-katex'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 
+// ??/??????frontmatter: noindex???? sitemap ???
+const noindexPages = new Set<string>()
 const createdDates: Record<string, string> = (() => {
   try {
     return JSON.parse(readFileSync(join(__dirname, 'created-dates.json'), 'utf-8'))
@@ -153,6 +155,12 @@ export default defineConfig({
   appearance: 'dark',
   sitemap: {
     hostname: 'https://endlessyoung.github.io/Blog_',
+    transformItems(items) {
+      return items.filter((item) => {
+        const clean = (item.url || '').replace(/^\//, '').replace(/\.html$/, '').replace(/\/index$/, '')
+        return !noindexPages.has(clean)
+      })
+    },
   },
   base: isProduction ? '/Blog_/' : '/',
   markdown: {
@@ -279,9 +287,12 @@ html:not(.dark) {
     ['meta', { name: 'twitter:image', content: 'https://endlessyoung.github.io/Blog_/index.png' }],
   ],
   transformPageData(pageData) {
+    const fm = pageData.frontmatter as Record<string, any> | undefined
+    // Collect noindex pages so they can be excluded from sitemap
+    const key = ((pageData as any).relativePath || pageData.filePath?.replace(/^.*[\\/]docs[\\/]/, '') || '').replace(/\.md$/, '')
+    if (fm?.noindex && key) noindexPages.add(key)
     // Auto-inject created date from git cache if missing in frontmatter
-    if (!(pageData.frontmatter as Record<string, any>)?.created) {
-      const key = (pageData as any).relativePath || pageData.filePath?.replace(/^.*[\\/]docs[\\/]/, '')
+    if (!fm?.created) {
       if (key && createdDates[key]) {
         (pageData.frontmatter as any).created = createdDates[key]
       }
@@ -298,6 +309,12 @@ html:not(.dark) {
     const url = pagePath ? `${siteUrl}${base}${pagePath}` : `${siteUrl}${base}`
 
     const fm = ctx.pageData.frontmatter as Record<string, any> | undefined
+    // ??/?????????frontmatter: noindex: true?
+    if (fm?.noindex) {
+      return [
+        ['meta', { name: 'robots', content: 'noindex, nofollow' }],
+      ]
+    }
     const ogTitle = fm?.title || ctx.title
     const ogDescription = fm?.description || ctx.description
     const ogType = ctx.page === 'index.md' ? 'website' : 'article'

@@ -1,4 +1,8 @@
 ---
+title: CAS
+description: CAS (Compare And Swap，比较和交换)，是非阻塞同步的实现原理，它是CPU硬件的指令，从CPU层面保证比较与交换两个操作的原子性。 CAS 指令操作包括三个参数：
+categories: [Java]
+tags: [java, CAS]
 created: 2025-01-15
 ---
 

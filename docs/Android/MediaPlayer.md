@@ -1,4 +1,8 @@
 ---
+title: MediaPlayer
+description: Idle 状态： 当使用new()方法创建一个MediaPlayer对象或者调用了其reset()方法时，该MediaPlayer对象处于idle状态。这两种方法的一个重要差别就是：如果在这个状态下调用了getDuration()等方法（相当于调用时机不正确）?
+categories: [Android]
+tags: [android, MediaPlayer]
 created: 2024-08-06
 ---
 

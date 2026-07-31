@@ -1,4 +1,8 @@
 ---
+title: GC算法
+description: 讲内存分为两个大小相同的空间，每次只使用其中一个空间。当内存快被用完时，GC会将存活的对象复制到另一个空闲空间上，然后一次性清空当前空间。
+categories: [Java]
+tags: [java, GC]
 created: 2024-10-09
 ---
 

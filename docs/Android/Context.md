@@ -1,4 +1,8 @@
 ---
+title: Context
+description: 它是Android里的一个上帝类，启动四大组件、获取资源、获取类加载器等重要功能都通过Context 来完成，Activity、Service与Application也都派生自Context，Broadcast Receiver与Content Provide?
+categories: [Android]
+tags: [android, Context]
 created: 2024-04-05
 ---
 

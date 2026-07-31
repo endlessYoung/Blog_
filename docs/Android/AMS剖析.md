@@ -1,4 +1,8 @@
 ---
+title: AMS剖析
+description: 所有的 Android 应用程序都是由 Zygote 进程 fork 而来，在 Zygote 进程中初始化了 Java 运行时，加载了常用的 Java Classes，加载了系统资源等。这些底层基础都会被 Android 应用程序继承。在从 Zygote 中继?
+categories: [Android]
+tags: [android, AMS]
 created: 2024-01-07
 ---
 

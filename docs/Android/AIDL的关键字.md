@@ -1,4 +1,8 @@
 ---
+title: AIDL的关键字
+description: 好的，下面是 AIDL 中所有关键字和概念的完整列表：
+categories: [Android]
+tags: [android, AIDL]
 created: 2025-01-09
 ---
 

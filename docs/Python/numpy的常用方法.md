@@ -1,4 +1,8 @@
 ---
+title: numpy的常用方法
+categories: [Python]
+tags: [python, numpy]
+noindex: true
 created: 2024-05-06
 ---
 

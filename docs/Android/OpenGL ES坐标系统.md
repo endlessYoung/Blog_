@@ -1,4 +1,8 @@
 ---
+title: OpenGL ES坐标系统
+categories: [Android]
+tags: [android, OpenGL, ES]
+noindex: true
 created: 2023-12-13
 ---
 

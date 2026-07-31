@@ -1,4 +1,8 @@
 ---
+title: 实践-Widget
+description: widget就是安卓的桌面小组件，可以方便快捷的使用app提供的部分功能。
+categories: [Android]
+tags: [android, Widget]
 created: 2023-12-26
 ---
 
