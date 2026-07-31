@@ -3,6 +3,7 @@
     <div class="series-nav__head">
       <span class="series-nav__badge">系列</span>
       <span class="series-nav__name">{{ series.title }}</span>
+      <span v-if="series.total > 1" class="series-nav__progress">第 {{ series.index + 1 }}/{{ series.total }} 篇</span>
     </div>
     <div class="series-nav__body">
       <a
@@ -64,7 +65,7 @@ function normalize(link: string): string {
   return link.replace(/^\/+|\/+$/g, '').toLowerCase()
 }
 
-const series = computed<{ title: string; prev: SeriesItem | null; next: SeriesItem | null } | null>(() => {
+const series = computed<{ title: string; prev: SeriesItem | null; next: SeriesItem | null; index: number; total: number } | null>(() => {
   const sidebar = theme.value.sidebar
   const current = normalize((page.value.relativePath || '').replace(/\.md$/, ''))
   if (!sidebar || !current) return null
@@ -88,6 +89,8 @@ const series = computed<{ title: string; prev: SeriesItem | null; next: SeriesIt
       title: group.text || '系列文章',
       prev: index > 0 ? items[index - 1] : null,
       next: index < items.length - 1 ? items[index + 1] : null,
+      index,
+      total: items.length,
     }
   }
   return null
@@ -126,6 +129,13 @@ const series = computed<{ title: string; prev: SeriesItem | null; next: SeriesIt
   font-size: 15px;
   font-weight: 600;
   color: var(--vp-c-text-1);
+}
+.series-nav__progress {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--vp-c-text-3);
 }
 .series-nav__body {
   display: grid;
