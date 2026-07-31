@@ -1,16 +1,34 @@
-﻿<script setup lang="ts">
+<script setup lang="ts">
 import { ref, shallowRef } from 'vue'
+import { useData } from 'vitepress'
 
 defineProps<{ endpoint: string }>()
 
 const loaded = ref(false)
 const Documate = shallowRef<any>(null)
+const { site } = useData()
+
+function assetHref(name: string) {
+  const base = site.value.base || '/'
+  return `${base}${name}`
+}
 
 async function load() {
   if (loaded.value) return
   const mod = await import('@documate/vue')
   Documate.value = mod.default
   loaded.value = true
+  // Documate styles are self-hosted to keep the blocking cdnjs
+  // github-markdown @import out of the main stylesheet.
+  for (const css of ['documate.css', 'github-markdown.css']) {
+    const id = `dm-${css}`
+    if (document.getElementById(id)) continue
+    const link = document.createElement('link')
+    link.id = id
+    link.rel = 'stylesheet'
+    link.href = assetHref(css)
+    document.head.appendChild(link)
+  }
 }
 </script>
 

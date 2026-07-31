@@ -8,7 +8,7 @@
   "scripts": {
     "docs:dev": "node scripts/gen-tags.mjs && vitepress dev docs --port 5173",
     "docs:created": "node scripts/update-created-dates.js",
-    "docs:build": "pnpm docs:created && node scripts/gen-tags.mjs && vitepress build docs",
+    "docs:build": "pnpm docs:created && node scripts/gen-tags.mjs && vitepress build docs && node scripts/strip-inter-preload.mjs",
     "docs:preview": "vitepress preview docs",
     "documate:upload": "documate upload --verbose"
   },
