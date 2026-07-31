@@ -25,15 +25,26 @@ export function initHomeScrollImmersion() {
   }
 
   const html = document.documentElement
+  const mobileMql =
+    typeof matchMedia !== 'undefined' ? matchMedia('(max-width: 959px)') : null
   let raf = 0
   let disposed = false
+  let mobileFinalApplied = false
 
   /** 小屏 HUD 在主卡下方：拉长行程，轻微滑动时 immersion 仍接近 0 */
   const rangeHero = () => {
-    const mobile =
-      typeof matchMedia !== 'undefined' && matchMedia('(max-width: 959px)').matches
+    const mobile = mobileMql?.matches ?? false
     if (mobile) return Math.min(window.innerHeight * 0.78, 720)
     return Math.min(window.innerHeight * 0.48, 500)
+  }
+
+  /** 小屏不做滚动沉浸：一次性落到最终静态状态，避免滚动时每帧重绘大卡片 */
+  const applyFinalMobile = () => {
+    if (mobileFinalApplied) return
+    mobileFinalApplied = true
+    html.style.setProperty('--home-immersion', '0')
+    html.style.setProperty('--home-below', '1')
+    html.style.setProperty('--home-cta', '1')
   }
 
   const apply = () => {
@@ -42,8 +53,15 @@ export function initHomeScrollImmersion() {
       html.style.removeProperty('--home-immersion')
       html.style.removeProperty('--home-below')
       html.style.removeProperty('--home-cta')
+      mobileFinalApplied = false
       return
     }
+
+    if (mobileMql?.matches) {
+      applyFinalMobile()
+      return
+    }
+    mobileFinalApplied = false
 
     const vh = window.innerHeight || 1
     const y = getScrollY()

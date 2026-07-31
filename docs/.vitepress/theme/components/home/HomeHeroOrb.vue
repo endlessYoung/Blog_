@@ -224,6 +224,12 @@ onMounted(() => {
     return
   }
   pickNext()
+  // 小屏：静态展示当前文章链接，不做自动轮播，避免周期性重绘造成闪烁
+  const smallScreen =
+    typeof window !== 'undefined' &&
+    (window.matchMedia('(max-width: 960px)').matches ||
+      window.matchMedia('(hover: none)').matches)
+  if (smallScreen) return
   const reduced =
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches

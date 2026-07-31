@@ -1,0 +1,207 @@
+/* ==========================================================================
+   Small screens (≤960px) — 稳定优先、实用为主
+   --------------------------------------------------------------------------
+   桌面端首页依赖大量滚动沉浸动效（transform + blur + opacity 逐帧变化）、
+   霓虹呼吸、conic 描边、glitch 文字、扫描线、光晕漂移等。这些效果在手机
+   浏览器上会每帧重绘大块区域，造成屏幕闪烁。小屏统一降级为静态、可读的
+   布局：只保留内容与按钮，关闭所有装饰性动画、背板模糊和滚动联动。
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  /* ------------------------------------------------------------------ *
+   * 1) 滚动沉浸动效：强制落到最终静态状态，任何元素不再位移/模糊/缩放   *
+   * ------------------------------------------------------------------ */
+  .VPContent.is-home .VPHero,
+  .VPContent.is-home .VPHero .main,
+  .VPContent.is-home .VPHero.has-image .image,
+  .VPContent.is-home .VPHero .image-bg,
+  .VPContent.is-home .VPHero .image-container,
+  .VPContent.is-home .home-sec-head,
+  .VPContent.is-home .home-sec-head__rule,
+  .VPContent.is-home .VPFeatures,
+  .VPContent.is-home .VPFeature,
+  .VPContent.is-home .VPFeature .box,
+  .VPContent.is-home .home-cta,
+  .VPContent.is-home .home-cta .home-cta__card {
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    will-change: auto !important;
+  }
+
+  /* ------------------------------------------------------------------ *
+   * 2) 主页大卡片：静态描边与底色，去掉呼吸/扫描/描边动画与装饰层          *
+   * ------------------------------------------------------------------ */
+  .home-landing .VPHero .main,
+  .VPContent.is-home .VPHero .main {
+    animation: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* 隐藏网格纹理、conic 描边光束、卡片内 glitch 彩条 */
+  .home-landing .VPHero .main::before,
+  .VPContent.is-home .VPHero .main::before,
+  .home-landing .VPHero .main::after,
+  .VPContent.is-home .VPHero .main::after,
+  .home-landing .VPHero .main > .heading::after,
+  .VPContent.is-home .VPHero .main > .heading::after {
+    display: none !important;
+  }
+
+  html:not(.dark) .home-landing .VPHero .main,
+  html:not(.dark) .VPContent.is-home .VPHero .main {
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08) !important;
+  }
+
+  /* SYSTEM ACTIVE 标签：保留但静态 */
+  .home-landing .VPHero .heading::before,
+  .VPContent.is-home .VPHero .heading::before {
+    animation: none !important;
+    text-shadow: none !important;
+  }
+
+  /* 主标题：静态渐变文字，关闭流动与 glitch，去掉重投影光晕 */
+  .home-landing .VPHero .name,
+  .home-landing .VPHero .name.clip,
+  .VPContent.is-home .VPHero .name,
+  .VPContent.is-home .VPHero .name.clip,
+  html.hero-copy-sheen .home-landing .VPHero .name.clip,
+  html.hero-copy-sheen .VPContent.is-home .VPHero .name.clip,
+  html.hero-copy-tier .home-landing .VPHero .name.clip,
+  html.hero-copy-tier .VPContent.is-home .VPHero .name.clip {
+    animation: none !important;
+    filter: none !important;
+    background-size: 100% 100% !important;
+  }
+
+  /* slogan：静态渐变文字，关闭流光 */
+  .home-landing .VPHero .text,
+  .VPContent.is-home .VPHero .text {
+    animation: none !important;
+    background-size: 100% 100% !important;
+  }
+
+  /* 隐藏 slogan 下方的动态数据流下划线 */
+  .home-landing .VPHero .text::after,
+  .VPContent.is-home .VPHero .text::after {
+    display: none !important;
+  }
+
+  /* tagline：去掉打字光标 */
+  .home-landing .VPHero .tagline::after,
+  .VPContent.is-home .VPHero .tagline::after {
+    content: none !important;
+    display: none !important;
+    animation: none !important;
+  }
+
+  /* 按钮：关闭呼吸脉冲与 hover 上浮 */
+  .home-landing .VPHero .VPButton.brand,
+  .VPContent.is-home .VPHero .VPButton.brand,
+  .home-landing .home-cta .VPButton.brand,
+  .VPContent.is-home .home-cta .VPButton.brand {
+    animation: none !important;
+  }
+
+  .VPButton.brand:hover,
+  .VPButton.alt:hover {
+    transform: none !important;
+  }
+
+  /* ------------------------------------------------------------------ *
+   * 3) 功能区卡片：立即显示、实底、无 hover 位移、无背板模糊              *
+   * ------------------------------------------------------------------ */
+  .VPHome .VPFeature,
+  .VPContent.is-home .VPFeature {
+    animation: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06) !important;
+    transition: none !important;
+  }
+
+  html.dark .VPHome .VPFeature,
+  html.dark .VPContent.is-home .VPFeature {
+    background: rgba(18, 24, 36, 0.96) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .VPHome .VPFeature:hover,
+  .VPContent.is-home .VPFeature:hover {
+    transform: none !important;
+  }
+
+  /* ------------------------------------------------------------------ *
+   * 4) HUD 扫描区：静态展示，关闭旋转/扫描/脉冲/光晕模糊                 *
+   * ------------------------------------------------------------------ */
+  .home-hud__aura {
+    display: none !important;
+  }
+
+  .home-hud__spin--slow,
+  .home-hud__spin--mid,
+  .home-hud__scan-line,
+  .home-hud__core,
+  .home-hud__core-dot,
+  .home-hud__feed--hit {
+    animation: none !important;
+  }
+
+  .home-hud__feed {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transition: none !important;
+  }
+
+  .home-hud__feed--hit {
+    transform: none !important;
+  }
+
+  /* ------------------------------------------------------------------ *
+   * 5) RECENT 面板：关闭扫描线与状态点脉冲                               *
+   * ------------------------------------------------------------------ */
+  .home-tx__inner::before,
+  .home-tx__dot,
+  .home-tx__status {
+    animation: none !important;
+  }
+
+  /* ------------------------------------------------------------------ *
+   * 6) 科技背景：只留静态渐变 + 网格，关闭发光/glitch/粒子/扫描/噪点       *
+   * ------------------------------------------------------------------ */
+  .tech-bg__glow,
+  .tech-bg__glow--left,
+  .tech-bg__glow--right,
+  .tech-bg__glitch,
+  .tech-bg__scan,
+  .tech-bg__grain,
+  .tech-bg__particles,
+  .tech-bg__floor {
+    display: none !important;
+  }
+
+  /* ------------------------------------------------------------------ *
+   * 7) 导航/侧栏/页脚：去掉 backdrop-filter，改用实底，避免滚动闪烁       *
+   * ------------------------------------------------------------------ */
+  .VPNavBar,
+  .VPSidebar,
+  .VPFooter {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  html.dark .VPNavBar,
+  html.dark .VPSidebar,
+  html.dark .VPFooter {
+    background: rgba(11, 15, 25, 0.98) !important;
+  }
+
+  html:not(.dark) .VPNavBar,
+  html:not(.dark) .VPSidebar,
+  html:not(.dark) .VPFooter {
+    background: rgba(255, 255, 255, 0.98) !important;
+  }
+}

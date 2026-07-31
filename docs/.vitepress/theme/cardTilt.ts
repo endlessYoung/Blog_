@@ -2,6 +2,16 @@ const MAX_RX = 2.8
 const MAX_RY = 3.2
 
 export function initCardTilt() {
+  // 小屏 / 触屏设备没有鼠标悬浮导致的 3D 倾斜需求，直接跳过，减少布局压力
+  if (typeof matchMedia !== 'undefined') {
+    if (
+      matchMedia('(hover: none)').matches ||
+      matchMedia('(max-width: 959px)').matches
+    ) {
+      return
+    }
+  }
+
   const cards = document.querySelectorAll<HTMLElement>('.VPFeature')
 
   cards.forEach((card) => {

@@ -3,6 +3,7 @@ import './style/var.css'
 import './style/tech.css'
 import './style/vp-code-group.css'
 import './custom.css'
+import './style/mobile.css'
 
 import '@documate/vue/dist/style.css'
 import { h, onMounted, onUnmounted, nextTick, watch } from 'vue'
