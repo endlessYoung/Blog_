@@ -1,7 +1,7 @@
 import { defineConfig, SiteData } from 'vitepress'
 import markdownItKatex from 'markdown-it-katex'
-import { readFileSync } from 'fs'
-import { join } from 'path'
+import { readFileSync, readdirSync, statSync } from 'fs'
+import { join, relative } from 'path'
 
 // ??/??????frontmatter: noindex???? sitemap ???
 const noindexPages = new Set<string>()
@@ -9,6 +9,92 @@ const createdDates: Record<string, string> = (() => {
   try {
     return JSON.parse(readFileSync(join(__dirname, 'created-dates.json'), 'utf-8'))
   } catch { return {} }
+})()
+
+interface RelatedEntry {
+  title: string
+  link: string
+  meta: string
+}
+
+/** Build a static "related reading" index from article frontmatter (SSR-friendly). */
+function listMarkdownFiles(dir: string): string[] {
+  const results: string[] = []
+  for (const entry of readdirSync(dir)) {
+    if (entry === '.vitepress' || entry === 'node_modules') continue
+    const full = join(dir, entry)
+    if (statSync(full).isDirectory()) results.push(...listMarkdownFiles(full))
+    else if (entry.endsWith('.md')) results.push(full)
+  }
+  return results
+}
+
+function parseFrontmatterLine(line: string): [string, unknown] | null {
+  const m = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/)
+  if (!m) return null
+  const key = m[1]
+  let raw = m[2].trim()
+  if (/^\[.*\]$/.test(raw)) {
+    const arr = raw
+      .slice(1, -1)
+      .split(',')
+      .map((s) => s.trim().replace(/^['"]|['"]$/g, ''))
+      .filter(Boolean)
+    return [key, arr]
+  }
+  raw = raw.replace(/^['"]|['"]$/g, '')
+  if (raw === 'true') return [key, true]
+  if (raw === 'false') return [key, false]
+  return [key, raw]
+}
+
+function parseArticleFrontmatter(file: string): Record<string, unknown> {
+  const text = readFileSync(file, 'utf-8')
+  const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+  const fm: Record<string, unknown> = {}
+  if (!m) return fm
+  for (const line of m[1].split(/\r?\n/)) {
+    const kv = parseFrontmatterLine(line)
+    if (kv) fm[kv[0]] = kv[1]
+  }
+  return fm
+}
+
+/** relativePath -> up to 4 related articles (tag intersection + same category). */
+const relatedIndex: Record<string, RelatedEntry[]> = (() => {
+  const srcDir = join(__dirname, '..')
+  const files = listMarkdownFiles(srcDir).map((file) => {
+    const fm = parseArticleFrontmatter(file)
+    return {
+      rel: relative(srcDir, file).replace(/\\/g, '/'),
+      title: String(fm.title || '').trim(),
+      tags: Array.isArray(fm.tags) ? (fm.tags as string[]).map((t) => String(t).trim().toLowerCase()) : [],
+      categories: Array.isArray(fm.categories) ? (fm.categories as string[]).map((c) => String(c).trim()) : [],
+      noindex: !!fm.noindex,
+      created: String(fm.created || fm.date || ''),
+    }
+  })
+
+  const index: Record<string, RelatedEntry[]> = {}
+  for (const a of files) {
+    if (a.noindex || !a.title) continue
+    const scored = files
+      .filter((b) => b !== a && !b.noindex && b.title && b.rel !== 'index.md' && !b.rel.endsWith('/index.md') && (b.tags.length > 0 || b.categories.length > 0))
+      .map((b) => {
+        let score = 0
+        for (const tag of b.tags) if (a.tags.includes(tag)) score += 2
+        if (b.categories.some((c) => a.categories.includes(c))) score += 1
+        return { b, score }
+      })
+      .filter((s) => s.score > 0)
+    scored.sort((x, y) => y.score - x.score || y.b.created.localeCompare(x.b.created) || x.b.title.localeCompare(y.b.title))
+    index[a.rel] = scored.slice(0, 4).map((s) => ({
+      title: s.b.title,
+      link: '/' + s.b.rel.replace(/(?:(^|\/)index)?\.md$/, '$1'),
+      meta: s.b.categories[0] || '',
+    }))
+  }
+  return index
 })()
 
 const customElements = [
@@ -331,6 +417,7 @@ html:not(.dark) {
   },
 
   themeConfig: {
+    related: relatedIndex,
     logo: '/panda.png',
     darkModeSwitchLabel: "🌓",
     lastUpdated: {

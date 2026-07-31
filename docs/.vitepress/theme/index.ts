@@ -14,6 +14,7 @@ import { initNavScreenScrollLock } from './navScreenScrollLock'
 import { useData, useRoute } from 'vitepress'
 import Comments from './components/Comments.vue'
 import SeriesNav from './components/SeriesNav.vue'
+import RelatedArticles from './components/RelatedArticles.vue'
 import ImageViewer from './components/ImageViewer.vue'
 import { initImageViewer } from './imageViewer'
 import ArticleMetadata from './components/ArticleMetadata.vue'
@@ -125,7 +126,7 @@ export default {
         'nav-bar-content-before': () =>
           h(Documate, { endpoint: 'https://izbdbdndfp.us.aircode.run/ask' }),
         'doc-before': () => h(ArticleMetadata),
-        'doc-after': () => [h(SeriesNav), h(Comments)],
+        'doc-after': () => [h(SeriesNav), h(RelatedArticles), h(Comments)],
         }),
         h(ImageViewer),
       ]
