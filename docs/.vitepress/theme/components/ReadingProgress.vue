@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div v-if="enabled" class="reading-progress" aria-hidden="true">
     <div class="reading-progress__bar" :style="{ width: progress + '%' }"></div>
     <button
@@ -74,6 +74,7 @@ onUnmounted(() => {
 }
 .reading-progress__top {
   position: fixed;
+  pointer-events: auto;
   right: 24px;
   bottom: 28px;
   z-index: 998;
