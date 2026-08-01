@@ -324,7 +324,7 @@ export default defineConfig({
   },
   lang: 'zh-CN',
   head: [
-    ['link', { rel: 'icon', href: '/Blog_/favicon.ico' }],
+    ['link', { rel: 'icon', href: '/Blog_/logo.png' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/Blog_/feed.xml' }], // 也是放在/public目录中
     // Hero 霓虹标题 / 霓虹按钮：深浅色双套变量（与 theme/custom.css 双保险）
     [
@@ -513,7 +513,7 @@ html:not(.dark) {
   },
   themeConfig: {
     related: relatedIndex,
-    logo: '/panda.webp',
+    logo: '/logo.png',
     darkModeSwitchLabel: "🌓",
     lastUpdated: {
       text: 'Updated at',
