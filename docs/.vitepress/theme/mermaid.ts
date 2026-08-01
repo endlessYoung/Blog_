@@ -1,7 +1,7 @@
 import mermaid from 'mermaid'
 import { openViewer } from './imageViewer'
 
-/** ???Cyberpunk??????? Dracula / Cyberpunk ???? */
+/** 与博客 Dracula / Cyberpunk 风格统一的 Mermaid 主题变量 */
 const DARK_THEME = {
   theme: 'base' as const,
   themeVariables: {
@@ -30,7 +30,7 @@ const DARK_THEME = {
   startOnLoad: false,
 }
 
-/** ??????????????????? */
+/** 浅色主题：白底深字，保证浅色模式下可读 */
 const LIGHT_THEME = {
   theme: 'base' as const,
   themeVariables: {
@@ -67,7 +67,7 @@ function currentTheme(): 'dark' | 'light' {
   return document.documentElement.classList.contains('dark') ? 'dark' : 'light'
 }
 
-/** ?????? ImageViewer ????? */
+/** 点击图表时在 ImageViewer 中放大查看 */
 function bindClickToOpen(el: HTMLElement): void {
   if (el.dataset.viewerBound) return
   el.dataset.viewerBound = 'true'
@@ -79,11 +79,11 @@ function bindClickToOpen(el: HTMLElement): void {
     event.stopPropagation()
     const svg = el.querySelector('svg')
     if (!svg) return
-    openViewer([{ svg: svg.outerHTML, alt: 'Mermaid ??' }], 0)
+    openViewer([{ svg: svg.outerHTML, alt: 'Mermaid 图表' }], 0)
   })
 }
 
-/** ????????????????????? */
+/** 监听主题切换，变化时强制重渲染已渲染的图表 */
 function watchTheme(): void {
   if (typeof document === 'undefined' || themeObserver) return
   themeObserver = new MutationObserver(() => {
@@ -95,7 +95,7 @@ function watchTheme(): void {
   themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
 }
 
-/** ?????????? .mermaid ????? Mermaid ?? */
+/** 扫描页面中尚未渲染的 .mermaid 元素并交给 Mermaid 渲染 */
 export async function initMermaid(force = false): Promise<void> {
   if (typeof document === 'undefined') return
 
@@ -105,7 +105,7 @@ export async function initMermaid(force = false): Promise<void> {
 
   let els = Array.from(document.querySelectorAll<HTMLElement>('.mermaid'))
   if (force) {
-    // ??????????????????
+    // 主题切换：用保存的源码恢复后重新渲染
     els = els.filter((el) => el.getAttribute('data-processed') !== 'error')
     for (const el of els) {
       const source = el.dataset.source
@@ -129,17 +129,17 @@ export async function initMermaid(force = false): Promise<void> {
     el.dataset.source = code
 
     try {
-      // ? mermaid.render() ?? SVG ??? DOM??? v11
+      // 用 mermaid.render() 生成 SVG 再注入 DOM，兼容 v11
       const { svg } = await mermaid.render(`mermaid-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, code)
       el.innerHTML = svg
       el.setAttribute('data-processed', 'true')
       bindClickToOpen(el)
     } catch (err: any) {
-      console.error(`[mermaid] ????:
+      console.error(`[mermaid] 渲染失败:
 ${code}
 
-??:`, err?.message ?? err)
-      // ??????????????????
+错误:`, err?.message ?? err)
+      // 渲染失败时回退显示原始代码，方便排查
       el.innerHTML = `<pre style="color:#ff6b6b;white-space:pre-wrap;font-size:13px">${escapeHtml(code)}</pre>`
       el.setAttribute('data-processed', 'error')
     }

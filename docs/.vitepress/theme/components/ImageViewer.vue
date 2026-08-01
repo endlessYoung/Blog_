@@ -6,23 +6,23 @@
         class="image-viewer"
         role="dialog"
         aria-modal="true"
-        aria-label="????"
+        aria-label="图片预览"
         @click.self="close"
       >
         <button
           class="image-viewer__close"
           type="button"
-          aria-label="????"
+          aria-label="关闭预览"
           @click="close"
-        >?</button>
+        >✕</button>
 
         <button
           v-if="images.length > 1"
           class="image-viewer__arrow image-viewer__arrow--prev"
           type="button"
-          aria-label="???"
+          aria-label="上一张"
           @click="step(-1)"
-        >?</button>
+        >‹</button>
 
         <figure class="image-viewer__stage">
           <div
@@ -40,7 +40,7 @@
             <div
               v-else
               class="image-viewer__svg"
-              aria-label="Mermaid ??"
+              aria-label="Mermaid 图表"
               v-html="current.svg"
             ></div>
           </div>
@@ -53,14 +53,14 @@
           v-if="images.length > 1"
           class="image-viewer__arrow image-viewer__arrow--next"
           type="button"
-          aria-label="???"
+          aria-label="下一张"
           @click="step(1)"
-        >?</button>
+        >›</button>
 
         <span v-if="images.length > 1" class="image-viewer__counter">
           {{ index + 1 }} / {{ images.length }}
         </span>
-        <span class="image-viewer__zoom-hint">???? {{ Math.round(scale * 100) }}%</span>
+        <span class="image-viewer__zoom-hint">滚轮缩放 {{ Math.round(scale * 100) }}%</span>
       </div>
     </Transition>
   </Teleport>
@@ -278,3 +278,4 @@ onBeforeUnmount(() => {
   }
 }
 </style>
+
