@@ -9,6 +9,7 @@ import { h, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { initCardTilt } from './cardTilt'
 import { initHomeScrollImmersion } from './homeScrollImmersion'
 import { initNavScreenScrollLock } from './navScreenScrollLock'
+import { initMermaid } from './mermaid'
 import { useData, useRoute } from 'vitepress'
 import Comments from './components/Comments.vue'
 import SeriesNav from './components/SeriesNav.vue'
@@ -119,6 +120,17 @@ export default {
       onUnmounted(() => {
         stopHomeImmersion?.()
       })
+
+      // Mermaid 图表渲染：首次加载 + SPA 路由切换后重新扫描
+      onMounted(() => {
+        nextTick(() => { initMermaid() })
+      })
+      watch(
+        () => route.path,
+        () => {
+          nextTick(() => { initMermaid() })
+        },
+      )
     },
     render() {
       return [

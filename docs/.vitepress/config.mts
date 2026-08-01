@@ -282,6 +282,13 @@ export default defineConfig({
         }
         const rawInfo = token.info ? String(token.info) : ''
         const info = rawInfo.split(/\s+/).find(Boolean) || ''
+
+        // Mermaid 图表：HTML 转义后放入 div。
+        // 浏览器不会解析 &lt; &gt; 为真实标签，textContent 读回时恢复原始代码。
+        if (info.toLowerCase() === 'mermaid' || info.toLowerCase() === 'mmd') {
+          return `<div class="mermaid"><pre>${md.utils.escapeHtml(token.content)}</pre></div>`
+        }
+
         const html = fence ? fence(tokens, idx, options, env, self) : self.renderToken(tokens, idx, options)
 
         let lang = info
@@ -538,7 +545,6 @@ html:not(.dark) {
     },
     nav: [
       { text: 'Android', link: '/Android/' },
-      { text: '标签', link: '/tags/' },
       {
         text: '编程语言',
         items: [
@@ -563,7 +569,7 @@ html:not(.dark) {
       { text: 'Linux', link: '/Linux/Index' },
     ],
 
-        sidebar: {
+    sidebar: {
       '/Android/': [
         {
           text: 'Android基础',
@@ -928,6 +934,7 @@ html:not(.dark) {
           items: [
             { text: '知识图谱', link: '/Agent/知识图谱' },
             { text: 'RAG', link: '/Agent/RAG' },
+            { text: 'Chunking', link: '/Agent/Chunking' },
             { text: 'Agent Skill', link: '/Agent/Skill' },
             { text: 'Tool Use', link: '/Agent/ToolUse' },
           ],
