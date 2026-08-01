@@ -25,14 +25,25 @@
         >?</button>
 
         <figure class="image-viewer__stage">
-          <img
-            :src="current.src"
-            :alt="current.alt"
-            class="image-viewer__image"
+          <div
+            class="image-viewer__media"
             :style="{ transform: `scale(${scale})` }"
             @click="toggleZoom"
-            draggable="false"
-          />
+          >
+            <img
+              v-if="!current.svg"
+              :src="current.src"
+              :alt="current.alt"
+              class="image-viewer__image"
+              draggable="false"
+            />
+            <div
+              v-else
+              class="image-viewer__svg"
+              aria-label="Mermaid ??"
+              v-html="current.svg"
+            ></div>
+          </div>
           <figcaption v-if="current.alt" class="image-viewer__caption">
             {{ current.alt }}
           </figcaption>
@@ -140,17 +151,38 @@ onBeforeUnmount(() => {
   max-width: 92vw;
   max-height: 92vh;
 }
+.image-viewer__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 92vw;
+  max-height: 84vh;
+  cursor: zoom-in;
+  transition: transform 0.12s ease-out;
+  will-change: transform;
+}
 .image-viewer__image {
   max-width: 92vw;
   max-height: 84vh;
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55);
-  cursor: zoom-in;
   user-select: none;
   -webkit-user-drag: none;
-  transition: transform 0.12s ease-out;
-  will-change: transform;
+}
+.image-viewer__svg {
+  display: block;
+  width: 92vw;
+  max-width: 92vw;
+  max-height: 84vh;
+  border-radius: 8px;
+  overflow: auto;
+}
+.image-viewer__svg :deep(svg) {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 84vh;
 }
 .image-viewer__caption {
   margin-top: 12px;

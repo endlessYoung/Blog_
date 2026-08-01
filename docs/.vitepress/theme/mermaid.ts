@@ -67,13 +67,6 @@ function currentTheme(): 'dark' | 'light' {
   return document.documentElement.classList.contains('dark') ? 'dark' : 'light'
 }
 
-function serializeSvg(el: HTMLElement): string | null {
-  const svg = el.querySelector('svg')
-  if (!svg) return null
-  const xml = new XMLSerializer().serializeToString(svg)
-  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml)
-}
-
 /** ?????? ImageViewer ????? */
 function bindClickToOpen(el: HTMLElement): void {
   if (el.dataset.viewerBound) return
@@ -84,9 +77,9 @@ function bindClickToOpen(el: HTMLElement): void {
     }
     event.preventDefault()
     event.stopPropagation()
-    const src = serializeSvg(el)
-    if (!src) return
-    openViewer([{ src, alt: 'Mermaid ??' }], 0)
+    const svg = el.querySelector('svg')
+    if (!svg) return
+    openViewer([{ svg: svg.outerHTML, alt: 'Mermaid ??' }], 0)
   })
 }
 
