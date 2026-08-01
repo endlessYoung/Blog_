@@ -6,7 +6,6 @@ import './custom.css'
 import './style/mobile.css'
 
 import { h, onMounted, onUnmounted, nextTick, watch } from 'vue'
-import DocumateLazy from './components/DocumateLazy.vue'
 import { initCardTilt } from './cardTilt'
 import { initHomeScrollImmersion } from './homeScrollImmersion'
 import { initNavScreenScrollLock } from './navScreenScrollLock'
@@ -61,7 +60,7 @@ export default {
 
       try {
         onMounted(() => {
-          initCardTilt();
+          if (window.innerWidth > 960) initCardTilt();
         });
       } catch (error) {
         console.error('Error during setup:', error);
@@ -84,6 +83,14 @@ export default {
         stopHomeImmersion?.()
         stopHomeImmersion = undefined
         if (typeof document === 'undefined') return
+        if (typeof window !== 'undefined' && window.innerWidth <= 960) {
+          // 小屏不启用滚动沉浸动效（mobile.css 已强制静态），避免移动端闪烁
+          const root = document.documentElement
+          root.style.removeProperty('--home-immersion')
+          root.style.removeProperty('--home-below')
+          root.style.removeProperty('--home-cta')
+          return
+        }
         if (frontmatter.value.layout !== 'home') {
           const root = document.documentElement
           root.style.removeProperty('--home-immersion')
@@ -123,8 +130,6 @@ export default {
         'home-hero-after': () => h(HomeMetricsStrip),
         'home-features-before': () => h(HomeSectionHeader),
         'home-features-after': () => h(HomeBottomCta),
-        'nav-bar-content-before': () =>
-          h(DocumateLazy, { endpoint: 'https://izbdbdndfp.us.aircode.run/ask' }),
         'doc-before': () => h(ArticleMetadata),
         'doc-after': () => [h(SeriesNav), h(RelatedArticles), h(Comments)],
         }),

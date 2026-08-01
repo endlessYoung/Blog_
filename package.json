@@ -1,6 +1,5 @@
 {
   "devDependencies": {
-    "@documate/documate": "^0.2.1",
     "feed": "^6.0.0",
     "markdown-it-katex": "^2.0.3",
     "vitepress": "^2.0.0-alpha.16"
@@ -9,11 +8,9 @@
     "docs:dev": "node scripts/gen-tags.mjs && vitepress dev docs --port 5173",
     "docs:created": "node scripts/update-created-dates.js",
     "docs:build": "pnpm docs:created && node scripts/gen-tags.mjs && vitepress build docs && node scripts/strip-inter-preload.mjs",
-    "docs:preview": "vitepress preview docs",
-    "documate:upload": "documate upload --verbose"
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "@documate/vue": "^0.3.1",
     "vue": "^3.5.0"
   },
   "packageManager": "pnpm@9.0.0"
