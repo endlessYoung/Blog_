@@ -1,7 +1,8 @@
 import mermaid from 'mermaid'
+import { openViewer } from './imageViewer'
 
-/** 与博客 Dracula / Cyberpunk 风格统一的 Mermaid 主题变量 */
-const CYBERPUNK_THEME = {
+/** ???Cyberpunk??????? Dracula / Cyberpunk ???? */
+const DARK_THEME = {
   theme: 'base' as const,
   themeVariables: {
     primaryColor: '#7000ff33',
@@ -29,37 +30,129 @@ const CYBERPUNK_THEME = {
   startOnLoad: false,
 }
 
-let initialized = false
+/** ??????????????????? */
+const LIGHT_THEME = {
+  theme: 'base' as const,
+  themeVariables: {
+    primaryColor: '#7c3aed22',
+    primaryTextColor: '#1e293b',
+    primaryBorderColor: '#6d28d9',
+    secondaryColor: '#e2e8f0aa',
+    secondaryTextColor: '#475569',
+    secondaryBorderColor: '#94a3b8',
+    tertiaryColor: '#f1f5f999',
+    tertiaryTextColor: '#64748b',
+    tertiaryBorderColor: '#05966988',
+    lineColor: '#0e7490',
+    textColor: '#1e293b',
+    background: 'transparent',
+    mainBkg: '#ffffff',
+    nodeBorder: '#6d28d9',
+    clusterBkg: '#f1f5f9aa',
+    clusterBorder: '#7c3aed88',
+    titleColor: '#0e7490',
+    edgeLabelBackground: '#ffffff',
+    fontSize: '14px',
+    fontFamily: 'inherit',
+  },
+  securityLevel: 'loose' as const,
+  startOnLoad: false,
+}
 
-/** 扫描页面中尚未渲染的 .mermaid 元素并交给 Mermaid 渲染 */
-export async function initMermaid(): Promise<void> {
+let lastTheme: 'dark' | 'light' | null = null
+let themeObserver: MutationObserver | null = null
+
+function currentTheme(): 'dark' | 'light' {
+  if (typeof document === 'undefined') return 'dark'
+  return document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+}
+
+function serializeSvg(el: HTMLElement): string | null {
+  const svg = el.querySelector('svg')
+  if (!svg) return null
+  const xml = new XMLSerializer().serializeToString(svg)
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml)
+}
+
+/** ?????? ImageViewer ????? */
+function bindClickToOpen(el: HTMLElement): void {
+  if (el.dataset.viewerBound) return
+  el.dataset.viewerBound = 'true'
+  el.addEventListener('click', (event) => {
+    if (event.target instanceof SVGElement && (event.target as SVGElement).closest('a')) {
+      return
+    }
+    event.preventDefault()
+    event.stopPropagation()
+    const src = serializeSvg(el)
+    if (!src) return
+    openViewer([{ src, alt: 'Mermaid ??' }], 0)
+  })
+}
+
+/** ????????????????????? */
+function watchTheme(): void {
+  if (typeof document === 'undefined' || themeObserver) return
+  themeObserver = new MutationObserver(() => {
+    const theme = currentTheme()
+    if (lastTheme !== null && lastTheme !== theme) {
+      void initMermaid(true)
+    }
+  })
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+}
+
+/** ?????????? .mermaid ????? Mermaid ?? */
+export async function initMermaid(force = false): Promise<void> {
   if (typeof document === 'undefined') return
 
-  const els = document.querySelectorAll<HTMLElement>('.mermaid:not([data-processed])')
-  if (els.length === 0) return
+  const theme = currentTheme()
+  if (lastTheme !== null && lastTheme !== theme) force = true
+  lastTheme = theme
 
-  if (!initialized) {
-    mermaid.initialize(CYBERPUNK_THEME)
-    initialized = true
+  let els = Array.from(document.querySelectorAll<HTMLElement>('.mermaid'))
+  if (force) {
+    // ??????????????????
+    els = els.filter((el) => el.getAttribute('data-processed') !== 'error')
+    for (const el of els) {
+      const source = el.dataset.source
+      if (source) {
+        el.textContent = source
+        delete el.dataset.source
+      }
+      el.removeAttribute('data-processed')
+    }
+    els = Array.from(document.querySelectorAll<HTMLElement>('.mermaid'))
   }
 
-  // 逐个渲染：textContent 会自动反转义 HTML 实体，所以 <br/> 能完整保留
+  els = els.filter((el) => !el.getAttribute('data-processed'))
+  if (els.length === 0) return
+
+  mermaid.initialize(theme === 'dark' ? DARK_THEME : LIGHT_THEME)
+
   for (const el of els) {
     const code = el.textContent?.trim() || ''
     if (!code) continue
+    el.dataset.source = code
 
     try {
-      // 用 mermaid.render() 生成 SVG 再注入 DOM，兼容 v11
+      // ? mermaid.render() ?? SVG ??? DOM??? v11
       const { svg } = await mermaid.render(`mermaid-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, code)
       el.innerHTML = svg
       el.setAttribute('data-processed', 'true')
+      bindClickToOpen(el)
     } catch (err: any) {
-      console.error(`[mermaid] 渲染失败:\n${code}\n\n错误:`, err?.message ?? err)
-      // 渲染失败时回退显示原始代码，方便排查
+      console.error(`[mermaid] ????:
+${code}
+
+??:`, err?.message ?? err)
+      // ??????????????????
       el.innerHTML = `<pre style="color:#ff6b6b;white-space:pre-wrap;font-size:13px">${escapeHtml(code)}</pre>`
       el.setAttribute('data-processed', 'error')
     }
   }
+
+  watchTheme()
 }
 
 function escapeHtml(s: string): string {

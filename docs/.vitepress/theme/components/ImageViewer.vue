@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <Teleport to="body">
     <Transition name="imgv">
       <div
@@ -6,30 +6,32 @@
         class="image-viewer"
         role="dialog"
         aria-modal="true"
-        aria-label="图片预览"
+        aria-label="????"
         @click.self="close"
       >
         <button
           class="image-viewer__close"
           type="button"
-          aria-label="关闭预览"
+          aria-label="????"
           @click="close"
-        >✕</button>
+        >?</button>
 
         <button
           v-if="images.length > 1"
           class="image-viewer__arrow image-viewer__arrow--prev"
           type="button"
-          aria-label="上一张"
+          aria-label="???"
           @click="step(-1)"
-        >‹</button>
+        >?</button>
 
-        <figure class="image-viewer__stage" :class="{ 'is-zoomed': zoomed }">
+        <figure class="image-viewer__stage">
           <img
             :src="current.src"
             :alt="current.alt"
             class="image-viewer__image"
+            :style="{ transform: `scale(${scale})` }"
             @click="toggleZoom"
+            draggable="false"
           />
           <figcaption v-if="current.alt" class="image-viewer__caption">
             {{ current.alt }}
@@ -40,13 +42,14 @@
           v-if="images.length > 1"
           class="image-viewer__arrow image-viewer__arrow--next"
           type="button"
-          aria-label="下一张"
+          aria-label="???"
           @click="step(1)"
-        >›</button>
+        >?</button>
 
         <span v-if="images.length > 1" class="image-viewer__counter">
           {{ index + 1 }} / {{ images.length }}
         </span>
+        <span class="image-viewer__zoom-hint">???? {{ Math.round(scale * 100) }}%</span>
       </div>
     </Transition>
   </Teleport>
@@ -63,24 +66,37 @@ import {
   type ViewerImage,
 } from '../imageViewer'
 
-const zoomed = ref(false)
+const MIN_SCALE = 1
+const MAX_SCALE = 6
+const scale = ref(1)
 
 const images = computed<ViewerImage[]>(() => viewerImages.value)
 const index = computed(() => viewerIndex.value)
 const current = computed(() => images.value[index.value] || { src: '', alt: '' })
 
+function resetZoom(): void {
+  scale.value = 1
+}
+
 function close(): void {
-  zoomed.value = false
+  resetZoom()
   closeViewer()
 }
 
 function step(delta: number): void {
-  zoomed.value = false
+  resetZoom()
   stepViewer(delta)
 }
 
 function toggleZoom(): void {
-  zoomed.value = !zoomed.value
+  scale.value = scale.value > 1 ? 1 : 2
+}
+
+function onWheel(event: WheelEvent): void {
+  if (!viewerActive.value) return
+  event.preventDefault()
+  const factor = event.deltaY < 0 ? 1.12 : 1 / 1.12
+  scale.value = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale.value * factor))
 }
 
 function onKeydown(event: KeyboardEvent): void {
@@ -91,11 +107,17 @@ function onKeydown(event: KeyboardEvent): void {
 }
 
 watch(viewerActive, (active) => {
-  if (!active) zoomed.value = false
+  if (!active) resetZoom()
 })
 
-onMounted(() => window.addEventListener('keydown', onKeydown))
-onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
+onMounted(() => {
+  window.addEventListener('keydown', onKeydown)
+  window.addEventListener('wheel', onWheel, { passive: false })
+})
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', onKeydown)
+  window.removeEventListener('wheel', onWheel)
+})
 </script>
 
 <style scoped>
@@ -127,11 +149,8 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   cursor: zoom-in;
   user-select: none;
   -webkit-user-drag: none;
-  transition: transform 0.22s ease;
-}
-.image-viewer__stage.is-zoomed .image-viewer__image {
-  transform: scale(2);
-  cursor: zoom-out;
+  transition: transform 0.12s ease-out;
+  will-change: transform;
 }
 .image-viewer__caption {
   margin-top: 12px;
@@ -192,6 +211,18 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   background: rgba(255, 255, 255, 0.14);
   color: #fff;
   font-size: 13px;
+}
+.image-viewer__zoom-hint {
+  position: fixed;
+  bottom: 58px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #aab4c8;
+  font-size: 12px;
+  pointer-events: none;
 }
 .imgv-enter-active,
 .imgv-leave-active {

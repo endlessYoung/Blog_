@@ -818,3 +818,11 @@ html:not(.dark) .vp-doc :not(pre) > code {
   cursor: zoom-in;
 }
 
+/* Mermaid charts are clickable to open the lightbox viewer */
+.mermaid {
+  cursor: zoom-in;
+}
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
