@@ -168,17 +168,26 @@ onBeforeUnmount(() => {
   -webkit-user-drag: none;
 }
 .image-viewer__svg {
-  display: block;
-  width: 92vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
   max-width: 92vw;
   max-height: 84vh;
-  border-radius: 8px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #ffffff;
   overflow: auto;
 }
+
+.dark .image-viewer__svg {
+  background: #0d1117;
+}
+
 .image-viewer__svg :deep(svg) {
   display: block;
-  width: 100%;
-  height: auto;
+  flex: 0 0 auto;
+  max-width: 100%;
   max-height: 84vh;
 }
 .image-viewer__close {
