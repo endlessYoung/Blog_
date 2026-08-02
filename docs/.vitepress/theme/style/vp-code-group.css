@@ -762,3 +762,39 @@ html:not(.dark) .vp-code-group .blocks div[class*='language-']>pre {
   background: rgba(167, 139, 250, 0.14);
   color: #e9d5ff;
 }
+
+/* =========================================
+   无语言代码块：纯圆角矩形卡片，去掉空语言标签药丸与顶栏
+   ========================================= */
+.vp-doc div.language- {
+  background: linear-gradient(
+    180deg,
+    var(--cc-card-bg-light) 0,
+    var(--cc-card-bg-light) 100%
+  ) !important;
+}
+
+.dark .vp-doc div.language- {
+  background: var(--cc-card-bg-dark) !important;
+}
+
+.vp-doc div.language-::before {
+  content: none !important;
+  display: none !important;
+}
+
+.vp-doc div.language- > span.lang {
+  display: none !important;
+}
+
+.vp-doc div.language- > pre {
+  margin-top: 0 !important;
+}
+
+.vp-doc div.language-.line-numbers-mode .line-numbers-wrapper {
+  top: 0 !important;
+}
+
+.vp-doc div.language- > button.copy {
+  top: 0.75rem !important;
+}
