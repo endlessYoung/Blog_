@@ -44,9 +44,6 @@
               v-html="current.svg"
             ></div>
           </div>
-          <figcaption v-if="current.alt" class="image-viewer__caption">
-            {{ current.alt }}
-          </figcaption>
         </figure>
 
         <button
@@ -183,14 +180,6 @@ onBeforeUnmount(() => {
   width: 100%;
   height: auto;
   max-height: 84vh;
-}
-.image-viewer__caption {
-  margin-top: 12px;
-  max-width: 80vw;
-  font-size: 13px;
-  line-height: 1.6;
-  text-align: center;
-  color: #dbe4ff;
 }
 .image-viewer__close {
   position: fixed;
