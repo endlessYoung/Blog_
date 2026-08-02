@@ -552,6 +552,68 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink):hover {
   color: #e5e5e5;
 }
 
+/* =========================================
+   Lists - 克制实用：品牌色 marker，层级递进
+   ========================================= */
+.vp-doc ul,
+.vp-doc ol {
+  padding-left: 1.3em;
+}
+
+.vp-doc ul {
+  list-style: none;
+}
+
+.vp-doc ul > li {
+  position: relative;
+}
+
+/* 无序列表：一级实心圆点 */
+.vp-doc ul > li::before {
+  content: '';
+  position: absolute;
+  left: -0.9em;
+  top: 0.66em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--tech-c-accent, #22d3ee);
+}
+
+/* 二级：空心圆 */
+.vp-doc ul ul > li::before {
+  width: 7px;
+  height: 7px;
+  background: transparent;
+  border: 1.5px solid var(--tech-c-accent, #22d3ee);
+}
+
+/* 三级：短横线 */
+.vp-doc ul ul ul > li::before {
+  width: 9px;
+  height: 2px;
+  border: 0;
+  border-radius: 0;
+  background: var(--tech-c-accent, #22d3ee);
+  opacity: 0.75;
+}
+
+/* 有序列表：品牌色加粗数字，嵌套保持默认层级（1. / a. / i.） */
+.vp-doc ol > li::marker {
+  color: var(--tech-c-accent, #22d3ee);
+  font-weight: 700;
+}
+
+/* 间距：适度紧凑 */
+.vp-doc li + li {
+  margin-top: 0.25em;
+}
+
+.vp-doc li > ul,
+.vp-doc li > ol {
+  margin-top: 0.25em;
+}
+
 /* 正文代码围栏的外壳与底色由 vp-code-group.css 统一绘制；此处不再给 .shiki 叠 border/阴影，
    否则会在卡片 #0a0a0a 内多出一圈「盒底边」+ 底缝感（与 code-card-template 不一致） */
 
