@@ -573,7 +573,7 @@ html:not(.dark) {
       '/Android/': [
         {
           text: 'Android基础',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Android简介', link: '/Android/Android简介' },
             { text: 'Manifest详解', link: '/Android/Manifest详解' },
@@ -632,7 +632,7 @@ html:not(.dark) {
         },
         {
           text: '组件通信',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Activity和Fragment的低耦合通信', link: '/Android/Activity和Fragment的低耦合通信' },
             { text: 'Android与Service通信', link: '/Android/Android与Service通信' },
@@ -641,7 +641,7 @@ html:not(.dark) {
         },
         {
           text: 'Jetpack Compose',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Compose Gradle 配置', link: '/Android/Compose/Compose的gradle配置' },
             { text: 'Compose 状态管理', link: '/Android/Compose/ComposeStateManagement' },
@@ -650,7 +650,7 @@ html:not(.dark) {
         },
         {
           text: 'debug与调试',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '安卓常见的内存泄漏点', link: '/Android/安卓常见的内存泄漏点' },
             { text: 'Fragment找不到id对应view', link: '/Android/Fragment找不到id对应view' },
@@ -669,7 +669,7 @@ html:not(.dark) {
         },
         {
           text: '常见三方库',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '三方库面试题', link: '/Android/三方库面试题' },
             { text: 'LeakCanary原理分析', link: '/Android/LeakCanary原理分析' },
@@ -679,7 +679,7 @@ html:not(.dark) {
         },
         {
           text: '编译',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Android.mk', link: '/Android/Android.mk' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
@@ -689,14 +689,14 @@ html:not(.dark) {
         },
         {
           text: '性能优化',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'RecyclerView性能优化', link: '/Android/RecyclerView性能优化' },
           ],
         },
         {
           text: 'JNI',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '初识JNI', link: '/Android/初识JNI' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
@@ -704,7 +704,7 @@ html:not(.dark) {
         },
         {
           text: 'Framework',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'AOSP架构', link: '/Android/AOSP架构' },
             { text: 'Android进程和线程', link: '/Android/Android进程和线程' },
@@ -741,7 +741,7 @@ html:not(.dark) {
         },
         {
           text: '图形渲染',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '图形渲染', link: '/Android/图形渲染' },
             { text: '渲染机制', link: '/Android/渲染机制' },
@@ -755,20 +755,20 @@ html:not(.dark) {
         },
         {
           text: '序列化',
-          collapsed: true,
+          collapsed: false,
           items: [
           ],
         },
         {
           text: '安全',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'v1和v2签名机制', link: '/Android/v1和v2签名机制' },
           ],
         },
         {
           text: '安卓日志系统',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '日志详解', link: '/Android/日志详解' },
             { text: 'logd日志简介及典型案例分析', link: '/Android/logd日志简介及典型案例分析' },
@@ -782,7 +782,7 @@ html:not(.dark) {
         },
         {
           text: '实践',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '亮度调节', link: '/Android/实践-亮度调节' },
             { text: '手机所有应用', link: '/Android/实践-手机所有应用' },
@@ -796,7 +796,7 @@ html:not(.dark) {
         },
         {
           text: '进阶',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '安卓常见架构', link: '/Android/安卓常见架构' },
             { text: 'Intent发送数据的上限', link: '/Android/Intent发送数据的上限' },
@@ -816,14 +816,14 @@ html:not(.dark) {
         },
         {
           text: '安卓与设计模式',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '策略模式实现状态校验', link: '/Android/策略模式实现状态校验' },
           ],
         },
         {
           text: 'OpenGL ES',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
             { text: '坐标系统', link: '/Android/OpenGL ES坐标系统' },
@@ -832,13 +832,13 @@ html:not(.dark) {
         },
         {
           text: 'Gradle',
-          collapsed: true,
+          collapsed: false,
           items: [
           ],
         },
         {
           text: 'NDK',
-          collapsed: true,
+          collapsed: false,
           items: [
           ],
         },
@@ -846,7 +846,7 @@ html:not(.dark) {
       '/Ai/': [
         {
           text: '机器学习',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '监督学习', link: '/Ai/监督学习入门' },
             { text: '非监督学习', link: '/Ai/非监督学习' },
@@ -874,7 +874,7 @@ html:not(.dark) {
         },
         {
           text: '回归算法',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '线性回归', link: '/Ai/线性回归' },
             { text: '多项式回归', link: '/Ai/多项式回归' },
@@ -888,7 +888,7 @@ html:not(.dark) {
         },
         {
           text: '聚类算法',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '聚类算法', link: '/Ai/聚类算法' },
             { text: 'K-means', link: '/Ai/K-means' },
@@ -898,7 +898,7 @@ html:not(.dark) {
         },
         {
           text: 'Pytorch',
-          collapsed: true,
+          collapsed: false,
           items: [
           ],
         },
@@ -906,7 +906,7 @@ html:not(.dark) {
       '/Agent/': [
         {
           text: 'Agent 基础',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Agent 开发总览', link: '/Agent/' },
             { text: 'Agent 基础概念', link: '/Agent/基础概念' },
@@ -918,7 +918,7 @@ html:not(.dark) {
         },
         {
           text: '框架与工具',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'LangChain', link: '/Agent/LangChain' },
             { text: 'LangGraph', link: '/Agent/LangGraph' },
@@ -930,18 +930,19 @@ html:not(.dark) {
         },
         {
           text: '知识与推理',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '知识图谱', link: '/Agent/知识图谱' },
             { text: 'RAG', link: '/Agent/RAG' },
             { text: 'Chunking', link: '/Agent/Chunking' },
+            { text: 'Embedding', link: '/Agent/Embedding' },
             { text: 'Agent Skill', link: '/Agent/Skill' },
             { text: 'Tool Use', link: '/Agent/ToolUse' },
           ],
         },
         {
           text: '实践进阶',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Multi-Agent', link: '/Agent/MultiAgent' },
             { text: '工作流设计', link: '/Agent/工作流设计' },
@@ -954,7 +955,7 @@ html:not(.dark) {
       '/JS/': [
         {
           text: 'JS',
-          collapsed: true,
+          collapsed: false,
           items: [
           ],
         },
@@ -962,7 +963,7 @@ html:not(.dark) {
       '/数据结构和算法/': [
         {
           text: '简单题',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '合并数组', link: '/数据结构和算法/合并数组' },
             { text: '移除元素', link: '/数据结构和算法/移除元素' },
@@ -971,7 +972,7 @@ html:not(.dark) {
         },
         {
           text: '位运算',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '异或运算', link: '/数据结构和算法/异或运算' },
           ],
@@ -980,7 +981,7 @@ html:not(.dark) {
       '/Java/': [
         {
           text: 'Java基础',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Integer1000与100的比较', link: '/Java/Integer1000与100的比较' },
             { text: '动态代理', link: '/Java/动态代理' },
@@ -991,7 +992,7 @@ html:not(.dark) {
         },
         {
           text: 'Java并发',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'ThreadLocal', link: '/Java/ThreadLocal' },
             { text: 'CAS', link: '/Java/CAS' },
@@ -1005,7 +1006,7 @@ html:not(.dark) {
         },
         {
           text: 'JVM',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'JVM概述', link: '/Java/JVM概述' },
             { text: 'JVM分区', link: '/Java/JVM分区' },
@@ -1023,7 +1024,7 @@ html:not(.dark) {
       '/Kotlin/': [
         {
           text: 'kotlin基础',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '集合', link: '/Kotlin/集合' },
             { text: '作用域函数', link: '/Kotlin/作用域函数' },
@@ -1060,7 +1061,7 @@ html:not(.dark) {
         },
         {
           text: '协程',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '协程', link: '/Kotlin/协程' },
             { text: '协程作用域', link: '/Kotlin/协程作用域' },
@@ -1076,7 +1077,7 @@ html:not(.dark) {
         },
         {
           text: 'Flow',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'Flow', link: '/Kotlin/Flow' },
           ],
@@ -1085,26 +1086,26 @@ html:not(.dark) {
       '/Python/': [
         {
           text: 'python基础',
-          collapsed: true,
+          collapsed: false,
           items: [
           ],
         },
         {
           text: 'numpy',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'numpy的常用方法', link: '/Python/numpy的常用方法' },
           ],
         },
         {
           text: 'ski-learn',
-          collapsed: true,
+          collapsed: false,
           items: [
           ],
         },
         {
           text: 'pytorch',
-          collapsed: true,
+          collapsed: false,
           items: [
           ],
         },
@@ -1112,7 +1113,7 @@ html:not(.dark) {
       '/Flutter/': [
         {
           text: 'dart语言简介',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'dart语言简介', link: '/Flutter/dart语言简介' },
           ],
@@ -1121,14 +1122,14 @@ html:not(.dark) {
       '/SQL/': [
         {
           text: 'SQL基础',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: 'SQL简介', link: '/SQL/SQL基础/SQL简介' },
           ],
         },
         {
           text: 'SQL',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '全文搜索', link: '/SQL/全文搜索' },
           ],
@@ -1137,7 +1138,7 @@ html:not(.dark) {
       '/C/': [
         {
           text: 'C',
-          collapsed: true,
+          collapsed: false,
           items: [
           ],
         },
@@ -1145,7 +1146,7 @@ html:not(.dark) {
       '/C++/': [
         {
           text: 'C++',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '头文件的声明规范', link: '/C++/头文件的声明规范' },
             { text: '模板', link: '/C++/模板' },
@@ -1155,7 +1156,7 @@ html:not(.dark) {
       '/Linux/': [
         {
           text: 'Linux',
-          collapsed: true,
+          collapsed: false,
           items: [
           ],
         },
