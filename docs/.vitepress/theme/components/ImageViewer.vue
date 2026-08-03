@@ -31,7 +31,6 @@
             :class="{ 'is-zoomed': scale > 1, 'is-dragging': dragging }"
             :style="{
               transform: `translate(${panX}px, ${panY}px) scale(${scale})`,
-              transition: dragging ? 'none' : undefined,
             }"
             @click="toggleZoom"
             @pointerdown="onPointerDown"
@@ -66,7 +65,22 @@
         <span v-if="images.length > 1" class="image-viewer__counter">
           {{ index + 1 }} / {{ images.length }}
         </span>
-        <span class="image-viewer__zoom-hint">滚轮缩放 {{ Math.round(scale * 100) }}%</span>
+                <div class="image-viewer__zoomctl">
+          <button class="image-viewer__zoombtn" type="button" aria-label="缩小" @click="zoomStep(-0.1)">−</button>
+          <input
+            class="image-viewer__zoomval"
+            type="number"
+            min="100"
+            max="600"
+            step="10"
+            :value="Math.round(scale * 100)"
+            @change="onZoomInput"
+            @keydown.enter="onZoomInput"
+            aria-label="缩放比例"
+          />
+          <span class="image-viewer__zoomunit">%</span>
+          <button class="image-viewer__zoombtn" type="button" aria-label="放大" @click="zoomStep(0.1)">+</button>
+        </div>
       </div>
     </Transition>
   </Teleport>
@@ -116,13 +130,16 @@ function step(delta: number): void {
 function clampPan(): void {
   const el = mediaRef.value
   if (!el) return
+  const vw = window.innerWidth
+  const vh = window.innerHeight
   const w = el.clientWidth
   const h = el.clientHeight
+  const ox = el.offsetLeft
+  const oy = el.offsetTop
   const s = scale.value
-  const maxX = Math.max(0, w * (s - 1))
-  const maxY = Math.max(0, h * (s - 1))
-  panX.value = Math.min(0, Math.max(-maxX, panX.value))
-  panY.value = Math.min(0, Math.max(-maxY, panY.value))
+  // 图片始终与视口相交：边缘可到达视口任意一侧（保证最上/最左内容可见）
+  panX.value = Math.min(vw - ox, Math.max(-ox - w * s, panX.value))
+  panY.value = Math.min(vh - oy, Math.max(-oy - h * s, panY.value))
 }
 
 function zoomAt(clientX: number, clientY: number, newScale: number): void {
@@ -138,6 +155,10 @@ function zoomAt(clientX: number, clientY: number, newScale: number): void {
   panX.value = cx - localX * s
   panY.value = cy - localY * s
   scale.value = s
+  if (s <= 1) {
+    panX.value = 0
+    panY.value = 0
+  }
   clampPan()
 }
 
@@ -151,9 +172,39 @@ function toggleZoom(event: MouseEvent): void {
 
 function onWheel(event: WheelEvent): void {
   if (!viewerActive.value) return
+  const el = mediaRef.value
+  if (!el) return
   event.preventDefault()
+  const r = el.getBoundingClientRect()
+  const margin = 40
+  const overMedia =
+    event.clientX >= r.left - margin &&
+    event.clientX <= r.right + margin &&
+    event.clientY >= r.top - margin &&
+    event.clientY <= r.bottom + margin
   const factor = event.deltaY < 0 ? 1.12 : 1 / 1.12
-  zoomAt(event.clientX, event.clientY, scale.value * factor)
+  if (overMedia) {
+    zoomAt(event.clientX, event.clientY, scale.value * factor)
+  }
+}
+
+function zoomStep(delta: number): void {
+  const el = mediaRef.value
+  if (!el) return
+  const cx = el.offsetLeft + el.clientWidth / 2
+  const cy = el.offsetTop + el.clientHeight / 2
+  zoomAt(cx, cy, scale.value + delta)
+}
+
+function onZoomInput(event: Event): void {
+  const input = event.target as HTMLInputElement
+  const percent = Number(input.value)
+  if (!Number.isFinite(percent)) return
+  const el = mediaRef.value
+  if (!el) return
+  const cx = el.offsetLeft + el.clientWidth / 2
+  const cy = el.offsetTop + el.clientHeight / 2
+  zoomAt(cx, cy, percent / 100)
 }
 
 function onPointerDown(event: PointerEvent): void {
@@ -183,6 +234,8 @@ function onKeydown(event: KeyboardEvent): void {
   if (event.key === 'Escape') close()
   else if (event.key === 'ArrowLeft') step(-1)
   else if (event.key === 'ArrowRight') step(1)
+  else if (event.key === '+' || event.key === '=') zoomStep(0.1)
+  else if (event.key === '-' || event.key === '_') zoomStep(-0.1)
 }
 
 watch(viewerActive, (active) => {
@@ -226,7 +279,7 @@ onBeforeUnmount(() => {
   max-width: 92vw;
   max-height: 84vh;
   cursor: zoom-in;
-  transition: transform 0.12s ease-out;
+  transform-origin: 0 0;
   will-change: transform;
 }
 
@@ -322,17 +375,55 @@ onBeforeUnmount(() => {
   color: #fff;
   font-size: 13px;
 }
-.image-viewer__zoom-hint {
+.image-viewer__zoomctl {
   position: fixed;
-  bottom: 58px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 4px 12px;
+  top: 18px;
+  right: 76px;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.image-viewer__zoombtn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.image-viewer__zoombtn:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+.image-viewer__zoomval {
+  width: 48px;
+  height: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-size: 13px;
+  text-align: center;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.image-viewer__zoomval::-webkit-outer-spin-button,
+.image-viewer__zoomval::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.image-viewer__zoomunit {
   color: #aab4c8;
   font-size: 12px;
-  pointer-events: none;
 }
 .imgv-enter-active,
 .imgv-leave-active {
