@@ -1,18 +1,27 @@
 {
   "devDependencies": {
     "feed": "^6.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0",
     "markdown-it-katex": "^2.0.3",
+    "prettier": "^3.9.6",
     "vitepress": "^2.0.0-alpha.16"
   },
   "scripts": {
     "docs:dev": "node scripts/gen-tags.mjs && vitepress dev docs --port 5173",
     "docs:created": "node scripts/update-created-dates.js",
     "docs:build": "pnpm docs:created && node scripts/gen-tags.mjs && vitepress build docs && node scripts/strip-inter-preload.mjs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "format": "prettier --write \"docs/**/*.md\"",
+    "format:check": "prettier --check \"docs/**/*.md\"",
+    "prepare": "husky"
   },
   "dependencies": {
     "mermaid": "^11.16.0",
     "vue": "^3.5.0"
   },
-  "packageManager": "pnpm@9.0.0"
+  "packageManager": "pnpm@9.0.0",
+  "lint-staged": {
+    "*.md": "prettier --write"
+  }
 }
