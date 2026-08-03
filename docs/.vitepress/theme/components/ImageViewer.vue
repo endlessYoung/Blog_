@@ -280,7 +280,6 @@ onBeforeUnmount(() => {
   max-height: 84vh;
   cursor: zoom-in;
   transform-origin: 0 0;
-  will-change: transform;
 }
 
 .image-viewer__media.is-zoomed {
@@ -310,7 +309,6 @@ onBeforeUnmount(() => {
   padding: 14px;
   border-radius: 12px;
   background: #ffffff;
-  overflow: auto;
 }
 
 .dark .image-viewer__svg {
