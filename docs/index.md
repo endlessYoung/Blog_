@@ -1,6 +1,6 @@
 ---
-title: Endlessyoung ????? - Android / Kotlin / Java / AI
-description: Endlessyoung ?????????? Android?Kotlin?Java?Python?AI ? Agent ????????????????
+title: Endlessyoung 的学习笔记 - Android / Kotlin / Java / AI
+description: Endlessyoung 的个人技术博客，记录 Android、Kotlin、Java、Python、AI 与 Agent 方向的学习笔记与实践总结。
 created: 2023-10-04
 layout: home
 radar: sonar

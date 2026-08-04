@@ -1,6 +1,6 @@
 ---
 title: AI / 机器学习
-description: AI ?????????????????????????????????????
+description: AI 与机器学习学习笔记，涵盖监督学习、神经网络、经典算法推导与工程实践。
 categories: [Ai]
 tags: [ai]
 created: 2026-06-24
@@ -44,7 +44,7 @@ created: 2026-06-24
 - [Lasso回归](/Ai/Lasso回归)
 - [逻辑回归](/Ai/逻辑回归)
 - [弹性网络回归](/Ai/弹性网络回归)
-- [支持向量回归(SVR)](/Ai/支持向量回归(SVR))
+- [支持向量回归(SVR)](</Ai/支持向量回归(SVR)>)
 - [神经网络回归](/Ai/神经网络回归)
 - [线性回归中的梯度下降](/Ai/线性回归中的梯度下降)
 
@@ -57,7 +57,7 @@ created: 2026-06-24
 
 ## Pytorch & TensorFlow
 
-- [Pytorch学习(一)](/Ai/Pytorch学习(一))
+- [Pytorch学习(一)](</Ai/Pytorch学习(一)>)
 - [TensorFlow中的数据](/Ai/TensorFlow中的数据)
 - [TensorFlow实现](/Ai/TensorFlow实现)
 

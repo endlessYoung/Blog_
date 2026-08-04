@@ -1,6 +1,6 @@
 ---
 title: Jetpack Compose 状态管理详解
-description: 在 Jetpack Compose 中，状态 (State) 是驱动 UI 更新的核心。与传统的 View 体系不同，Compose 是声明式的：UI 是状态的函数。当应用的状态发生变化时，Compose 会重新执行受影响的 Composable 函数（这个过?
+description: 在 Jetpack Compose 中，状态 (State) 是驱动 UI 更新的核心。与传统的 View 体系不同，Compose 是声明式的：UI 是状态的函数。当应用的状态发生变化时，Compose 会重新执行受影响的 Composable 函数（这个过程称为重组），从而更新 UI。
 categories: [Android]
 tags: [android, Compose, ComposeStateManagement]
 created: 2026-02-08
@@ -45,8 +45,8 @@ fun Counter() {
 }
 ```
 
-*   `mutableStateOf(v)`: 创建一个初始值为 `v` 的 `MutableState`。
-*   `remember { ... }`: 在内存中缓存计算结果，直到 Composable 离开组合树。
+- `mutableStateOf(v)`: 创建一个初始值为 `v` 的 `MutableState`。
+- `remember { ... }`: 在内存中缓存计算结果，直到 Composable 离开组合树。
 
 ## 2. 状态提升 (State Hoisting)
 
@@ -61,6 +61,7 @@ fun Counter() {
 ### 如何做？
 
 通常将状态变量替换为两个参数：
+
 1.  **value: T**：当前显示的值。
 2.  **onValueChange: (T) -> Unit**：请求修改值的事件回调。
 
@@ -75,7 +76,7 @@ fun StatefulCounter() {
 // 无状态组件 (Stateless) - 纯 UI 展示，易于复用和测试
 @Composable
 fun StatelessCounter(
-    count: Int, 
+    count: Int,
     onIncrement: () -> Unit
 ) {
     Button(onClick = onIncrement) {
@@ -170,9 +171,9 @@ val showButton by remember {
 
 状态改变通常会触发 UI 更新，但有时我们需要在状态改变时执行非 UI 操作（副作用），如打日志、启动协程、显示 Toast 等。
 
-*   **`LaunchedEffect(key)`**: 当 `key` 变化时，启动一个协程。适合执行挂起函数（如网络请求、动画）。
-*   **`DisposableEffect(key)`**: 当 `key` 变化或组件销毁时，执行清理操作（如注册/注销监听器）。
-*   **`SideEffect`**: 每次重组成功后执行。适合将 Compose 状态同步到非 Compose 代码系统。
+- **`LaunchedEffect(key)`**: 当 `key` 变化时，启动一个协程。适合执行挂起函数（如网络请求、动画）。
+- **`DisposableEffect(key)`**: 当 `key` 变化或组件销毁时，执行清理操作（如注册/注销监听器）。
+- **`SideEffect`**: 每次重组成功后执行。适合将 Compose 状态同步到非 Compose 代码系统。
 
 ```kotlin
 // 示例：当 snackbarHostState 变化时显示 Snackbar
