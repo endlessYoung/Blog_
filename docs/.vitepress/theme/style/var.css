@@ -101,7 +101,7 @@ html {
 
   /* Gradients - Blue for Hero */
   --vp-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --vp-gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --vp-gradient-secondary: linear-gradient(135deg, #22d3ee 0%, #22d3ee 100%);
 
   /* Home Hero - Keep Blue */
   --vp-home-hero-name-color: transparent;

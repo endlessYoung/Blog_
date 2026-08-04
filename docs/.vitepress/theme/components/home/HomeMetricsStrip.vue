@@ -199,10 +199,10 @@ const recent = buildRecent(3)
   background:
     linear-gradient(#67e8f9, #67e8f9) 0 0 / 8px 1.5px no-repeat,
     linear-gradient(#67e8f9, #67e8f9) 0 0 / 1.5px 8px no-repeat,
-    linear-gradient(#c084fc, #c084fc) 100% 0 / 8px 1.5px no-repeat,
-    linear-gradient(#c084fc, #c084fc) 100% 0 / 1.5px 8px no-repeat,
-    linear-gradient(#c084fc, #c084fc) 0 100% / 8px 1.5px no-repeat,
-    linear-gradient(#c084fc, #c084fc) 0 100% / 1.5px 8px no-repeat,
+    linear-gradient(#67e8f9, #67e8f9) 100% 0 / 8px 1.5px no-repeat,
+    linear-gradient(#67e8f9, #67e8f9) 100% 0 / 1.5px 8px no-repeat,
+    linear-gradient(#67e8f9, #67e8f9) 0 100% / 8px 1.5px no-repeat,
+    linear-gradient(#67e8f9, #67e8f9) 0 100% / 1.5px 8px no-repeat,
     linear-gradient(#67e8f9, #67e8f9) 100% 100% / 8px 1.5px no-repeat,
     linear-gradient(#67e8f9, #67e8f9) 100% 100% / 1.5px 8px no-repeat;
 }
@@ -478,10 +478,10 @@ const recent = buildRecent(3)
   background:
     linear-gradient(#0e7490, #0e7490) 0 0 / 8px 1.5px no-repeat,
     linear-gradient(#0e7490, #0e7490) 0 0 / 1.5px 8px no-repeat,
-    linear-gradient(#6d28d9, #6d28d9) 100% 0 / 8px 1.5px no-repeat,
-    linear-gradient(#6d28d9, #6d28d9) 100% 0 / 1.5px 8px no-repeat,
-    linear-gradient(#6d28d9, #6d28d9) 0 100% / 8px 1.5px no-repeat,
-    linear-gradient(#6d28d9, #6d28d9) 0 100% / 1.5px 8px no-repeat,
+    linear-gradient(#0e7490, #0e7490) 100% 0 / 8px 1.5px no-repeat,
+    linear-gradient(#0e7490, #0e7490) 100% 0 / 1.5px 8px no-repeat,
+    linear-gradient(#0e7490, #0e7490) 0 100% / 8px 1.5px no-repeat,
+    linear-gradient(#0e7490, #0e7490) 0 100% / 1.5px 8px no-repeat,
     linear-gradient(#0e7490, #0e7490) 100% 100% / 8px 1.5px no-repeat,
     linear-gradient(#0e7490, #0e7490) 100% 100% / 1.5px 8px no-repeat;
 }

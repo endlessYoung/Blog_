@@ -256,7 +256,7 @@ onBeforeUnmount(() => {
 .image-viewer {
   position: fixed;
   inset: 0;
-  z-index: 2147483000;
+  z-index: var(--z-viewer, 2147483000);
   display: flex;
   align-items: center;
   justify-content: center;

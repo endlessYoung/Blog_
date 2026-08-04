@@ -32,7 +32,7 @@
 }
 
 .home-eyebrow__accent--end {
-  background: linear-gradient(90deg, rgba(167, 139, 250, 0.25), transparent);
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.25), transparent);
 }
 
 @media (max-width: 639px) {
@@ -46,6 +46,6 @@
 }
 
 :global(html:not(.dark) .home-eyebrow__accent--end) {
-  background: linear-gradient(90deg, rgba(124, 58, 237, 0.38), transparent);
+  background: linear-gradient(90deg, rgba(8, 145, 178, 0.38), transparent);
 }
 </style>

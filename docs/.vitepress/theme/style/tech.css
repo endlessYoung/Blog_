@@ -15,10 +15,10 @@ html.dark {
   --tech-c-bg-soft: rgba(255, 255, 255, 0.04);
   --tech-c-panel: rgba(12, 12, 16, 0.72);
   --tech-c-neon-cyan: #22d3ee;
-  --tech-c-neon-magenta: #e879f9;
-  --tech-neon-pink: #ec4899;
-  --tech-neon-purple: #c084fc;
-  --tech-neon-pink-glow: rgba(236, 72, 153, 0.45);
+  --tech-c-neon-magenta: #22d3ee;
+  --tech-neon-pink: #22d3ee;
+  --tech-neon-purple: #67e8f9;
+  --tech-neon-pink-glow: rgba(34, 211, 238, 0.45);
   --tech-neon-purple-glow: rgba(192, 132, 252, 0.35);
   --tech-c-border: rgba(255, 255, 255, 0.1);
   --tech-c-border-strong: rgba(34, 211, 238, 0.35);
@@ -34,13 +34,13 @@ html.dark {
   --vp-c-text-3: #a1a1aa;
   --vp-c-brand-1: #22d3ee;
   --vp-c-brand-2: #67e8f9;
-  --vp-c-brand-3: #a78bfa;
+  --vp-c-brand-3: #67e8f9;
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: linear-gradient(100deg, #f4f4f5 0%, #e4e4e7 40%, #22d3ee 100%);
   --vp-home-hero-image-background-image: radial-gradient(
     circle at center,
     rgba(34, 211, 238, 0.35),
-    rgba(167, 139, 250, 0.08) 55%,
+    rgba(34, 211, 238, 0.08) 55%,
     transparent 72%
   );
   --vp-home-hero-image-filter: blur(80px);
@@ -58,11 +58,11 @@ html:not(.dark) {
   --tech-c-bg-soft: rgba(0, 0, 0, 0.04);
   --tech-c-panel: rgba(255, 255, 255, 0.92);
   --tech-c-neon-cyan: #0891b2;
-  --tech-c-neon-magenta: #a855f7;
+  --tech-c-neon-magenta: #22d3ee;
   --tech-neon-pink: #db2777;
-  --tech-neon-purple: #7c3aed;
+  --tech-neon-purple: #0e7490;
   --tech-neon-pink-glow: rgba(219, 39, 119, 0.22);
-  --tech-neon-purple-glow: rgba(124, 58, 237, 0.2);
+  --tech-neon-purple-glow: rgba(8, 145, 178, 0.2);
   --tech-c-border: rgba(0, 0, 0, 0.08);
   --tech-c-border-strong: rgba(8, 145, 178, 0.35);
   --tech-c-text: #18181b;
@@ -77,13 +77,13 @@ html:not(.dark) {
   --vp-c-text-3: #52525b;
   --vp-c-brand-1: #0e7490;
   --vp-c-brand-2: #06b6d4;
-  --vp-c-brand-3: #7c3aed;
+  --vp-c-brand-3: #0e7490;
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: linear-gradient(100deg, #18181b 0%, #3f3f46 30%, #0e7490 100%);
   --vp-home-hero-image-background-image: radial-gradient(
     circle at center,
     rgba(6, 182, 212, 0.22),
-    rgba(124, 58, 237, 0.06) 55%,
+    rgba(8, 145, 178, 0.06) 55%,
     transparent 72%
   );
   --vp-home-hero-image-filter: blur(80px);
@@ -132,7 +132,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(236, 72, 153, 0.45), rgba(168, 85, 247, 0.4), rgba(34, 211, 238, 0.45));
+  background: linear-gradient(180deg, rgba(34, 211, 238, 0.45), rgba(34, 211, 238, 0.4), rgba(34, 211, 238, 0.45));
   border-radius: 999px;
 }
 
@@ -166,7 +166,7 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow:
     0 1px 0 rgba(0, 0, 0, 0.4),
-    inset 0 -1px 0 rgba(236, 72, 153, 0.12);
+    inset 0 -1px 0 rgba(34, 211, 238, 0.12);
 }
 
 .VPNavBar .title {
@@ -226,7 +226,7 @@ body {
 }
 
 a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
-  background: linear-gradient(90deg, #22d3ee, #a78bfa) !important;
+  background: linear-gradient(90deg, #22d3ee, #67e8f9) !important;
 }
 
 .VPHero {
@@ -367,7 +367,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
     145deg,
     rgba(34, 211, 238, 0.07) 0%,
     transparent 48%,
-    rgba(167, 139, 250, 0.05) 100%
+    rgba(34, 211, 238, 0.05) 100%
   );
   opacity: 0.65;
   pointer-events: none;
@@ -534,7 +534,7 @@ html:not(.dark) .VPFeature:hover .icon {
   width: 96px;
   height: 2px;
   margin-top: 10px;
-  background: linear-gradient(90deg, rgba(34, 211, 238, 0.9), rgba(167, 139, 250, 0.55), transparent);
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.9), rgba(34, 211, 238, 0.55), transparent);
 }
 
 @property --border-beam-angle {
@@ -601,13 +601,13 @@ html:not(.dark) .VPFeature:hover .icon {
   100% {
     filter:
       drop-shadow(0 1px 0 rgba(255, 255, 255, 0.75))
-      drop-shadow(0 0 14px rgba(99, 102, 241, 0.18));
+      drop-shadow(0 0 14px rgba(34, 211, 238, 0.18));
   }
 
   50% {
     filter:
       drop-shadow(0 1px 0 rgba(255, 255, 255, 0.85))
-      drop-shadow(0 0 20px rgba(99, 102, 241, 0.28));
+      drop-shadow(0 0 20px rgba(34, 211, 238, 0.28));
   }
 }
 
@@ -630,7 +630,7 @@ html:not(.dark) .VPFeature:hover .icon {
       inset 0 1px 0 rgba(255, 255, 255, 0.18),
       inset 0 0 18px rgba(34, 211, 238, 0.18),
       0 0 22px rgba(34, 211, 238, 0.28),
-      0 0 40px rgba(167, 139, 250, 0.18),
+      0 0 40px rgba(34, 211, 238, 0.18),
       0 10px 32px rgba(0, 0, 0, 0.5);
   }
 
@@ -639,7 +639,7 @@ html:not(.dark) .VPFeature:hover .icon {
       inset 0 1px 0 rgba(255, 255, 255, 0.22),
       inset 0 0 24px rgba(34, 211, 238, 0.28),
       0 0 36px rgba(34, 211, 238, 0.42),
-      0 0 56px rgba(167, 139, 250, 0.28),
+      0 0 56px rgba(34, 211, 238, 0.28),
       0 10px 32px rgba(0, 0, 0, 0.5);
   }
 }
@@ -652,7 +652,7 @@ html:not(.dark) .VPFeature:hover .icon {
       0 0 0 1px rgba(34, 211, 238, 0.75),
       0 0 18px rgba(34, 211, 238, 0.55),
       0 0 42px rgba(34, 211, 238, 0.35),
-      0 0 72px rgba(167, 139, 250, 0.28),
+      0 0 72px rgba(34, 211, 238, 0.28),
       0 28px 72px rgba(0, 0, 0, 0.55),
       inset 0 0 40px rgba(34, 211, 238, 0.04);
   }
@@ -662,9 +662,9 @@ html:not(.dark) .VPFeature:hover .icon {
       0 0 0 1px rgba(192, 132, 252, 0.85),
       0 0 28px rgba(34, 211, 238, 0.7),
       0 0 56px rgba(34, 211, 238, 0.45),
-      0 0 90px rgba(167, 139, 250, 0.4),
+      0 0 90px rgba(34, 211, 238, 0.4),
       0 28px 72px rgba(0, 0, 0, 0.55),
-      inset 0 0 48px rgba(167, 139, 250, 0.06);
+      inset 0 0 48px rgba(34, 211, 238, 0.06);
   }
 }
 
@@ -683,7 +683,7 @@ html:not(.dark) .VPFeature:hover .icon {
   86% {
     filter:
       drop-shadow(2px 0 #22d3ee)
-      drop-shadow(-2px 0 #ec4899)
+      drop-shadow(-2px 0 #22d3ee)
       drop-shadow(0 0 20px rgba(34, 211, 238, 0.9));
     transform: translate3d(-1.5px, 0, 0);
   }
@@ -691,15 +691,15 @@ html:not(.dark) .VPFeature:hover .icon {
   88% {
     filter:
       drop-shadow(-2px 0 #67e8f9)
-      drop-shadow(2px 0 #c084fc)
-      drop-shadow(0 0 22px rgba(236, 72, 153, 0.55));
+      drop-shadow(2px 0 #67e8f9)
+      drop-shadow(0 0 22px rgba(34, 211, 238, 0.55));
     transform: translate3d(1.5px, 0.5px, 0);
   }
 
   90% {
     filter:
       drop-shadow(1px 0 #22d3ee)
-      drop-shadow(-1px 0 #a78bfa)
+      drop-shadow(-1px 0 #67e8f9)
       drop-shadow(0 0 18px rgba(34, 211, 238, 0.85));
     transform: translate3d(-0.5px, 0, 0);
   }
@@ -728,7 +728,7 @@ html:not(.dark) .VPFeature:hover .icon {
     opacity: 1;
     text-shadow:
       0 0 10px #22d3ee,
-      3px 0 12px rgba(167, 139, 250, 0.85),
+      3px 0 12px rgba(34, 211, 238, 0.85),
       6px 0 18px rgba(34, 211, 238, 0.45);
   }
 
@@ -737,7 +737,7 @@ html:not(.dark) .VPFeature:hover .icon {
     opacity: 0.12;
     text-shadow:
       0 0 4px rgba(34, 211, 238, 0.4),
-      4px 0 10px rgba(167, 139, 250, 0.25);
+      4px 0 10px rgba(34, 211, 238, 0.25);
   }
 }
 
@@ -753,7 +753,7 @@ html:not(.dark) .VPFeature:hover .icon {
     transform: scaleX(1);
     box-shadow:
       0 0 14px rgba(34, 211, 238, 0.95),
-      0 0 22px rgba(167, 139, 250, 0.55);
+      0 0 22px rgba(34, 211, 238, 0.55);
   }
 }
 
@@ -945,7 +945,7 @@ html:not(.dark) .VPFeature:hover .icon {
     box-shadow:
       0 0 0 1px rgba(34, 211, 238, 0.7),
       0 0 22px rgba(34, 211, 238, 0.5),
-      0 0 48px rgba(167, 139, 250, 0.28),
+      0 0 48px rgba(34, 211, 238, 0.28),
       0 28px 72px rgba(0, 0, 0, 0.55),
       inset 0 0 40px rgba(34, 211, 238, 0.04);
   }
@@ -969,7 +969,7 @@ html:not(.dark) .VPFeature:hover .icon {
       90deg,
       transparent,
       rgba(34, 211, 238, 0.7),
-      rgba(167, 139, 250, 0.55),
+      rgba(34, 211, 238, 0.55),
       transparent
     );
   }
@@ -1182,7 +1182,7 @@ html:not(.dark) .VPFeature:hover .icon {
       90deg,
       #22d3ee 0%,
       #67e8f9 28%,
-      #a78bfa 55%,
+      #67e8f9 55%,
       #22d3ee 78%,
       transparent 100%
     ),
@@ -1195,7 +1195,7 @@ html:not(.dark) .VPFeature:hover .icon {
   box-shadow:
     0 0 12px rgba(34, 211, 238, 0.85),
     0 0 28px rgba(34, 211, 238, 0.45),
-    0 4px 18px rgba(167, 139, 250, 0.35);
+    0 4px 18px rgba(34, 211, 238, 0.35);
   opacity: 1;
   animation: dataStream 5.5s linear infinite;
   pointer-events: none;
@@ -1236,7 +1236,7 @@ html.hero-copy-sheen .VPContent.is-home .VPHero .name.clip,
       #e0f2fe 14%,
       #67e8f9 36%,
       #a5f3fc 55%,
-      #e9d5ff 78%,
+      #a5f3fc 78%,
       #ffffff 100%
     ) !important;
   background-size: 100% 100%, 240% auto;
@@ -1425,17 +1425,17 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
       transparent 9px 16px
     ),
     radial-gradient(ellipse 100% 55% at 20% -5%, rgba(34, 211, 238, 0.3), transparent 55%),
-    radial-gradient(ellipse 70% 50% at 105% 105%, rgba(167, 139, 250, 0.24), transparent 50%),
+    radial-gradient(ellipse 70% 50% at 105% 105%, rgba(34, 211, 238, 0.24), transparent 50%),
     linear-gradient(168deg, #0a1220 0%, #05080f 48%, #04060c 100%);
   background-size: auto, auto, auto, auto;
   background-position: 0 0, 0 0, 0 0, 0 0;
   background-repeat: repeat, no-repeat, no-repeat, no-repeat;
   backdrop-filter: none;
   box-shadow:
-    0 0 0 1px rgba(167, 139, 250, 0.5),
+    0 0 0 1px rgba(34, 211, 238, 0.5),
     0 0 22px rgba(34, 211, 238, 0.6),
     0 0 48px rgba(34, 211, 238, 0.32),
-    0 0 80px rgba(167, 139, 250, 0.24),
+    0 0 80px rgba(34, 211, 238, 0.24),
     0 28px 72px rgba(0, 0, 0, 0.55),
     inset 0 0 60px rgba(34, 211, 238, 0.05);
   animation: neonCardBreath 4.2s ease-in-out infinite;
@@ -1478,7 +1478,7 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
     90deg,
     transparent 0%,
     #22d3ee 12%,
-    #ec4899 42%,
+    #22d3ee 42%,
     #67e8f9 68%,
     transparent 100%
   );
@@ -1544,7 +1544,7 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
     transparent 62%,
     rgba(34, 211, 238, 0.15) 72%,
     #22d3ee 84%,
-    #c084fc 90%,
+    #67e8f9 90%,
     #67e8f9 94%,
     transparent 98%,
     transparent 100%
@@ -1598,7 +1598,7 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
   html.dark .home-landing.VPHome {
     background:
       radial-gradient(ellipse 92% 42% at 50% 0%, rgba(34, 211, 238, 0.08), transparent 58%),
-      radial-gradient(ellipse 72% 36% at 82% 58%, rgba(167, 139, 250, 0.06), transparent 52%);
+      radial-gradient(ellipse 72% 36% at 82% 58%, rgba(34, 211, 238, 0.06), transparent 52%);
   }
 
   /* 扫描 HUD：背后青紫环境光，避免陷在过暗里 */
@@ -1608,7 +1608,7 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
       radial-gradient(
         ellipse 72% 58% at 50% 40%,
         rgba(34, 211, 238, 0.18),
-        rgba(167, 139, 250, 0.09) 44%,
+        rgba(34, 211, 238, 0.09) 44%,
         transparent 74%
       );
     border-radius: 20px;
@@ -1629,7 +1629,7 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
         transparent 9px 16px
       ),
       radial-gradient(ellipse 100% 55% at 20% -5%, rgba(34, 211, 238, 0.48), transparent 55%),
-      radial-gradient(ellipse 70% 50% at 105% 105%, rgba(167, 139, 250, 0.36), transparent 50%),
+      radial-gradient(ellipse 70% 50% at 105% 105%, rgba(34, 211, 238, 0.36), transparent 50%),
       linear-gradient(168deg, #142840 0%, #0e1c30 48%, #0a1624 100%);
     background-size: auto, auto, auto, auto;
     background-position: 0 0, 0 0, 0 0, 0 0;
@@ -1639,7 +1639,7 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
       0 0 0 1px rgba(34, 211, 238, 0.92),
       0 0 28px rgba(34, 211, 238, 0.72),
       0 0 56px rgba(34, 211, 238, 0.42),
-      0 0 88px rgba(167, 139, 250, 0.34),
+      0 0 88px rgba(34, 211, 238, 0.34),
       0 18px 48px rgba(0, 0, 0, 0.32),
       inset 0 0 48px rgba(34, 211, 238, 0.12);
     animation: neonCardBreath 5.5s ease-in-out infinite;
@@ -1697,7 +1697,7 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
     box-shadow:
       0 0 14px rgba(34, 211, 238, 0.95),
       0 0 30px rgba(34, 211, 238, 0.55),
-      0 4px 18px rgba(167, 139, 250, 0.4);
+      0 4px 18px rgba(34, 211, 238, 0.4);
   }
 
   html.dark .home-landing .VPHero .actions,
@@ -1752,10 +1752,10 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
   width: 14px;
   height: 2px;
   margin-top: -1px;
-  background: linear-gradient(90deg, #22d3ee, #c084fc);
+  background: linear-gradient(90deg, #22d3ee, #67e8f9);
   box-shadow:
     0 0 10px rgba(34, 211, 238, 0.9),
-    0 0 18px rgba(167, 139, 250, 0.55);
+    0 0 18px rgba(34, 211, 238, 0.55);
   transform-origin: center;
   animation: energyPulse 2s ease-in-out infinite;
   pointer-events: none;
@@ -1811,12 +1811,12 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
 .VPContent.is-home .home-cta .VPButton.brand {
   color: #020617 !important;
   border: 1px solid #a5f3fc !important;
-  background: linear-gradient(135deg, #22d3ee 0%, #38bdf8 32%, #818cf8 68%, #c084fc 100%) !important;
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 32%, #22d3ee 68%, #67e8f9 100%) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.45),
     inset 0 0 24px rgba(255, 255, 255, 0.18),
     0 0 20px rgba(34, 211, 238, 0.65),
-    0 0 42px rgba(167, 139, 250, 0.4),
+    0 0 42px rgba(34, 211, 238, 0.4),
     0 10px 32px rgba(0, 0, 0, 0.45) !important;
   animation: brandPulse 2.8s ease-in-out infinite;
   text-shadow: none;
@@ -1842,7 +1842,7 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
     0 0 0 1px rgba(192, 132, 252, 0.55) inset,
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 0 22px rgba(34, 211, 238, 0.35),
-    0 0 36px rgba(167, 139, 250, 0.18),
+    0 0 36px rgba(34, 211, 238, 0.18),
     0 10px 32px rgba(0, 0, 0, 0.42) !important;
   backdrop-filter: none;
 }
@@ -1859,7 +1859,7 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
     inset 0 1px 0 rgba(255, 255, 255, 0.55),
     inset 0 0 28px rgba(255, 255, 255, 0.22),
     0 0 36px rgba(34, 211, 238, 0.85),
-    0 0 72px rgba(167, 139, 250, 0.55),
+    0 0 72px rgba(34, 211, 238, 0.55),
     0 14px 40px rgba(0, 0, 0, 0.5) !important;
 }
 
@@ -1958,7 +1958,7 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(236, 72, 153, 0.35) 18%,
+    rgba(34, 211, 238, 0.35) 18%,
     rgba(192, 132, 252, 0.4) 52%,
     rgba(34, 211, 238, 0.25) 82%,
     transparent
@@ -2006,7 +2006,7 @@ html {
     box-shadow:
       0 0 0 1px rgba(34, 211, 238, calc(0.55 + var(--home-immersion) * 0.15)),
       0 0 22px rgba(34, 211, 238, calc(0.45 - var(--home-immersion) * 0.1)),
-      0 0 48px rgba(167, 139, 250, calc(0.25 - var(--home-immersion) * 0.08)),
+      0 0 48px rgba(34, 211, 238, calc(0.25 - var(--home-immersion) * 0.08)),
       0 calc(24px - var(--home-immersion) * 16px) calc(72px - var(--home-immersion) * 40px) rgba(0, 0, 0, 0.5),
       inset 0 0 40px rgba(34, 211, 238, 0.04);
   }
@@ -2198,7 +2198,7 @@ html {
         0 0 0 1px rgba(34, 211, 238, 0.88),
         0 0 26px rgba(34, 211, 238, 0.65),
         0 0 52px rgba(34, 211, 238, 0.38),
-        0 0 80px rgba(167, 139, 250, 0.28),
+        0 0 80px rgba(34, 211, 238, 0.28),
         0 18px 48px rgba(0, 0, 0, 0.35),
         inset 0 0 48px rgba(34, 211, 238, 0.1);
     }
@@ -2261,7 +2261,7 @@ html:not(.dark) ::-webkit-scrollbar-thumb {
   background: linear-gradient(
     180deg,
     rgba(8, 145, 178, 0.42),
-    rgba(124, 58, 237, 0.32),
+    rgba(8, 145, 178, 0.32),
     rgba(6, 182, 212, 0.38)
   );
 }
@@ -2363,7 +2363,7 @@ html:not(.dark) .VPContent.is-home .VPHero .main {
   background-color: #f8fafc;
   background-image:
     radial-gradient(ellipse 110% 70% at 18% -8%, rgba(6, 182, 212, 0.09), transparent 52%),
-    radial-gradient(ellipse 70% 55% at 108% 108%, rgba(124, 58, 237, 0.05), transparent 48%),
+    radial-gradient(ellipse 70% 55% at 108% 108%, rgba(8, 145, 178, 0.05), transparent 48%),
     linear-gradient(168deg, #ffffff 0%, #f1f5f9 48%, #f8fafc 100%);
   background-size: auto, auto, auto;
   background-position: 0 0, 0 0, 0 0;
@@ -2409,7 +2409,7 @@ html:not(.dark) .VPContent.is-home .VPHero .main::after {
     transparent 72%,
     rgba(8, 145, 178, 0.04) 80%,
     rgba(8, 145, 178, 0.7) 88%,
-    rgba(109, 40, 217, 0.3) 92%,
+    rgba(8, 145, 178, 0.3) 92%,
     transparent 97%,
     transparent 100%
   );
@@ -2444,7 +2444,7 @@ html:not(.dark) .VPContent.is-home .VPHero .text::after {
       transparent 0%,
       rgba(8, 145, 178, 0.2) 12%,
       rgba(8, 145, 178, 0.55) 40%,
-      rgba(109, 40, 217, 0.35) 70%,
+      rgba(8, 145, 178, 0.35) 70%,
       transparent 100%
     ),
     repeating-linear-gradient(
@@ -2487,7 +2487,7 @@ html:not(.dark) .VPContent.is-home .VPHero .actions {
 
 html:not(.dark) .home-landing .VPHero .action:first-child::after,
 html:not(.dark) .VPContent.is-home .VPHero .action:first-child::after {
-  background: linear-gradient(90deg, #0891b2, #7c3aed);
+  background: linear-gradient(90deg, #0891b2, #0e7490);
   box-shadow: 0 0 6px rgba(8, 145, 178, 0.35);
 }
 
@@ -2515,7 +2515,7 @@ html:not(.dark).hero-copy-sheen .home-landing .VPHero .tagline::after,
 html:not(.dark).hero-copy-sheen .VPContent.is-home .VPHero .tagline::after,
 html:not(.dark) .home-landing.hero-copy-sheen .VPHero .tagline::after,
 html:not(.dark) .VPContent.is-home.hero-copy-sheen .VPHero .tagline::after {
-  text-shadow: 0 0 10px rgba(124, 58, 237, 0.35);
+  text-shadow: 0 0 10px rgba(8, 145, 178, 0.35);
 }
 
 html:not(.dark) .home-landing .VPHero .VPButton.brand,
@@ -2528,7 +2528,7 @@ html:not(.dark) .VPContent.is-home .home-cta .VPButton.brand {
     135deg,
     #06b6d4 0%,
     #0891b2 45%,
-    #7c3aed 100%
+    #0e7490 100%
   ) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.28),
@@ -2564,8 +2564,8 @@ html:not(.dark) .VPContent.is-home .home-cta .VPButton.alt {
   background:
     linear-gradient(#0891b2, #0891b2) 4px 4px / 8px 1.5px no-repeat,
     linear-gradient(#0891b2, #0891b2) 4px 4px / 1.5px 8px no-repeat,
-    linear-gradient(#7c3aed, #7c3aed) calc(100% - 4px) calc(100% - 4px) / 8px 1.5px no-repeat,
-    linear-gradient(#7c3aed, #7c3aed) calc(100% - 4px) calc(100% - 4px) / 1.5px 8px no-repeat,
+    linear-gradient(#0e7490, #0e7490) calc(100% - 4px) calc(100% - 4px) / 8px 1.5px no-repeat,
+    linear-gradient(#0e7490, #0e7490) calc(100% - 4px) calc(100% - 4px) / 1.5px 8px no-repeat,
     linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 244, 245, 0.98) 100%) !important;
   box-shadow:
     0 0 0 1px rgba(8, 145, 178, 0.35),
@@ -2606,7 +2606,7 @@ html:not(.dark) .VPContent.is-home.hero-copy-sheen .VPHero .name.clip {
       #0e7490 0%,
       #0369a1 22%,
       #4338ca 52%,
-      #6d28d9 78%,
+      #0e7490 78%,
       #0e7490 100%
     ) !important;
   background-size: 100% 100%, 240% auto;

@@ -68,8 +68,8 @@
   bottom: 4%;
   right: -12%;
   background:
-    radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.22) 0%, transparent 45%),
-    radial-gradient(circle, rgba(168, 85, 247, 0.28) 0%, transparent 62%);
+    radial-gradient(circle at 40% 40%, rgba(34, 211, 238, 0.22) 0%, transparent 45%),
+    radial-gradient(circle, rgba(34, 211, 238, 0.28) 0%, transparent 62%);
   opacity: 0.85;
   animation: glowDrift 22s ease-in-out infinite alternate-reverse;
 }
@@ -109,10 +109,10 @@
   pointer-events: none;
   background:
     linear-gradient(90deg, transparent 0%, rgba(34, 211, 238, 0.55) 8%, rgba(34, 211, 238, 0.15) 22%, transparent 35%) 0 18% / 100% 3px no-repeat,
-    linear-gradient(90deg, transparent 40%, rgba(236, 72, 153, 0.65) 52%, rgba(236, 72, 153, 0.2) 62%, transparent 78%) 0 34% / 100% 2px no-repeat,
+    linear-gradient(90deg, transparent 40%, rgba(34, 211, 238, 0.65) 52%, rgba(34, 211, 238, 0.2) 62%, transparent 78%) 0 34% / 100% 2px no-repeat,
     linear-gradient(90deg, transparent 10%, rgba(103, 232, 249, 0.5) 28%, transparent 48%) 0 52% / 100% 2px no-repeat,
     linear-gradient(90deg, transparent 55%, rgba(192, 132, 252, 0.55) 68%, rgba(34, 211, 238, 0.35) 78%, transparent 92%) 0 71% / 100% 3px no-repeat,
-    linear-gradient(90deg, transparent 5%, rgba(236, 72, 153, 0.4) 18%, transparent 32%) 0 84% / 100% 2px no-repeat;
+    linear-gradient(90deg, transparent 5%, rgba(34, 211, 238, 0.4) 18%, transparent 32%) 0 84% / 100% 2px no-repeat;
   mix-blend-mode: screen;
   animation: glitchBars 5.5s steps(1, end) infinite;
 }
@@ -147,14 +147,14 @@
   opacity: 0;
   background-image:
     radial-gradient(1.5px 1.5px at 12% 22%, rgba(34, 211, 238, 0.9), transparent),
-    radial-gradient(1px 1px at 28% 68%, rgba(236, 72, 153, 0.7), transparent),
+    radial-gradient(1px 1px at 28% 68%, rgba(34, 211, 238, 0.7), transparent),
     radial-gradient(2px 2px at 46% 18%, rgba(103, 232, 249, 0.75), transparent),
     radial-gradient(1px 1px at 62% 78%, rgba(34, 211, 238, 0.7), transparent),
     radial-gradient(1.5px 1.5px at 78% 34%, rgba(192, 132, 252, 0.8), transparent),
     radial-gradient(1px 1px at 88% 58%, rgba(34, 211, 238, 0.6), transparent),
     radial-gradient(1px 1px at 18% 48%, rgba(255, 255, 255, 0.45), transparent),
-    radial-gradient(2px 2px at 54% 42%, rgba(236, 72, 153, 0.55), transparent),
-    radial-gradient(1px 1px at 36% 88%, rgba(167, 139, 250, 0.65), transparent),
+    radial-gradient(2px 2px at 54% 42%, rgba(34, 211, 238, 0.55), transparent),
+    radial-gradient(1px 1px at 36% 88%, rgba(34, 211, 238, 0.65), transparent),
     radial-gradient(1.5px 1.5px at 70% 12%, rgba(34, 211, 238, 0.7), transparent);
   animation: particleDrift 18s ease-in-out infinite alternate;
 }

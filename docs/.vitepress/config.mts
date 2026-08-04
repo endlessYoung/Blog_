@@ -520,6 +520,7 @@ html:not(.dark) {
   },
   themeConfig: {
     related: relatedIndex,
+    outline: { level: [2, 4] },
     logo: '/panda.webp',
     darkModeSwitchLabel: "🌓",
     lastUpdated: {

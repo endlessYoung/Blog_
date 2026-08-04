@@ -9,7 +9,7 @@ hideArticleMeta: true
 共 **119** 篇文章：
 
 - [Compose布局系统与 Modifier](/Android/Compose/Compose布局系统 & Modifier) — 文档级 · 教学级 · 指南级
-- [Jetpack Compose 状态管理详解](/Android/Compose/ComposeStateManagement) — 在 Jetpack Compose 中，状态 (State) 是驱动 UI 更新的核心。与传统的 View 体系不同，Compose 是声明式的：UI 是状态的函数。当应用的状态发生变化时，Compose 会重新执行受影响的 Composable 函数（这个过?
+- [Jetpack Compose 状态管理详解](/Android/Compose/ComposeStateManagement) — 在 Jetpack Compose 中，状态 (State) 是驱动 UI 更新的核心。与传统的 View 体系不同，Compose 是声明式的：UI 是状态的函数。当应用的状态发生变化时，Compose 会重新执行受影响的 Composable 函数（这个过程称为重组），从而更新 UI。
 - [JobScheduler](/Android/JobScheduler) — JobScheduler 是 Android 5.0（API 21）引入的系统级后台任务调度 API，旨在帮助开发者以低功耗、系统友好的方式执行后台任务。它提供条件触发、持久化、系统统一调度等机制，是 Google 在 Doze 模式、App Standby?
 - [Compose的gradle配置](/Android/Compose/Compose的gradle配置) — Jetpack Compose 是一个用于构建原生 Android UI 的现代工具包。它使用声明式函数来构建UI组件，不需要我们使用任何xml布局。
 - [多进程模式](/Android/多进程模式) — 在安卓中使用多进程只有一种方法，就是给四大组件在 AndroidManifest 中指定 android:process 属性，我们无法给一个线程或者一个实体类指定其运行时所在的进程。还有另外一种非常规的多进程方法，那就是通过 JNI 在 Nativte 层中?

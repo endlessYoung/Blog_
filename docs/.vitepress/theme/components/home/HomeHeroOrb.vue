@@ -345,7 +345,7 @@ onUnmounted(() => {
 <style scoped>
 .home-hud {
   --hud-cyan: #00f0ff;
-  --hud-violet: #7000ff;
+  --hud-accent: #22d3ee;
   --hud-line: rgba(0, 240, 255, 0.45);
   --hud-line-soft: rgba(0, 240, 255, 0.2);
   --hud-fill: rgba(0, 240, 255, 0.08);
@@ -381,11 +381,11 @@ onUnmounted(() => {
   border-radius: 50%;
   background: radial-gradient(
     circle at 50% 45%,
-    rgba(0, 240, 255, 0.22),
-    rgba(112, 0, 255, 0.12) 42%,
+    rgba(0, 240, 255, 0.18),
+    rgba(34, 211, 238, 0.14) 42%,
     transparent 70%
   );
-  filter: blur(22px);
+  filter: blur(14px);
   animation: hudPulse 5.5s ease-in-out infinite alternate;
   pointer-events: none;
 }
@@ -411,7 +411,7 @@ onUnmounted(() => {
 }
 
 .home-hud__ring--mid {
-  stroke: rgba(112, 0, 255, 0.45);
+  stroke: rgba(34, 211, 238, 0.5);
 }
 
 .home-hud__arc {
@@ -421,8 +421,8 @@ onUnmounted(() => {
 }
 
 .home-hud__arc--alt {
-  stroke: rgba(112, 0, 255, 0.75);
-  filter: drop-shadow(0 0 6px rgba(112, 0, 255, 0.45));
+  stroke: rgba(34, 211, 238, 0.8);
+  filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.5));
 }
 
 .home-hud__node {
@@ -439,7 +439,7 @@ onUnmounted(() => {
 
 .home-hud__hex--outer {
   fill: transparent;
-  stroke: rgba(112, 0, 255, 0.55);
+  stroke: rgba(34, 211, 238, 0.6);
   stroke-width: 1;
 }
 
@@ -574,7 +574,7 @@ onUnmounted(() => {
   background: var(--hud-panel);
   backdrop-filter: blur(10px) saturate(140%);
   box-shadow:
-    0 0 0 1px rgba(112, 0, 255, 0.12),
+    0 0 0 1px rgba(34, 211, 238, 0.14),
     0 0 20px rgba(0, 240, 255, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
   transition:
@@ -584,11 +584,11 @@ onUnmounted(() => {
 }
 
 .home-hud__feed--hit {
-  border-color: rgba(0, 255, 102, 0.65);
+  border-color: rgba(34, 211, 238, 0.65);
   box-shadow:
-    0 0 0 1px rgba(0, 255, 102, 0.25),
+    0 0 0 1px rgba(34, 211, 238, 0.25),
     0 0 28px rgba(0, 240, 255, 0.28),
-    0 0 36px rgba(0, 255, 102, 0.18);
+    0 0 36px rgba(34, 211, 238, 0.18);
   transform: translateY(-2px);
   animation: hudHitFlash 0.85s ease;
 }
@@ -619,8 +619,8 @@ onUnmounted(() => {
 }
 
 .home-hud__feed--hit .home-hud__feed-tag {
-  color: #00ff66;
-  text-shadow: 0 0 10px rgba(0, 255, 102, 0.55);
+  color: #22d3ee;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.55);
 }
 
 .home-hud__feed-idx {
@@ -864,7 +864,7 @@ onUnmounted(() => {
 <style>
 html:not(.dark) .home-hud {
   --hud-cyan: #0891b2;
-  --hud-violet: #6d28d9;
+  --hud-accent: #0e7490;
   --hud-line: rgba(8, 145, 178, 0.5);
   --hud-line-soft: rgba(8, 145, 178, 0.22);
   --hud-fill: rgba(8, 145, 178, 0.08);
@@ -877,18 +877,18 @@ html:not(.dark) .home-hud__aura {
   background: radial-gradient(
     circle at 50% 45%,
     rgba(8, 145, 178, 0.18),
-    rgba(109, 40, 217, 0.08) 42%,
+    rgba(8, 145, 178, 0.1) 42%,
     transparent 70%
   );
 }
 
 html:not(.dark) .home-hud__ring--mid {
-  stroke: rgba(109, 40, 217, 0.4);
+  stroke: rgba(8, 145, 178, 0.45);
 }
 
 html:not(.dark) .home-hud__arc--alt {
-  stroke: rgba(109, 40, 217, 0.7);
-  filter: drop-shadow(0 0 4px rgba(109, 40, 217, 0.35));
+  stroke: rgba(8, 145, 178, 0.75);
+  filter: drop-shadow(0 0 4px rgba(8, 145, 178, 0.4));
 }
 
 /* 浅色：光束与亮点换成青色系，避免用深色荧光 */
@@ -914,7 +914,7 @@ html:not(.dark) .home-hud__feed-meta {
 }
 
 html:not(.dark) .home-hud__feed--hit {
-  border-color: rgba(5, 150, 105, 0.55);
+  border-color: rgba(8, 145, 178, 0.55);
 }
 
 html:not(.dark) .home-hud__feed--blip {
@@ -929,7 +929,7 @@ html:not(.dark) .home-hud__feed--blip {
   background-image: radial-gradient(
     circle at center,
     rgba(0, 240, 255, 0.25),
-    rgba(112, 0, 255, 0.1) 50%,
+    rgba(34, 211, 238, 0.12) 50%,
     transparent 72%
   ) !important;
 }
@@ -938,7 +938,7 @@ html:not(.dark) .VPHero.has-image .image-bg {
   background-image: radial-gradient(
     circle at center,
     rgba(8, 145, 178, 0.18),
-    rgba(109, 40, 217, 0.08) 50%,
+    rgba(8, 145, 178, 0.1) 50%,
     transparent 72%
   ) !important;
 }

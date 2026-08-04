@@ -1,3 +1,4 @@
+import '@fontsource-variable/space-grotesk'
 import Theme from 'vitepress/theme'
 import './style/var.css'
 import './style/tech.css'
@@ -17,6 +18,7 @@ import RelatedArticles from './components/RelatedArticles.vue'
 import ImageViewer from './components/ImageViewer.vue'
 import ReadingProgress from './components/ReadingProgress.vue'
 import { initImageViewer } from './imageViewer'
+import { initOutlineAutoScroll } from './outlineAutoScroll'
 import ArticleMetadata from './components/ArticleMetadata.vue'
 import TechBackground from './components/TechBackground.vue'
 import HomeHeroEyebrow from './components/home/HomeHeroEyebrow.vue'
@@ -77,6 +79,25 @@ export default {
 
       onMounted(() => {
         initImageViewer()
+      })
+
+      // 文章右侧目录：激活项自动滚入可视区（路由切换后重建监听）
+      let stopOutlineScroll: (() => void) | undefined
+      const syncOutlineScroll = () => {
+        stopOutlineScroll?.()
+        stopOutlineScroll = undefined
+        if (typeof document === 'undefined') return
+        nextTick(() => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              stopOutlineScroll = initOutlineAutoScroll()
+            })
+          })
+        })
+      }
+      watch(() => route.path, syncOutlineScroll, { immediate: true })
+      onUnmounted(() => {
+        stopOutlineScroll?.()
       })
 
       let stopHomeImmersion: (() => void) | undefined

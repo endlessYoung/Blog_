@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/space-grotesk':
+        specifier: ^5.3.0
+        version: 5.3.0
       mermaid:
         specifier: ^11.16.0
         version: 11.16.0
@@ -79,6 +82,9 @@ packages:
 
   '@emnapi/wasi-threads@1.2.2':
     resolution: {integrity: sha512-c95qOXkHdydNKhscBTebqEC1CVAZpyqOfVfBzQ1qgzyl3gfeldUjIggDbIZgDKsHLgnsM+igH7TJ/eAasaVuMA==}
+
+  '@fontsource-variable/space-grotesk@5.3.0':
+    resolution: {integrity: sha512-2IxmvfB08i9vnGB3Ym/AXvhRE+8XOjWMXIyDum03c+tPwH0FUoMNQfGpU8NXPxjbws0Vvss3AH0Zqt4oJBBAdw==}
 
   '@iconify-json/simple-icons@1.2.91':
     resolution: {integrity: sha512-plQJHZxzpkIXaeYjJF0Sc9nkzYF32EDX9olx7j1hcKYFaiTrQXbcngZmvzuV0pG6uZPU3ZuA/GIsgxSHOm6jrQ==}
@@ -1331,6 +1337,8 @@ snapshots:
     dependencies:
       tslib: 2.8.1
     optional: true
+
+  '@fontsource-variable/space-grotesk@5.3.0': {}
 
   '@iconify-json/simple-icons@1.2.91':
     dependencies:
