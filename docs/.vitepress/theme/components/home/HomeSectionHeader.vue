@@ -43,7 +43,7 @@
   width: 48px;
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, rgba(34, 211, 238, 0.55), rgba(167, 139, 250, 0.35), transparent);
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.55), rgba(34, 211, 238, 0.35), transparent);
 }
 </style>
 
@@ -55,6 +55,6 @@ html:not(.dark) .home-sec-head__title {
 }
 
 html:not(.dark) .home-sec-head__rule {
-  background: linear-gradient(90deg, rgba(8, 145, 178, 0.5), rgba(124, 58, 237, 0.3), transparent);
+  background: linear-gradient(90deg, rgba(8, 145, 178, 0.5), rgba(8, 145, 178, 0.3), transparent);
 }
 </style>

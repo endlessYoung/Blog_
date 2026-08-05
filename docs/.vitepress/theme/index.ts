@@ -24,6 +24,7 @@ import TechBackground from './components/TechBackground.vue'
 import HomeHeroEyebrow from './components/home/HomeHeroEyebrow.vue'
 import HomeHeroCopySwitch from './components/home/HomeHeroCopySwitch.vue'
 import HomeHeroOrb from './components/home/HomeHeroOrb.vue'
+import HomeParticleField from './components/home/HomeParticleField.vue'
 import HomeMetricsStrip from './components/home/HomeMetricsStrip.vue'
 import HomeSectionHeader from './components/home/HomeSectionHeader.vue'
 import HomeBottomCta from './components/home/HomeBottomCta.vue'
@@ -152,11 +153,9 @@ export default {
           nextTick(() => { initMermaid() })
         },
       )
-    },
-    render() {
-      return [
+      return () => [
         h(Theme.Layout, null, {
-        'layout-top': () => h(TechBackground),
+        'layout-top': () => h(frontmatter.value.layout === 'home' ? HomeParticleField : TechBackground),
         'home-hero-before': () => [h(HomeHeroEyebrow), h(HomeHeroCopySwitch)],
         'home-hero-image': () => h(HomeHeroOrb),
         /* 主题大卡外独立区块：RECENT / 最新文章 */

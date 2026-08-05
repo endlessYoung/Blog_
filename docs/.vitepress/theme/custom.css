@@ -584,10 +584,10 @@ html:not(.dark) .VPButton.alt:hover {
 .VPHome .VPFeature,
 .VPContent.is-home .VPFeature {
   border-radius: 14px !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  background: #121824 !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(16, 20, 30, 0.55) !important;
+  backdrop-filter: blur(8px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(130%) !important;
   box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
@@ -600,8 +600,10 @@ html:not(.dark) .VPButton.alt:hover {
 html:not(.dark) .VPHome .VPFeature,
 html:not(.dark) .VPContent.is-home .VPFeature,
 html:not(.dark) .VPFeature {
-  border: 1px solid rgba(8, 145, 178, 0.16) !important;
-  background: #ffffff !important;
+  border: 1px solid rgba(8, 145, 178, 0.14) !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(8px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(130%) !important;
   box-shadow:
     0 12px 32px rgba(15, 23, 42, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;

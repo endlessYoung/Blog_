@@ -111,7 +111,9 @@ const readUrl = withBase('/Android/Activity')
 
 :global(html:not(.dark) .home-cta__card) {
   border: 1px solid rgba(0, 0, 0, 0.08);
-  background: linear-gradient(125deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 244, 245, 0.98) 50%, rgba(250, 250, 250, 0.95) 100%);
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.72) 0%, rgba(244, 244, 245, 0.75) 50%, rgba(250, 250, 250, 0.7) 100%);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
   box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
 }
 

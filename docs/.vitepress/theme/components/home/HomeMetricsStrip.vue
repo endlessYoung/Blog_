@@ -148,7 +148,7 @@ const recent = buildRecent(3)
   padding: 14px 16px 12px;
   border: 1px solid rgba(34, 211, 238, 0.38);
   border-radius: 12px;
-  background: linear-gradient(180deg, #0a1524 0%, #071018 100%);
+  background: linear-gradient(180deg, rgba(10, 21, 36, 0.62) 0%, rgba(7, 16, 24, 0.58) 100%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
     0 8px 28px rgba(0, 0, 0, 0.28);
@@ -181,7 +181,7 @@ const recent = buildRecent(3)
   margin-bottom: 10px;
   padding: 7px 10px 7px 12px;
   border: 1px solid rgba(34, 211, 238, 0.45);
-  background: rgba(4, 12, 22, 0.85);
+  background: rgba(4, 12, 22, 0.55);
   box-shadow:
     inset 0 0 20px rgba(34, 211, 238, 0.06),
     0 0 12px rgba(34, 211, 238, 0.12);
