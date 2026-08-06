@@ -26,6 +26,8 @@ import HomeHeroEyebrow from './components/home/HomeHeroEyebrow.vue'
 import HomeHeroCopySwitch from './components/home/HomeHeroCopySwitch.vue'
 import HomeHeroOrb from './components/home/HomeHeroOrb.vue'
 import HomeParticleField from './components/home/HomeParticleField.vue'
+import SidebarToggle from './components/SidebarToggle.vue'
+import TocToggle from './components/TocToggle.vue'
 import HomeCategoryCards from './components/home/HomeCategoryCards.vue'
 import HomeMetricsStrip from './components/home/HomeMetricsStrip.vue'
 import HomeSectionHeader from './components/home/HomeSectionHeader.vue'
@@ -169,6 +171,8 @@ export default {
       return () => [
         h(Theme.Layout, null, {
         'layout-top': () => h(frontmatter.value.layout === 'home' ? HomeParticleField : TechBackground),
+        'nav-bar-title-before': () => h(SidebarToggle),
+        'nav-bar-content-after': () => h(TocToggle),
         'home-hero-before': () => [h(HomeHeroEyebrow), h(HomeHeroCopySwitch)],
         'home-hero-image': () => h(HomeHeroOrb),
         /* 主题大卡外独立区块：RECENT / 最新文章 */

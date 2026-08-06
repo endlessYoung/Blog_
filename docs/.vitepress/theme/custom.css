@@ -1,1622 +1,3246 @@
 /**
 
+
+
  * Cyberpunk & Sci-Fi Tech UI
+
+
 
  * Dark = neon void; Light = ice-lab / holographic panel (not fake-dark).
 
+
+
  * Loaded last so tokens can override prior theme layers.
 
+
+
  */
+
+
+
+
 
 
 
 :root {
 
+
+
   --cyber-font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+
 
   --cyber-font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 
+
+
   /* z-index 层级规范 */
+
+
 
   --z-nav: 64;
 
+
+
   --z-nav-screen: 74;
+
+
 
   --z-viewer: 2147483000;
 
+
+
   --vp-font-family-base: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+
+
 
   --vp-font-family-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
 
+
+
   --cyber-grid-size: 30px;
+
+
 
 }
 
 
 
+
+
+
+
 /* -------------------------------------------------------------------------- */
+
+
 
 /* Dark tokens                                                                  */
 
+
+
 /* -------------------------------------------------------------------------- */
+
+
+
+
 
 
 
 html.dark {
 
+
+
   color-scheme: dark;
+
+
 
   --vp-c-bg: #0b0f19;
 
+
+
   --vp-c-bg-soft: #121824;
+
+
 
   --vp-c-bg-alt: #1a2332;
 
+
+
   --vp-c-brand-1: #00f0ff;
+
+
 
   --vp-c-brand-2: #67e8f9;
 
+
+
   --vp-c-brand-3: #22d3ee;
+
+
 
   --vp-c-text-1: #e8f0ff;
 
+
+
   --vp-c-text-2: #9db0c9;
+
+
 
   --vp-c-text-3: #6b7f99;
 
+
+
   --vp-c-divider: rgba(0, 240, 255, 0.12);
+
+
 
   --vp-c-gutter: #0b0f19;
 
+
+
   --vp-c-border: rgba(0, 240, 255, 0.18);
+
+
 
   --vp-c-brand-soft: rgba(0, 240, 255, 0.12);
 
 
 
+
+
+
+
   --vp-home-hero-name-color: transparent;
+
+
 
   --vp-home-hero-name-background: linear-gradient(
 
+
+
     120deg,
+
+
 
     #f0f7ff 0%,
 
+
+
     #22d3ee 100%
 
+
+
   );
+
+
 
   --vp-home-hero-image-background-image: radial-gradient(
 
+
+
     circle at center,
+
+
 
     rgba(34, 211, 238, 0.28),
 
+
+
     transparent 70%
+
+
 
   );
 
+
+
   --vp-home-hero-image-filter: blur(72px);
+
+
+
+
 
 
 
   --vp-button-brand-bg: #00f0ff;
 
+
+
   --vp-button-brand-hover-bg: #5cffff;
+
+
 
   --vp-button-brand-active-bg: #00d4e0;
 
+
+
   --vp-button-brand-text: #0b0f19;
+
+
 
   --vp-button-brand-hover-text: #0b0f19;
 
+
+
   --vp-button-brand-border: #00f0ff;
+
+
 
   --vp-button-brand-hover-border: #5cffff;
 
+
+
   --vp-button-alt-bg: rgba(18, 24, 36, 0.72);
+
+
 
   --vp-button-alt-hover-bg: rgba(26, 35, 50, 0.92);
 
+
+
   --vp-button-alt-text: #e8f0ff;
 
+
+
   --vp-button-alt-border: rgba(0, 240, 255, 0.45);
+
+
 
   --vp-button-alt-hover-border: #00f0ff;
 
 
 
+
+
+
+
   --cyber-glow-cyan: rgba(0, 240, 255, 0.55);
+
+
 
   --cyber-glow-accent: rgba(34, 211, 238, 0.4);
 
+
+
   --cyber-grid-line: rgba(0, 240, 255, 0.05);
 
+
+
   --cyber-wash: rgba(0, 240, 255, 0.1);
+
+
 
 }
 
 
 
+
+
+
+
 /* -------------------------------------------------------------------------- */
+
+
 
 /* Light tokens — ice lab / holographic (readable, still tech)                  */
 
+
+
 /* -------------------------------------------------------------------------- */
+
+
+
+
 
 
 
 html:not(.dark) {
 
+
+
   color-scheme: light;
+
+
 
   --vp-c-bg: #eef3f8;
 
+
+
   --vp-c-bg-soft: #ffffff;
+
+
 
   --vp-c-bg-alt: #e2eaf2;
 
+
+
   --vp-c-brand-1: #0891b2;
+
+
 
   --vp-c-brand-2: #06b6d4;
 
+
+
   --vp-c-brand-3: #0e7490;
+
+
 
   --vp-c-text-1: #0f172a;
 
+
+
   --vp-c-text-2: #334155;
+
+
 
   --vp-c-text-3: #64748b;
 
+
+
   --vp-c-divider: rgba(8, 145, 178, 0.16);
+
+
 
   --vp-c-gutter: #eef3f8;
 
+
+
   --vp-c-border: rgba(8, 145, 178, 0.22);
+
+
 
   --vp-c-brand-soft: rgba(8, 145, 178, 0.1);
 
 
 
+
+
+
+
   --vp-home-hero-name-color: transparent;
+
+
 
   --vp-home-hero-name-background: linear-gradient(
 
+
+
     120deg,
+
+
 
     #0f172a 0%,
 
+
+
     #0e7490 100%
 
+
+
   );
+
+
 
   --vp-home-hero-image-background-image: radial-gradient(
 
+
+
     circle at center,
+
+
 
     rgba(8, 145, 178, 0.2),
 
+
+
     transparent 70%
 
+
+
   );
+
+
 
   --vp-home-hero-image-filter: blur(72px);
 
 
 
+
+
+
+
   --vp-button-brand-bg: #0891b2;
+
+
 
   --vp-button-brand-hover-bg: #0e7490;
 
+
+
   --vp-button-brand-active-bg: #155e75;
+
+
 
   --vp-button-brand-text: #ffffff;
 
+
+
   --vp-button-brand-hover-text: #ffffff;
+
+
 
   --vp-button-brand-border: #0891b2;
 
+
+
   --vp-button-brand-hover-border: #0e7490;
+
+
 
   --vp-button-alt-bg: rgba(255, 255, 255, 0.88);
 
+
+
   --vp-button-alt-hover-bg: #ffffff;
+
+
 
   --vp-button-alt-text: #0f172a;
 
+
+
   --vp-button-alt-border: rgba(8, 145, 178, 0.35);
+
+
 
   --vp-button-alt-hover-border: #0891b2;
 
 
 
+
+
+
+
   --cyber-glow-cyan: rgba(8, 145, 178, 0.28);
+
+
 
   --cyber-glow-accent: rgba(8, 145, 178, 0.22);
 
+
+
   --cyber-grid-line: rgba(8, 145, 178, 0.09);
 
+
+
   --cyber-wash: rgba(8, 145, 178, 0.08);
+
+
 
 }
 
 
 
+
+
+
+
 /* -------------------------------------------------------------------------- */
+
+
 
 /* Body：30px 网格 + 顶部光效                                                  */
 
+
+
 /* -------------------------------------------------------------------------- */
+
+
+
+
 
 
 
 html,
 
+
+
 body {
+
+
 
   background-color: var(--vp-c-bg) !important;
 
+
+
 }
+
+
+
+
 
 
 
 html::before,
 
+
+
 html::after {
+
+
 
   opacity: 0 !important;
 
+
+
   animation: none !important;
+
+
 
   background: none !important;
 
+
+
   content: none !important;
+
+
 
   display: none !important;
 
+
+
 }
+
+
+
+
 
 
 
 /*
 
+
+
  * 保险：Vue scoped 里 :global(body:has(...)) .child 曾被误编译成改 body/html 本身
+
+
 
  * （opacity/height/animation），整页像蒙半透明膜。源已修；此处双保险清掉泄漏。
 
+
+
  */
+
+
 
 html,
 
+
+
 html.dark {
+
+
 
   opacity: 1 !important;
 
+
+
 }
+
+
+
+
 
 
 
 body,
 
+
+
 body:has(.VPContent.is-home),
+
+
 
 body:has(.home-landing),
 
+
+
 html.dark body:has(.VPContent.is-home),
+
+
 
 html.dark body:has(.home-landing) {
 
+
+
   opacity: 1 !important;
+
+
 
   height: auto !important;
 
+
+
   min-height: 100% !important;
+
+
 
   animation: none !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* 禁止任何全屏伪元素再盖在首页上 */
 
+
+
 .VPContent.is-home .VPHome::before,
+
+
 
 .VPContent.is-home .VPHome::after,
 
+
+
 .home-landing.VPHome::before,
+
+
 
 .home-landing .VPHome::before {
 
+
+
   content: none !important;
+
+
 
   display: none !important;
 
+
+
   opacity: 0 !important;
+
+
 
   background: none !important;
 
+
+
   pointer-events: none !important;
 
+
+
 }
+
+
+
+
 
 
 
 .Layout {
 
+
+
   background: transparent !important;
 
+
+
 }
+
+
+
+
 
 
 
 body {
 
+
+
   position: relative;
+
+
 
   min-height: 100%;
 
+
+
   background-image:
+
+
 
     linear-gradient(180deg, var(--cyber-wash) 0%, transparent 28%),
 
+
+
     linear-gradient(var(--cyber-grid-line) 1px, transparent 1px),
+
+
 
     linear-gradient(90deg, var(--cyber-grid-line) 1px, transparent 1px) !important;
 
+
+
   background-size:
+
+
 
     100% 100%,
 
+
+
     var(--cyber-grid-size) var(--cyber-grid-size),
+
+
 
     var(--cyber-grid-size) var(--cyber-grid-size) !important;
 
+
+
   background-attachment: fixed !important;
+
+
 
   background-position: 0 0, 0 0, 0 0 !important;
 
+
+
 }
+
+
+
+
 
 
 
 body::before {
 
+
+
   content: '';
+
+
 
   position: fixed;
 
+
+
   inset: 0 0 auto 0;
+
+
 
   height: min(42vh, 420px);
 
+
+
   z-index: 0;
+
+
 
   pointer-events: none;
 
+
+
   background:
+
+
 
     radial-gradient(ellipse 70% 55% at 50% -10%, var(--cyber-glow-accent), transparent 70%),
 
+
+
     radial-gradient(ellipse 50% 40% at 18% 0%, var(--cyber-glow-cyan), transparent 65%);
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) body::before {
 
+
+
   background:
+
+
 
     radial-gradient(ellipse 70% 55% at 50% -10%, rgba(8, 145, 178, 0.1), transparent 70%),
 
+
+
     radial-gradient(ellipse 50% 40% at 18% 0%, rgba(8, 145, 178, 0.14), transparent 65%);
 
+
+
 }
+
+
+
+
 
 
 
 .Layout,
 
+
+
 .VPContent,
+
+
 
 .VPFooter {
 
+
+
   position: relative;
+
+
 
   z-index: 1;
 
+
+
 }
+
+
+
+
 
 
 
 /* 导航必须高于页面沉浸层 / 内容，否则移动端汉堡菜单点开后像「消失」 */
 
+
+
 .VPNav {
+
+
 
   position: relative;
 
+
+
   z-index: var(--vp-z-index-nav, 64) !important;
+
+
 
   /* 再次锁死：任何主题层不得给 .VPNav 加会困住 fixed 子元素的属性 */
 
+
+
   background: transparent !important;
+
+
 
   backdrop-filter: none !important;
 
+
+
   -webkit-backdrop-filter: none !important;
+
+
 
   filter: none !important;
 
+
+
   transform: none !important;
+
+
 
   perspective: none !important;
 
+
+
   contain: none !important;
+
+
 
   overflow: visible !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPNavBar {
 
+
+
   z-index: var(--vp-z-index-nav, 64) !important;
+
+
 
   position: relative;
 
+
+
 }
+
+
+
+
 
 
 
 .VPNavScreen {
 
+
+
   z-index: calc(var(--vp-z-index-nav, 64) + 10) !important;
+
+
 
   position: fixed !important;
 
+
+
   top: var(--vp-nav-height, 64px) !important;
+
+
 
   right: 0 !important;
 
+
+
   bottom: 0 !important;
+
+
 
   left: 0 !important;
 
+
+
   width: 100% !important;
+
+
 
   /* 双保险：即使祖先创建了 fixed 包含块，也用视口高度撑开 */
 
+
+
   height: calc(100vh - var(--vp-nav-height, 64px)) !important;
+
+
 
   height: calc(100dvh - var(--vp-nav-height, 64px)) !important;
 
+
+
   min-height: calc(100svh - var(--vp-nav-height, 64px)) !important;
+
+
 
   max-height: none !important;
 
+
+
   overflow-x: hidden !important;
+
+
 
   overflow-y: auto !important;
 
+
+
   -webkit-overflow-scrolling: touch;
+
+
 
   overscroll-behavior: contain !important;
 
+
+
   overscroll-behavior-y: contain !important;
+
+
 
   touch-action: pan-y;
 
+
+
   background: rgba(11, 15, 25, 0.96) !important;
+
+
 
   backdrop-filter: blur(18px) saturate(140%);
 
+
+
   -webkit-backdrop-filter: blur(18px) saturate(140%);
+
+
 
   pointer-events: auto !important;
 
+
+
   visibility: visible !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* 菜单打开时锁死底层滚动（VitePress 只锁 body，html/穿透仍可能滚） */
 
+
+
 html:has(.VPNavBar.screen-open),
+
+
 
 html:has(.VPNavScreen),
 
+
+
 html:has(#VPNavScreen),
+
+
 
 html.vp-nav-screen-open {
 
+
+
   overflow: hidden !important;
+
+
 
   overscroll-behavior: none !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:has(.VPNavBar.screen-open) body,
 
+
+
 html:has(.VPNavScreen) body,
+
+
 
 html:has(#VPNavScreen) body,
 
+
+
 html.vp-nav-screen-open body {
+
+
 
   overflow: hidden !important;
 
+
+
   overscroll-behavior: none !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPNavScreen {
 
+
+
   background: rgba(238, 243, 248, 0.97) !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPNavScreen .container,
 
+
+
 .VPNavScreen .menu,
+
+
 
 .VPNavScreen a,
 
+
+
 .VPNavScreen button {
+
+
 
   pointer-events: auto !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* 三条横线 / 关闭按钮：对比度 + 可点；显示断点与下方 screen 对齐到 ≤959 */
 
+
+
 .VPNavBarHamburger {
+
+
 
   position: relative;
 
+
+
   z-index: 3 !important;
+
+
 
   pointer-events: auto !important;
 
+
+
   color: #e8f0ff !important;
+
+
 
   opacity: 1 !important;
 
+
+
   visibility: visible !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* VitePress 默认 ≥768 隐藏汉堡/屏；本站导航项多，统一用 ≤959 移动菜单 */
 
+
+
 @media (max-width: 959px) {
+
+
 
   .VPNavBarHamburger {
 
+
+
     display: flex !important;
 
+
+
   }
+
+
+
+
 
 
 
   .VPNavBarMenu {
 
+
+
     display: none !important;
 
+
+
   }
+
+
+
+
 
 
 
   .VPNavBarExtra {
 
+
+
     display: none !important;
 
+
+
   }
+
+
+
+
 
 
 
   /* 打开时 v-if 才挂载；覆盖默认 @media (min-width: 768px) { display: none } */
 
+
+
   .VPNavScreen {
+
+
 
     display: block !important;
 
+
+
   }
 
+
+
 }
+
+
+
+
 
 
 
 @media (min-width: 960px) {
 
+
+
   .VPNavBarHamburger {
+
+
 
     display: none !important;
 
+
+
   }
 
+
+
 }
+
+
+
+
 
 
 
 .VPNavBarHamburger .top,
 
+
+
 .VPNavBarHamburger .middle,
+
+
 
 .VPNavBarHamburger .bottom {
 
+
+
   background-color: #e8f0ff !important;
+
+
 
   opacity: 1 !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPNavBarHamburger.active .top,
 
+
+
 .VPNavBarHamburger.active .middle,
+
+
 
 .VPNavBarHamburger.active .bottom,
 
+
+
 .VPNavBarHamburger.active:hover .top,
+
+
 
 .VPNavBarHamburger.active:hover .middle,
 
+
+
 .VPNavBarHamburger.active:hover .bottom {
+
+
 
   background-color: #00f0ff !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPNavBarHamburger {
 
+
+
   color: #0f172a !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPNavBarHamburger .top,
 
+
+
 html:not(.dark) .VPNavBarHamburger .middle,
+
+
 
 html:not(.dark) .VPNavBarHamburger .bottom {
 
+
+
   background-color: #0f172a !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPNavBarHamburger.active .top,
 
+
+
 html:not(.dark) .VPNavBarHamburger.active .middle,
+
+
 
 html:not(.dark) .VPNavBarHamburger.active .bottom,
 
+
+
 html:not(.dark) .VPNavBarHamburger.active:hover .top,
+
+
 
 html:not(.dark) .VPNavBarHamburger.active:hover .middle,
 
+
+
 html:not(.dark) .VPNavBarHamburger.active:hover .bottom {
+
+
 
   background-color: #0891b2 !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* 浅色：导航/侧栏/页脚干净玻璃，避免旧 tech.css 发灰发脏
 
+
+
    注意：backdrop-filter 只能挂在 .VPNavBar，不能挂 .VPNav（否则移动菜单高度为 0） */
+
+
 
 html:not(.dark) .VPNavBar,
 
+
+
 html:not(.dark) .VPSidebar,
+
+
 
 html:not(.dark) .VPFooter {
 
+
+
   background: rgba(255, 255, 255, 0.82) !important;
+
+
 
   backdrop-filter: blur(14px) saturate(140%);
 
+
+
   border-color: rgba(8, 145, 178, 0.14) !important;
+
+
 
   color: #0f172a !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPNav {
 
+
+
   background: transparent !important;
+
+
 
   backdrop-filter: none !important;
 
+
+
   -webkit-backdrop-filter: none !important;
+
+
 
   filter: none !important;
 
+
+
   transform: none !important;
+
+
 
   color: #0f172a !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPNavBar a,
 
+
+
 html:not(.dark) .VPNavBarTitle .title,
+
+
 
 html:not(.dark) .VPSidebar,
 
+
+
 html:not(.dark) .VPSidebar a,
+
+
 
 html:not(.dark) .VPFooter,
 
+
+
 html:not(.dark) .VPFooter :where(p, span, div, a) {
+
+
 
   color: #1e293b !important;
 
+
+
   -webkit-text-fill-color: currentColor !important;
+
+
 
   text-shadow: none !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPNavBar a:hover,
 
+
+
 html:not(.dark) .VPNavBar a.active,
+
+
 
 html:not(.dark) .VPSidebar a:hover,
 
+
+
 html:not(.dark) .VPSidebar a.active {
+
+
 
   color: #0891b2 !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .Layout {
 
+
+
   background: transparent !important;
+
+
 
 }
 
 
 
+
+
+
+
 /* -------------------------------------------------------------------------- */
+
+
 
 /* Hero                                                                       */
 
+
+
 /* -------------------------------------------------------------------------- */
+
+
+
+
 
 
 
 .VPHero .name.clip {
 
+
+
   background: var(--vp-home-hero-name-background) !important;
+
+
 
   -webkit-background-clip: text !important;
 
+
+
   background-clip: text !important;
+
+
 
   -webkit-text-fill-color: transparent !important;
 
+
+
   color: transparent !important;
+
+
 
   filter: drop-shadow(0 0 14px rgba(34, 211, 238, 0.35));
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark).hero-copy-sheen .home-landing .VPHero .name.clip,
 
+
+
 html:not(.dark).hero-copy-sheen .VPContent.is-home .VPHero .name.clip,
+
+
 
 html:not(.dark) .home-landing.hero-copy-sheen .VPHero .name.clip,
 
+
+
 html:not(.dark) .VPContent.is-home.hero-copy-sheen .VPHero .name.clip {
+
+
 
   filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.85))
 
+
+
     drop-shadow(0 0 14px rgba(8, 145, 178, 0.22));
 
+
+
 }
+
+
+
+
 
 
 
 .VPHero .text {
 
+
+
   color: #f0f7ff !important;
+
+
 
   -webkit-text-fill-color: #f0f7ff !important;
 
+
+
   text-shadow: 0 0 24px rgba(0, 240, 255, 0.25);
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark).hero-copy-sheen .home-landing .VPHero .text,
 
+
+
 html:not(.dark).hero-copy-sheen .VPContent.is-home .VPHero .text,
+
+
 
 html:not(.dark) .home-landing.hero-copy-sheen .VPHero .text,
 
+
+
 html:not(.dark) .VPContent.is-home.hero-copy-sheen .VPHero .text {
+
+
 
   /* 浅色 slogan：深色→青→紫缓慢漂移，保持可读、无假暗霓虹 */
 
+
+
   background-image: linear-gradient(
+
+
 
     105deg,
 
+
+
     #0f172a 0%,
+
+
 
     #1e293b 30%,
 
+
+
     #0e7490 62%,
+
+
 
     #0f172a 100%
 
+
+
   ) !important;
+
+
 
   background-size: 260% 100% !important;
 
+
+
   -webkit-background-clip: text !important;
+
+
 
   background-clip: text !important;
 
+
+
   color: transparent !important;
+
+
 
   -webkit-text-fill-color: transparent !important;
 
+
+
   text-shadow: none !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark).hero-copy-tier .home-landing .VPHero .text,
 
+
+
 html:not(.dark).hero-copy-tier .VPContent.is-home .VPHero .text,
+
+
 
 html:not(.dark) .home-landing.hero-copy-tier .VPHero .text,
 
+
+
 html:not(.dark) .VPContent.is-home.hero-copy-tier .VPHero .text {
+
+
 
   background: none !important;
 
+
+
   -webkit-background-clip: border-box !important;
+
+
 
   background-clip: border-box !important;
 
+
+
   color: #0f172a !important;
+
+
 
   -webkit-text-fill-color: #0f172a !important;
 
+
+
   text-shadow: none !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPHero .text::after,
 
+
+
 html:not(.dark) .home-landing .VPHero .text::after,
+
+
 
 html:not(.dark) .VPContent.is-home .VPHero .text::after {
 
+
+
   /* 浅色保留极淡数据流下划线，强度由 tech.css 控制 */
+
+
 
   opacity: 0.4;
 
+
+
 }
+
+
+
+
 
 
 
 .VPHero .tagline {
 
+
+
   color: var(--vp-c-text-2) !important;
+
+
 
   -webkit-text-fill-color: var(--vp-c-text-2) !important;
 
+
+
   font-family: var(--cyber-font-mono);
+
+
 
   letter-spacing: 0.02em;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPHero .tagline,
 
+
+
 html:not(.dark) .home-landing .VPHero .tagline {
+
+
 
   color: #334155 !important;
 
+
+
   -webkit-text-fill-color: #334155 !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPHero .main,
 
+
+
 html:not(.dark) .home-landing .VPHero .main,
+
+
 
 html:not(.dark) .VPContent.is-home .VPHero .main {
 
+
+
   /* 浅色主卡：强制盖掉深色斜纹/点阵底，整卡浅青灰（无四角 L） */
+
+
 
   border: 1px solid rgba(8, 145, 178, 0.26) !important;
 
+
+
   background-color: #f8fafc !important;
+
+
 
   background-image:
 
+
+
     radial-gradient(ellipse 110% 70% at 18% -8%, rgba(6, 182, 212, 0.09), transparent 52%),
+
+
 
     radial-gradient(ellipse 70% 55% at 108% 108%, rgba(8, 145, 178, 0.05), transparent 48%),
 
+
+
     linear-gradient(168deg, #ffffff 0%, #f1f5f9 48%, #f8fafc 100%) !important;
+
+
 
   background-size: auto, auto, auto !important;
 
+
+
   background-position: 0 0, 0 0, 0 0 !important;
+
+
 
   background-repeat: no-repeat !important;
 
+
+
   backdrop-filter: none !important;
+
+
 
   box-shadow:
 
+
+
     0 20px 50px rgba(15, 23, 42, 0.07),
+
+
 
     0 0 0 1px rgba(8, 145, 178, 0.08),
 
+
+
     inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+
+
 
   animation: none !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPButton.brand {
 
+
+
   border-radius: 10px !important;
+
+
 
   background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%) !important;
 
+
+
   border: 1px solid #67e8f9 !important;
+
+
 
   color: #020617 !important;
 
+
+
   font-weight: 700 !important;
+
+
 
   letter-spacing: 0.04em !important;
 
+
+
   box-shadow:
+
+
 
     0 0 16px rgba(34, 211, 238, 0.4),
 
+
+
     inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+
+
 
   transition:
 
+
+
     transform 0.2s ease,
+
+
 
     box-shadow 0.2s ease,
 
+
+
     filter 0.2s ease !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPButton.brand,
 
+
+
 html:not(.dark) .home-landing .VPHero .VPButton.brand,
+
+
 
 html:not(.dark) .VPContent.is-home .VPHero .VPButton.brand,
 
+
+
 html:not(.dark) .home-landing .home-cta .VPButton.brand {
+
+
 
   background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%) !important;
 
+
+
   border: 1px solid #0891b2 !important;
+
+
 
   color: #ffffff !important;
 
+
+
   box-shadow:
+
+
 
     0 0 14px rgba(8, 145, 178, 0.18),
 
+
+
     0 8px 24px rgba(8, 145, 178, 0.22),
+
+
 
     inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPButton.brand:hover {
 
+
+
   transform: translateY(-2px);
+
+
 
   filter: brightness(1.08);
 
+
+
   box-shadow:
+
+
 
     0 0 22px rgba(34, 211, 238, 0.5),
 
+
+
     inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPButton.brand:hover {
 
+
+
   filter: brightness(1.05);
+
+
 
   box-shadow:
 
+
+
     0 12px 28px rgba(8, 145, 178, 0.3),
+
+
 
     0 0 0 1px rgba(8, 145, 178, 0.15) !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPButton.alt {
 
+
+
   border-radius: 10px !important;
+
+
 
   background: rgba(8, 12, 22, 0.72) !important;
 
+
+
   border: 1px solid rgba(34, 211, 238, 0.5) !important;
+
+
 
   color: #67e8f9 !important;
 
+
+
   box-shadow: 0 0 14px rgba(34, 211, 238, 0.2) !important;
+
+
 
   transition:
 
+
+
     transform 0.2s ease,
+
+
 
     border-color 0.2s ease,
 
+
+
     box-shadow 0.2s ease !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPButton.alt,
 
+
+
 html:not(.dark) .home-landing .VPHero .VPButton.alt,
+
+
 
 html:not(.dark) .VPContent.is-home .VPHero .VPButton.alt {
 
+
+
   background: rgba(255, 255, 255, 0.92) !important;
+
+
 
   border: 1px solid rgba(8, 145, 178, 0.35) !important;
 
+
+
   color: #0f172a !important;
+
+
 
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06) !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPButton.alt:hover {
 
+
+
   transform: translateY(-2px);
+
+
 
   border-color: #00f0ff !important;
 
+
+
   box-shadow: 0 0 22px rgba(0, 240, 255, 0.4) !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPButton.alt:hover {
 
+
+
   border-color: #0891b2 !important;
 
+
+
   box-shadow: 0 10px 24px rgba(8, 145, 178, 0.15) !important;
+
+
 
 }
 
 
 
+
+
+
+
 /* -------------------------------------------------------------------------- */
+
+
 
 /* Feature cards                                                              */
 
+
+
 /* -------------------------------------------------------------------------- */
+
+
+
+
 
 
 
 .VPHome .VPFeature,
 
+
+
 .VPContent.is-home .VPFeature {
+
+
 
   border-radius: 14px !important;
 
+
+
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
+
+
 
   background: rgba(16, 20, 30, 0.55) !important;
 
+
+
   backdrop-filter: blur(8px) saturate(130%) !important;
+
+
 
   -webkit-backdrop-filter: blur(8px) saturate(130%) !important;
 
+
+
   box-shadow:
+
+
 
     0 12px 32px rgba(0, 0, 0, 0.28),
 
+
+
     inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+
+
 
   transition:
 
+
+
     transform 0.25s ease,
+
+
 
     border-color 0.25s ease,
 
+
+
     box-shadow 0.25s ease !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPHome .VPFeature,
 
+
+
 html:not(.dark) .VPContent.is-home .VPFeature,
+
+
 
 html:not(.dark) .VPFeature {
 
+
+
   border: 1px solid rgba(8, 145, 178, 0.14) !important;
+
+
 
   background: rgba(255, 255, 255, 0.72) !important;
 
+
+
   backdrop-filter: blur(8px) saturate(130%) !important;
+
+
 
   -webkit-backdrop-filter: blur(8px) saturate(130%) !important;
 
+
+
   box-shadow:
+
+
 
     0 12px 32px rgba(15, 23, 42, 0.06),
 
+
+
     inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPHome .VPFeature:hover,
 
+
+
 .VPContent.is-home .VPFeature:hover {
+
+
 
   transform: translateY(-3px) !important;
 
+
+
   border-color: rgba(34, 211, 238, 0.45) !important;
+
+
 
   box-shadow:
 
+
+
     0 0 0 1px rgba(34, 211, 238, 0.18),
+
+
 
     0 18px 36px rgba(0, 0, 0, 0.32) !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPHome .VPFeature:hover,
 
+
+
 html:not(.dark) .VPContent.is-home .VPFeature:hover,
+
+
 
 html:not(.dark) .VPFeature:hover {
 
+
+
   border-color: rgba(8, 145, 178, 0.4) !important;
+
+
 
   box-shadow:
 
+
+
     0 0 0 1px rgba(8, 145, 178, 0.12),
+
+
 
     0 18px 36px rgba(15, 23, 42, 0.1) !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPHome .VPFeature .title,
 
+
+
 .VPContent.is-home .VPFeature .title {
+
+
 
   font-family: var(--cyber-font-display) !important;
 
+
+
   letter-spacing: -0.01em;
+
+
 
   font-size: 1.15rem;
 
+
+
   color: #e8f0ff !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPHome .VPFeature .title,
 
+
+
 html:not(.dark) .VPContent.is-home .VPFeature .title,
+
+
 
 html:not(.dark) .VPFeature .title {
 
+
+
   color: #0f172a !important;
+
+
 
   font-size: 1.15rem;
 
+
+
 }
+
+
+
+
 
 
 
 .VPHome .VPFeature .details,
 
+
+
 .VPContent.is-home .VPFeature .details {
+
+
 
   color: var(--vp-c-text-2) !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPFeature .details {
 
+
+
   color: #475569 !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .VPFeature .icon {
 
+
+
   border: 1px solid rgba(8, 145, 178, 0.28) !important;
+
+
 
   background: rgba(8, 145, 178, 0.07) !important;
 
+
+
   color: #0e7490 !important;
+
+
 
   box-shadow: none !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* 首页 CTA / 专栏标题：浅色可读 */
 
+
+
 html:not(.dark) .home-sec-head__title {
+
+
 
   color: #0f172a !important;
 
+
+
   -webkit-text-fill-color: #0f172a !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .home-cta__card {
 
+
+
   border: 1px solid rgba(8, 145, 178, 0.2) !important;
+
+
 
   background: rgba(255, 255, 255, 0.9) !important;
 
+
+
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08) !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .home-cta__title {
 
+
+
   color: #0f172a !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .home-cta__sub {
 
+
+
   color: #475569 !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* 文档正文浅色 */
 
+
+
 html:not(.dark) .vp-doc h1,
+
+
 
 html:not(.dark) .vp-doc h2,
 
+
+
 html:not(.dark) .vp-doc h3,
 
+
+
 html:not(.dark) .vp-doc p,
+
+
 
 html:not(.dark) .vp-doc li,
 
+
+
 html:not(.dark) .vp-doc td,
+
+
 
 html:not(.dark) .vp-doc th {
 
+
+
   color: #0f172a !important;
+
+
 
   -webkit-text-fill-color: currentColor !important;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .vp-doc p,
 
+
+
 html:not(.dark) .vp-doc li {
 
+
+
   color: #334155 !important;
+
+
 
 }
 
 
 
+
+
+
+
 /* -------------------------------------------------------------------------- */
+
+
 
 /* Mono fonts + inline code                                                     */
 
+
+
 /* -------------------------------------------------------------------------- */
+
+
+
+
 
 
 
 .vp-doc h1,
 
+
+
 .vp-doc h2,
+
+
 
 .vp-doc h3,
 
+
+
 .VPHero .name,
+
+
 
 .VPHero .text,
 
+
+
 .VPSidebar .title,
+
+
 
 .VPNavBarTitle .title {
 
+
+
   font-family: var(--cyber-font-display) !important;
+
+
 
   letter-spacing: -0.02em;
 
+
+
 }
+
+
+
+
 
 
 
 .vp-doc div[class*='language-'],
 
+
+
 .vp-doc div[class*='language-'] code,
+
+
 
 .vp-doc div[class*='language-'] pre,
 
+
+
 .vp-code-group,
+
+
 
 .vp-code-group code,
 
+
+
 span.lang,
+
+
 
 button.copy,
 
+
+
 .vp-doc :not(pre) > code {
+
+
 
   font-family: var(--cyber-font-mono) !important;
 
+
+
 }
+
+
+
+
 
 
 
 .vp-doc :not(pre) > code {
 
+
+
   color: #00f0ff;
+
+
 
   background: rgba(0, 240, 255, 0.08);
 
+
+
   border: 1px solid rgba(0, 240, 255, 0.2);
+
+
 
   border-radius: 4px;
 
+
+
   padding: 0.1em 0.35em;
 
+
+
 }
+
+
+
+
 
 
 
 html:not(.dark) .vp-doc :not(pre) > code {
 
+
+
   color: #0e7490;
+
+
 
   background: rgba(8, 145, 178, 0.08);
 
+
+
   border-color: rgba(8, 145, 178, 0.22);
 
+
+
 }
+
+
+
+
 
 
 
 @media (prefers-reduced-motion: reduce) {
 
+
+
   .VPHome .VPFeature,
+
+
 
   .VPContent.is-home .VPFeature,
 
+
+
   .VPButton.brand,
+
+
 
   .VPButton.alt {
 
+
+
     transition: none !important;
 
+
+
   }
+
+
+
+
 
 
 
   .VPHome .VPFeature:hover,
 
+
+
   .VPContent.is-home .VPFeature:hover,
+
+
 
   .VPButton.brand:hover,
 
+
+
   .VPButton.alt:hover {
+
+
 
     transform: none !important;
 
+
+
   }
+
+
+
+
 
 
 
   .home-landing.hero-copy-sheen .VPHero .text,
 
+
+
   .VPContent.is-home.hero-copy-sheen .VPHero .text,
+
+
 
   html:not(.dark) .home-landing.hero-copy-sheen .VPHero .text,
 
+
+
   html:not(.dark) .VPContent.is-home.hero-copy-sheen .VPHero .text,
+
+
 
   .home-landing .VPHero .VPButton.brand,
 
+
+
   .VPContent.is-home .VPHero .VPButton.brand,
+
+
 
   html:not(.dark) .home-landing .VPHero .VPButton.brand,
 
+
+
   .home-landing .VPHero .main::after,
+
+
 
   .VPContent.is-home .VPHero .main::after,
 
+
+
   .home-landing.hero-copy-sheen .VPHero .name.clip,
+
+
 
   .VPContent.is-home.hero-copy-sheen .VPHero .name.clip {
 
+
+
     animation: none !important;
+
+
 
   }
 
+
+
 }
+
+
+
+
 
 
 
 /* Hero 扫描区：小屏纵向在主卡下方；清掉 VP 默认负 margin / 固定 320 方盒 */
 
+
+
 @media (max-width: 959px) {
+
+
 
   /* 深色小屏：页面底色整体抬一档，避免死黑 */
 
+
+
   html.dark {
+
+
 
     --vp-c-bg: #121a2a;
 
+
+
     --vp-c-bg-soft: #1a2536;
+
+
 
     --vp-c-bg-alt: #243044;
 
+
+
     --vp-c-gutter: #121a2a;
+
+
 
     --cyber-wash: rgba(0, 240, 255, 0.15);
 
+
+
     --cyber-grid-line: rgba(0, 240, 255, 0.075);
+
+
 
     --cyber-glow-cyan: rgba(0, 240, 255, 0.68);
 
+
+
     --cyber-glow-accent: rgba(34, 211, 238, 0.5);
 
+
+
   }
+
+
+
+
 
 
 
   .home-landing .VPHero.has-image .main,
 
+
+
   .VPContent.is-home .VPHero.has-image .main {
+
+
 
     order: 1 !important;
 
+
+
   }
+
+
+
+
 
 
 
   .home-landing .VPHero.has-image .image,
 
+
+
   .VPContent.is-home .VPHero.has-image .image {
+
+
 
     order: 2 !important;
 
+
+
     min-height: 0 !important;
+
+
 
     margin: 0 !important;
 
+
+
   }
+
+
+
+
 
 
 
   .home-landing .VPHero.has-image .image-container,
 
+
+
   .VPContent.is-home .VPHero.has-image .image-container {
+
+
 
     width: 100% !important;
 
+
+
     height: auto !important;
+
+
 
     max-width: 100% !important;
 
+
+
     transform: none !important;
+
+
 
     animation: none !important;
 
+
+
   }
+
+
 
 }
 
 
 
+
+
+
+
 /* -------------------------------------------------------------------------- */
+
+
 
 /* Doc footer: hide built-in last-updated & prev/next pager                   */
 
+
+
 /* (covered by ArticleMetadata top meta and SeriesNav series card)            */
+
+
 
 /* -------------------------------------------------------------------------- */
 
+
+
 .VPDocFooter {
+
+
 
   display: none;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1624,373 +3248,842 @@ html:not(.dark) .vp-doc :not(pre) > code {
 
 /* Article images are clickable to open the lightbox viewer */
 
+
+
 .vp-doc img {
+
+
 
   cursor: zoom-in;
 
+
+
 }
+
+
+
+
 
 
 
 /* Mermaid charts are clickable to open the lightbox viewer */
 
+
+
 .mermaid {
+
+
 
   cursor: zoom-in;
 
+
+
 }
+
+
 
 .mermaid svg {
 
+
+
   max-width: 100%;
+
+
 
   height: auto;
 
+
+
 }
+
+
+
+
 
 
 
 /* ==========================================================
 
+
+
    高端科技编辑部风（taste 审计落地）
+
+
 
    ========================================================== */
 
+
+
 /* 平滑滚动（尊重 reduced-motion） */
+
+
 
 @media (prefers-reduced-motion: no-preference) {
 
+
+
   html {
+
+
 
     scroll-behavior: smooth;
 
+
+
   }
 
+
+
 }
+
+
+
+
 
 
 
 /* 键盘焦点环：全局可见 */
 
+
+
 :focus-visible {
+
+
 
   outline: 2px solid var(--vp-c-brand-1, #22d3ee) !important;
 
+
+
   outline-offset: 2px !important;
+
+
 
   border-radius: 2px;
 
+
+
 }
+
+
+
+
 
 
 
 /* 按钮/链接按下反馈 */
 
+
+
 .VPButton.brand:active,
+
+
 
 .VPButton.alt:active,
 
+
+
 .vp-doc button.copy:active,
+
+
 
 .image-viewer__close:active,
 
+
+
 .image-viewer__arrow:active,
+
+
 
 .image-viewer__zoombtn:active {
 
+
+
   transform: scale(0.97);
 
+
+
 }
+
+
 
 .VPButton.brand,
 
+
+
 .VPButton.alt {
+
+
 
   transition:
 
+
+
     transform 0.2s ease,
+
+
 
     box-shadow 0.2s ease,
 
+
+
     filter 0.2s ease,
+
+
 
     background-color 0.2s ease !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* 功能卡片：不对称网格（1 大卡 + 2 叠卡 + 2 半宽 + 1 全宽） */
 
+
+
 .VPFeatures .items {
+
+
 
   grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
 
+
+
 }
+
+
 
 .VPFeatures .items .grid-6 {
 
+
+
   display: flex;
 
+
+
 }
+
+
 
 .VPFeatures .items .grid-6 .VPFeature {
 
+
+
   width: 100%;
+
+
 
   height: 100%;
 
+
+
 }
+
+
 
 .VPFeatures .items .grid-6:nth-child(1) {
 
+
+
   grid-column: 1 / 5;
+
+
 
   grid-row: 1 / 3;
 
+
+
 }
+
+
 
 .VPFeatures .items .grid-6:nth-child(2) {
 
+
+
   grid-column: 5 / 7;
+
+
 
   grid-row: 1;
 
+
+
 }
+
+
 
 .VPFeatures .items .grid-6:nth-child(3) {
 
+
+
   grid-column: 5 / 7;
+
+
 
   grid-row: 2;
 
+
+
 }
+
+
 
 .VPFeatures .items .grid-6:nth-child(4) {
 
+
+
   grid-column: 1 / 4;
+
+
 
   grid-row: 3;
 
+
+
 }
+
+
 
 .VPFeatures .items .grid-6:nth-child(5) {
 
+
+
   grid-column: 4 / 7;
+
+
 
   grid-row: 3;
 
+
+
 }
+
+
 
 .VPFeatures .items .grid-6:nth-child(6) {
 
+
+
   grid-column: 1 / 7;
+
+
 
   grid-row: 4;
 
+
+
 }
+
+
 
 /* 大卡内容垂直分布，更有“主编推荐”感 */
 
+
+
 .VPFeatures .items .grid-6:nth-child(1) .VPFeature,
+
+
 
 .VPFeatures .items .grid-6:nth-child(6) .VPFeature {
 
+
+
   display: flex;
+
+
 
   flex-direction: column;
 
+
+
   justify-content: center;
+
+
 
   gap: 0.5rem;
 
+
+
 }
+
+
 
 .VPFeatures .items .grid-6:nth-child(1) .VPFeature .title,
 
+
+
 .VPFeatures .items .grid-6:nth-child(6) .VPFeature .title {
+
+
 
   font-size: 1.45rem;
 
+
+
 }
+
+
 
 @media (max-width: 640px) {
 
+
+
   .VPFeatures .items .grid-6 {
+
+
 
     grid-column: 1 / -1 !important;
 
+
+
     grid-row: auto !important;
+
+
 
   }
 
+
+
 }
+
+
+
+
 
 
 
 /* ==========================================================
 
+
+
    文章右侧目录（TOC）：编辑部风（隐藏标题 + 三级层级）
+
+
 
    ========================================================== */
 
+
+
+/* 隐藏右侧目录底部的固定渐变遮罩（.aside-curtain）：深浅色下都会形成一块可见色块 */
+.aside-curtain {
+  display: none !important;
+}
+
 .VPDocAsideOutline .outline-title {
+
+
 
   display: none !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPDocAsideOutline .content {
 
+
+
   padding-left: 14px !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* 基础样式（所有级别）：允许换行，不省略 */
 
+
+
 .VPDocAsideOutline :where(.VPDocOutlineItem > li) > .outline-link {
+
+
 
   display: block;
 
+
+
   color: var(--vp-c-text-2) !important;
+
+
 
   white-space: normal !important;
 
+
+
   overflow: visible !important;
+
+
 
   text-overflow: clip !important;
 
+
+
   word-break: break-word;
+
+
 
   transition: color 0.2s ease !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* 一级标题（章节）：加粗主色，节间距更大 */
 
+
+
 .VPDocAsideOutline :where(.VPDocOutlineItem.root > li) > .outline-link {
+
+
 
   padding: 4px 0;
 
+
+
   margin-top: 10px;
+
+
 
   font-size: 13px !important;
 
+
+
   font-weight: 600 !important;
+
+
 
   line-height: 1.7 !important;
 
+
+
   color: var(--vp-c-text-1) !important;
 
+
+
 }
+
+
 
 .VPDocAsideOutline :where(.VPDocOutlineItem.root > li:first-child) > .outline-link {
 
+
+
   margin-top: 0;
 
+
+
 }
+
+
+
+
 
 
 
 /* 二级标题：小缩进 + 常规字重 */
 
+
+
 .VPDocAsideOutline :where(.VPDocOutlineItem.root > li > .VPDocOutlineItem.nested > li) > .outline-link {
+
+
 
   padding-left: 10px !important;
 
+
+
   padding-top: 2px;
+
+
 
   padding-bottom: 2px;
 
+
+
   font-size: 12.5px !important;
+
+
 
   font-weight: 400 !important;
 
+
+
   line-height: 1.75 !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* 三级标题：略深缩进 + 弱化 */
 
+
+
 .VPDocAsideOutline :where(.VPDocOutlineItem.root > li > .VPDocOutlineItem.nested > li > .VPDocOutlineItem.nested > li) > .outline-link {
+
+
 
   padding-left: 20px !important;
 
+
+
   padding-top: 1px;
+
+
 
   padding-bottom: 1px;
 
+
+
   font-size: 12px !important;
+
+
 
   line-height: 1.75 !important;
 
+
+
   color: var(--vp-c-text-3) !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPDocAsideOutline .outline-link:hover {
 
+
+
   color: var(--vp-c-text-1) !important;
 
+
+
 }
+
+
+
+
 
 
 
 .VPDocAsideOutline .outline-link.active {
 
+
+
   color: var(--vp-c-brand-1) !important;
+
+
 
   font-weight: 600 !important;
 
+
+
 }
+
+
+
+
 
 
 
 /* 滚动指示条：更细长、圆角；隐藏标题后补偿 VitePress 硬编码的 +39px 偏移 */
 
+
+
 .VPDocAsideOutline .outline-marker {
+
+
 
   width: 2px !important;
 
+
+
   height: 16px !important;
+
+
 
   border-radius: 2px !important;
 
+
+
   transform: translateY(-39px);
+
+
 
 }
 
+
+
 /* 标语自成一排：不主动折行，字号随视口缩放以保证放得下 */
+
 .VPHero .text {
+
   white-space: nowrap;
+
   font-size: clamp(1.3rem, 2.2vw, 2.05rem);
+
+}
+
+
+
+/* ==========================================================
+
+   标语手绘下划线：SVG 一笔画出（仅桌面端）
+
+   ========================================================== */
+
+.hero-underline {
+
+  position: absolute;
+
+  pointer-events: none;
+
+  overflow: visible;
+
+}
+
+
+
+.hero-underline__path {
+
+  fill: none;
+
+  stroke: var(--vp-c-brand-1, #22d3ee);
+
+  stroke-width: 2.5;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  opacity: 0.75;
+
 }
 
 /* ==========================================================
-   标语手绘下划线：SVG 一笔画出（仅桌面端）
+   导航标题左移 + 侧边栏折叠
    ========================================================== */
-.hero-underline {
-  position: absolute;
-  pointer-events: none;
-  overflow: visible;
+@media (min-width: 960px) {
+  /* 标题向左移动：覆盖 VitePress ≥1440 的对齐 padding（max(32, calc(...)) = 53px） */
+  .VPNavBar.has-sidebar .title {
+    padding-left: 16px !important;
+  }
+  .VPNavBarTitle .title {
+    padding-left: 0 !important;
+  }
 }
 
-.hero-underline__path {
-  fill: none;
-  stroke: var(--vp-c-brand-1, #22d3ee);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.75;
+/* 折叠态：左侧边栏滑出、正文撑开（右侧目录独立控制，见下方） */
+@media (min-width: 960px) {
+  html.vp-sidebar-collapsed .VPSidebar {
+    transform: translateX(-100%);
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.25s ease, visibility 0s linear 0.25s;
+  }
+  html.vp-sidebar-collapsed .VPContent.has-sidebar {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* 标题回到文档流，不再依赖绝对定位/收缩宽度，确保折叠后始终可见（背景保持导航玻璃色，与首页一致） */
+  html.vp-sidebar-collapsed .VPNavBar.has-sidebar .title {
+    position: static;
+    width: auto;
+    padding: 0 24px 0 16px;
+  }
+  html.vp-sidebar-collapsed .VPNavBar.has-sidebar .content {
+    padding-left: 24px;
+    padding-right: 32px;
+  }
+  html.vp-sidebar-collapsed .VPNavBar.has-sidebar .divider {
+    padding-left: 0;
+  }
 }
 
+/* 折叠态：右侧 ON THIS PAGE 目录独立隐藏 */
+@media (min-width: 1280px) {
+  html.vp-toc-collapsed .VPDoc .aside {
+    display: none;
+  }
+}
+
+/* 折叠态：正文随两侧状态流动占满 —— 关掉哪一边，正文就占满哪一边 */
+@media (min-width: 1280px) {
+  /* 任一折叠：去掉阅读列与正文的固定宽度（tech.css 的 52rem 上限），让正文撑满 */
+  html.vp-toc-collapsed .VPDoc.has-aside .content-container,
+  html.vp-sidebar-collapsed .VPDoc.has-aside .content-container {
+    max-width: none;
+  }
+  html.vp-toc-collapsed .vp-doc,
+  html.vp-sidebar-collapsed .vp-doc {
+    max-width: none;
+  }
+  /* 仅折叠左侧：正文向左贴齐，若右侧目录保留则正文止于目录左侧 */
+  html.vp-sidebar-collapsed .VPDoc .container {
+    justify-content: flex-start;
+  }
+  html.vp-sidebar-collapsed .VPDoc .content {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+}
+
+
+/* 左侧折叠按钮：仅在存在侧边栏的文档页显示，首页等无侧边栏页面隐藏 */
+@media (min-width: 960px) {
+  body:has(.VPSidebar) .sidebar-toggle {
+    display: inline-flex !important;
+  }
+}
+
+/* 左上角标题区与首页一致：侧边栏从导航下方开始，不再用实色 curtain 盖住标题区（展开/折叠颜色都保持玻璃色） */
+@media (min-width: 960px) {
+  .VPSidebar {
+    top: calc(var(--vp-layout-top-height, 0px) + var(--vp-nav-height)) !important;
+    padding-top: 0 !important;
+  }
+  .VPSidebar .curtain {
+    display: none !important;
+  }
+}
+
+/* 右侧目录折叠按钮：仅在存在右侧目录的文档页显示 */
+@media (min-width: 1280px) {
+  body:has(.VPDoc .aside) .toc-toggle {
+    display: inline-flex !important;
+  }
+}
