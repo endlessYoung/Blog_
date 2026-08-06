@@ -34,6 +34,8 @@ interface Particle {
   vx: number
   vy: number
   active: number // 0..1 平滑激活值
+  baseAlpha: number // 本底透明度（主题切换时乘以 alphaMul）
+  baseSize: number // 本底尺寸（主题切换时乘以 sizeMul）
 }
 
 let disposed = false
@@ -79,8 +81,8 @@ function isEligible(): boolean {
 function currentPalette() {
   const dark = document.documentElement.classList.contains('dark')
   return dark
-    ? { base: [0.82, 0.9, 1], accent: [0.14, 0.82, 0.93] }
-    : { base: [0.18, 0.22, 0.28], accent: [0.055, 0.455, 0.565] }
+    ? { base: [0.82, 0.9, 1], accent: [0.14, 0.82, 0.93], alphaMul: 1, sizeMul: 1 }
+    : { base: [0.09, 0.11, 0.16], accent: [0.02, 0.35, 0.45], alphaMul: 1.8, sizeMul: 1.0 }
 }
 
 function particleCount(): number {
@@ -149,12 +151,14 @@ async function start(): Promise<void> {
   for (let i = 0; i < count; i++) {
     const sizeScale = 0.55 + Math.random() * 0.9
     const isAccent = Math.random() < ACCENT_RATIO
-    particles.push({ hx: xs[i], hy: ys[i], x: xs[i], y: ys[i], vx: 0, vy: 0, active: 0 })
+    const baseAlpha = (0.35 + Math.random() * 0.4) * (isAccent ? 1.2 : 1)
+    const baseSize = sizeScale * (1.6 + Math.random() * 2.0)
+    particles.push({ hx: xs[i], hy: ys[i], x: xs[i], y: ys[i], vx: 0, vy: 0, active: 0, baseAlpha, baseSize })
     posArray[i * 3] = xs[i]
     posArray[i * 3 + 1] = ys[i]
     posArray[i * 3 + 2] = 0
-    sizes[i] = sizeScale * (1.6 + Math.random() * 2.0)
-    alphas[i] = (0.35 + Math.random() * 0.4) * (isAccent ? 1.2 : 1)
+    sizes[i] = baseSize * palette.sizeMul
+    alphas[i] = baseAlpha * palette.alphaMul
     accents[i] = isAccent ? 1 : 0
     hues[i] = Math.random() // 每颗粒子固定色相，随时间漂移
   }
@@ -241,8 +245,11 @@ async function start(): Promise<void> {
     mouseTarget.y = -9999
   }
   const onResize = () => {
+    const oldW = width
+    const oldH = height
     width = window.innerWidth
     height = window.innerHeight
+    dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP)
     renderer.setSize(width, height, false)
     canvas.width = Math.round(width * dpr)
     canvas.height = Math.round(height * dpr)
@@ -253,11 +260,41 @@ async function start(): Promise<void> {
     camera.top = 0
     camera.bottom = height
     camera.updateProjectionMatrix()
+    material.uniforms.uPixelRatio.value = dpr
+    // 粒子场按比例伸缩，保持铺满新视口
+    if (oldW > 0 && oldH > 0) {
+      const sx = width / oldW
+      const sy = height / oldH
+      const arr = posArray
+      if (arr) {
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i]
+          p.x *= sx
+          p.hx *= sx
+          p.y *= sy
+          p.hy *= sy
+          arr[i * 3] = p.x
+          arr[i * 3 + 1] = p.y
+        }
+        geometry.attributes.position.needsUpdate = true
+      }
+    }
+  }
+  const applyAlpha = () => {
+    const pal = currentPalette()
+    const mul = pal.alphaMul
+    for (let i = 0; i < particles.length; i++) {
+      activeArray![i] = particles[i].baseAlpha * mul
+      sizes![i] = particles[i].baseSize * pal.sizeMul
+    }
+    geometry.attributes.aAlpha.needsUpdate = true
+    geometry.attributes.aSize.needsUpdate = true
   }
   const themeObserver = new MutationObserver(() => {
     const p = currentPalette()
     material.uniforms.uBaseColor.value.set(...p.base)
     material.uniforms.uAccentColor.value.set(...p.accent)
+    applyAlpha()
   })
   themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
 

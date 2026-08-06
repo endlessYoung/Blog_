@@ -19,12 +19,14 @@ import ImageViewer from './components/ImageViewer.vue'
 import ReadingProgress from './components/ReadingProgress.vue'
 import { initImageViewer } from './imageViewer'
 import { initOutlineAutoScroll } from './outlineAutoScroll'
+import { initHeroUnderline } from './heroUnderline'
 import ArticleMetadata from './components/ArticleMetadata.vue'
 import TechBackground from './components/TechBackground.vue'
 import HomeHeroEyebrow from './components/home/HomeHeroEyebrow.vue'
 import HomeHeroCopySwitch from './components/home/HomeHeroCopySwitch.vue'
 import HomeHeroOrb from './components/home/HomeHeroOrb.vue'
 import HomeParticleField from './components/home/HomeParticleField.vue'
+import HomeCategoryCards from './components/home/HomeCategoryCards.vue'
 import HomeMetricsStrip from './components/home/HomeMetricsStrip.vue'
 import HomeSectionHeader from './components/home/HomeSectionHeader.vue'
 import HomeBottomCta from './components/home/HomeBottomCta.vue'
@@ -147,6 +149,17 @@ export default {
       onMounted(() => {
         nextTick(() => { initMermaid() })
       })
+
+      // 标语手写动画：首页 + 路由切换后（每次进入首页重新书写）
+      onMounted(() => {
+        nextTick(() => { initHeroUnderline() })
+      })
+      watch(
+        () => route.path,
+        () => {
+          nextTick(() => { initHeroUnderline() })
+        },
+      )
       watch(
         () => route.path,
         () => {
@@ -161,7 +174,7 @@ export default {
         /* 主题大卡外独立区块：RECENT / 最新文章 */
         'home-hero-after': () => h(HomeMetricsStrip),
         'home-features-before': () => h(HomeSectionHeader),
-        'home-features-after': () => h(HomeBottomCta),
+        'home-features-after': () => [h(HomeCategoryCards), h(HomeBottomCta)],
         'doc-before': () => h(ArticleMetadata),
         'doc-after': () => [h(SeriesNav), h(RelatedArticles), h(Comments)],
         }),

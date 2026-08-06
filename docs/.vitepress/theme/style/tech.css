@@ -2026,18 +2026,18 @@ html {
   .VPContent.is-home .home-sec-head {
     position: relative;
     z-index: 4;
-    transform: translateY(calc((1 - var(--home-below)) * 56px))
-      scale(calc(0.94 + var(--home-below) * 0.06));
-    opacity: calc(0.52 + var(--home-below) * 0.48);
-    filter: blur(calc((1 - var(--home-below)) * 5px));
+    transform: translateY(calc((1 - var(--home-below)) * 20px))
+      scale(calc(0.97 + var(--home-below) * 0.03));
+    opacity: calc(0.9 + var(--home-below) * 0.1);
+    filter: blur(calc((1 - var(--home-below)) * 1.5px));
     will-change: transform, opacity, filter;
   }
 
   .VPContent.is-home .home-sec-head__rule {
     transform: scaleX(calc(0.35 + var(--home-below) * 0.65));
     transform-origin: 0 50%;
-    opacity: calc(0.45 + var(--home-below) * 0.55);
-    filter: blur(calc((1 - var(--home-below)) * 3px));
+    opacity: calc(0.7 + var(--home-below) * 0.3);
+    filter: blur(calc((1 - var(--home-below)) * 1px));
   }
 
   /* ?? ???????????? ?? */
@@ -2070,7 +2070,7 @@ html {
   }
 
   .VPContent.is-home .VPFeature:nth-child(2) .box {
-    transform: translateY(calc((1 - var(--home-below)) * 56px))
+    transform: translateY(calc((1 - var(--home-below)) * 20px))
       scale(calc(0.9 + var(--home-below) * 0.1));
     filter: blur(calc((1 - var(--home-below)) * 6.5px));
     opacity: calc(0.58 + var(--home-below) * 0.42);
@@ -2100,7 +2100,7 @@ html {
   .VPContent.is-home .VPFeature:nth-child(6) .box {
     transform: translateY(calc((1 - var(--home-below)) * 76px))
       scale(calc(0.9 + var(--home-below) * 0.1));
-    filter: blur(calc((1 - var(--home-below)) * 5px));
+    filter: blur(calc((1 - var(--home-below)) * 1.5px));
     opacity: calc(0.58 + var(--home-below) * 0.42);
   }
 

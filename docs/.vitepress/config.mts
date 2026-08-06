@@ -98,6 +98,49 @@ const relatedIndex: Record<string, RelatedEntry[]> = (() => {
   return index
 })()
 
+/** 首页分类卡片：按目录统计文章数 + 按 created 取最新代表文章（SSR 构建期计算） */
+interface HomeCategory {
+  title: string
+  icon: string
+  count: number
+  link: string
+  articles: { title: string; link: string }[]
+}
+
+const HOME_CATEGORY_DEFS: { title: string; icon: string; dirs: string[]; link: string }[] = [
+  { title: '移动开发', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>', dirs: ['Android', 'Kotlin', 'Flutter'], link: '/Android/' },
+  { title: 'AI 与智能体', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.7L19.6 10l-5.7 1.9L12 17.6l-1.9-5.7L4.4 10l5.7-1.9z"/><path d="M19 15l.9 2.6 2.6.9-2.6.9L19 22l-.9-2.6-2.6-.9 2.6-.9z"/></svg>', dirs: ['Ai', 'Agent'], link: '/Ai/' },
+  { title: '后端技术', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>', dirs: ['Java', 'Python', 'SQL'], link: '/Java/' },
+  { title: '系统与底层', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>', dirs: ['C', 'C++', 'Linux'], link: '/C/' },
+  { title: '前端与脚本', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>', dirs: ['JS', 'Common'], link: '/JS/' },
+  { title: '算法与数据结构', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>', dirs: ['数据结构和算法'], link: '/数据结构和算法/' },
+]
+
+const homeCategories: HomeCategory[] = HOME_CATEGORY_DEFS.map((def) => {
+  const srcDir = join(__dirname, '..')
+  const files = listMarkdownFiles(srcDir)
+    .map((file) => {
+      const rel = relative(srcDir, file).replace(/\\/g, '/')
+      const fm = parseArticleFrontmatter(file)
+      return {
+        rel,
+        title: String(fm.title || '').trim(),
+        created: String(fm.created || fm.date || createdDates[rel] || ''),
+        noindex: !!fm.noindex,
+      }
+    })
+    .filter((a) => a.title && !/index\.md$/i.test(a.rel))
+    .filter((a) => !/^\d+\.md$/.test(a.rel.split('/').pop() || ''))
+    .filter((a) => def.dirs.some((d) => a.rel.startsWith(d + '/')))
+  const articles = files
+    .sort((a, b) => b.created.localeCompare(a.created) || a.rel.localeCompare(b.rel))
+    .slice(0, 4)
+    .map((a) => ({
+      title: a.title,
+      link: '/' + a.rel.replace(/(?:(^|\/)index)?\.md$/, '$1'),
+    }))
+  return { title: def.title, icon: def.icon, link: def.link, count: files.length, articles }
+})
 const customElements = [
   'math',
   'maction',
@@ -520,6 +563,7 @@ html:not(.dark) {
   },
   themeConfig: {
     related: relatedIndex,
+    homeCategories,
     outline: { level: [2, 4] },
     logo: '/panda.webp',
     darkModeSwitchLabel: "🌓",
