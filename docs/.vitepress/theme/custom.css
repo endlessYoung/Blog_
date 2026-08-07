@@ -4006,19 +4006,45 @@ html:not(.dark) .vp-doc :not(pre) > code {
   }
 }
 
-/* 折叠态：左侧边栏滑出、正文撑开（右侧目录独立控制，见下方） */
+/* ==========================================================
+   左右栏展开/折叠动效
+   决议：面板纯滑动 + 正文同步伸缩；约 300ms ease-out；顶栏布局瞬时；
+   prefers-reduced-motion 下降级为瞬时切换。
+   ========================================================== */
+:root {
+  --vp-panel-motion-duration: 300ms;
+  --vp-panel-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 左侧：侧栏滑动 + 正文 padding 同步 */
 @media (min-width: 960px) {
+  .VPSidebar {
+    transition:
+      transform var(--vp-panel-motion-duration) var(--vp-panel-motion-ease),
+      visibility 0s linear 0s;
+  }
+
+  .VPContent.has-sidebar {
+    transition:
+      padding-left var(--vp-panel-motion-duration) var(--vp-panel-motion-ease),
+      padding-right var(--vp-panel-motion-duration) var(--vp-panel-motion-ease);
+  }
+
   html.vp-sidebar-collapsed .VPSidebar {
     transform: translateX(-100%);
     visibility: hidden;
     pointer-events: none;
-    transition: transform 0.25s ease, visibility 0s linear 0.25s;
+    transition:
+      transform var(--vp-panel-motion-duration) var(--vp-panel-motion-ease),
+      visibility 0s linear var(--vp-panel-motion-duration);
   }
+
   html.vp-sidebar-collapsed .VPContent.has-sidebar {
     padding-left: 0;
     padding-right: 0;
   }
-  /* 标题回到文档流，不再依赖绝对定位/收缩宽度，确保折叠后始终可见（背景保持导航玻璃色，与首页一致） */
+
+  /* 顶栏布局瞬时切换（颜色已锁死，不做过渡） */
   html.vp-sidebar-collapsed .VPNavBar.has-sidebar .title {
     position: static;
     width: auto;
@@ -4033,24 +4059,50 @@ html:not(.dark) .vp-doc :not(pre) > code {
   }
 }
 
-/* 折叠态：右侧 ON THIS PAGE 目录独立隐藏 */
+/* 右侧：目录滑出 + 占位宽度同步收起（不用 display:none，否则无法动画） */
 @media (min-width: 1280px) {
-  html.vp-toc-collapsed .VPDoc .aside {
-    display: none;
+  .VPDoc .aside {
+    transition:
+      max-width var(--vp-panel-motion-duration) var(--vp-panel-motion-ease),
+      padding-left var(--vp-panel-motion-duration) var(--vp-panel-motion-ease),
+      flex-grow var(--vp-panel-motion-duration) var(--vp-panel-motion-ease);
   }
-}
 
-/* 折叠态：正文随两侧状态流动占满 —— 关掉哪一边，正文就占满哪一边 */
-@media (min-width: 1280px) {
-  /* 任一折叠：去掉阅读列与正文的固定宽度（tech.css 的 52rem 上限），让正文撑满 */
+  .VPDoc .aside .aside-container,
+  .VPDoc .aside .aside-curtain {
+    transition: transform var(--vp-panel-motion-duration) var(--vp-panel-motion-ease);
+  }
+
+  .VPDoc.has-aside .content-container,
+  .VPDoc.has-aside .vp-doc {
+    transition: max-width var(--vp-panel-motion-duration) var(--vp-panel-motion-ease);
+  }
+
+  html.vp-toc-collapsed .VPDoc .aside {
+    max-width: 0 !important;
+    padding-left: 0 !important;
+    flex-grow: 0;
+    pointer-events: none;
+    border: none;
+    overflow: hidden;
+  }
+
+  html.vp-toc-collapsed .VPDoc .aside .aside-container,
+  html.vp-toc-collapsed .VPDoc .aside .aside-curtain {
+    transform: translateX(100%);
+    pointer-events: none;
+  }
+
+  /* 任一折叠：正文撑满；用 100% 而非 none，才能插值过渡 */
   html.vp-toc-collapsed .VPDoc.has-aside .content-container,
   html.vp-sidebar-collapsed .VPDoc.has-aside .content-container {
-    max-width: none;
+    max-width: 100%;
   }
   html.vp-toc-collapsed .vp-doc,
   html.vp-sidebar-collapsed .vp-doc {
-    max-width: none;
+    max-width: 100%;
   }
+
   /* 仅折叠左侧：正文向左贴齐，若右侧目录保留则正文止于目录左侧 */
   html.vp-sidebar-collapsed .VPDoc .container {
     justify-content: flex-start;
@@ -4059,6 +4111,34 @@ html:not(.dark) .vp-doc :not(pre) > code {
     flex: 1 1 auto;
     width: auto;
     min-width: 0;
+    transition: width var(--vp-panel-motion-duration) var(--vp-panel-motion-ease);
+  }
+}
+
+/* 减少动态效果 / 首屏恢复折叠态：瞬时开合 */
+html.vp-panel-no-motion .VPSidebar,
+html.vp-panel-no-motion .VPContent.has-sidebar,
+html.vp-panel-no-motion .VPDoc .aside,
+html.vp-panel-no-motion .VPDoc .aside .aside-container,
+html.vp-panel-no-motion .VPDoc .aside .aside-curtain,
+html.vp-panel-no-motion .VPDoc.has-aside .content-container,
+html.vp-panel-no-motion .VPDoc.has-aside .vp-doc,
+html.vp-panel-no-motion .vp-doc,
+html.vp-panel-no-motion .VPDoc .content {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .VPSidebar,
+  .VPContent.has-sidebar,
+  .VPDoc .aside,
+  .VPDoc .aside .aside-container,
+  .VPDoc .aside .aside-curtain,
+  .VPDoc.has-aside .content-container,
+  .VPDoc.has-aside .vp-doc,
+  .vp-doc,
+  .VPDoc .content {
+    transition: none !important;
   }
 }
 
@@ -4070,7 +4150,7 @@ html:not(.dark) .vp-doc :not(pre) > code {
   }
 }
 
-/* 左上角标题区与首页一致：侧边栏从导航下方开始，不再用实色 curtain 盖住标题区（展开/折叠颜色都保持玻璃色） */
+/* 左上角标题区与首页一致：侧边栏从导航下方开始，不再用实色 curtain 盖住标题区 */
 @media (min-width: 960px) {
   .VPSidebar {
     top: calc(var(--vp-layout-top-height, 0px) + var(--vp-nav-height)) !important;
@@ -4079,6 +4159,41 @@ html:not(.dark) .vp-doc :not(pre) > code {
   .VPSidebar .curtain {
     display: none !important;
   }
+
+  /*
+   * 锁死 topbar：展开/折叠侧栏时颜色不变。
+   * 默认 .has-sidebar .title 透明、.content-body 用 --vp-nav-bg-color（实色），
+   * 折叠后 padding/position 一变，左上角就会从玻璃色切到侧栏/页面色。
+   * 做法：整条导航只用 .VPNavBar 一层背景；title / content-body 永远透明。
+   */
+  .VPNavBar,
+  .VPNavBar.has-sidebar {
+    background: rgba(5, 5, 8, 0.55) !important;
+    background-color: rgba(5, 5, 8, 0.55) !important;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+  }
+
+  .VPNavBar .title,
+  .VPNavBar.has-sidebar .title,
+  .VPNavBar .content-body,
+  .VPNavBar.has-sidebar .content-body,
+  html.vp-sidebar-collapsed .VPNavBar.has-sidebar .title {
+    background: transparent !important;
+    background-color: transparent !important;
+    transition: none !important;
+  }
+
+  html:not(.dark) .VPNavBar,
+  html:not(.dark) .VPNavBar.has-sidebar {
+    background: rgba(255, 255, 255, 0.82) !important;
+    background-color: rgba(255, 255, 255, 0.82) !important;
+  }
+
+  /* 去掉 has-sidebar 标题底部分割线，避免左上角出现“侧栏色带” */
+  .VPNavBarTitle.has-sidebar .title,
+  .VPNavBar.has-sidebar .VPNavBarTitle .title {
+    border-bottom-color: transparent !important;
+  }
 }
 
 /* 右侧目录折叠按钮：仅在存在右侧目录的文档页显示 */
@@ -4086,4 +4201,29 @@ html:not(.dark) .vp-doc :not(pre) > code {
   body:has(.VPDoc .aside) .toc-toggle {
     display: inline-flex !important;
   }
+}
+
+/* ==========================================================
+   去掉链接 hover 深色细下划线，只保留标题青色装饰条
+   （全局 a::after / var.css 黑灰下划线会与 tech.css h2/h3::after 叠在一起）
+   ========================================================== */
+.vp-doc a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after,
+.vp-doc main a::after,
+.vp-doc .content a::after,
+.vp-doc :is(h1, h2, h3, h4, h5, h6) a::after,
+.VPSidebar a::after,
+.VPSidebarItem a::after,
+.vp-doc-aside a::after,
+.aside a::after,
+.table-of-contents a::after,
+.VPDocAsideOutline a::after,
+.VPDocAsideOutline .outline-link::after,
+[class*='Android'] a::after,
+[class*='Java'] a::after,
+[class*='数据结构'] a::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  opacity: 0 !important;
+  background: none !important;
 }

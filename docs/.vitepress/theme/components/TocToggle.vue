@@ -37,7 +37,15 @@ function toggle(): void {
 
 onMounted(() => {
   try {
-    if (localStorage.getItem(STORAGE_KEY) === '1') apply(true)
+    if (localStorage.getItem(STORAGE_KEY) === '1') {
+      document.documentElement.classList.add('vp-panel-no-motion')
+      apply(true)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove('vp-panel-no-motion')
+        })
+      })
+    }
   } catch {
     /* ignore */
   }
@@ -74,5 +82,24 @@ html:not(.dark) .toc-toggle:hover {
 .toc-toggle svg {
   width: 18px;
   height: 18px;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+.toc-toggle[aria-expanded='false'] svg {
+  transform: scaleX(-1);
+  opacity: 0.72;
+}
+.toc-toggle:active svg {
+  transform: rotate(10deg) scale(0.92);
+  opacity: 0.85;
+}
+.toc-toggle[aria-expanded='false']:active svg {
+  transform: scaleX(-1) rotate(-10deg) scale(0.92);
+}
+@media (prefers-reduced-motion: reduce) {
+  .toc-toggle svg {
+    transition: none;
+  }
 }
 </style>

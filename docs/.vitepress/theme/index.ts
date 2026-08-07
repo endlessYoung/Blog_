@@ -27,6 +27,7 @@ import HomeHeroCopySwitch from './components/home/HomeHeroCopySwitch.vue'
 import HomeHeroOrb from './components/home/HomeHeroOrb.vue'
 import HomeParticleField from './components/home/HomeParticleField.vue'
 import SidebarToggle from './components/SidebarToggle.vue'
+import NavBrandTitle from './components/NavBrandTitle.vue'
 import TocToggle from './components/TocToggle.vue'
 import HomeCategoryCards from './components/home/HomeCategoryCards.vue'
 import HomeMetricsStrip from './components/home/HomeMetricsStrip.vue'
@@ -172,6 +173,7 @@ export default {
         h(Theme.Layout, null, {
         'layout-top': () => h(frontmatter.value.layout === 'home' ? HomeParticleField : TechBackground),
         'nav-bar-title-before': () => h(SidebarToggle),
+        'nav-bar-title-after': () => h(NavBrandTitle),
         'nav-bar-content-after': () => h(TocToggle),
         'home-hero-before': () => [h(HomeHeroEyebrow), h(HomeHeroCopySwitch)],
         'home-hero-image': () => h(HomeHeroOrb),

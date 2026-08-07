@@ -257,7 +257,7 @@ html:not(.dark) .home-cat-card__idx {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background-image: linear-gradient(currentColor, currentColor);
+  background-image: linear-gradient(#22d3ee, #22d3ee);
   background-repeat: no-repeat;
   background-position: 0 100%;
   background-size: 0% 2px;
@@ -273,6 +273,13 @@ html:not(.dark) .home-cat-card__link:hover {
 }
 .home-cat-card__link:hover .home-cat-card__link-text {
   background-size: 100% 2px;
+}
+/* 去掉全局 a::after 深色/重复下划线，只留上面青色装饰线 */
+.home-cat-cards .home-cat-card__link::after,
+.home-cat-cards .home-cat-card__more::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
 }
 
 /* 空卡占位 */
