@@ -14,14 +14,14 @@
         </div>
         <ul v-if="cat.articles.length" class="home-cat-card__list">
           <li v-for="(a, ai) in cat.articles" :key="a.link">
-            <a class="home-cat-card__link" :href="a.link">
+            <a class="home-cat-card__link" :href="withBase(a.link)">
               <span class="home-cat-card__idx">{{ ai + 1 }}</span>
               <span class="home-cat-card__link-text">{{ a.title }}</span>
             </a>
           </li>
         </ul>
         <p v-else class="home-cat-card__empty">内容整理中，敬请期待…</p>
-        <a class="home-cat-card__more" :href="cat.link">查看全部</a>
+        <a class="home-cat-card__more" :href="withBase(cat.link)">查看全部</a>
       </article>
     </div>
   </section>
@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 
 const { theme } = useData()
 interface HomeArticle {
