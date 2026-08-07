@@ -26,8 +26,11 @@
   .VPContent.is-home .VPHero.has-image .image,
   .VPContent.is-home .VPHero .image-bg,
   .VPContent.is-home .VPHero .image-container,
+  .VPContent.is-home .home-tx,
   .VPContent.is-home .home-sec-head,
   .VPContent.is-home .home-sec-head__rule,
+  .VPContent.is-home .home-cat-cards,
+  .VPContent.is-home .home-cat-card,
   .VPContent.is-home .VPFeatures,
   .VPContent.is-home .VPFeature,
   .VPContent.is-home .VPFeature .box,
@@ -65,11 +68,11 @@
     box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08) !important;
   }
 
-  /* SYSTEM ACTIVE 标签：保留但静态 */
+  /* SYSTEM ACTIVE 已移除：与桌面 hero 减法一致 */
   .home-landing .VPHero .heading::before,
   .VPContent.is-home .VPHero .heading::before {
-    animation: none !important;
-    text-shadow: none !important;
+    content: none !important;
+    display: none !important;
   }
 
   /* 主标题：静态渐变文字，关闭流动与 glitch，去掉重投影光晕 */
@@ -109,9 +112,7 @@
 
   /* 按钮：关闭呼吸脉冲与 hover 上浮 */
   .home-landing .VPHero .VPButton.brand,
-  .VPContent.is-home .VPHero .VPButton.brand,
-  .home-landing .home-cta .VPButton.brand,
-  .VPContent.is-home .home-cta .VPButton.brand {
+  .VPContent.is-home .VPHero .VPButton.brand {
     animation: none !important;
   }
 
@@ -147,40 +148,16 @@
   /* ------------------------------------------------------------------ *
    * 4) HUD 扫描区：静态展示，关闭旋转/扫描/脉冲/光晕模糊                 *
    * ------------------------------------------------------------------ */
-  .home-hud__aura {
+  /* 小屏 / 窄窗：整块雷达图与占位一并去掉 */
+  .home-hud,
+  .VPContent.is-home .VPHero.has-image .image,
+  .VPContent.is-home .VPHero .image-bg,
+  .VPContent.is-home .VPHero .image-container {
     display: none !important;
-  }
-
-  .home-hud__spin--slow,
-  .home-hud__spin--mid,
-  .home-hud__core,
-  .home-hud__core-dot,
-  .home-hud__feed--hit {
-    animation: none !important;
-  }
-
-  /* 小屏不渲染雷达光束 / 声呐波纹 / 扫描亮点，保持静态简洁 */
-  .home-hud__beam,
-  .home-hud__sonar,
-  .home-hud__sonar-ring,
-  .home-hud__blip,
-  .home-hud__blip-ring,
-  .home-hud__blip-dot {
-    display: none !important;
-  }
-
-  .home-hud__feed {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    transition: none !important;
-  }
-
-  .home-hud__feed--hit {
-    transform: none !important;
   }
 
   /* ------------------------------------------------------------------ *
-   * 5) RECENT 面板：关闭扫描线与状态点脉冲                               *
+   * 5) 最新文章面板：关闭扫描线与状态点脉冲                               *
    * ------------------------------------------------------------------ */
   .home-tx__inner::before,
   .home-tx__dot,
@@ -213,14 +190,13 @@
   }
 
   html.dark .VPNavBar,
-  html.dark .VPSidebar,
-  html.dark .VPFooter {
+  html.dark .VPSidebar {
     background: rgba(11, 15, 25, 0.98) !important;
   }
 
   html:not(.dark) .VPNavBar,
-  html:not(.dark) .VPSidebar,
-  html:not(.dark) .VPFooter {
+  html:not(.dark) .VPSidebar {
     background: rgba(255, 255, 255, 0.98) !important;
   }
+
 }

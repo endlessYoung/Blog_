@@ -1236,8 +1236,13 @@ html:not(.dark) {
       }
     },
     footer: {
-      message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2019-present <a href="https://github.com/endlessYoung">Endless Young</a>'
+      message:
+        '<span class="sf-row">' +
+        '<span class="sf-mit" title="MIT License">MIT</span>' +
+        '<span class="sf-rule" aria-hidden="true"></span>' +
+        '<span class="sf-copy">© 2019-present <a href="https://github.com/endlessYoung">Endless Young</a></span>' +
+        '</span>',
+      copyright: ''
     }
   }
 })

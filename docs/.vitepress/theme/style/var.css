@@ -278,8 +278,7 @@ html {
    Components (Sidebar, Navbar, Footer)
    ========================================= */
 .VPSidebar,
-.VPNavBar,
-.VPFooter {
+.VPNavBar {
   backdrop-filter: blur(20px) !important;
   transition: all 0.3s ease;
 }
@@ -295,13 +294,11 @@ html {
 }
 
 .VPFooter {
-  background-color: rgba(255, 255, 255, 0.7) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: none !important;
 }
 
 .dark .VPSidebar,
-.dark .VPNavBar,
-.dark .VPFooter {
+.dark .VPNavBar {
   background-color: rgba(30, 30, 32, 0.7) !important;
   border-color: rgba(255, 255, 255, 0.05);
 }
@@ -353,7 +350,7 @@ html {
    Link Animations - Fluid Gradient Underline (Global - Blue for Home)
    ========================================= */
 /* Target ALL links except Buttons and Social Icons - DEFAULT BLUE */
-a:not(.VPButton):not(.social-link):not(.VPSocialLink) {
+a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.home-cta__btn):not(.home-cat-card__more) {
   position: relative !important;
   text-decoration: none !important;
   color: var(--vp-c-primary);
@@ -361,7 +358,7 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink) {
 }
 
 /* The Magic Underline - Pseudo element */
-a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
+a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.home-cta__btn):not(.home-cat-card__more)::after {
   content: '' !important;
   position: absolute !important;
   width: 0 !important;
@@ -380,12 +377,12 @@ a:not(.VPButton):not(.social-link):not(.VPSocialLink)::after {
 }
 
 /* Hover State - Trigger Animation */
-a:not(.VPButton):not(.social-link):not(.VPSocialLink):hover::after {
+a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.home-cta__btn):not(.home-cat-card__more):hover::after {
   width: 100% !important;
 }
 
 /* Text Color Change on Hover */
-a:not(.VPButton):not(.social-link):not(.VPSocialLink):hover {
+a:not(.VPButton):not(.social-link):not(.VPSocialLink):not(.home-cta__btn):not(.home-cat-card__more):hover {
   color: var(--vp-c-primary-dark, #4752C4) !important;
 }
 

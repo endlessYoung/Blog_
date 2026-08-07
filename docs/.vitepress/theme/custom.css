@@ -1454,11 +1454,7 @@ html:not(.dark) .VPNavBar,
 
 
 
-html:not(.dark) .VPSidebar,
-
-
-
-html:not(.dark) .VPFooter {
+html:not(.dark) .VPSidebar {
 
 
 
@@ -1478,6 +1474,13 @@ html:not(.dark) .VPFooter {
 
 
 
+}
+
+/* Footer：通栏细带由 tech.css 着色；这里只禁止玻璃 */
+html:not(.dark) .VPFooter,
+html.dark .VPFooter {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 
@@ -1534,15 +1537,7 @@ html:not(.dark) .VPSidebar,
 
 
 
-html:not(.dark) .VPSidebar a,
-
-
-
-html:not(.dark) .VPFooter,
-
-
-
-html:not(.dark) .VPFooter :where(p, span, div, a) {
+html:not(.dark) .VPSidebar a {
 
 
 
@@ -1698,15 +1693,23 @@ html:not(.dark) .VPContent.is-home.hero-copy-sheen .VPHero .name.clip {
 
 
 
-  color: #f0f7ff !important;
+  color: rgba(148, 163, 184, 0.88) !important;
 
 
 
-  -webkit-text-fill-color: #f0f7ff !important;
+  -webkit-text-fill-color: rgba(148, 163, 184, 0.88) !important;
 
 
 
-  text-shadow: 0 0 24px rgba(0, 240, 255, 0.25);
+  text-shadow: none;
+
+
+
+  font-size: clamp(0.95rem, 1.55vw, 1.18rem);
+
+
+
+  font-weight: 450;
 
 
 
@@ -1734,59 +1737,43 @@ html:not(.dark) .VPContent.is-home.hero-copy-sheen .VPHero .text {
 
 
 
-  /* 浅色 slogan：深色→青→紫缓慢漂移，保持可读、无假暗霓虹 */
+  background: none !important;
 
 
 
-  background-image: linear-gradient(
+  -webkit-background-clip: border-box !important;
 
 
 
-    105deg,
+  background-clip: border-box !important;
 
 
 
-    #0f172a 0%,
+  color: #64748b !important;
 
 
 
-    #1e293b 30%,
-
-
-
-    #0e7490 62%,
-
-
-
-    #0f172a 100%
-
-
-
-  ) !important;
-
-
-
-  background-size: 260% 100% !important;
-
-
-
-  -webkit-background-clip: text !important;
-
-
-
-  background-clip: text !important;
-
-
-
-  color: transparent !important;
-
-
-
-  -webkit-text-fill-color: transparent !important;
+  -webkit-text-fill-color: #64748b !important;
 
 
 
   text-shadow: none !important;
+
+
+
+  filter: none !important;
+
+
+
+  animation: none !important;
+
+
+
+  font-size: clamp(0.95rem, 1.55vw, 1.18rem);
+
+
+
+  font-weight: 450;
 
 
 
@@ -1826,15 +1813,23 @@ html:not(.dark) .VPContent.is-home.hero-copy-tier .VPHero .text {
 
 
 
-  color: #0f172a !important;
+  color: #64748b !important;
 
 
 
-  -webkit-text-fill-color: #0f172a !important;
+  -webkit-text-fill-color: #64748b !important;
 
 
 
   text-shadow: none !important;
+
+
+
+  font-size: clamp(0.95rem, 1.55vw, 1.18rem);
+
+
+
+  font-weight: 450;
 
 
 
@@ -2018,15 +2013,19 @@ html:not(.dark) .VPContent.is-home .VPHero .main {
 
 
 
-  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%) !important;
+  background: linear-gradient(135deg, #0e7490 0%, #0891b2 100%) !important;
 
 
 
-  border: 1px solid #67e8f9 !important;
+  border: 1px solid rgba(103, 232, 249, 0.55) !important;
 
 
 
-  color: #020617 !important;
+  color: #ffffff !important;
+
+
+
+  -webkit-text-fill-color: #ffffff !important;
 
 
 
@@ -2082,42 +2081,14 @@ html:not(.dark) .home-landing .VPHero .VPButton.brand,
 
 
 
-html:not(.dark) .VPContent.is-home .VPHero .VPButton.brand,
-
-
-
-html:not(.dark) .home-landing .home-cta .VPButton.brand {
-
-
-
+html:not(.dark) .VPContent.is-home .VPHero .VPButton.brand {
   background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%) !important;
-
-
-
   border: 1px solid #0891b2 !important;
-
-
-
   color: #ffffff !important;
-
-
-
   box-shadow:
-
-
-
     0 0 14px rgba(8, 145, 178, 0.18),
-
-
-
     0 8px 24px rgba(8, 145, 178, 0.22),
-
-
-
     inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
-
-
-
 }
 
 
@@ -2202,7 +2173,11 @@ html:not(.dark) .VPButton.brand:hover {
 
 
 
-  color: #67e8f9 !important;
+  color: #ffffff !important;
+
+
+
+  -webkit-text-fill-color: #ffffff !important;
 
 
 
@@ -2246,19 +2221,23 @@ html:not(.dark) .VPContent.is-home .VPHero .VPButton.alt {
 
 
 
-  background: rgba(255, 255, 255, 0.92) !important;
+  background: linear-gradient(180deg, #164e63 0%, #0e7490 100%) !important;
 
 
 
-  border: 1px solid rgba(8, 145, 178, 0.35) !important;
+  border: 1px solid rgba(8, 145, 178, 0.4) !important;
 
 
 
-  color: #0f172a !important;
+  color: #ffffff !important;
 
 
 
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06) !important;
+  -webkit-text-fill-color: #ffffff !important;
+
+
+
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1) !important;
 
 
 
@@ -2638,7 +2617,23 @@ html:not(.dark) .VPFeature .icon {
 
 
 
-/* 首页 CTA / 专栏标题：浅色可读 */
+/* 首页 CTA / 专栏标题：深浅色都可读 */
+
+html.dark .home-sec-head__title {
+
+  color: #f8fafc !important;
+
+
+
+  -webkit-text-fill-color: #f8fafc !important;
+
+
+
+  opacity: 1 !important;
+
+
+
+}
 
 
 
@@ -2663,21 +2658,9 @@ html:not(.dark) .home-sec-head__title {
 
 
 html:not(.dark) .home-cta__card {
-
-
-
-  border: 1px solid rgba(8, 145, 178, 0.2) !important;
-
-
-
-  background: rgba(255, 255, 255, 0.9) !important;
-
-
-
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08) !important;
-
-
-
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  background: rgba(255, 255, 255, 0.55) !important;
+  box-shadow: none !important;
 }
 
 
@@ -3953,7 +3936,7 @@ html:not(.dark) .vp-doc :not(pre) > code {
 
   white-space: nowrap;
 
-  font-size: clamp(1.3rem, 2.2vw, 2.05rem);
+  font-size: clamp(0.95rem, 1.55vw, 1.18rem);
 
 }
 

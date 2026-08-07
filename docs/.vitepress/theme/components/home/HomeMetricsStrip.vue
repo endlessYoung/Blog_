@@ -2,10 +2,7 @@
   <section v-if="recent.length" class="home-tx" aria-label="最新文章">
     <div class="home-tx__inner">
       <div class="home-tx__head">
-        <span class="home-tx__frame" aria-hidden="true" />
         <span class="home-tx__dot" aria-hidden="true" />
-        <span class="home-tx__tag">RECENT TX</span>
-        <span class="home-tx__sep" aria-hidden="true">/</span>
         <span class="home-tx__label">最新文章</span>
         <span class="home-tx__meta">{{ recent.length }}</span>
       </div>
@@ -136,7 +133,7 @@ const recent = buildRecent(3)
   position: relative;
   z-index: 1;
   width: 100%;
-  margin: 18px auto 0;
+  margin: 18px auto 8px;
   padding: 0 24px;
   box-sizing: border-box;
 }
@@ -179,60 +176,34 @@ const recent = buildRecent(3)
   align-items: center;
   gap: 8px;
   margin-bottom: 10px;
-  padding: 7px 10px 7px 12px;
-  border: 1px solid rgba(34, 211, 238, 0.45);
-  background: rgba(4, 12, 22, 0.55);
-  box-shadow:
-    inset 0 0 20px rgba(34, 211, 238, 0.06),
-    0 0 12px rgba(34, 211, 238, 0.12);
-  font-family: var(--tech-font-mono, 'JetBrains Mono', ui-monospace, monospace);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  padding: 4px 2px 8px;
+  border: none;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.18);
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--tech-font-ui, ui-sans-serif, system-ui, sans-serif);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: rgba(148, 163, 184, 0.95);
 }
 
-.home-tx__frame {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(#67e8f9, #67e8f9) 0 0 / 8px 1.5px no-repeat,
-    linear-gradient(#67e8f9, #67e8f9) 0 0 / 1.5px 8px no-repeat,
-    linear-gradient(#67e8f9, #67e8f9) 100% 0 / 8px 1.5px no-repeat,
-    linear-gradient(#67e8f9, #67e8f9) 100% 0 / 1.5px 8px no-repeat,
-    linear-gradient(#67e8f9, #67e8f9) 0 100% / 8px 1.5px no-repeat,
-    linear-gradient(#67e8f9, #67e8f9) 0 100% / 1.5px 8px no-repeat,
-    linear-gradient(#67e8f9, #67e8f9) 100% 100% / 8px 1.5px no-repeat,
-    linear-gradient(#67e8f9, #67e8f9) 100% 100% / 1.5px 8px no-repeat;
-}
-
 .home-tx__dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   flex-shrink: 0;
   background: #22d3ee;
-  box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.55);
   animation: homeTxPulse 2s ease-in-out infinite;
 }
 
-.home-tx__tag {
-  color: #67e8f9;
-  font-weight: 800;
-  text-shadow: 0 0 12px rgba(34, 211, 238, 0.65);
-}
-
-.home-tx__sep {
-  color: #475569;
-  letter-spacing: 0;
-}
-
 .home-tx__label {
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   text-transform: none;
-  color: #94a3b8;
+  color: #e2e8f0;
   font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .home-tx__meta {
@@ -393,11 +364,9 @@ const recent = buildRecent(3)
   }
 
   :global(html.dark .home-tx__head) {
-    background: rgba(10, 24, 40, 0.88);
-    border-color: rgba(34, 211, 238, 0.55);
-    box-shadow:
-      inset 0 0 24px rgba(34, 211, 238, 0.1),
-      0 0 14px rgba(34, 211, 238, 0.16);
+    background: transparent;
+    border-color: rgba(34, 211, 238, 0.22);
+    box-shadow: none;
   }
 }
 
@@ -468,35 +437,14 @@ const recent = buildRecent(3)
 }
 
 :global(html:not(.dark) .home-tx__head) {
-  border-color: rgba(8, 145, 178, 0.28);
-  background: rgba(236, 246, 249, 0.95);
+  border-color: rgba(8, 145, 178, 0.18);
+  background: transparent;
   color: #64748b;
   box-shadow: none;
 }
 
-:global(html:not(.dark) .home-tx__frame) {
-  background:
-    linear-gradient(#0e7490, #0e7490) 0 0 / 8px 1.5px no-repeat,
-    linear-gradient(#0e7490, #0e7490) 0 0 / 1.5px 8px no-repeat,
-    linear-gradient(#0e7490, #0e7490) 100% 0 / 8px 1.5px no-repeat,
-    linear-gradient(#0e7490, #0e7490) 100% 0 / 1.5px 8px no-repeat,
-    linear-gradient(#0e7490, #0e7490) 0 100% / 8px 1.5px no-repeat,
-    linear-gradient(#0e7490, #0e7490) 0 100% / 1.5px 8px no-repeat,
-    linear-gradient(#0e7490, #0e7490) 100% 100% / 8px 1.5px no-repeat,
-    linear-gradient(#0e7490, #0e7490) 100% 100% / 1.5px 8px no-repeat;
-}
-
-:global(html:not(.dark) .home-tx__tag) {
-  color: #0e7490;
-  text-shadow: none;
-}
-
-:global(html:not(.dark) .home-tx__sep) {
-  color: #94a3b8;
-}
-
 :global(html:not(.dark) .home-tx__label) {
-  color: #475569;
+  color: #0f172a;
 }
 
 :global(html:not(.dark) .home-tx__meta) {

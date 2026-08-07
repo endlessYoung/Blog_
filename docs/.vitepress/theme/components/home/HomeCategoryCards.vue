@@ -21,7 +21,10 @@
           </li>
         </ul>
         <p v-else class="home-cat-card__empty">内容整理中，敬请期待…</p>
-        <a class="home-cat-card__more" :href="withBase(cat.link)">查看全部</a>
+        <a class="home-cat-card__more" :href="withBase(cat.link)">
+          <span class="home-cat-card__more-label">查看全部</span>
+          <span class="home-cat-card__more-arrow" aria-hidden="true">→</span>
+        </a>
       </article>
     </div>
   </section>
@@ -105,7 +108,10 @@ html:not(.dark) .home-cat-card {
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 .home-cat-card:hover {
-  transform: translateY(-3px);
+  transform:
+    translateY(calc(var(--cat-parallax-y, 0px) - 6px))
+    scale(calc(var(--cat-parallax-s, 1) * 1.02))
+    rotateX(var(--cat-parallax-rx, 0deg));
   border-color: rgba(34, 211, 238, 0.4);
 }
 html:not(.dark) .home-cat-card:hover {
@@ -219,7 +225,7 @@ html:not(.dark) .home-cat-card__count-unit {
 /* 链接列表 */
 .home-cat-card__list {
   list-style: none;
-  margin: 0;
+  margin: 0 0 16px;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -285,7 +291,7 @@ html:not(.dark) .home-cat-card__link:hover {
 /* 空卡占位 */
 .home-cat-card__empty {
   flex: 1 1 auto;
-  margin: 0;
+  margin: 0 0 16px;
   padding: 10px 8px;
   font-size: 0.85rem;
   color: #8b93a3;
@@ -294,24 +300,59 @@ html:not(.dark) .home-cat-card__empty {
   color: #64748b;
 }
 
-/* 查看全部 */
+/* 查看全部：紧凑描边按钮 */
 .home-cat-card__more {
-  margin-top: 16px;
+  margin-top: auto;
   align-self: flex-start;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #8b93a3;
-  text-decoration: none;
-  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  margin-block-start: auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  background: rgba(34, 211, 238, 0.08);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #67e8f9 !important;
+  -webkit-text-fill-color: #67e8f9 !important;
+  text-decoration: none !important;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
-html:not(.dark) .home-cat-card__more {
-  color: #64748b;
+.home-cat-card__more-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  font-size: 0.9em;
+  line-height: 1;
 }
 .home-cat-card__more:hover {
-  color: #22d3ee;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: rgba(103, 232, 249, 0.65);
+  background: rgba(14, 116, 144, 0.85);
+  transform: translateY(-1px);
+}
+.home-cat-card__more:hover .home-cat-card__more-arrow {
+  transform: translateX(3px);
+}
+html:not(.dark) .home-cat-card__more {
+  border-color: rgba(8, 145, 178, 0.35);
+  background: rgba(8, 145, 178, 0.08);
+  color: #0e7490 !important;
+  -webkit-text-fill-color: #0e7490 !important;
 }
 html:not(.dark) .home-cat-card__more:hover {
-  color: #0e7490;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: rgba(8, 145, 178, 0.55);
+  background: #0e7490;
 }
 
 /* 大卡 / 全宽卡：编号与标题更舒展 */
@@ -352,21 +393,17 @@ html:not(.dark) .home-cat-card__more:hover {
   }
 }
 
-/* 覆盖全局 a 链接色：深色白系、浅色深灰，hover 统一青 */
-.home-cat-cards .home-cat-card__link,
-.home-cat-cards .home-cat-card__more {
+/* 覆盖全局 a 链接色（文章行）；「查看全部」走上方按钮样式 */
+.home-cat-cards .home-cat-card__link {
   color: #e6e8ee !important;
 }
-html:not(.dark) .home-cat-cards .home-cat-card__link,
-html:not(.dark) .home-cat-cards .home-cat-card__more {
+html:not(.dark) .home-cat-cards .home-cat-card__link {
   color: #334155 !important;
 }
-.home-cat-cards .home-cat-card__link:hover,
-.home-cat-cards .home-cat-card__more:hover {
+.home-cat-cards .home-cat-card__link:hover {
   color: #22d3ee !important;
 }
-html:not(.dark) .home-cat-cards .home-cat-card__link:hover,
-html:not(.dark) .home-cat-cards .home-cat-card__more:hover {
+html:not(.dark) .home-cat-cards .home-cat-card__link:hover {
   color: #0e7490 !important;
 }
 

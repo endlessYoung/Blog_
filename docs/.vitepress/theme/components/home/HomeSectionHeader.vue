@@ -35,8 +35,10 @@
   font-size: clamp(1.22rem, 2.2vw, 1.45rem);
   font-weight: 650;
   letter-spacing: 0.04em;
-  color: #fafafa;
-  -webkit-text-fill-color: currentColor;
+  color: #f8fafc;
+  -webkit-text-fill-color: #f8fafc;
+  text-shadow: none;
+  opacity: 1;
 }
 
 .home-sec-head__rule {
@@ -47,8 +49,15 @@
 }
 </style>
 
-<!-- 勿用 :global(html:not(.dark)) 包属性：Vue 会误编译成整页 html 规则，锁死 -webkit-text-fill-color，浅色代码高亮全变灰 -->
+/* 勿用 :global(html:not(.dark)) 包属性：Vue 会误编译成整页 html 规则，锁死 -webkit-text-fill-color，浅色代码高亮全变灰 */
 <style>
+html.dark .home-sec-head__title,
+.dark .home-sec-head__title {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+  opacity: 1 !important;
+}
+
 html:not(.dark) .home-sec-head__title {
   color: #0f172a !important;
   -webkit-text-fill-color: currentColor !important;

@@ -799,64 +799,10 @@ onUnmounted(() => {
   }
 }
 
-/* 移动端：雷达缩小，扫描条沉底独立，避免叠在圆环上 */
+/* 小窗 / 移动端：整块雷达图隐藏 */
 @media (max-width: 959px) {
   .home-hud {
-    width: 100%;
-    max-width: 420px;
-    min-height: 0;
-    gap: 10px;
-  }
-
-  .home-hud__aura {
-    inset: 8% 18% 32% 18%;
-    /* 小屏减弱光晕 blur，避免雷达看起来发糊 */
-    filter: blur(14px);
-    opacity: 0.85;
-  }
-
-  .home-hud__svg {
-    width: min(72vw, 260px);
-    max-width: 260px;
-    margin: 0 auto;
-    flex: 0 0 auto;
-  }
-
-  .home-hud__feed {
-    position: relative;
-    left: auto;
-    right: auto;
-    bottom: auto;
-    width: 100%;
-    margin: 0;
-    padding: 12px 14px;
-  }
-
-  .home-hud__feed-title {
-    white-space: normal;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-size: 13px;
-    line-height: 1.45;
-  }
-
-  .home-hud__feed-tag,
-  .home-hud__feed-idx {
-    font-size: 11px;
-  }
-
-  .home-hud__feed-meta {
-    font-size: 11px;
-    flex-wrap: wrap;
-  }
-}
-
-@media (max-width: 479px) {
-  .home-hud__svg {
-    width: min(64vw, 220px);
-    max-width: 220px;
+    display: none !important;
   }
 }
 </style>
