@@ -14,3 +14,7 @@ CLAUDE.*
 .codex/
 .claude/
 .vscode/
+.agents/
+.cursor/
+AGENTS.md
+skills-lock.json
