@@ -8,7 +8,9 @@ pageClass: home-landing hero-copy-sheen
 
 hero:
   name: Endlessyoung
-  text: 这世界太大，勇敢的少年奔赴天涯！
+  text: |-
+    这世界太大，
+    勇敢的少年奔赴天涯！
   actions:
     - theme: brand
       text: 开始阅读

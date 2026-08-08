@@ -293,9 +293,12 @@ body:has(.home-landing) .tech-bg__vignette {
     mix-blend-mode: normal;
   }
 
+  /* 小屏关闭粒子（与 mobile.css 一致，避免首页条件样式把粒子重新点亮） */
   body:has(.VPContent.is-home) .tech-bg__particles,
   body:has(.home-landing) .tech-bg__particles {
-    opacity: 0.45;
+    display: none !important;
+    opacity: 0 !important;
+    animation: none !important;
   }
 
   /* 小屏大幅削弱扫描/噪点，避免「蒙一层膜」 */

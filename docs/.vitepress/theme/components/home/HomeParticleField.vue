@@ -15,9 +15,9 @@ const debugDot = DEBUG
 /** 首页粒子背景：完整粒子阵列，鼠标悬停/滑动处按物理特征疏散
  *  被疏散的粒子点亮炫彩颜色（HSV 动态色相），普通粒子保持克制配色
  *  物理：弹簧回位 + 阻尼 + 光标排斥力场；弱回弹让滑动留下尾迹
- *  降级：<960px / prefers-reduced-motion / 无 WebGL 时静默跳过
+ *  降级：≤960px / prefers-reduced-motion / 无 WebGL 时静默跳过
  */
-const MIN_WIDTH = 960
+const MOBILE_MQ = '(max-width: 960px)'
 const DPR_CAP = 2
 const ACCENT_RATIO = 0.06
 const STIFFNESS = 0.032   // 回位弹簧刚度（弱化，让疏散尾迹更持久）
@@ -41,7 +41,10 @@ interface Particle {
 let disposed = false
 let rafId = 0
 let running = false
-let cleanupFns: Array<() => void> = []
+/** 粒子运行期清理（resize / 进小屏时调用） */
+let runtimeCleanups: Array<() => void> = []
+/** 组件生命周期清理（仅 unmount） */
+let lifecycleCleanups: Array<() => void> = []
 
 let renderer: any = null
 let scene: any = null
@@ -73,9 +76,32 @@ function webglSupported(): boolean {
 
 function isEligible(): boolean {
   if (typeof window === 'undefined') return false
-  if (window.innerWidth < MIN_WIDTH) return false
+  // 与 mobile.css 断点一致：小屏彻底不启粒子
+  if (window.matchMedia(MOBILE_MQ).matches) return false
+  if (window.innerWidth <= 960) return false
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
   return true
+}
+
+/** 停掉粒子场；保留媒体查询监听以便回到大屏可重启 */
+function teardown(): void {
+  pause()
+  for (const fn of runtimeCleanups) fn()
+  runtimeCleanups = []
+  particles = []
+  posArray = null
+  activeArray = null
+  geometry = null
+  material = null
+  scene = null
+  camera = null
+  renderer = null
+  const canvas = canvasRef.value
+  if (canvas) {
+    canvas.width = 0
+    canvas.height = 0
+    canvas.style.display = 'none'
+  }
 }
 
 function currentPalette() {
@@ -114,11 +140,16 @@ function buildParticles(count: number): { xs: number[]; ys: number[] } {
 async function start(): Promise<void> {
   const canvas = canvasRef.value
   if (!canvas || disposed) return
-  if (!isEligible()) return
+  if (!isEligible()) {
+    canvas.style.display = 'none'
+    return
+  }
   if (!webglSupported()) return
+  if (renderer) return // 已在运行
 
   const THREE = await import('three')
-  if (disposed || !canvasRef.value) return // 懒加载期间可能已卸载
+  // 懒加载期间可能已卸载，或缩到小屏
+  if (disposed || !canvasRef.value || !isEligible()) return
 
   const palette = currentPalette()
   dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP)
@@ -128,6 +159,7 @@ async function start(): Promise<void> {
   canvas.height = Math.round(height * dpr)
   canvas.style.width = width + 'px'
   canvas.style.height = height + 'px'
+  canvas.style.display = ''
 
   renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'high-performance' })
   renderer.setPixelRatio(dpr)
@@ -245,6 +277,11 @@ async function start(): Promise<void> {
     mouseTarget.y = -9999
   }
   const onResize = () => {
+    if (!isEligible()) {
+      teardown()
+      return
+    }
+    if (!renderer || !camera || !material || !geometry) return
     const oldW = width
     const oldH = height
     width = window.innerWidth
@@ -302,7 +339,7 @@ async function start(): Promise<void> {
   window.addEventListener('pointerleave', onPointerLeave)
   window.addEventListener('resize', onResize)
   document.addEventListener('visibilitychange', onVisibility)
-  cleanupFns.push(() => {
+  runtimeCleanups.push(() => {
     window.removeEventListener('pointermove', onPointerMove)
     window.removeEventListener('pointerleave', onPointerLeave)
     window.removeEventListener('resize', onResize)
@@ -397,12 +434,23 @@ function resume() {
 
 onMounted(() => {
   void start()
+  const mq = window.matchMedia(MOBILE_MQ)
+  const onMq = () => {
+    if (!isEligible()) teardown()
+    else if (!renderer) void start()
+  }
+  if (typeof mq.addEventListener === 'function') mq.addEventListener('change', onMq)
+  else mq.addListener(onMq)
+  lifecycleCleanups.push(() => {
+    if (typeof mq.removeEventListener === 'function') mq.removeEventListener('change', onMq)
+    else mq.removeListener(onMq)
+  })
 })
 onBeforeUnmount(() => {
   disposed = true
-  pause()
-  for (const fn of cleanupFns) fn()
-  cleanupFns = []
+  teardown()
+  for (const fn of lifecycleCleanups) fn()
+  lifecycleCleanups = []
 })
 </script>
 

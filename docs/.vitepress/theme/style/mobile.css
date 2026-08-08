@@ -175,7 +175,8 @@
   .tech-bg__scan,
   .tech-bg__grain,
   .tech-bg__particles,
-  .tech-bg__floor {
+  .tech-bg__floor,
+  .home-particles {
     display: none !important;
   }
 

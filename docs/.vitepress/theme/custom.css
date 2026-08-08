@@ -1693,23 +1693,15 @@ html:not(.dark) .VPContent.is-home.hero-copy-sheen .VPHero .name.clip {
 
 
 
-  color: rgba(148, 163, 184, 0.88) !important;
+  font-size: clamp(1.12rem, 1.9vw, 1.42rem);
 
 
 
-  -webkit-text-fill-color: rgba(148, 163, 184, 0.88) !important;
+  font-weight: 560;
 
 
 
-  text-shadow: none;
-
-
-
-  font-size: clamp(0.95rem, 1.55vw, 1.18rem);
-
-
-
-  font-weight: 450;
+  /* 颜色由 tech.css sheen 规则提供，避免这里盖成灰字 */
 
 
 
@@ -1737,23 +1729,51 @@ html:not(.dark) .VPContent.is-home.hero-copy-sheen .VPHero .text {
 
 
 
-  background: none !important;
+  background-image: linear-gradient(
 
 
 
-  -webkit-background-clip: border-box !important;
+    105deg,
 
 
 
-  background-clip: border-box !important;
+    #0e7490 0%,
 
 
 
-  color: #64748b !important;
+    #0891b2 42%,
 
 
 
-  -webkit-text-fill-color: #64748b !important;
+    #06b6d4 78%,
+
+
+
+    #22d3ee 100%
+
+
+
+  ) !important;
+
+
+
+  background-size: 160% auto;
+
+
+
+  -webkit-background-clip: text !important;
+
+
+
+  background-clip: text !important;
+
+
+
+  color: transparent !important;
+
+
+
+  -webkit-text-fill-color: transparent !important;
 
 
 
@@ -1761,7 +1781,7 @@ html:not(.dark) .VPContent.is-home.hero-copy-sheen .VPHero .text {
 
 
 
-  filter: none !important;
+  filter: drop-shadow(0 0 8px rgba(8, 145, 178, 0.22));
 
 
 
@@ -1769,11 +1789,11 @@ html:not(.dark) .VPContent.is-home.hero-copy-sheen .VPHero .text {
 
 
 
-  font-size: clamp(0.95rem, 1.55vw, 1.18rem);
+  font-size: clamp(1.12rem, 1.9vw, 1.42rem);
 
 
 
-  font-weight: 450;
+  font-weight: 560;
 
 
 
@@ -1853,13 +1873,19 @@ html:not(.dark) .VPContent.is-home .VPHero .text::after {
 
 
 
-  /* 浅色保留极淡数据流下划线，强度由 tech.css 控制 */
+  content: none !important;
 
 
 
-  opacity: 0.4;
+  display: none !important;
 
 
+
+}
+
+.hero-underline {
+
+  display: none !important;
 
 }
 
@@ -3930,14 +3956,21 @@ html:not(.dark) .vp-doc :not(pre) > code {
 
 
 
-/* 标语自成一排：不主动折行，字号随视口缩放以保证放得下 */
+/* 标语：大屏由 tech.css 排成两行；小屏仍尽量单行缩放 */
 
 .VPHero .text {
 
   white-space: nowrap;
 
-  font-size: clamp(0.95rem, 1.55vw, 1.18rem);
+  font-size: clamp(1.12rem, 1.9vw, 1.42rem);
 
+}
+
+@media (min-width: 960px) {
+  .home-landing .VPHero.has-image .text,
+  .VPContent.is-home .VPHero.has-image .text {
+    white-space: pre-line;
+  }
 }
 
 
