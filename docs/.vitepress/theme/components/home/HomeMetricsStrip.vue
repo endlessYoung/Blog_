@@ -2,19 +2,19 @@
   <section v-if="recent.length" class="home-tx" aria-label="最新文章">
     <div class="home-tx__inner">
       <div class="home-tx__head">
-        <span class="home-tx__dot" aria-hidden="true" />
-        <span class="home-tx__label">最新文章</span>
-        <span class="home-tx__meta">{{ recent.length }}</span>
+        <div class="home-tx__head-row">
+          <span class="home-tx__label">最新文章</span>
+          <span class="home-tx__meta">{{ recent.length }}</span>
+        </div>
+        <div class="home-tx__rule" aria-hidden="true" />
       </div>
       <ul class="home-tx__list">
         <li v-for="(item, index) in recent" :key="item.href" class="home-tx__item">
           <a class="home-tx__link" :href="item.href" :title="item.title">
-            <span class="home-tx__status" aria-hidden="true" />
             <span class="home-tx__idx">{{ String(index + 1).padStart(2, '0') }}</span>
             <span class="home-tx__section">{{ item.section }}</span>
             <span class="home-tx__title">{{ item.title }}</span>
             <span class="home-tx__stamp">{{ item.stamp }}</span>
-            <span class="home-tx__go" aria-hidden="true">→</span>
           </a>
         </li>
       </ul>
@@ -128,7 +128,7 @@ const recent = buildRecent(3)
 </script>
 
 <style scoped>
-/* 独立面板：在主题大卡外，自有容器与层级 */
+/* 独立玻璃面板：对齐专栏卡气质 */
 .home-tx {
   position: relative;
   z-index: 1;
@@ -142,80 +142,53 @@ const recent = buildRecent(3)
   position: relative;
   max-width: 1152px;
   margin: 0 auto;
-  padding: 14px 16px 12px;
-  border: 1px solid rgba(34, 211, 238, 0.38);
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(10, 21, 36, 0.62) 0%, rgba(7, 16, 24, 0.58) 100%);
+  padding: 22px 24px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  background: rgba(16, 20, 30, 0.6);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 8px 28px rgba(0, 0, 0, 0.28);
-  overflow: hidden;
-}
-
-.home-tx__inner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0,
-    transparent 3px,
-    rgba(34, 211, 238, 0.05) 3px,
-    rgba(34, 211, 238, 0.05) 4px
-  );
-  animation: homeTxScan 7s linear infinite;
-  opacity: 0.7;
+    0 14px 36px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .home-tx__head {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-  padding: 4px 2px 8px;
-  border: none;
-  border-bottom: 1px solid rgba(34, 211, 238, 0.18);
-  background: transparent;
-  box-shadow: none;
-  font-family: var(--tech-font-ui, ui-sans-serif, system-ui, sans-serif);
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  text-transform: none;
-  color: rgba(148, 163, 184, 0.95);
+  margin-bottom: 14px;
 }
 
-.home-tx__dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  background: #22d3ee;
-  box-shadow: 0 0 6px rgba(34, 211, 238, 0.55);
-  animation: homeTxPulse 2s ease-in-out infinite;
+.home-tx__head-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .home-tx__label {
-  letter-spacing: 0.02em;
-  text-transform: none;
-  color: #e2e8f0;
-  font-weight: 600;
-  font-size: 0.95rem;
+  margin: 0;
+  font-family: var(--tech-font-ui, ui-sans-serif, system-ui, sans-serif);
+  font-size: clamp(1.22rem, 2.2vw, 1.45rem);
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  color: #f8fafc;
+  -webkit-text-fill-color: #f8fafc;
 }
 
 .home-tx__meta {
   margin-left: auto;
-  letter-spacing: 0.06em;
+  font-family: var(--tech-font-mono, 'JetBrains Mono', ui-monospace, monospace);
+  font-size: 0.78rem;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
   color: #64748b;
 }
 
+.home-tx__rule {
+  width: 48px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.55), rgba(34, 211, 238, 0.35), transparent);
+}
+
 .home-tx__list {
-  position: relative;
-  z-index: 1;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -226,73 +199,38 @@ const recent = buildRecent(3)
 
 .home-tx__link {
   display: grid;
-  grid-template-columns: 8px 1.8em 5.2em minmax(0, 1fr) auto auto;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 12px;
-  border-radius: 6px;
-  border: 1px solid transparent;
+  grid-template-columns: 1.8em 5.2em minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 4px;
+  border-radius: 0;
+  border: none;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease;
-}
-
-.home-tx__link:hover {
-  background: rgba(34, 211, 238, 0.12);
-  border-color: rgba(34, 211, 238, 0.28);
+  transition: color 0.25s ease;
 }
 
 .home-tx__link:focus-visible {
-  outline: 2px solid rgba(34, 211, 238, 0.75);
+  outline: 2px solid rgba(34, 211, 238, 0.55);
   outline-offset: 2px;
-}
-
-.home-tx__link:hover .home-tx__title {
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(34, 211, 238, 0.35);
-}
-
-.home-tx__link:hover .home-tx__go {
-  color: #67e8f9;
-  opacity: 1;
-  transform: translateX(2px);
-}
-
-.home-tx__status {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  justify-self: center;
-  background: #22d3ee;
-  box-shadow: 0 0 8px rgba(34, 211, 238, 0.85);
-  animation: homeTxPulse 2s ease-in-out infinite;
-}
-
-.home-tx__item:nth-child(2) .home-tx__status {
-  animation-delay: 0.35s;
-}
-
-.home-tx__item:nth-child(3) .home-tx__status {
-  animation-delay: 0.7s;
+  border-radius: 6px;
 }
 
 .home-tx__idx,
 .home-tx__section,
-.home-tx__stamp,
-.home-tx__go {
+.home-tx__stamp {
   font-family: var(--tech-font-mono, 'JetBrains Mono', ui-monospace, monospace);
-  font-size: 11px;
+  font-size: 0.78rem;
   letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
 }
 
 .home-tx__idx {
   color: #22d3ee;
   font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
+  opacity: 0.9;
+  text-align: right;
 }
 
 .home-tx__section {
@@ -306,85 +244,58 @@ const recent = buildRecent(3)
 
 .home-tx__title {
   min-width: 0;
-  font-family: var(--tech-font-mono, 'JetBrains Mono', ui-monospace, monospace);
-  font-size: 13.5px;
-  font-weight: 650;
-  line-height: 1.35;
-  color: #f8fafc;
+  font-family: var(--tech-font-ui, ui-sans-serif, system-ui, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.55;
+  color: #a3a8b5;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: color 0.15s ease;
+  background-image: linear-gradient(#22d3ee, #22d3ee);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition:
+    color 0.25s ease,
+    background-size 0.35s ease;
 }
 
 .home-tx__stamp {
   color: #64748b;
-  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
-.home-tx__go {
-  color: #475569;
-  opacity: 0.55;
-  transition:
-    color 0.15s ease,
-    opacity 0.15s ease,
-    transform 0.15s ease;
+.home-tx__link:hover .home-tx__title {
+  color: #22d3ee;
+  background-size: 100% 2px;
 }
 
-@keyframes homeTxPulse {
-  0%,
-  100% {
-    opacity: 0.35;
-    box-shadow: 0 0 4px rgba(34, 211, 238, 0.3);
-  }
-  50% {
-    opacity: 1;
-    box-shadow: 0 0 12px rgba(34, 211, 238, 0.95);
-  }
-}
-
-@keyframes homeTxScan {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 20px;
-  }
+/* 去掉全局 a::after 下划线，只留标题底线 */
+.home-tx__link::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
 }
 
 @media (max-width: 960px) {
   .home-tx {
     margin-top: 14px;
-    padding: 0 16px;
   }
 
   .home-tx__inner {
-    padding: 12px 12px 10px;
-  }
-
-  :global(html.dark .home-tx__head) {
-    background: transparent;
-    border-color: rgba(34, 211, 238, 0.22);
-    box-shadow: none;
+    padding: 18px 16px 14px;
   }
 }
 
 @media (max-width: 639px) {
   .home-tx__link {
-    grid-template-columns: 8px 1.8em minmax(0, 1fr) auto;
+    grid-template-columns: 1.8em minmax(0, 1fr) auto;
     grid-template-areas:
-      'status idx section stamp'
-      'status idx title title'
-      'status idx go go';
-    row-gap: 3px;
-    padding: 12px 10px;
-  }
-
-  .home-tx__status {
-    grid-area: status;
-    align-self: start;
-    margin-top: 6px;
+      'idx section stamp'
+      'idx title title';
+    row-gap: 4px;
+    padding: 10px 4px;
   }
 
   .home-tx__idx {
@@ -403,122 +314,85 @@ const recent = buildRecent(3)
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    font-size: 14px;
+    font-size: 0.95rem;
   }
 
   .home-tx__stamp {
     grid-area: stamp;
   }
-
-  .home-tx__go {
-    grid-area: go;
-    justify-self: start;
-    opacity: 0.8;
-  }
-}
-
-:global(html:not(.dark) .home-tx__inner) {
-  background: linear-gradient(180deg, #f0f9fb 0%, #e8f4f7 100%);
-  border-color: rgba(8, 145, 178, 0.26);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.85),
-    0 6px 20px rgba(15, 23, 42, 0.05);
-}
-
-:global(html:not(.dark) .home-tx__inner::before) {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0,
-    transparent 3px,
-    rgba(14, 116, 144, 0.035) 3px,
-    rgba(14, 116, 144, 0.035) 4px
-  );
-  opacity: 0.45;
-}
-
-:global(html:not(.dark) .home-tx__head) {
-  border-color: rgba(8, 145, 178, 0.18);
-  background: transparent;
-  color: #64748b;
-  box-shadow: none;
-}
-
-:global(html:not(.dark) .home-tx__label) {
-  color: #0f172a;
-}
-
-:global(html:not(.dark) .home-tx__meta) {
-  color: #64748b;
-}
-
-:global(html:not(.dark)) .home-tx__dot,
-:global(html:not(.dark)) .home-tx__status {
-  background: #0e7490;
-  box-shadow: none;
-  animation: homeTxPulseLight 2s ease-in-out infinite;
-}
-
-@keyframes homeTxPulseLight {
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-:global(html:not(.dark) .home-tx__idx) {
-  color: #0e7490;
-  text-shadow: none;
-}
-
-:global(html:not(.dark) .home-tx__section) {
-  color: #475569;
-}
-
-:global(html:not(.dark) .home-tx__title) {
-  color: #0f172a;
-}
-
-:global(html:not(.dark) .home-tx__stamp),
-:global(html:not(.dark) .home-tx__go) {
-  color: #64748b;
-}
-
-:global(html:not(.dark) .home-tx__link:hover) {
-  background: rgba(8, 145, 178, 0.09);
-  border-color: rgba(8, 145, 178, 0.22);
-}
-
-:global(html:not(.dark) .home-tx__link:hover .home-tx__title) {
-  color: #0e7490;
-  text-shadow: none;
-}
-
-:global(html:not(.dark) .home-tx__link:hover .home-tx__go) {
-  color: #0e7490;
-}
-
-:global(html:not(.dark) .home-tx__link:focus-visible) {
-  outline-color: rgba(8, 145, 178, 0.7);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-tx__dot,
-  .home-tx__status,
-  .home-tx__inner::before {
-    animation: none;
-  }
-
-  .home-tx__dot,
-  .home-tx__status {
-    opacity: 0.9;
-  }
-
-  .home-tx__link,
-  .home-tx__go {
+  .home-tx__title {
     transition: none;
+  }
+}
+</style>
+
+<style>
+html.dark .home-tx__label,
+.dark .home-tx__label {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+}
+
+html:not(.dark) .home-tx__inner {
+  border-color: rgba(8, 145, 178, 0.13);
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 14px 36px rgba(15, 23, 42, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+html:not(.dark) .home-tx__label {
+  color: #0f172a !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+html:not(.dark) .home-tx__meta {
+  color: #64748b;
+}
+
+html:not(.dark) .home-tx__rule {
+  background: linear-gradient(90deg, rgba(8, 145, 178, 0.5), rgba(8, 145, 178, 0.3), transparent);
+}
+
+html:not(.dark) .home-tx__idx {
+  color: #0e7490;
+}
+
+html:not(.dark) .home-tx__section {
+  color: #475569;
+}
+
+html:not(.dark) .home-tx__title {
+  color: #475569;
+  background-image: linear-gradient(#0e7490, #0e7490);
+}
+
+html:not(.dark) .home-tx__stamp {
+  color: #64748b;
+}
+
+html:not(.dark) .home-tx__link:hover .home-tx__title {
+  color: #0e7490;
+}
+
+html:not(.dark) .home-tx__link:focus-visible {
+  outline-color: rgba(8, 145, 178, 0.7);
+}
+
+@media (min-width: 640px) {
+  .home-tx {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media (min-width: 960px) {
+  .home-tx {
+    padding-left: 64px;
+    padding-right: 64px;
   }
 }
 </style>

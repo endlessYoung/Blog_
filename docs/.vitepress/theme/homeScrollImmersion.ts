@@ -3,7 +3,6 @@
  * --home-immersion：首屏/最新文章进度
  * --home-below：专栏标题进度
  * --cat-reveal：每张专栏卡独立进度（错落入场）
- * --home-cta：底部 CTA 进度
  * 小屏关闭，落到静态终态。
  */
 
@@ -53,7 +52,6 @@ export function initHomeScrollImmersion() {
     mobileFinalApplied = true
     html.style.setProperty('--home-immersion', '0')
     html.style.setProperty('--home-below', '1')
-    html.style.setProperty('--home-cta', '1')
     document.querySelectorAll<HTMLElement>('.home-cat-card').forEach((el) => {
       el.style.setProperty('--cat-reveal', '1')
     })
@@ -64,7 +62,6 @@ export function initHomeScrollImmersion() {
     if (!isOnVitePressHome()) {
       html.style.removeProperty('--home-immersion')
       html.style.removeProperty('--home-below')
-      html.style.removeProperty('--home-cta')
       clearCatReveals()
       mobileFinalApplied = false
       return
@@ -99,13 +96,6 @@ export function initHomeScrollImmersion() {
       card.style.setProperty('--cat-reveal', reveal.toFixed(4))
     })
 
-    const cta = document.querySelector('.VPContent.is-home .home-cta')
-    let ctaReveal = 0
-    if (cta) {
-      const enter = vh - cta.getBoundingClientRect().top
-      ctaReveal = smoothstep(vh * 0.02, vh * 0.52, enter)
-    }
-    html.style.setProperty('--home-cta', ctaReveal.toFixed(4))
   }
 
   const schedule = () => {
@@ -130,7 +120,6 @@ export function initHomeScrollImmersion() {
     if (raf) cancelAnimationFrame(raf)
     html.style.removeProperty('--home-immersion')
     html.style.removeProperty('--home-below')
-    html.style.removeProperty('--home-cta')
     clearCatReveals()
   }
 }

@@ -89,7 +89,7 @@ onBeforeUnmount(() => countObserver?.disconnect())
   padding: 24px 24px 20px;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.09);
-  background: rgba(16, 20, 30, 0.4);
+  background: rgba(16, 20, 30, 0.6);
   box-shadow:
     0 14px 36px rgba(0, 0, 0, 0.24),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);

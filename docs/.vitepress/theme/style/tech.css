@@ -1024,10 +1024,7 @@ html:not(.dark) .VPFeature:hover .icon {
   html:not(.dark) .VPContent.is-home .VPHero .VPButton.brand,
   .home-landing .VPHero .action:first-child::after,
   .VPContent.is-home .VPHero .action:first-child::after,
-  .home-metrics__dot,
-  .home-tx__dot,
-  .home-tx__status,
-  .home-tx__inner::before {
+  .home-metrics__dot {
     animation: none !important;
   }
 
@@ -1089,8 +1086,7 @@ html:not(.dark) .VPFeature:hover .icon {
   .VPContent.is-home .home-cat-cards,
   .VPContent.is-home .home-cat-card,
   .VPContent.is-home .VPFeatures,
-  .VPContent.is-home .VPFeature .box,
-  .VPContent.is-home .home-cta .home-cta__card {
+  .VPContent.is-home .VPFeature .box {
     transform: none !important;
     filter: none !important;
     opacity: 1 !important;
@@ -1103,13 +1099,14 @@ html:not(.dark) .VPFeature:hover .icon {
 }
 
 /* ????????? + ?? Hero ?? */
+/* 首页底部间距：CTA 已移除，只需收尾留白 */
 .home-landing .VPHome {
-  margin-bottom: 56px;
+  margin-bottom: 24px;
 }
 
 @media (min-width: 768px) {
   .home-landing .VPHome {
-    margin-bottom: 80px;
+    margin-bottom: 32px;
   }
 }
 
@@ -1145,8 +1142,28 @@ html:not(.dark) .VPFeature:hover .icon {
   display: flex !important;
   /* 随内容定高，勿 stretch 把 main 拉齐 image 造成底部空洞 */
   align-items: flex-start;
-  gap: clamp(20px, 4.5vw, 56px);
+  justify-content: center;
+  gap: 0;
   text-align: left !important;
+}
+
+/* 关闭外侧 HUD：journey 大卡为唯一主角 */
+.home-landing .VPHero.has-image .image,
+.VPContent.is-home .VPHero.has-image .image,
+.home-landing .VPHero.has-image .image-container,
+.VPContent.is-home .VPHero.has-image .image-container,
+.home-landing .VPHero.has-image .image-bg,
+.VPContent.is-home .VPHero.has-image .image-bg,
+.home-hud,
+.home-hero-image-off {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
 }
 
 .home-landing .VPHero.has-image .name,
@@ -1234,19 +1251,44 @@ html:not(.dark) .VPFeature:hover .icon {
   .home-landing .VPHero.has-image .main,
   .VPContent.is-home .VPHero.has-image .main {
     order: 1 !important;
-    /* 加大卡片：斜切双色分区（底色层裁切，按钮不裁） */
+    /* journey 大卡独占首屏：右区图幅加宽，约 44% */
     position: relative;
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 240px;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.95fr);
     align-items: stretch;
-    width: min(760px, 62vw);
-    max-width: min(760px, 100%);
-    min-height: min(328px, 42vh);
+    width: min(1080px, 94vw);
+    max-width: min(1080px, 100%);
+    min-height: min(360px, 46vh);
     height: auto;
-    align-self: flex-start;
+    align-self: center;
     flex-grow: 0;
+    margin-inline: auto;
     padding: 0;
     overflow: hidden;
+  }
+
+  /* 开场运镜：整卡轻推近 + 淡入（每次进入首页由 JS 挂 hero-cine / hero-cine--in） */
+  .home-landing .VPHero.has-image .main.hero-cine,
+  .VPContent.is-home .VPHero.has-image .main.hero-cine {
+    opacity: 0;
+    transform: scale(0.96);
+    transform-origin: center center;
+    will-change: transform, opacity;
+    transition: none;
+  }
+
+  .home-landing .VPHero.has-image .main.hero-cine.hero-cine--in,
+  .VPContent.is-home .VPHero.has-image .main.hero-cine.hero-cine--in {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      opacity 900ms cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 900ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .home-landing .VPHero.has-image .main.hero-cine.hero-cine--settled,
+  .VPContent.is-home .VPHero.has-image .main.hero-cine.hero-cine--settled {
+    will-change: auto;
   }
 
   .home-landing .VPHero.has-image .heading,
@@ -1291,23 +1333,17 @@ html:not(.dark) .VPFeature:hover .icon {
     display: none !important;
   }
 
-  /* 右侧内容层：透明，按钮不被裁切；在斜切区内垂直水平居中 */
+  /* 右侧：journey 插画斜切背景板 + 整区隐形链接 */
   .home-landing .VPHero.has-image .actions,
   .VPContent.is-home .VPHero.has-image .actions {
     position: relative;
     z-index: 2;
-    display: flex !important;
+    display: block !important;
     width: 100%;
     height: 100%;
     min-height: 100%;
     margin: 0 !important;
-    /* 左侧多留，躲开斜切；上下对称 padding 保证视觉中心 */
-    padding: 0 40px 0 56px !important;
-    flex-direction: column !important;
-    flex-wrap: nowrap !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 18px !important;
+    padding: 0 !important;
     box-sizing: border-box;
     border: none !important;
     border-radius: 0 !important;
@@ -1316,12 +1352,13 @@ html:not(.dark) .VPFeature:hover .icon {
     filter: none !important;
     background: transparent !important;
     box-shadow: none !important;
+    /* visible：斜切层向左伸出 132px；位移已取消，由 .main overflow:hidden 收边 */
     overflow: visible;
   }
 
   /*
-   * 右区斜切色块：只裁背景，形成落差；配色明显区别于左侧
-   * 顶边切入约 30%，底边贴齐 → / 向分割
+   * 右区斜切插画：cover 铺满，对焦少年与光路
+   * --hero-journey 由 theme 注入（含 base path）
    */
   .home-landing .VPHero.has-image .actions::after,
   .VPContent.is-home .VPHero.has-image .actions::after {
@@ -1336,46 +1373,138 @@ html:not(.dark) .VPFeature:hover .icon {
     pointer-events: none;
     clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
     -webkit-clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
-    background:
-      linear-gradient(
-        128deg,
-        rgba(8, 52, 68, 0.2) 0%,
-        #083344 22%,
-        #062636 58%,
-        #041820 100%
-      ) !important;
+    background-color: #062636;
+    background-image: var(--hero-journey, none);
+    background-repeat: no-repeat;
+    background-position: 38% 50%;
+    background-size: cover;
     box-shadow: none !important;
-    filter: drop-shadow(-16px 0 30px rgba(0, 0, 0, 0.5));
+    /* 外阴影改由主卡承担；避免 drop-shadow / 位移画出裁切盒 */
+    filter: none;
+    transition: filter 480ms ease;
   }
 
+  /*
+   * 阳光微曦层：悬停定格暖光（不呼吸、不上浮、无外扩阴影）
+   * 阅读示意：仅 cursor:pointer + 光影，无词条/图标
+   */
+  .home-landing .VPHero.has-image .actions::before,
+  .VPContent.is-home .VPHero.has-image .actions::before {
+    content: '' !important;
+    display: block !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -132px;
+    z-index: 1;
+    pointer-events: none;
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+    background:
+      radial-gradient(
+        ellipse 52% 58% at 78% 38%,
+        rgba(255, 236, 170, 0) 0%,
+        rgba(255, 220, 140, 0) 45%,
+        transparent 74%
+      );
+    box-shadow: inset 0 0 0 1px rgba(255, 236, 200, 0);
+    transition:
+      background 480ms ease,
+      box-shadow 480ms ease;
+  }
+
+  .home-landing .VPHero.has-image .actions:has(.VPButton:hover)::before,
+  .VPContent.is-home .VPHero.has-image .actions:has(.VPButton:hover)::before,
+  .home-landing .VPHero.has-image .main.hero-fx--right .actions::before,
+  .VPContent.is-home .VPHero.has-image .main.hero-fx--right .actions::before {
+    /* 双层微曦：核心暖点 + 外圈薄纱，定格不呼吸 */
+    background:
+      radial-gradient(
+        circle 28% at 80% 36%,
+        rgba(255, 248, 220, 0.28) 0%,
+        rgba(255, 230, 160, 0.1) 38%,
+        transparent 68%
+      ),
+      radial-gradient(
+        ellipse 62% 70% at 76% 40%,
+        rgba(255, 236, 190, 0.1) 0%,
+        rgba(255, 220, 150, 0.04) 48%,
+        transparent 74%
+      );
+    box-shadow: inset 0 0 0 1px rgba(255, 236, 200, 0.24);
+    transition:
+      background 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  /* 整幅微提亮后定格（微曦档，半档加强可读性） */
+  .home-landing .VPHero.has-image .actions:has(.VPButton:hover)::after,
+  .VPContent.is-home .VPHero.has-image .actions:has(.VPButton:hover)::after,
+  .home-landing .VPHero.has-image .main.hero-fx--right .actions::after,
+  .VPContent.is-home .VPHero.has-image .main.hero-fx--right .actions::after {
+    filter: brightness(1.055) saturate(1.08);
+    transition: filter 200ms ease;
+  }
+
+  /* 整区可点：链接铺满斜切几何，文字仅供无障碍 */
   .home-landing .VPHero.has-image .actions .action,
   .VPContent.is-home .VPHero.has-image .actions .action {
-    position: relative;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -132px;
     z-index: 2;
-    width: 156px;
-    flex: 0 0 auto;
+    width: auto;
     margin: 0;
+    padding: 0 !important;
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
   }
 
   .home-landing .VPHero.has-image .actions .VPButton,
-  .VPContent.is-home .VPHero.has-image .actions .VPButton {
-    position: relative;
-    z-index: 2;
-    width: 156px !important;
-    min-width: 156px !important;
-    max-width: 156px !important;
-    justify-content: center !important;
-    height: 48px !important;
-    min-height: 48px !important;
-    max-height: 48px !important;
-    padding: 0 20px !important;
-    font-size: 15px !important;
-    font-weight: 650 !important;
-    border-radius: 11px !important;
-    letter-spacing: 0.02em !important;
+  .home-landing .VPHero.has-image .actions .VPButton.brand,
+  .VPContent.is-home .VPHero.has-image .actions .VPButton,
+  .VPContent.is-home .VPHero.has-image .actions .VPButton.brand,
+  html:not(.dark) .home-landing .VPHero.has-image .actions .VPButton.brand,
+  html:not(.dark) .VPContent.is-home .VPHero.has-image .actions .VPButton.brand {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    transform: none !important;
+    filter: none !important;
   }
 
-  /* 竖排时隐藏两钮间横线 */
+  .home-landing .VPHero.has-image .actions .VPButton.brand:hover,
+  .VPContent.is-home .VPHero.has-image .actions .VPButton.brand:hover,
+  html:not(.dark) .home-landing .VPHero.has-image .actions .VPButton.brand:hover,
+  html:not(.dark) .VPContent.is-home .VPHero.has-image .actions .VPButton.brand:hover {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+    filter: none !important;
+    border: none !important;
+  }
+
   .home-landing .VPHero.has-image .action:first-child::after,
   .VPContent.is-home .VPHero.has-image .action:first-child::after {
     display: none !important;
@@ -1390,30 +1519,12 @@ html:not(.dark) .VPFeature:hover .icon {
     content: none !important;
   }
 
-  /* 去掉中缝斜线伪元素 */
-  .home-landing .VPHero.has-image .actions::before,
-  .VPContent.is-home .VPHero.has-image .actions::before {
-    content: none !important;
-    display: none !important;
-  }
-
-  .home-landing .VPHero.has-image .image,
-  .VPContent.is-home .VPHero.has-image .image {
-    order: 2 !important;
-  }
-
   .home-landing .VPHero.has-image .name {
     max-width: 100%;
   }
 
   .home-landing .VPHero.has-image .tagline {
     max-width: 38rem;
-  }
-
-  .home-landing .VPHero.has-image .image {
-    min-height: min(220px, 34vh);
-    display: flex;
-    align-items: center;
   }
 }
 
@@ -2113,14 +2224,13 @@ html.hero-copy-tier .VPContent.is-home .VPHero .tagline::after,
 
 /* -------------------------------------------------------------------------- */
 /* 大屏分层视差：纯 translateY（中等强度）                                      */
-/* Hero 最快退 → 最新文章中速 → 专栏稍慢浮起 → CTA 最慢                         */
+/* Hero 最快退 → 最新文章中速 → 专栏稍慢浮起                                      */
 /* 无 blur / 无强制淡入淡出；小屏由 mobile.css + JS 静态终态关闭                 */
 /* -------------------------------------------------------------------------- */
 
 html {
   --home-immersion: 0;
   --home-below: 0;
-  --home-cta: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -2235,16 +2345,6 @@ html {
       will-change: transform;
     }
 
-    /* CTA：最慢 */
-    .VPContent.is-home .home-cta {
-      position: relative;
-      z-index: 4;
-    }
-
-    .VPContent.is-home .home-cta .home-cta__card {
-      transform: translateY(calc((1 - var(--home-cta)) * 16px));
-      will-change: transform;
-    }
   }
 }
 
@@ -2517,36 +2617,34 @@ html:not(.dark) .VPContent.is-home .VPHero .actions {
 
   html:not(.dark) .home-landing .VPHero.has-image .actions::after,
   html:not(.dark) .VPContent.is-home .VPHero.has-image .actions::after {
+    background-color: #7ec8d6;
+    background-image: var(--hero-journey, none) !important;
+    background-repeat: no-repeat !important;
+    background-position: 38% 50% !important;
+    background-size: cover !important;
+    filter: none;
+  }
+
+  html:not(.dark) .home-landing .VPHero.has-image .actions:has(.VPButton:hover)::before,
+  html:not(.dark) .VPContent.is-home .VPHero.has-image .actions:has(.VPButton:hover)::before,
+  html:not(.dark) .home-landing .VPHero.has-image .main.hero-fx--right .actions::before,
+  html:not(.dark) .VPContent.is-home .VPHero.has-image .main.hero-fx--right .actions::before {
     background:
-      linear-gradient(
-        128deg,
-        rgba(165, 220, 232, 0.35) 0%,
-        #9fd4e4 20%,
-        #7ec4d8 55%,
-        #5eb0c9 100%
-      ) !important;
-    filter: drop-shadow(-14px 0 24px rgba(15, 23, 42, 0.12));
+      radial-gradient(
+        circle 28% at 80% 36%,
+        rgba(255, 248, 220, 0.24) 0%,
+        rgba(255, 230, 160, 0.08) 38%,
+        transparent 68%
+      ),
+      radial-gradient(
+        ellipse 62% 70% at 76% 40%,
+        rgba(255, 236, 190, 0.08) 0%,
+        rgba(255, 220, 150, 0.03) 48%,
+        transparent 74%
+      );
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
   }
 
-  html:not(.dark) .home-landing .VPHero.has-image .actions::before,
-  html:not(.dark) .VPContent.is-home .VPHero.has-image .actions::before {
-    content: none !important;
-    display: none !important;
-  }
-
-  html:not(.dark) .home-landing .VPHero.has-image .VPButton.alt,
-  html:not(.dark) .VPContent.is-home .VPHero.has-image .VPButton.alt {
-    color: #0e7490 !important;
-    -webkit-text-fill-color: #0e7490 !important;
-    border: 1px solid rgba(255, 255, 255, 0.65) !important;
-    background: rgba(255, 255, 255, 0.82) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
-  }
-
-  html:not(.dark) .home-landing .VPHero.has-image .VPButton.brand,
-  html:not(.dark) .VPContent.is-home .VPHero.has-image .VPButton.brand {
-    border-color: rgba(255, 255, 255, 0.35) !important;
-  }
 }
 
 html:not(.dark) .home-landing .VPHero .action:first-child::after,
@@ -2728,24 +2826,6 @@ html.dark .home-sec-head__title {
   opacity: 1 !important;
 }
 
-/* 浅色 CTA：轻面板，压过历史厚阴影规则 */
-html:not(.dark) .VPContent.is-home .home-cta__card,
-html:not(.dark) .home-landing .home-cta__card {
-  border: 1px solid rgba(15, 23, 42, 0.08) !important;
-  background: rgba(255, 255, 255, 0.55) !important;
-  box-shadow: none !important;
-}
-
-html:not(.dark) .VPContent.is-home .home-cta__title,
-html:not(.dark) .home-landing .home-cta__title {
-  color: #18181b !important;
-}
-
-html:not(.dark) .VPContent.is-home .home-cta__sub,
-html:not(.dark) .home-landing .home-cta__sub {
-  color: #52525b !important;
-}
-
 html:not(.dark) .VPNavBar a.VPNavBarMenuLink {
   color: #27272a !important;
 }
@@ -2774,3 +2854,312 @@ html:not(.dark) .VPFooter :where(p, span, div, a) {
 html:not(.dark) .VPFooter a:hover {
   color: #0f172a !important;
 }
+
+/* ==========================================================================
+ * Hero 左右分区 hover 动效（heroZoneFX.ts 注入图层，仅大屏）
+ * 左区：探照灯光斑 + 网格映现｜右区：斜缝跑光 + 电路纹理 + 按钮磁吸
+ * 舞台追光：hover 一侧时对侧亮度微降
+ * ========================================================================== */
+@media (min-width: 960px) {
+  /* —— 左区：探照灯光斑（径向光 + 更亮网格，同一光斑蒙版内显现）
+   * 半径 --fx-r 与强度 --fx-i 由 JS 随指针速度逐帧驱动（呼吸）
+   * 快进慢出：进入 160ms，离开 450ms —— */
+  .home-landing .VPHero.has-image .main > .hero-fx__spot,
+  .VPContent.is-home .VPHero.has-image .main > .hero-fx__spot {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 450ms ease;
+    background-image:
+      radial-gradient(
+        calc(var(--fx-r, 260px) + 44px) circle at var(--fx-x, 50%) var(--fx-y, 50%),
+        rgba(103, 232, 249, 0.12),
+        rgba(34, 211, 238, 0.05) 45%,
+        transparent 72%
+      ),
+      linear-gradient(rgba(34, 211, 238, 0.16) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34, 211, 238, 0.16) 1px, transparent 1px);
+    background-size:
+      auto,
+      20px 20px,
+      20px 20px;
+    -webkit-mask-image: radial-gradient(
+      var(--fx-r, 260px) circle at var(--fx-x, 50%) var(--fx-y, 50%),
+      #000 0%,
+      rgba(0, 0, 0, 0.45) 52%,
+      transparent 78%
+    );
+    mask-image: radial-gradient(
+      var(--fx-r, 260px) circle at var(--fx-x, 50%) var(--fx-y, 50%),
+      #000 0%,
+      rgba(0, 0, 0, 0.45) 52%,
+      transparent 78%
+    );
+  }
+
+  .home-landing .VPHero.has-image .main.hero-fx--left > .hero-fx__spot,
+  .VPContent.is-home .VPHero.has-image .main.hero-fx--left > .hero-fx__spot {
+    opacity: var(--fx-i, 1);
+    transition: opacity 160ms ease;
+  }
+
+  /* —— 右区图层几何：与色板 ::after 完全一致（盒向左扩 132px） —— */
+  .home-landing .VPHero.has-image .actions > .hero-fx__circuit,
+  .VPContent.is-home .VPHero.has-image .actions > .hero-fx__circuit,
+  .home-landing .VPHero.has-image .actions > .hero-fx__seam,
+  .VPContent.is-home .VPHero.has-image .actions > .hero-fx__seam {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -132px;
+    z-index: 1;
+    width: auto;
+    margin: 0;
+    pointer-events: none;
+    opacity: 0;
+    /* 快进慢出：离开 450ms 余韵 */
+    transition: opacity 450ms ease;
+  }
+
+  /* 电路纹理：正交走线 + 节点，hover 时淡入停留 */
+  .home-landing .VPHero.has-image .actions > .hero-fx__circuit,
+  .VPContent.is-home .VPHero.has-image .actions > .hero-fx__circuit {
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 35px,
+        rgba(103, 232, 249, 0.11) 35px 36px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 35px,
+        rgba(103, 232, 249, 0.11) 35px 36px
+      ),
+      radial-gradient(circle 1.6px at 18px 18px, rgba(165, 243, 252, 0.4), transparent 2.6px);
+    background-size:
+      auto,
+      auto,
+      72px 72px;
+  }
+
+  .home-landing .VPHero.has-image .main.hero-fx--right .actions > .hero-fx__circuit,
+  .VPContent.is-home .VPHero.has-image .main.hero-fx--right .actions > .hero-fx__circuit {
+    opacity: 0.55;
+    transition: opacity 180ms ease;
+  }
+
+  /* 斜缝：沿对角线的 3px 细带，hover 时静态微光 */
+  .home-landing .VPHero.has-image .actions > .hero-fx__seam,
+  .VPContent.is-home .VPHero.has-image .actions > .hero-fx__seam {
+    clip-path: polygon(30% 0, calc(30% + 3px) 0, 3px 100%, 0% 100%);
+    -webkit-clip-path: polygon(30% 0, calc(30% + 3px) 0, 3px 100%, 0% 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(103, 232, 249, 0.18) 0%,
+      rgba(103, 232, 249, 0.55) 50%,
+      rgba(34, 211, 238, 0.22) 100%
+    );
+    filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.55));
+  }
+
+  .home-landing .VPHero.has-image .main.hero-fx--right .actions > .hero-fx__seam,
+  .VPContent.is-home .VPHero.has-image .main.hero-fx--right .actions > .hero-fx__seam {
+    opacity: 1;
+    transition: opacity 180ms ease;
+  }
+
+  /* 跨缝闪光：右→左交接时斜缝短促亮一下（animation 优先于 transition） */
+  .hero-fx__seam.is-flash {
+    animation: heroSeamFlash 340ms ease-out;
+  }
+
+  @keyframes heroSeamFlash {
+    0% {
+      opacity: 0;
+    }
+    28% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* 跑光：进入右区时沿斜缝奔跑一次（元素被裁成细带，横向光条即呈现为缝上光段） */
+  .hero-fx__seam > .hero-fx__runner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 34%;
+    display: block;
+    transform: translateY(-120%);
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(165, 243, 252, 0.95) 50%,
+      transparent 100%
+    );
+  }
+
+  .hero-fx__seam.is-run > .hero-fx__runner {
+    animation: heroSeamRun 700ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+
+  @keyframes heroSeamRun {
+    from {
+      transform: translateY(-120%);
+    }
+    to {
+      transform: translateY(330%);
+    }
+  }
+
+  /* —— 舞台追光：对侧亮度微降 6%（快进慢出） —— */
+  .home-landing .VPHero.has-image .heading,
+  .VPContent.is-home .VPHero.has-image .heading,
+  .home-landing .VPHero.has-image .actions,
+  .VPContent.is-home .VPHero.has-image .actions {
+    transition: filter 450ms ease;
+  }
+
+  .home-landing .VPHero.has-image .main.hero-fx--left .actions,
+  .VPContent.is-home .VPHero.has-image .main.hero-fx--left .actions {
+    filter: brightness(0.94) !important;
+    transition: filter 180ms ease;
+  }
+
+  .home-landing .VPHero.has-image .main.hero-fx--right .heading,
+  .VPContent.is-home .VPHero.has-image .main.hero-fx--right .heading {
+    filter: brightness(0.94);
+    transition: filter 180ms ease;
+  }
+
+  /* —— 按钮磁吸：JS 逐帧写 translate（不声明 transition，弹性归位由 JS 内联控制） —— */
+  .home-landing .VPHero.has-image .main.hero-fx .actions .VPButton,
+  .VPContent.is-home .VPHero.has-image .main.hero-fx .actions .VPButton {
+    will-change: translate;
+    overflow: hidden;
+  }
+
+  /* —— 命中层次：光标压到主按钮上时一道斜向 sheen 扫光（一次性） —— */
+  .home-landing .VPHero.has-image .main.hero-fx .actions .VPButton.brand::after,
+  .VPContent.is-home .VPHero.has-image .main.hero-fx .actions .VPButton.brand::after {
+    content: '' !important;
+    display: block !important;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -70%;
+    width: 50%;
+    pointer-events: none;
+    transform: skewX(-20deg) translateX(-140%);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.26) 50%,
+      transparent 100%
+    );
+  }
+
+  .home-landing .VPHero.has-image .main.hero-fx .actions .VPButton.brand:hover::after,
+  .VPContent.is-home .VPHero.has-image .main.hero-fx .actions .VPButton.brand:hover::after {
+    animation: heroBtnSheen 600ms ease forwards;
+  }
+
+  @keyframes heroBtnSheen {
+    to {
+      transform: skewX(-20deg) translateX(520%);
+    }
+  }
+
+  /* —— 浅色模式：青蓝系压低亮度差 —— */
+  html:not(.dark) .home-landing .VPHero.has-image .main > .hero-fx__spot,
+  html:not(.dark) .VPContent.is-home .VPHero.has-image .main > .hero-fx__spot {
+    background-image:
+      radial-gradient(
+        calc(var(--fx-r, 260px) + 44px) circle at var(--fx-x, 50%) var(--fx-y, 50%),
+        rgba(8, 145, 178, 0.1),
+        rgba(8, 145, 178, 0.04) 45%,
+        transparent 72%
+      ),
+      linear-gradient(rgba(8, 145, 178, 0.14) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(8, 145, 178, 0.14) 1px, transparent 1px);
+  }
+
+  html:not(.dark) .home-landing .VPHero.has-image .actions > .hero-fx__circuit,
+  html:not(.dark) .VPContent.is-home .VPHero.has-image .actions > .hero-fx__circuit {
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0 35px,
+        rgba(14, 116, 144, 0.16) 35px 36px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 35px,
+        rgba(14, 116, 144, 0.16) 35px 36px
+      ),
+      radial-gradient(circle 1.6px at 18px 18px, rgba(14, 116, 144, 0.42), transparent 2.6px);
+  }
+
+  html:not(.dark) .home-landing .VPHero.has-image .actions > .hero-fx__seam,
+  html:not(.dark) .VPContent.is-home .VPHero.has-image .actions > .hero-fx__seam {
+    background: linear-gradient(
+      180deg,
+      rgba(14, 116, 144, 0.22) 0%,
+      rgba(8, 145, 178, 0.6) 50%,
+      rgba(14, 116, 144, 0.25) 100%
+    );
+    filter: drop-shadow(0 0 5px rgba(8, 145, 178, 0.4));
+  }
+
+  html:not(.dark) .hero-fx__seam > .hero-fx__runner {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(224, 250, 255, 0.95) 50%,
+      transparent 100%
+    );
+  }
+
+  html:not(.dark) .home-landing .VPHero.has-image .main.hero-fx--left .actions,
+  html:not(.dark) .VPContent.is-home .VPHero.has-image .main.hero-fx--left .actions {
+    filter: brightness(0.96) !important;
+  }
+
+  html:not(.dark) .home-landing .VPHero.has-image .main.hero-fx--right .heading,
+  html:not(.dark) .VPContent.is-home .VPHero.has-image .main.hero-fx--right .heading {
+    filter: brightness(0.96);
+  }
+}
+
+/* reduced-motion：禁用右区运动；提示文案仍可静态显现 */
+@media (prefers-reduced-motion: reduce) {
+  .hero-fx__spot,
+  .home-landing .VPHero.has-image .actions,
+  .VPContent.is-home .VPHero.has-image .actions,
+  .home-landing .VPHero.has-image .actions::before,
+  .home-landing .VPHero.has-image .actions::after,
+  .VPContent.is-home .VPHero.has-image .actions::before,
+  .VPContent.is-home .VPHero.has-image .actions::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .home-landing .VPHero.has-image .main.hero-cine,
+  .VPContent.is-home .VPHero.has-image .main.hero-cine,
+  .home-landing .VPHero.has-image .main.hero-cine.hero-cine--in,
+  .VPContent.is-home .VPHero.has-image .main.hero-cine.hero-cine--in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+}
+

@@ -33,9 +33,7 @@
   .VPContent.is-home .home-cat-card,
   .VPContent.is-home .VPFeatures,
   .VPContent.is-home .VPFeature,
-  .VPContent.is-home .VPFeature .box,
-  .VPContent.is-home .home-cta,
-  .VPContent.is-home .home-cta .home-cta__card {
+  .VPContent.is-home .VPFeature .box {
     transform: none !important;
     opacity: 1 !important;
     filter: none !important;
@@ -157,16 +155,7 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * 5) 最新文章面板：关闭扫描线与状态点脉冲                               *
-   * ------------------------------------------------------------------ */
-  .home-tx__inner::before,
-  .home-tx__dot,
-  .home-tx__status {
-    animation: none !important;
-  }
-
-  /* ------------------------------------------------------------------ *
-   * 6) 科技背景：只留静态渐变 + 网格，关闭发光/glitch/粒子/扫描/噪点       *
+   * 5) 科技背景：只留静态渐变 + 网格，关闭发光/glitch/粒子/扫描/噪点       *
    * ------------------------------------------------------------------ */
   .tech-bg__glow,
   .tech-bg__glow--left,
@@ -181,7 +170,7 @@
   }
 
   /* ------------------------------------------------------------------ *
-   * 7) 导航/侧栏/页脚：去掉 backdrop-filter，改用实底，避免滚动闪烁       *
+   * 6) 导航/侧栏/页脚：去掉 backdrop-filter，改用实底，避免滚动闪烁       *
    * ------------------------------------------------------------------ */
   .VPNavBar,
   .VPSidebar,
