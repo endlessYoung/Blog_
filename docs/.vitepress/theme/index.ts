@@ -34,6 +34,7 @@ import TocToggle from './components/TocToggle.vue'
 import HomeCategoryCards from './components/home/HomeCategoryCards.vue'
 import HomeMetricsStrip from './components/home/HomeMetricsStrip.vue'
 import HomeSectionHeader from './components/home/HomeSectionHeader.vue'
+import SiteNotFound from './components/SiteNotFound.vue'
 // 存储滚动位置
 const scrollPositions: Record<string, number> = {}
 
@@ -215,6 +216,7 @@ export default {
       return () => [
         h(Theme.Layout, null, {
         'layout-top': () => h(frontmatter.value.layout === 'home' ? HomeParticleField : TechBackground),
+        'not-found': () => h(SiteNotFound),
         'nav-bar-title-before': () => h(SidebarToggle),
         'nav-bar-title-after': () => h(NavBrandTitle),
         'nav-bar-content-after': () => h(TocToggle),
