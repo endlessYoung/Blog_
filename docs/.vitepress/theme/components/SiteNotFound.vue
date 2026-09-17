@@ -1,22 +1,28 @@
 <template>
-  <section class="nf" aria-labelledby="nf-title">
+  <section class="nf" :class="{ 'nf--motion': motionReady }" aria-labelledby="nf-title">
     <div class="nf__scene" aria-hidden="true">
-      <img
-        class="nf__art nf__art--light"
-        :src="lightArt"
-        alt=""
-        width="1920"
-        height="1080"
-        decoding="async"
-      />
-      <img
-        class="nf__art nf__art--dark"
-        :src="darkArt"
-        alt=""
-        width="1920"
-        height="1080"
-        decoding="async"
-      />
+      <div class="nf__stage">
+        <img
+          class="nf__art nf__art--light"
+          :src="lightArt"
+          alt=""
+          width="1280"
+          height="720"
+          decoding="async"
+        />
+        <img
+          class="nf__art nf__art--dark"
+          :src="darkArt"
+          alt=""
+          width="1280"
+          height="720"
+          decoding="async"
+        />
+        <div class="nf__cat">
+          <img class="nf__cat-tail" :src="tailArt" alt="" width="379" height="174" decoding="async" />
+          <img class="nf__cat-body" :src="catArt" alt="" width="301" height="464" decoding="async" />
+        </div>
+      </div>
     </div>
 
     <div class="nf__content">
@@ -51,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useData, useRoute, withBase } from 'vitepress'
 
 interface HomeCategory {
@@ -70,8 +76,11 @@ const FALLBACK_DIRS: HomeCategory[] = [
 
 const route = useRoute()
 const { theme } = useData()
-const lightArt = withBase('/404-desk-light.png')
-const darkArt = withBase('/404-desk-dark.png')
+const lightArt = withBase('/404-scene-light.png')
+const darkArt = withBase('/404-scene-dark.png')
+const catArt = withBase('/404-cat.png')
+const tailArt = withBase('/404-cat-tail.png')
+const motionReady = ref(false)
 
 const dirs = computed(() => {
   const cats = theme.value.homeCategories as HomeCategory[] | undefined
@@ -93,6 +102,9 @@ const lostPath = computed(() => {
 
 onMounted(() => {
   document.querySelector('.Layout')?.classList.add('site-not-found')
+  requestAnimationFrame(() => {
+    motionReady.value = true
+  })
 })
 onUnmounted(() => {
   document.querySelector('.Layout')?.classList.remove('site-not-found')
@@ -112,21 +124,108 @@ onUnmounted(() => {
 .nf__scene {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
+  overflow: hidden;
   pointer-events: none;
 }
 
+.nf__stage {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  aspect-ratio: 16 / 9;
+  height: 100%;
+  width: auto;
+  transform: translate3d(0, -50%, 0);
+}
+
+@media (min-aspect-ratio: 16 / 9) {
+  .nf__stage {
+    width: 100%;
+    height: auto;
+  }
+}
+
 .nf__art {
-  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: right center;
+  object-fit: fill;
+  opacity: 0;
+  transform: translateZ(0);
+}
+
+.nf--motion .nf__art {
+  transition: opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nf__cat {
+  position: absolute;
+  left: 58.6%;
+  top: 38.8%;
+  z-index: 3;
+  width: 11%;
+}
+
+.nf__cat-body,
+.nf__cat-tail {
+  display: block;
+}
+
+.nf__cat-body {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  transform-origin: 52% 86%;
+  will-change: transform;
+}
+
+.nf__cat-tail {
+  position: absolute;
+  z-index: 1;
+  left: -52%;
+  bottom: 4%;
+  width: 96%;
+  height: auto;
+  transform-origin: 88% 42%;
+  will-change: transform;
+}
+
+.nf--motion .nf__cat-body {
+  animation: nf-cat-breathe 6.4s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+.nf--motion .nf__cat-tail {
+  animation: nf-cat-wag 5.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@keyframes nf-cat-breathe {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scaleY(1);
+  }
+  50% {
+    transform: translate3d(0, -1.6%, 0) scaleY(1.018);
+  }
+}
+
+@keyframes nf-cat-wag {
+  0%,
+  100% {
+    transform: rotate(8deg);
+  }
+  50% {
+    transform: rotate(-16deg);
+  }
 }
 
 .nf__content {
   position: relative;
-  z-index: 1;
+  z-index: 4;
   width: min(34rem, 100%);
   padding: 28px 20px 40px;
 }
@@ -296,30 +395,29 @@ onUnmounted(() => {
 
 @media (max-width: 767px) {
   .nf {
-    flex-direction: column;
     align-items: stretch;
-    min-height: 0;
   }
 
-  .nf__scene {
-    position: relative;
-    height: min(42vw, 280px);
-    min-height: 200px;
-  }
-
-  .nf__art {
-    object-position: 82% 58%;
+  .nf__cat {
+    left: 56.8%;
+    top: 39%;
+    width: 18%;
   }
 
   .nf__content {
     width: 100%;
-    padding: 8px 20px 36px;
+    padding: 20px 20px 40px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .nf--motion .nf__art,
+  .nf--motion .nf__cat-body,
+  .nf--motion .nf__cat-tail,
   .nf a.nf__home:active,
   .nf a.nf__chip:active {
+    transition: none;
+    animation: none;
     transform: none;
   }
 }
@@ -333,30 +431,31 @@ onUnmounted(() => {
   display: none;
 }
 
+body:has(.nf),
+body:has(.Layout.site-not-found) {
+  background-image: none !important;
+  background-color: #0b1220 !important;
+}
+
+html:not(.dark) body:has(.nf),
+html:not(.dark) body:has(.Layout.site-not-found) {
+  background-color: #f4efe6 !important;
+}
+
 .Layout.site-not-found {
   background: #0b1220;
+  transition: background-color 400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .Layout.site-not-found .VPContent {
   display: flex;
   flex-direction: column;
+  padding-top: 0;
 }
 
-@media (min-width: 960px) {
-  .Layout.site-not-found .VPContent {
-    padding-top: 0;
-  }
-
-  .Layout.site-not-found .nf {
-    min-height: 100dvh;
-    padding-top: var(--vp-nav-height, 64px);
-  }
-}
-
-@media (max-width: 959px) {
-  .Layout.site-not-found .VPContent {
-    padding-top: var(--vp-nav-height, 64px);
-  }
+.Layout.site-not-found .nf {
+  min-height: 100dvh;
+  padding-top: var(--vp-nav-height, 64px);
 }
 
 .Layout.site-not-found .VPFooter {
@@ -369,7 +468,23 @@ html:not(.dark) .Layout.site-not-found {
 
 html:not(.dark) .nf__art--light,
 html.dark .nf__art--dark {
-  display: block;
+  opacity: 1;
+}
+
+html:not(.dark) .nf__cat-body {
+  filter: drop-shadow(0 10px 12px rgba(40, 28, 16, 0.22));
+}
+
+html.dark .nf__cat {
+  filter: brightness(0.8) saturate(0.94);
+}
+
+html.dark .nf__cat-body {
+  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.5));
+}
+
+.nf--motion .nf__cat {
+  transition: filter 400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html:not(.dark) .nf__code {
@@ -426,11 +541,24 @@ html:not(.dark) .nf a.nf__chip:focus-visible {
 
 @media (max-width: 767px) {
   html:not(.dark) .nf__content {
-    background: #f4efe6;
+    background: linear-gradient(180deg, rgba(244, 239, 230, 0.82) 0%, rgba(244, 239, 230, 0.18) 100%);
   }
 
   html.dark .nf__content {
-    background: #0b1220;
+    background: linear-gradient(180deg, rgba(11, 18, 32, 0.76) 0%, rgba(11, 18, 32, 0.16) 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .Layout.site-not-found {
+    transition: none;
+  }
+
+  .nf--motion .nf__art,
+  .nf--motion .nf__cat-body,
+  .nf--motion .nf__cat-tail {
+    transition: none !important;
+    animation: none !important;
   }
 }
 

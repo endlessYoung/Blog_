@@ -5,8 +5,10 @@ import './style/tech.css'
 import './style/vp-code-group.css'
 import './custom.css'
 import './style/mobile.css'
+import './style/appearance-transition.css'
 
 import { h, onMounted, onUnmounted, nextTick, watch } from 'vue'
+import { provideAnimatedAppearanceToggle } from './appearanceTransition'
 import { initCardTilt } from './cardTilt'
 import { initHomeScrollImmersion } from './homeScrollImmersion'
 import { initNavScreenScrollLock } from './navScreenScrollLock'
@@ -43,7 +45,22 @@ export default {
   Layout: {
     setup() {
       const route = useRoute()
-      const { frontmatter } = useData()
+      const { frontmatter, isDark, page } = useData()
+      provideAnimatedAppearanceToggle(
+        isDark,
+        () => page.value.isNotFound || frontmatter.value.pageClass === 'site-not-found',
+      )
+
+      const syncNotFoundLayout = () => {
+        if (typeof document === 'undefined') return
+        const on = !!(page.value.isNotFound || frontmatter.value.pageClass === 'site-not-found')
+        document.querySelector('.Layout')?.classList.toggle('site-not-found', on)
+      }
+      watch(
+        () => [page.value.isNotFound, frontmatter.value.pageClass] as const,
+        () => nextTick(syncNotFoundLayout),
+        { flush: 'post', immediate: true },
+      )
 
       // 保存滚动位置
       onMounted(() => {
