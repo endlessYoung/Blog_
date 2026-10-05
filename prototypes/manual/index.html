@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark" data-accent="orange">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Endlessyoung · 技术参考手册（改版演示）</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- 网格：基础层 + 光标附近的高亮层 -->
+  <div class="grid-layer" aria-hidden="true"><div class="wrap grid-cols" id="gridBase"></div></div>
+  <div class="grid-layer grid-glow" aria-hidden="true"><div class="wrap grid-cols" id="gridGlow"></div></div>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <button class="brand" data-action="home">
+        <span class="brand-mark">EY</span>
+        <span class="brand-text">ENDLESSYOUNG<span class="brand-sub">/ MANUAL</span></span>
+      </button>
+      <nav class="topnav" aria-label="主导航">
+        <a href="#contents" class="u-link">目录</a>
+        <a href="#figures" class="u-link">图集</a>
+        <a href="#changelog" class="u-link">日志</a>
+        <a href="#index" class="u-link">索引</a>
+      </nav>
+      <div class="tools">
+        <button class="search-btn" data-action="palette">
+          <span>搜索</span><kbd>Ctrl K</kbd>
+        </button>
+        <button class="icon-btn" data-action="accent" title="切换强调色（橙 / 蓝）" aria-label="切换强调色">
+          <span class="accent-dot"></span>
+        </button>
+        <button class="icon-btn" data-action="theme" title="切换明暗" aria-label="切换明暗">
+          <span class="theme-glyph"></span>
+        </button>
+        <button class="icon-btn mono-btn" data-action="replay" title="重播开场">REPLAY</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- ================= 首页 ================= -->
+    <section id="view-index" class="view">
+      <section class="masthead wrap">
+        <div class="mh-meta mono">
+          <span>VOL.2026 · 技术参考手册</span>
+          <span>最后更新 <span class="odo" data-value="2026"></span>-<span class="odo" data-value="10"></span>-<span class="odo" data-value="04"></span></span>
+        </div>
+        <h1 class="mh-title" id="mhTitle" aria-label="ENDLESSYOUNG">ENDLESSYOUNG</h1>
+        <div class="mh-foot">
+          <p class="mh-lede">Android、Java 与 AI 的原理笔记。<br />写给想弄懂“为什么”的工程师。</p>
+          <dl class="mh-stats">
+            <div><dt class="mono">ARTICLES</dt><dd><span class="odo" data-value="334"></span></dd></div>
+            <div><dt class="mono">PARTS</dt><dd><span class="odo" data-value="05"></span></dd></div>
+            <div><dt class="mono">CHAPTERS</dt><dd><span class="odo" id="chapCount" data-value="12"></span></dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section id="contents" class="block wrap">
+        <header class="block-head">
+          <span class="mono block-num">§ A</span>
+          <h2>目录</h2>
+          <p class="block-desc">点击某一部分展开章节，悬停文章可在右侧预览。键盘上下键也能操作。</p>
+        </header>
+        <div class="contents-grid">
+          <div class="parts" id="parts"></div>
+          <aside class="flap" aria-live="polite">
+            <div class="flap-label mono">PREVIEW</div>
+            <div class="flap-stage" id="flapStage"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="figures" class="block wrap">
+        <header class="block-head">
+          <span class="mono block-num">§ B</span>
+          <h2>图集</h2>
+          <p class="block-desc">站内可交互讲解的缩略版。按住拖动浏览，点击进入文章。</p>
+        </header>
+      </section>
+      <div class="gallery" id="gallery">
+        <div class="gallery-track" id="galleryTrack"></div>
+      </div>
+
+      <section id="changelog" class="block wrap">
+        <header class="block-head">
+          <span class="mono block-num">§ C</span>
+          <h2>更新日志</h2>
+        </header>
+        <ol class="log" id="log"></ol>
+      </section>
+
+      <section id="index" class="block wrap">
+        <header class="block-head">
+          <span class="mono block-num">§ D</span>
+          <h2>索引</h2>
+          <p class="block-desc">按概念查找。悬停条目可以预览对应文章。</p>
+        </header>
+        <div class="terms" id="terms"></div>
+      </section>
+
+      <footer class="foot wrap mono">
+        <span>© 2019–2026 ENDLESS YOUNG</span>
+        <span>改版演示原型 · 不代表最终内容</span>
+      </footer>
+    </section>
+
+    <!-- ================= 文章页 ================= -->
+    <section id="view-article" class="view" hidden>
+      <div class="ruler" id="ruler" aria-hidden="true">
+        <div class="ruler-track"><div class="ruler-ticks" id="rulerTicks"></div><div class="ruler-cursor" id="rulerCursor"><div class="ruler-readout mono" id="rulerReadout"></div></div></div>
+      </div>
+      <article class="article wrap" id="article"></article>
+    </section>
+  </main>
+
+  <!-- 链接预览 -->
+  <div class="peek" id="peek" role="tooltip" hidden></div>
+
+  <!-- Ctrl K 索引台 -->
+  <div class="palette" id="palette" hidden>
+    <div class="palette-backdrop" data-action="palette-close"></div>
+    <div class="palette-panel" role="dialog" aria-label="搜索">
+      <div class="palette-input-row">
+        <span class="mono palette-prompt">&gt;</span>
+        <input id="paletteInput" type="text" placeholder="输入标题、编号或部分，例如 JVM、CAS、02.JUC" autocomplete="off" spellcheck="false" />
+        <kbd>ESC</kbd>
+      </div>
+      <div class="palette-body">
+        <ul class="palette-list" id="paletteList"></ul>
+        <div class="palette-preview" id="palettePreview"></div>
+      </div>
+      <div class="palette-foot mono"><span>↑↓ 选择</span><span>ENTER 打开</span><span id="paletteCount"></span></div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
