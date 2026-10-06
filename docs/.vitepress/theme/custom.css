@@ -86,7 +86,7 @@
 
 
 
-html.dark {
+html:not([data-theme]).dark {
 
 
 
@@ -294,7 +294,7 @@ html.dark {
 
 
 
-html:not(.dark) {
+html:not([data-theme]):not(.dark) {
 
 
 
@@ -3087,7 +3087,7 @@ html:not(.dark) .vp-doc :not(pre) > code {
 
 
 
-  html.dark {
+  html:not([data-theme]).dark {
 
 
 

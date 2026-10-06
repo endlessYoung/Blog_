@@ -413,12 +413,12 @@ export default defineConfig({
     ],
     ['link', { rel: 'icon', href: '/Blog_/favicon.ico' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/Blog_/feed.xml' }], // 也是放在/public目录中
-    // Hero 霓虹标题 / 霓虹按钮：深浅色双套变量（与 theme/custom.css 双保险）
+    // Hero 霓虹标题 / 霓虹按钮：仅在未设置新主题 data-theme 时生效作为旧版保底
     [
       'style',
       {},
       `
-html.dark {
+html:not([data-theme]).dark {
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: linear-gradient(120deg, #00f0ff 0%, #7000ff 45%, #00ff66 100%);
   --vp-button-brand-bg: #00f0ff;
@@ -429,7 +429,7 @@ html.dark {
   --vp-c-brand-2: #7000ff;
   --vp-c-brand-3: #00ff66;
 }
-html:not(.dark) {
+html:not([data-theme]):not(.dark) {
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: linear-gradient(120deg, #0e7490 0%, #6d28d9 48%, #047857 100%);
   --vp-button-brand-bg: #0891b2;

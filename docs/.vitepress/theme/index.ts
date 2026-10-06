@@ -14,7 +14,6 @@ import './style/appearance-transition.css'
 import { h, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { provideAnimatedAppearanceToggle } from './appearanceTransition'
 import { initCardTilt } from './cardTilt'
-import { initHomeScrollImmersion } from './homeScrollImmersion'
 import { initNavScreenScrollLock } from './navScreenScrollLock'
 import { initMermaid } from './mermaid'
 import { useData, useRoute } from 'vitepress'
@@ -25,30 +24,21 @@ import ImageViewer from './components/ImageViewer.vue'
 import ReadingProgress from './components/ReadingProgress.vue'
 import { initImageViewer } from './imageViewer'
 import { initOutlineAutoScroll } from './outlineAutoScroll'
-import { initHeroUnderline } from './heroUnderline'
-import { initHeroZoneFX } from './heroZoneFX'
-import { initHeroJourneyPanel } from './heroJourneyPanel'
-import { playHeroCinematicEnter } from './heroCinematicEnter'
 import ArticleMetadata from './components/ArticleMetadata.vue'
-import TechBackground from './components/TechBackground.vue'
-import HomeHeroEyebrow from './components/home/HomeHeroEyebrow.vue'
-import HomeHeroCopySwitch from './components/home/HomeHeroCopySwitch.vue'
-import HomeParticleField from './components/home/HomeParticleField.vue'
 import SidebarToggle from './components/SidebarToggle.vue'
 import NavBrandTitle from './components/NavBrandTitle.vue'
 import TocToggle from './components/TocToggle.vue'
-import HomeCategoryCards from './components/home/HomeCategoryCards.vue'
-import HomeMetricsStrip from './components/home/HomeMetricsStrip.vue'
-import HomeSectionHeader from './components/home/HomeSectionHeader.vue'
 import SiteNotFound from './components/SiteNotFound.vue'
 import ThemeSwitcher from './components/ThemeSwitcher.vue'
 import ArticleBreadcrumb from './components/Article/ArticleBreadcrumb.vue'
 import ArticlePrevNext from './components/Article/ArticlePrevNext.vue'
 import ThemeBackdrop from './components/ThemeBackdrop.vue'
+import ThemeHome from './components/ThemeHome.vue'
 import ThemeHero from './components/ThemeHero.vue'
 import ThemeToc from './components/ThemeToc.vue'
 import DiagramCas from './components/Diagram/DiagramCas.vue'
 import { useTheme } from './composables/useTheme'
+
 // 存储滚动位置
 const scrollPositions: Record<string, number> = {}
 
@@ -59,6 +49,7 @@ export default {
       Theme.enhanceApp({ app })
     }
     app.component('DiagramCas', DiagramCas)
+    app.component('ThemeHome', ThemeHome)
     app.component('ThemeHero', ThemeHero)
     app.component('ThemeToc', ThemeToc)
   },
@@ -82,20 +73,17 @@ export default {
         { flush: 'post', immediate: true },
       )
 
-      // 保存滚动位置
+      // 保存与恢复滚动位置
       onMounted(() => {
         const handleScroll = () => {
           scrollPositions[route.path] = window.scrollY
         }
-
         window.addEventListener('scroll', handleScroll)
-
         return () => {
           window.removeEventListener('scroll', handleScroll)
         }
       })
 
-      // 恢复滚动位置
       onMounted(() => {
         nextTick(() => {
           const savedPosition = scrollPositions[route.path]
@@ -107,10 +95,10 @@ export default {
 
       try {
         onMounted(() => {
-          if (window.innerWidth > 960) initCardTilt();
-        });
+          if (window.innerWidth > 960) initCardTilt()
+        })
       } catch (error) {
-        console.error('Error during setup:', error);
+        console.error('Error during setup:', error)
       }
 
       let stopNavScrollLock: (() => void) | undefined
@@ -144,112 +132,17 @@ export default {
         stopOutlineScroll?.()
       })
 
-      let stopHomeImmersion: (() => void) | undefined
-      const syncHomeImmersion = () => {
-        stopHomeImmersion?.()
-        stopHomeImmersion = undefined
-        if (typeof document === 'undefined') return
-        if (typeof window !== 'undefined' && window.innerWidth <= 960) {
-          // 小屏不启用滚动沉浸动效（mobile.css 已强制静态），避免移动端闪烁
-          const root = document.documentElement
-          root.style.removeProperty('--home-immersion')
-          root.style.removeProperty('--home-below')
-          return
-        }
-        if (frontmatter.value.layout !== 'home') {
-          const root = document.documentElement
-          root.style.removeProperty('--home-immersion')
-          root.style.removeProperty('--home-below')
-          return
-        }
-        const boot = () => {
-          stopHomeImmersion = initHomeScrollImmersion()
-        }
-        // 等 Theme.Layout 把 VPContent / is-home 挂到 DOM 后再挂滚动（单 nextTick 有时偏早）
-        nextTick(() => {
-          requestAnimationFrame(() => {
-            requestAnimationFrame(boot)
-          })
-        })
-      }
-      watch(
-        () => [route.path, frontmatter.value.layout] as const,
-        syncHomeImmersion,
-        { immediate: true, flush: 'post' },
-      )
-      onMounted(() => {
-        if (frontmatter.value.layout === 'home') syncHomeImmersion()
-      })
-      onUnmounted(() => {
-        stopHomeImmersion?.()
-      })
-
-      // Hero 开场运镜 + 分区 hover + journey 背板：仅首页，路由切换时重建/清理
-      let stopHeroZoneFX: (() => void) | undefined
-      let stopHeroJourneyPanel: (() => void) | undefined
-      let stopHeroCine: (() => void) | undefined
-      const syncHeroJourneyBg = () => {
-        if (typeof document === 'undefined') return
-        const root = document.documentElement
-        if (frontmatter.value.layout !== 'home') {
-          root.style.removeProperty('--hero-journey')
-          return
-        }
-        const base = import.meta.env.BASE_URL || '/'
-        root.style.setProperty('--hero-journey', `url("${base}journey.jpg")`)
-      }
-      const syncHeroZoneFX = () => {
-        stopHeroZoneFX?.()
-        stopHeroZoneFX = undefined
-        stopHeroJourneyPanel?.()
-        stopHeroJourneyPanel = undefined
-        stopHeroCine?.()
-        stopHeroCine = undefined
-        if (typeof document === 'undefined') return
-        syncHeroJourneyBg()
-        if (frontmatter.value.layout !== 'home') return
-        nextTick(() => {
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              stopHeroCine = playHeroCinematicEnter()
-              stopHeroJourneyPanel = initHeroJourneyPanel()
-              stopHeroZoneFX = initHeroZoneFX()
-            })
-          })
-        })
-      }
-      watch(
-        () => [route.path, frontmatter.value.layout] as const,
-        syncHeroZoneFX,
-        { immediate: true, flush: 'post' },
-      )
-      onUnmounted(() => {
-        stopHeroZoneFX?.()
-        stopHeroJourneyPanel?.()
-        stopHeroCine?.()
-      })
-
       // Mermaid 图表渲染：首次加载 + SPA 路由切换后重新扫描
       onMounted(() => {
         nextTick(() => { initMermaid() })
       })
-
-      // 标语手写动画：首页 + 路由切换后（每次进入首页重新书写）
-      onMounted(() => {
-        nextTick(() => { initHeroUnderline() })
-      })
-      watch(
-        () => route.path,
-        () => {
-          nextTick(() => { initHeroUnderline() })
-        },
-      )
       watch(
         () => route.path,
         () => {
           nextTick(() => { initMermaid() })
         },
       )
+
       const theme = useTheme()
       onMounted(() => {
         theme.init()
@@ -257,24 +150,16 @@ export default {
 
       return () => [
         h(Theme.Layout, null, {
-        'layout-top': () => [
-          h(frontmatter.value.layout === 'home' ? HomeParticleField : TechBackground),
-          h(ThemeBackdrop),
-        ],
-        'not-found': () => h(SiteNotFound),
-        'nav-bar-title-before': () => h(SidebarToggle),
-        'nav-bar-title-after': () => h(NavBrandTitle),
-        'nav-bar-content-after': () => [h(ThemeSwitcher), h(TocToggle)],
-        'home-hero-before': () => [h(HomeHeroEyebrow), h(HomeHeroCopySwitch)],
-        /* 占位以保留 has-image 布局钩子；HUD 已关闭，视觉只留 journey 大卡 */
-        'home-hero-image': () =>
-          h('div', { class: 'home-hero-image-off', 'aria-hidden': 'true' }),
-        /* 主题大卡外独立区块：RECENT / 最新文章 */
-        'home-hero-after': () => h(HomeMetricsStrip),
-        'home-features-before': () => h(HomeSectionHeader),
-        'home-features-after': () => h(HomeCategoryCards),
-        'doc-before': () => [h(ArticleBreadcrumb), h(ArticleMetadata)],
-        'doc-after': () => [h(ArticlePrevNext), h(SeriesNav), h(RelatedArticles), h(Comments)],
+          // 背景层由统一的 ThemeBackdrop 渲染（工程为精密网格，空间为极光流光，流体为 WebGL）
+          'layout-top': () => h(ThemeBackdrop),
+          'not-found': () => h(SiteNotFound),
+          'nav-bar-title-before': () => h(SidebarToggle),
+          'nav-bar-title-after': () => h(NavBrandTitle),
+          'nav-bar-content-after': () => [h(ThemeSwitcher), h(TocToggle)],
+          // 首页完整由三套主题各自的自洽架构接管渲染
+          'home-hero-before': () => h(ThemeHome),
+          'doc-before': () => [h(ArticleBreadcrumb), h(ArticleMetadata)],
+          'doc-after': () => [h(ArticlePrevNext), h(SeriesNav), h(RelatedArticles), h(Comments)],
         }),
         h(ReadingProgress),
         h(ImageViewer),

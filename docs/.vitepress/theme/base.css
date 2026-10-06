@@ -619,3 +619,16 @@ body {
     transition: none;
   }
 }
+
+/* ===================================================================
+   12. 首页托管：隐藏 VitePress 默认 Hero 与 Features
+   =================================================================== */
+.home-landing .VPHero,
+.home-landing .VPFeatures,
+.home-landing .VPHome .VPHero,
+.home-landing .VPHome .VPFeatures,
+.VPContent.is-home .VPHero,
+.VPContent.is-home .VPFeatures {
+  display: none !important;
+}
+
