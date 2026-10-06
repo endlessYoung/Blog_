@@ -318,8 +318,10 @@ const totalChapters = computed(() => {
 const openParts = ref<Set<string>>(new Set(['01']))
 
 function togglePart(id: string) {
-  if (openParts.value.has(id)) openParts.value.delete(id)
-  else openParts.value.add(id)
+  const next = new Set(openParts.value)
+  if (next.has(id)) next.delete(id)
+  else next.add(id)
+  openParts.value = next
 }
 
 const previewCard = ref({

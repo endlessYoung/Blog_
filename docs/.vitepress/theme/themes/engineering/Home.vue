@@ -353,11 +353,13 @@ const totalChapters = computed(() => {
 const openParts = ref<Set<string>>(new Set(['01']))
 
 function togglePart(id: string) {
-  if (openParts.value.has(id)) {
-    openParts.value.delete(id)
+  const next = new Set(openParts.value)
+  if (next.has(id)) {
+    next.delete(id)
   } else {
-    openParts.value.add(id)
+    next.add(id)
   }
+  openParts.value = next
 }
 
 // 翻牌预览状态

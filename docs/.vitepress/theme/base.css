@@ -506,20 +506,8 @@ body {
   border: var(--ey-border-width) solid var(--ey-line-2);
   border-radius: var(--ey-radius-lg);
   padding: var(--ey-space-2) 0;
-  z-index: 200;
+  z-index: 99999;
   box-shadow: var(--ey-shadow-lg);
-  /* 初始隐藏 */
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(-8px);
-  transition: opacity var(--ey-dur-fast), transform var(--ey-dur-fast), visibility 0ms var(--ey-dur-fast);
-}
-
-.ey-theme-menu[data-open] {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity var(--ey-dur-fast), transform var(--ey-dur-fast);
 }
 
 .ey-theme-menu__section-label {

@@ -34,6 +34,7 @@
         v-if="isOpen"
         ref="menuRef"
         class="ey-theme-menu"
+        data-open
         role="dialog"
         aria-label="主题与显示设置"
         @keydown="handleMenuKey"
@@ -152,7 +153,6 @@ const fxLevels: { id: FxLevel; label: string; icon: string; note: string }[] = [
 function toggleMenu() {
   isOpen.value = !isOpen.value
   if (isOpen.value) {
-    // 打开后聚焦第一个可交互项
     setTimeout(() => {
       const first = menuRef.value?.querySelector<HTMLElement>('.ey-theme-menu__item')
       first?.focus()
@@ -162,7 +162,6 @@ function toggleMenu() {
 
 function closeMenu() {
   isOpen.value = false
-  // 关闭后焦点回到触发按钮
   ;(switcherRef.value?.querySelector('.ey-theme-switcher__btn') as HTMLElement)?.focus()
 }
 
@@ -187,7 +186,6 @@ function handleMenuKey(e: KeyboardEvent) {
     e.preventDefault()
     items[(idx - 1 + items.length) % items.length]?.focus()
   } else if (e.key === 'Tab' && !e.shiftKey) {
-    // Tab 超出菜单末端时关闭
     if (idx === items.length - 1) {
       closeMenu()
     }
@@ -196,43 +194,133 @@ function handleMenuKey(e: KeyboardEvent) {
 
 // 点击外部关闭
 function handleOutsideClick(e: MouseEvent) {
-  if (!switcherRef.value?.contains(e.target as Node)) {
+  if (isOpen.value && switcherRef.value && !switcherRef.value.contains(e.target as Node)) {
     isOpen.value = false
   }
 }
 
 onMounted(() => {
-  document.addEventListener('click', handleOutsideClick, { capture: true })
+  document.addEventListener('click', handleOutsideClick)
 })
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleOutsideClick, { capture: true })
+  document.removeEventListener('click', handleOutsideClick)
 })
 </script>
 
 <style scoped>
+.ey-theme-switcher {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  z-index: 100;
+}
+
+.ey-theme-switcher__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: var(--ey-surface, rgba(255, 255, 255, 0.06));
+  border: 1px solid var(--ey-line, rgba(255, 255, 255, 0.1));
+  border-radius: 999px;
+  font-size: 13px;
+  font-family: var(--ey-font-display, inherit);
+  font-weight: 500;
+  color: var(--ey-fg, currentColor);
+  cursor: pointer;
+  transition: all 180ms ease;
+  white-space: nowrap;
+}
+
+.ey-theme-switcher__btn:hover {
+  border-color: var(--ey-accent, #ff4f00);
+  background: var(--ey-surface-2, rgba(255, 255, 255, 0.12));
+}
+
 .ey-switcher-icon {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1;
 }
 
 .ey-switcher-label {
-  font-size: var(--ey-text-sm, 13px);
-}
-
-/* 窄屏隐藏标签文字，只显示图标 */
-@media (max-width: 768px) {
-  .ey-switcher-label {
-    display: none;
-  }
+  font-size: 13px;
 }
 
 .ey-switcher-chevron {
-  transition: transform var(--ey-dur-fast, 120ms) var(--ey-ease-standard, ease);
+  transition: transform 180ms ease;
 }
 
 .ey-switcher-chevron--open {
   transform: rotate(180deg);
+}
+
+/* 弹出菜单 */
+.ey-theme-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 230px;
+  background: var(--ey-surface-2, #16181d);
+  border: 1px solid var(--ey-line-2, rgba(255, 255, 255, 0.12));
+  border-radius: 14px;
+  padding: 8px 6px;
+  z-index: 99999;
+  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.ey-theme-menu__section-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--ey-font-mono, monospace);
+  color: var(--ey-fg-3, rgba(255, 255, 255, 0.45));
+  padding: 6px 10px 4px;
+}
+
+.ey-theme-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--ey-fg, #fff);
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.ey-theme-menu__item:hover:not(:disabled) {
+  background: var(--ey-surface, rgba(255, 255, 255, 0.08));
+  color: var(--ey-accent, #ff4f00);
+}
+
+.ey-theme-menu__item[aria-checked="true"] {
+  background: var(--ey-accent-soft, rgba(255, 79, 0, 0.14));
+  color: var(--ey-accent, #ff4f00);
+  font-weight: 500;
+}
+
+.ey-theme-menu__item--disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.ey-theme-menu__item-icon {
+  font-size: 15px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
 .ey-theme-menu__item-text {
@@ -243,13 +331,18 @@ onUnmounted(() => {
 }
 
 .ey-theme-menu__item-badge {
-  font-size: var(--ey-text-xs, 11px);
+  font-size: 10px;
   padding: 1px 5px;
   border-radius: 4px;
   background: var(--ey-accent-soft, rgba(255, 79, 0, 0.14));
   color: var(--ey-accent, #ff4f00);
-  font-family: var(--ey-font-mono);
-  letter-spacing: 0.04em;
+  font-family: var(--ey-font-mono, monospace);
+}
+
+.ey-theme-menu__item-note {
+  font-size: 11px;
+  color: var(--ey-fg-3, rgba(255, 255, 255, 0.45));
+  margin-left: auto;
 }
 
 .ey-theme-menu__item-check {
@@ -258,15 +351,22 @@ onUnmounted(() => {
   margin-left: auto;
 }
 
+.ey-theme-menu__divider {
+  height: 1px;
+  background: var(--ey-line, rgba(255, 255, 255, 0.08));
+  margin: 6px 4px;
+}
+
 /* 过渡动画 */
 .ey-menu-enter-active,
 .ey-menu-leave-active {
-  transition: opacity var(--ey-dur-fast, 120ms), transform var(--ey-dur-fast, 120ms);
+  transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1), transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ey-menu-enter-from,
 .ey-menu-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
+  opacity: 0 !important;
+  transform: translateY(-6px) scale(0.96);
 }
 </style>
+
