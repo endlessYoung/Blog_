@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Endlessyoung · 流动的原理笔记（改版演示）</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="../_shared/chameleon.css" />
+</head>
+<body>
+  <canvas id="fluid" aria-hidden="true"></canvas>
+  <div class="fluid-fallback" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="goo" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="b" />
+        <feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10" />
+      </filter>
+      <filter id="goo-mid" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b" />
+        <feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" />
+      </filter>
+      <filter id="goo-sm" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b" />
+        <feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" />
+      </filter>
+      <filter id="liquid" x="-10%" y="-20%" width="120%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.006 0.022" numOctaves="2" seed="7" result="n" />
+        <feDisplacementMap id="liquidDisp" in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="brand" data-action="home" aria-label="回到首页">
+        <span class="brand-drop" aria-hidden="true"><i></i><i></i></span>
+        <span class="brand-text">Endlessyoung</span>
+      </button>
+      <nav class="topnav" id="topnav" aria-label="主导航">
+        <span class="nav-blob" aria-hidden="true"></span>
+        <a href="#contents">目录</a>
+        <a href="#figures">图集</a>
+        <a href="#changelog">日志</a>
+        <a href="#index">索引</a>
+      </nav>
+      <div class="tools">
+        <button class="search-btn" data-action="palette">
+          <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8" /><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
+          <span>搜索</span><kbd>Ctrl K</kbd>
+        </button>
+        <button class="icon-btn theme-btn" data-action="theme" title="切换明暗" aria-label="切换明暗">
+          <span class="theme-glyph" aria-hidden="true"></span>
+        </button>
+        <button class="icon-btn replay-btn" data-action="replay" title="重播开场">REPLAY</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- ================= 首页 ================= -->
+    <section id="view-index" class="view">
+      <section class="hero" id="hero">
+        <div class="wrap hero-inner">
+          <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>VOL.2026 · Android / Java / AI 原理笔记<span class="eb-sep" aria-hidden="true"></span>最后更新 <b id="lastUpdate"></b></p>
+          <h1 class="hero-title" id="heroTitle" aria-label="Endless Young">
+            <span class="line" aria-hidden="true">Endless</span>
+            <span class="line" aria-hidden="true">Young<i class="title-drop"></i></span>
+          </h1>
+          <div class="hero-foot">
+            <p class="lede">Android、Java 与 AI 的原理笔记。<br />写给想弄懂“为什么”的工程师。</p>
+            <dl class="bubbles" id="bubbles"></dl>
+          </div>
+          <a class="scroll-cue" href="#contents" data-nav aria-label="向下浏览目录"><i></i></a>
+        </div>
+      </section>
+
+      <section id="contents" class="block wrap">
+        <header class="block-head">
+          <span class="block-mark" aria-hidden="true">A</span>
+          <h2>目录</h2>
+          <p class="block-desc">点击某一部分展开章节，悬停文章可在右侧预览。键盘上下键也能操作。</p>
+        </header>
+        <div class="contents-grid">
+          <div class="parts" id="parts"></div>
+          <aside class="preview" aria-live="polite">
+            <div class="preview-label">预览</div>
+            <div class="preview-stage" id="previewStage"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="figures" class="block wrap">
+        <header class="block-head">
+          <span class="block-mark" aria-hidden="true">B</span>
+          <h2>图集</h2>
+          <p class="block-desc">站内可交互讲解的缩略版。按住拖动浏览，点击进入文章。</p>
+        </header>
+      </section>
+      <div class="gallery" id="gallery">
+        <div class="gallery-track" id="galleryTrack"></div>
+      </div>
+
+      <section id="changelog" class="block wrap">
+        <header class="block-head">
+          <span class="block-mark" aria-hidden="true">C</span>
+          <h2>更新日志</h2>
+          <p class="block-desc">最近更新的八篇笔记。</p>
+        </header>
+        <ol class="log" id="log"></ol>
+      </section>
+
+      <section id="index" class="block wrap">
+        <header class="block-head">
+          <span class="block-mark" aria-hidden="true">D</span>
+          <h2>索引</h2>
+          <p class="block-desc">按概念查找。悬停条目可以预览对应文章。</p>
+        </header>
+        <div class="terms" id="terms"></div>
+      </section>
+
+      <footer class="foot wrap">
+        <span>© 2019–2026 Endless Young</span>
+        <span>改版演示原型 · 不代表最终内容</span>
+      </footer>
+    </section>
+
+    <!-- ================= 文章页 ================= -->
+    <section id="view-article" class="view" hidden>
+      <div class="flask" id="flask">
+        <button class="flask-orb" id="flaskOrb" aria-label="回到顶部">
+          <i class="liq l1"></i><i class="liq l2"></i>
+          <span class="flask-pct" id="flaskPct">0%</span>
+        </button>
+        <div class="flask-info">
+          <b id="flaskSec"></b>
+          <span id="flaskLeft"></span>
+        </div>
+        <div class="flask-dots" id="flaskDots"></div>
+      </div>
+      <article class="article wrap" id="article"></article>
+    </section>
+  </main>
+
+  <div class="peek" id="peek" role="tooltip" hidden></div>
+
+  <div class="palette" id="palette" hidden>
+    <div class="palette-backdrop" data-action="palette-close"></div>
+    <div class="palette-panel" role="dialog" aria-label="搜索">
+      <div class="palette-input-row">
+        <span class="palette-drop" aria-hidden="true"></span>
+        <input id="paletteInput" type="text" placeholder="输入标题、编号或部分，例如 JVM、CAS、02.JUC" autocomplete="off" spellcheck="false" />
+        <kbd>ESC</kbd>
+      </div>
+      <div class="palette-body">
+        <div class="palette-list-wrap">
+          <span class="p-hl" id="paletteHl" aria-hidden="true"></span>
+          <ul class="palette-list" id="paletteList"></ul>
+        </div>
+        <div class="palette-preview" id="palettePreview"></div>
+      </div>
+      <div class="palette-foot"><span>↑↓ 选择</span><span>Enter 打开</span><span id="paletteCount"></span></div>
+    </div>
+  </div>
+
+  <script src="../_shared/data.js"></script>
+  <script src="./app.js"></script>
+  <script src="../_shared/chameleon.js"></script>
+</body>
+</html>

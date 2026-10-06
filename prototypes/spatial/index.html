@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Endlessyoung · 空间（改版演示）</title>
+  <script>
+    try { var saved = localStorage.getItem('ey-theme-spatial') } catch (e) {}
+    document.documentElement.dataset.theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+  </script>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="../_shared/chameleon.css" />
+</head>
+<body>
+  <div class="sky" aria-hidden="true">
+    <i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="blob b4"></i>
+    <div class="grain"></div>
+  </div>
+
+  <header class="topbar glass" data-spec>
+    <button class="brand" data-action="home" aria-label="回到首页">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i></span>
+      <span class="brand-text">Endless Young</span>
+    </button>
+    <nav class="topnav" aria-label="主导航">
+      <span class="nav-cap" aria-hidden="true"></span>
+      <a href="#contents">目录</a>
+      <a href="#figures">图集</a>
+      <a href="#changelog">日志</a>
+      <a href="#index">索引</a>
+    </nav>
+    <div class="tools">
+      <button class="search-btn" data-action="palette" aria-label="搜索（Ctrl K）">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="5.5" /><path d="M13.2 13.2 17 17" /></svg>
+        <span>搜索</span><kbd>Ctrl K</kbd>
+      </button>
+      <button class="round-btn" data-action="theme" aria-label="切换明暗" title="切换明暗">
+        <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <mask id="moonMask"><rect width="24" height="24" fill="#fff" /><circle class="moon-bite" cx="24" cy="4" r="7" fill="#000" /></mask>
+          <circle class="sun-core" cx="12" cy="12" r="5" mask="url(#moonMask)" />
+          <g class="sun-rays"><path d="M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7" /></g>
+        </svg>
+      </button>
+      <button class="pill-btn replay-btn" data-action="replay" title="重播开场">REPLAY</button>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- ================= 首页 ================= -->
+    <section id="view-index" class="view">
+      <section class="hero wrap" id="hero">
+        <div class="hero-copy">
+          <span class="eyebrow glass-flat" data-rise><i class="live-dot"></i>技术笔记 · 最近更新 <b id="lastUpdate"></b></span>
+          <h1 class="hero-title" id="heroTitle" aria-label="Endless Young">Endless Young</h1>
+          <p class="hero-tag" data-rise>把底层原理，做成看得见、摸得着的东西。</p>
+          <p class="hero-lede" data-rise>Android、Java 与 AI 的原理笔记。写给想弄懂“为什么”的工程师。</p>
+          <div class="hero-actions" data-rise>
+            <a href="#contents" class="pill-btn primary" data-nav>浏览目录</a>
+            <button class="pill-btn" data-action="palette">搜索全部文章<kbd>/</kbd></button>
+          </div>
+        </div>
+        <div class="hero-stack" id="heroStack" aria-label="精选">
+          <div class="layer l3 glass" data-depth="3" data-spec data-rise-stack>
+            <span class="layer-label">规模</span>
+            <dl class="stats">
+              <div><dt>篇文章</dt><dd data-count id="statArticles"></dd></div>
+              <div><dt>个部分</dt><dd data-count id="statParts"></dd></div>
+              <div><dt>个章节</dt><dd data-count id="statChapters"></dd></div>
+            </dl>
+          </div>
+          <a class="layer l2 glass" data-depth="2" data-spec data-rise-stack id="heroLatest" href="#"></a>
+          <a class="layer l1 glass" data-depth="1" data-spec data-rise-stack id="heroFeature" href="#"></a>
+        </div>
+      </section>
+
+      <section id="contents" class="block wrap">
+        <header class="block-head" data-reveal>
+          <span class="block-kicker">01</span>
+          <h2>目录</h2>
+          <p class="block-desc">点开一个部分展开章节，悬停文章在右侧预览。也可以用键盘上下键浏览。</p>
+        </header>
+        <div class="contents-grid">
+          <div class="parts" id="parts"></div>
+          <aside class="preview glass" data-spec aria-live="polite">
+            <div class="preview-stage" id="previewStage"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="figures" class="block wrap">
+        <header class="block-head" data-reveal>
+          <span class="block-kicker">02</span>
+          <h2>图集</h2>
+          <p class="block-desc">站内可交互讲解的缩略版。按住拖动浏览，松手会自然停靠，点击进入文章。</p>
+        </header>
+      </section>
+      <div class="gallery" id="gallery">
+        <div class="gallery-track" id="galleryTrack"></div>
+      </div>
+
+      <section id="changelog" class="block wrap">
+        <header class="block-head" data-reveal>
+          <span class="block-kicker">03</span>
+          <h2>更新日志</h2>
+          <p class="block-desc">最近修订的 8 篇。</p>
+        </header>
+        <div class="log glass" data-spec data-reveal>
+          <span class="hover-cap" aria-hidden="true"></span>
+          <ol id="log"></ol>
+        </div>
+      </section>
+
+      <section id="index" class="block wrap">
+        <header class="block-head" data-reveal>
+          <span class="block-kicker">04</span>
+          <h2>索引</h2>
+          <p class="block-desc">按概念查找，悬停词条可以预览对应文章。</p>
+        </header>
+        <div class="terms glass" id="terms" data-spec data-reveal></div>
+      </section>
+
+      <footer class="foot wrap">
+        <span>© 2019–2026 Endless Young</span>
+        <span>改版演示原型 · 不代表最终内容</span>
+      </footer>
+    </section>
+
+    <!-- ================= 文章页 ================= -->
+    <section id="view-article" class="view" hidden>
+      <article class="article wrap" id="article"></article>
+    </section>
+  </main>
+
+  <!-- 阅读进度 -->
+  <div class="progress" id="progress" hidden>
+    <div class="progress-sheet glass" id="progressSheet" hidden>
+      <span class="sheet-label">跳转到章节</span>
+      <ol id="progressList"></ol>
+    </div>
+    <button class="progress-pill glass" id="progressPill" aria-expanded="false" aria-controls="progressSheet">
+      <svg class="ring" viewBox="0 0 36 36" aria-hidden="true"><circle class="ring-bg" cx="18" cy="18" r="15" /><circle class="ring-fg" id="ringFg" cx="18" cy="18" r="15" /></svg>
+      <span class="progress-text"><span class="progress-sec" id="progressSec"></span><span class="progress-left" id="progressLeft"></span></span>
+    </button>
+  </div>
+
+  <!-- 链接预览 -->
+  <div class="peek glass" id="peek" role="tooltip" hidden></div>
+
+  <!-- 搜索面板 -->
+  <div class="palette" id="palette" hidden>
+    <div class="palette-scrim" data-action="palette-close"></div>
+    <div class="sheet glass" role="dialog" aria-modal="true" aria-label="搜索">
+      <div class="sheet-input">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="5.5" /><path d="M13.2 13.2 17 17" /></svg>
+        <input id="paletteInput" type="text" placeholder="搜索标题、编号或部分，例如 JVM、CAS、02.JUC" autocomplete="off" spellcheck="false" aria-controls="paletteList" />
+        <kbd>Esc</kbd>
+      </div>
+      <div class="sheet-body">
+        <div class="sheet-results">
+          <span class="sheet-label" id="paletteCount"></span>
+          <ul class="sheet-list" id="paletteList" role="listbox"></ul>
+        </div>
+        <div class="sheet-preview" id="palettePreview"></div>
+      </div>
+      <div class="sheet-foot"><span><kbd>↑</kbd><kbd>↓</kbd> 选择</span><span><kbd>Enter</kbd> 打开</span><span><kbd>Esc</kbd> 关闭</span></div>
+    </div>
+  </div>
+
+  <script src="../_shared/data.js"></script>
+  <script src="./app.js"></script>
+  <script src="../_shared/chameleon.js"></script>
+</body>
+</html>

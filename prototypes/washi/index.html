@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Endlessyoung · 原理手记（改版演示 · 和纸）</title>
+  <script>
+    try { var saved = localStorage.getItem('ey-theme-washi') } catch (e) {}
+    document.documentElement.dataset.theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+  </script>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="../_shared/chameleon.css" />
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="seal-ink" x="-12%" y="-12%" width="124%" height="124%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d" />
+        <feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="1" seed="11" result="n2" />
+        <feColorMatrix in="n2" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -6 5.2" result="speck" />
+        <feComposite in="d" in2="speck" operator="in" />
+      </filter>
+      <filter id="brush" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.05 0.6" numOctaves="2" seed="5" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <symbol id="seal-yong" viewBox="0 0 64 64">
+        <rect x="1" y="1" width="62" height="62" rx="3" fill="#C8352B" />
+        <rect x="5.5" y="5.5" width="53" height="53" rx="1.5" fill="none" stroke="#F7F5F0" stroke-width="1.6" />
+        <text x="32" y="44.5" text-anchor="middle" font-size="36" font-weight="700" fill="#F7F5F0" font-family="'Noto Serif SC','Source Han Serif SC','Songti SC',serif">永</text>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="brand" data-action="home" aria-label="回到首页">
+        <svg class="brand-seal" viewBox="0 0 64 64" aria-hidden="true"><use href="#seal-yong" filter="url(#seal-ink)" /></svg>
+        <span class="brand-text">Endlessyoung<span class="brand-sub">原理手记</span></span>
+      </button>
+      <nav class="topnav" aria-label="主导航">
+        <a href="#contents">目录</a>
+        <a href="#figures">图集</a>
+        <a href="#changelog">日志</a>
+        <a href="#index">索引</a>
+      </nav>
+      <div class="tools">
+        <button class="search-btn" data-action="palette"><span>搜索</span><kbd>Ctrl K</kbd></button>
+        <button class="tool-btn theme-btn" data-action="theme" title="切换纸 / 墨" aria-label="切换明暗">
+          <span class="theme-glyph" aria-hidden="true"></span><span class="theme-label">墨</span>
+        </button>
+        <button class="tool-btn" data-action="replay" title="重播开场">重播</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- ================= 首页 ================= -->
+    <section id="view-index" class="view">
+      <section class="masthead" aria-label="刊头">
+        <div class="mh-inner">
+          <svg class="mh-enso" id="mhEnso" viewBox="0 0 400 400" aria-hidden="true"></svg>
+          <div class="mh-cols">
+            <div class="seal-wrap" id="seal">
+              <span class="seal-bleed" aria-hidden="true"></span>
+              <svg class="seal" viewBox="0 0 64 64" role="img" aria-label="印章：永"><use href="#seal-yong" filter="url(#seal-ink)" /></svg>
+            </div>
+            <h1 class="mh-title v in" data-o="1">原理手记</h1>
+            <p class="mh-sub v in" data-o="2">安卓、Java 与 AI 的原理笔记</p>
+            <p class="mh-lede v in" data-o="3">写给想弄懂「为什么」的工程师</p>
+          </div>
+          <div class="mh-foot">
+            <p class="mh-word in" data-o="4">Endlessyoung</p>
+            <dl class="mh-stats in" data-o="5" id="mhStats"></dl>
+            <p class="mh-date in" data-o="6" id="mhDate"></p>
+          </div>
+          <div class="mh-hint in" data-o="7" aria-hidden="true"><span class="v">向下翻阅</span><i></i></div>
+        </div>
+      </section>
+
+      <section id="contents" class="block">
+        <header class="block-label"><span class="bl-no">壹</span><h2>目录</h2></header>
+        <div class="block-main">
+          <p class="block-desc">五个部分，自右向左排列。悬停可见章节，点击展开文章；方向键也能操作。</p>
+          <div class="cols" id="cols" role="group" aria-label="五个部分"></div>
+          <div class="reveal">
+            <div class="reveal-stage" id="revealStage"></div>
+            <aside class="preview" aria-live="polite"><div class="preview-stage" id="previewStage"></div></aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="figures" class="block">
+        <header class="block-label"><span class="bl-no">贰</span><h2>图集</h2></header>
+        <div class="block-main">
+          <p class="block-desc">站内可交互讲解的缩略版。按住拖动浏览，点击进入文章。</p>
+        </div>
+      </section>
+      <div class="gallery" id="gallery"><div class="gallery-track" id="galleryTrack"></div></div>
+
+      <section id="changelog" class="block">
+        <header class="block-label"><span class="bl-no">叁</span><h2>日志</h2></header>
+        <div class="block-main">
+          <p class="block-desc">最近更新的八篇。</p>
+          <ol class="log" id="log"></ol>
+        </div>
+      </section>
+
+      <section id="index" class="block">
+        <header class="block-label"><span class="bl-no">肆</span><h2>索引</h2></header>
+        <div class="block-main">
+          <p class="block-desc">按概念查找。悬停条目可以预览对应文章。</p>
+          <div class="terms" id="terms"></div>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <svg class="foot-seal" viewBox="0 0 64 64" aria-hidden="true"><use href="#seal-yong" filter="url(#seal-ink)" /></svg>
+        <span>© 2019–2026 Endlessyoung</span>
+        <span>改版演示原型 · 不代表最终内容</span>
+      </footer>
+    </section>
+
+    <!-- ================= 文章页 ================= -->
+    <section id="view-article" class="view" hidden>
+      <article class="article" id="article"></article>
+    </section>
+  </main>
+
+  <div class="rail" id="rail" aria-hidden="true">
+    <div class="rail-line"><i class="rail-fill" id="railFill"></i><b class="rail-dot" id="railDot"></b></div>
+    <div class="rail-text v"><span class="rail-sec" id="railSec"></span><span class="rail-left" id="railLeft"></span></div>
+  </div>
+
+  <div class="peek" id="peek" role="tooltip" hidden></div>
+
+  <div class="palette" id="palette" hidden>
+    <div class="palette-backdrop" data-action="palette-close"></div>
+    <div class="palette-panel" role="dialog" aria-modal="true" aria-label="搜索">
+      <div class="palette-input-row">
+        <input id="paletteInput" type="text" placeholder="输入标题、编号或部分，例如 JVM、CAS、02.JUC" autocomplete="off" spellcheck="false" aria-label="搜索文章" />
+        <kbd>Esc</kbd>
+      </div>
+      <div class="palette-body">
+        <ul class="palette-list" id="paletteList" role="listbox"></ul>
+        <div class="palette-preview" id="palettePreview"></div>
+      </div>
+      <div class="palette-foot"><span>↑↓ 选择</span><span>Enter 打开</span><span id="paletteCount"></span></div>
+    </div>
+  </div>
+
+  <script src="../_shared/data.js"></script>
+  <script src="./app.js"></script>
+  <script src="../_shared/chameleon.js"></script>
+</body>
+</html>

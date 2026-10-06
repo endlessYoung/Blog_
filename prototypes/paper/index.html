@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Endlessyoung · 纸本（改版演示）</title>
+  <script>
+    try { var saved = localStorage.getItem('ey-theme-paper') } catch (e) {}
+    document.documentElement.dataset.theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+  </script>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="../_shared/chameleon.css" />
+</head>
+<body>
+  <!-- 共用的笔触滤镜：轻微抖动，模拟钢笔线条 -->
+  <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="pen" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="pen-soft" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="1" seed="3" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="spine" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <button class="brand" data-action="home" aria-label="回到卷首">
+        <span class="brand-name">Endlessyoung</span>
+        <span class="brand-sub">纸本</span>
+      </button>
+      <nav class="topnav" aria-label="主导航">
+        <a href="#contents">目录</a>
+        <a href="#figures">图集</a>
+        <a href="#changelog">日志</a>
+        <a href="#index">索引</a>
+      </nav>
+      <div class="tools">
+        <button class="search-btn" data-action="palette">
+          <span>检索</span><kbd>Ctrl K</kbd>
+        </button>
+        <button class="icon-btn lamp-btn" data-action="theme" title="切换日读 / 夜读" aria-label="切换日读或夜读">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <path class="lamp-glow" d="M7.5 13.5 L20.5 13.5 L26 29 L2 29 Z" />
+            <g class="lamp-lines" filter="url(#pen-soft)">
+              <path d="M7.5 13.5 L10.8 6 L17.2 6 L20.5 13.5 Z" />
+              <path d="M16 6.2 L23 10.5 L23 27.4" />
+              <path d="M18 27.6 L28 27.6" />
+            </g>
+          </svg>
+        </button>
+        <button class="text-btn" data-action="replay" title="重播开场">重播序章</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- ================= 首页 ================= -->
+    <section id="view-index" class="view">
+      <section class="masthead wrap">
+        <div class="running-head"><span>Endlessyoung · 技术笔记</span><span>卷首</span></div>
+        <div class="mh-grid">
+          <div class="mh-main">
+            <p class="mh-kicker">卷二〇二六 · 原理笔记</p>
+            <h1 class="mh-title" id="mhTitle" aria-label="Endlessyoung 的技术原理笔记">
+              <span class="l1">Endlessyoung</span>
+              <span class="l2">的技术原理笔记</span>
+            </h1>
+            <svg class="mh-flourish" viewBox="0 0 420 24" aria-hidden="true">
+              <path pathLength="1" d="M2 15 C 60 9, 110 18, 170 12 S 280 6, 340 13 C 370 16, 392 10, 404 8 M392 4 C 398 8, 404 8, 412 7" />
+            </svg>
+            <p class="mh-lede">Android、Java 与 AI 的原理笔记。<br />写给想弄懂“为什么”的工程师，慢一点读，读懂为止。</p>
+          </div>
+          <aside class="mh-colophon" aria-label="本册信息">
+            <div class="colo-title">本册信息</div>
+            <dl>
+              <div><dt>收录</dt><dd><span class="onum" id="statArticles"></span> 篇</dd></div>
+              <div><dt>分为</dt><dd><span class="onum" id="statParts"></span> 部 <span class="onum" id="statChapters"></span> 章</dd></div>
+              <div><dt>最近修订</dt><dd class="onum" id="statUpdate"></dd></div>
+            </dl>
+            <p class="colo-hand">“带图的篇目可以亲手操作，<br />从 CAS 读起最合适。”</p>
+          </aside>
+        </div>
+        <div class="folio">i</div>
+      </section>
+
+      <section id="contents" class="block wrap">
+        <div class="running-head"><span>目录</span><span>Contents</span></div>
+        <header class="block-head">
+          <h2>目录</h2>
+          <p class="block-desc">点开某一部，章节会像折页一样展开。悬停篇目，右侧索引卡会换上它的摘要；键盘上下键也能翻阅。</p>
+        </header>
+        <div class="contents-grid">
+          <div class="parts" id="parts"></div>
+          <aside class="card-desk" aria-live="polite">
+            <div class="card-stage" id="cardStage"></div>
+          </aside>
+        </div>
+        <div class="folio">ii</div>
+      </section>
+
+      <section id="figures" class="block wrap">
+        <div class="running-head"><span>图集</span><span>Plates</span></div>
+        <header class="block-head">
+          <h2>图集</h2>
+          <p class="block-desc">站内可交互讲解的手稿缩略。按住拖动翻看，点击进入正文。</p>
+        </header>
+      </section>
+      <div class="gallery" id="gallery">
+        <div class="gallery-track" id="galleryTrack"></div>
+      </div>
+
+      <section id="changelog" class="block wrap">
+        <div class="running-head"><span>更新日志</span><span>Errata &amp; Additions</span></div>
+        <header class="block-head">
+          <h2>更新日志</h2>
+          <p class="block-desc">最近修订与增补的八篇。</p>
+        </header>
+        <ol class="log" id="log"></ol>
+        <div class="folio">iii</div>
+      </section>
+
+      <section id="index" class="block wrap">
+        <div class="running-head"><span>索引</span><span>Index</span></div>
+        <header class="block-head">
+          <h2>索引</h2>
+          <p class="block-desc">按概念查找。悬停词条，会在旁边出现一张脚注小条。</p>
+        </header>
+        <div class="terms" id="terms"></div>
+        <div class="folio">iv</div>
+      </section>
+
+      <footer class="colophon wrap">
+        <div class="rule" aria-hidden="true"></div>
+        <p>本册以思源宋体排印，手记用楷体。© 2019–2026 Endless Young。</p>
+        <p class="colophon-sub">改版演示原型，不代表最终内容。</p>
+      </footer>
+    </section>
+
+    <!-- ================= 文章页 ================= -->
+    <section id="view-article" class="view" hidden>
+      <article class="article" id="article"></article>
+    </section>
+  </main>
+
+  <!-- 阅读进度：书签丝带 + 页脚页码 -->
+  <div class="ribbon" id="ribbon" aria-hidden="true"><i></i></div>
+  <div class="reader-folio" id="readerFolio" aria-live="off"></div>
+
+  <!-- 链接预览：脚注小条 -->
+  <div class="peek" id="peek" role="tooltip" hidden></div>
+
+  <!-- Ctrl K 卡片目录 -->
+  <div class="palette" id="palette" hidden>
+    <div class="palette-backdrop" data-action="palette-close"></div>
+    <div class="palette-panel" role="dialog" aria-label="检索">
+      <div class="palette-input-row">
+        <span class="palette-label">检索</span>
+        <input id="paletteInput" type="text" placeholder="书名、编号或分部，例如 JVM、CAS、02.JUC" autocomplete="off" spellcheck="false" />
+        <kbd>Esc</kbd>
+      </div>
+      <div class="palette-body">
+        <ul class="palette-list" id="paletteList"></ul>
+        <div class="palette-preview" id="palettePreview"></div>
+      </div>
+      <div class="palette-foot"><span>↑↓ 选择</span><span>Enter 翻开</span><span id="paletteCount"></span></div>
+    </div>
+  </div>
+
+  <script src="../_shared/data.js"></script>
+  <script src="./app.js"></script>
+  <script src="../_shared/chameleon.js"></script>
+</body>
+</html>
