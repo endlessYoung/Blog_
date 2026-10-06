@@ -212,7 +212,32 @@
   /* 侧边栏 */
   --vp-sidebar-bg-color: var(--ey-bg);
 
+  /* 兼容原型原生无前缀变量 */
+  --bg: var(--ey-bg);
+  --surface: var(--ey-surface);
+  --surface-2: var(--ey-surface-2);
+  --fg: var(--ey-fg);
+  --fg-2: var(--ey-fg-2);
+  --fg-3: var(--ey-fg-3);
+  --accent: var(--ey-accent);
+  --accent-ink: var(--ey-accent-ink);
+  --line: var(--ey-line);
+  --line-2: var(--ey-line-2);
+  --grid-line: var(--ey-grid-line);
+  --grid-glow: var(--ey-grid-glow);
+  --code-bg: var(--ey-code-bg);
+
   /* 自定义属性：供工程 Hero 的 Odometer 与网格使用 */
   --ey-eng-grid-cols: 12;
   --ey-eng-tick-color: var(--ey-accent);
 }
+
+/* 工程主题下 VPNavBar 精密背景 */
+:root[data-theme="engineering"] .VPNavBar {
+  background: color-mix(in srgb, var(--ey-bg) 85%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.2) !important;
+  border-bottom: 1px solid var(--ey-line) !important;
+}
+
+

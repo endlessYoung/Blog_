@@ -50,6 +50,14 @@ body {
   overflow-x: hidden;
 }
 
+/* 确保 VitePress 容器透明，透出 ThemeBackdrop 背景层 */
+.Layout,
+.VPContent,
+.VPContent.is-home,
+.home-landing {
+  background: transparent !important;
+}
+
 /* ===================================================================
    2. 无障碍：焦点环
    =================================================================== */

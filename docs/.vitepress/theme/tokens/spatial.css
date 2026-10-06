@@ -1,241 +1,176 @@
 /**
  * SPATIAL THEME TOKENS
- * 空间主题设计变量 — 从 prototypes/spatial/ 提炼并扩展
- * 作用域：[data-theme="spatial"]
+ * 空间主题完整设计变量 — 100% 精确对齐 prototypes/spatial/style.css
+ * 作用域：:root[data-theme="spatial"]
  */
 
 :root[data-theme="spatial"] {
-  /* 字体栈 */
-  --ey-font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', sans-serif;
-  --ey-font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Microsoft YaHei UI', system-ui, sans-serif;
-  --ey-font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', Consolas, ui-monospace, monospace;
+  --font-display: 'Space Grotesk', 'PingFang SC', 'Microsoft YaHei UI', 'Noto Sans SC', system-ui, sans-serif;
+  --font-body: 'PingFang SC', 'Microsoft YaHei UI', 'Noto Sans SC', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'SF Mono', Consolas, ui-monospace, monospace;
 
-  /* 字号阶梯 */
-  --ey-text-xs: clamp(11px, 2.4vw, 12px);
-  --ey-text-sm: clamp(12px, 2.6vw, 13px);
-  --ey-text-base: clamp(15px, 3.2vw, 16px);
-  --ey-text-md: clamp(17px, 3.6vw, 18px);
-  --ey-text-lg: clamp(20px, 4vw, 22px);
-  --ey-text-xl: clamp(24px, 5vw, 28px);
-  --ey-text-2xl: clamp(30px, 6vw, 36px);
-  --ey-text-hero: clamp(38px, 8vw, 68px);
+  /* 物理弹簧曲线 */
+  --spring-snappy: cubic-bezier(.3, 1.25, .4, 1);
+  --spring-snappy-dur: 420ms;
+  --spring-gentle: cubic-bezier(.22, 1.12, .36, 1);
+  --spring-gentle-dur: 720ms;
+  --spring-bouncy: cubic-bezier(.34, 1.6, .45, 1);
+  --spring-bouncy-dur: 900ms;
+  --ease-soft: cubic-bezier(.2, .8, .2, 1);
 
-  /* 行高与字距 */
-  --ey-leading-tight: 1.25;
-  --ey-leading-normal: 1.7;
-  --ey-leading-loose: 1.9;
-  --ey-tracking-tight: -0.025em;
-  --ey-tracking-normal: 0em;
-  --ey-tracking-wide: 0.04em;
-  --ey-tracking-wider: 0.08em;
+  --r-xl: 28px;
+  --r-lg: 22px;
+  --r-md: 16px;
+  --wrap: 1200px;
+  --pad: 40px;
+  --top: 84px;
+  --blur: 26px;
+  --sat: 1.7;
 
-  /* 几何 — 空间主题优雅大圆角 */
-  --ey-radius-none: 0px;
-  --ey-radius-sm: 8px;
-  --ey-radius-md: 16px;
-  --ey-radius-lg: 22px;
-  --ey-radius-xl: 28px;
+  /* 桥接通用的 --ey-* */
+  --ey-font-display: var(--font-display);
+  --ey-font-body: var(--font-body);
+  --ey-font-mono: var(--font-mono);
+  --ey-wrap: var(--wrap);
+  --ey-pad: var(--pad);
+  --ey-radius-md: var(--r-md);
+  --ey-radius-lg: var(--r-lg);
+  --ey-radius-xl: var(--r-xl);
   --ey-radius-pill: 9999px;
-
-  --ey-border-width: 1px;
-  --ey-border-width-thick: 2px;
-
-  /* 间距与布局 */
-  --ey-space-1: 4px;
-  --ey-space-2: 8px;
-  --ey-space-3: 12px;
-  --ey-space-4: 16px;
-  --ey-space-5: 24px;
-  --ey-space-6: 32px;
-  --ey-space-7: 40px;
-  --ey-space-8: 48px;
-  --ey-space-9: 64px;
-  --ey-space-10: 80px;
-
-  --ey-wrap: 1240px;
-  --ey-article-max: 760px;
-  --ey-gutter: 24px;
-  --ey-pad: clamp(16px, 4vw, 40px);
-  --ey-topbar-h: 60px;
-  --ey-hero-min-h: 520px;
-
-  /* 物理弹簧动效曲线 */
-  --ey-dur-instant: 70ms;
-  --ey-dur-fast: 180ms;
-  --ey-dur-normal: 360ms;
-  --ey-dur-slow: 720ms;
-  --ey-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ey-ease-spring: cubic-bezier(0.34, 1.56, 0.45, 1);
-  --ey-ease-gentle: cubic-bezier(0.22, 1.12, 0.36, 1);
-
-  /* 毛玻璃模糊基准（由 data-fx 控制动态缩放）*/
-  --ey-blur: 26px;
-  --ey-blur-sm: 12px;
-  --ey-sat: 1.7;
+  --ey-blur: var(--blur);
+  --ey-sat: var(--sat);
 }
 
-/* ===================================================================
-   特效等级响应 (data-fx)
-   =================================================================== */
-:root[data-theme="spatial"][data-fx="high"],
-:root[data-theme="spatial"]:not([data-fx="low"]):not([data-fx="off"]) {
-  --ey-blur: 26px;
-  --ey-blur-sm: 14px;
-  --ey-fx-ambient: 1;
+/* ============ 浅色模式 (Light) ============ */
+:root[data-theme="spatial"][data-mode="light"] {
+  color-scheme: light;
+  --base: #eef1f6;
+  --blob-1: #a9c1e8;
+  --blob-2: #f3cbb0;
+  --blob-3: #c9c3e6;
+  --blob-4: #b8dde6;
+  --ink: #172033;
+  --ink-2: #4b566c;
+  --ink-3: #8a93a6;
+  --accent: #3d7bff;
+  --accent-ink: #fff;
+  --t2: #9867f0;
+  --ok: #1fae7e;
+  --fail: #ec5b5b;
+  --glass-fill: rgba(255, 255, 255, .44);
+  --glass-strong: rgba(255, 255, 255, .66);
+  --glass-fallback: rgba(248, 250, 253, .94);
+  --glass-inset: rgba(255, 255, 255, .9);
+  --edge-1: rgba(255, 255, 255, .95);
+  --edge-2: rgba(255, 255, 255, .25);
+  --edge-3: rgba(255, 255, 255, .6);
+  --flat: rgba(255, 255, 255, .5);
+  --flat-line: rgba(23, 32, 51, .06);
+  --line: rgba(23, 32, 51, .08);
+  --line-2: rgba(23, 32, 51, .14);
+  --cap-fill: rgba(255, 255, 255, .78);
+  --kbd: rgba(23, 32, 51, .06);
+  --shadow: 38 52 92;
+  --spec: rgba(255, 255, 255, .7);
+  --code-bg: rgba(255, 255, 255, .5);
+  --stage: rgba(240, 244, 250, .55);
+  --scrim: rgba(226, 232, 242, .3);
+  --grain-op: .05;
+
+  /* 桥接 --ey-* 与 --vp-* */
+  --ey-bg: var(--base);
+  --ey-fg: var(--ink);
+  --ey-fg-2: var(--ink-2);
+  --ey-fg-3: var(--ink-3);
+  --ey-surface: var(--glass-fill);
+  --ey-surface-2: var(--glass-strong);
+  --ey-accent: var(--accent);
+  --ey-accent-ink: var(--accent-ink);
+  --ey-line: var(--line);
+  --ey-line-2: var(--line-2);
+
+  --vp-c-bg: var(--base);
+  --vp-c-bg-soft: var(--glass-fill);
+  --vp-c-bg-elv: var(--glass-strong);
+  --vp-c-text-1: var(--ink);
+  --vp-c-text-2: var(--ink-2);
+  --vp-c-text-3: var(--ink-3);
+  --vp-c-brand-1: var(--accent);
+  --vp-c-brand-2: var(--t2);
+  --vp-c-divider: var(--line);
 }
 
-:root[data-theme="spatial"][data-fx="low"] {
-  --ey-blur: 8px;
-  --ey-blur-sm: 4px;
-  --ey-fx-ambient: 0;
-}
-
-:root[data-theme="spatial"][data-fx="off"] {
-  --ey-blur: 0px;
-  --ey-blur-sm: 0px;
-  --ey-fx-ambient: 0;
-}
-
-/* ===================================================================
-   深色模式 (Dark Mode)
-   =================================================================== */
+/* ============ 深色模式 (Dark) ============ */
 :root[data-theme="spatial"][data-mode="dark"],
 :root[data-theme="spatial"]:not([data-mode="light"]) {
   color-scheme: dark;
+  --base: #0e1117;
+  --blob-1: #1f3466;
+  --blob-2: #4d2944;
+  --blob-3: #2a2660;
+  --blob-4: #0d4950;
+  --ink: #e8ecf4;
+  --ink-2: #a5aec0;
+  --ink-3: #6c7589;
+  --accent: #6e9bff;
+  --accent-ink: #0b1020;
+  --t2: #b996ff;
+  --ok: #4fd8a6;
+  --fail: #ff7f7a;
+  --glass-fill: rgba(30, 36, 52, .46);
+  --glass-strong: rgba(24, 29, 42, .74);
+  --glass-fallback: rgba(22, 26, 37, .95);
+  --glass-inset: rgba(255, 255, 255, .12);
+  --edge-1: rgba(255, 255, 255, .26);
+  --edge-2: rgba(255, 255, 255, .03);
+  --edge-3: rgba(255, 255, 255, .1);
+  --flat: rgba(255, 255, 255, .045);
+  --flat-line: rgba(255, 255, 255, .06);
+  --line: rgba(255, 255, 255, .07);
+  --line-2: rgba(255, 255, 255, .14);
+  --cap-fill: rgba(255, 255, 255, .085);
+  --kbd: rgba(255, 255, 255, .08);
+  --shadow: 0 0 0;
+  --spec: rgba(255, 255, 255, .13);
+  --code-bg: rgba(8, 11, 18, .45);
+  --stage: rgba(8, 11, 18, .35);
+  --scrim: rgba(6, 8, 12, .4);
+  --grain-op: .07;
 
-  --ey-bg: #0e1117;
-  --ey-surface: rgba(30, 36, 52, 0.46);
-  --ey-surface-2: rgba(24, 29, 42, 0.74);
-  --ey-surface-3: rgba(38, 46, 68, 0.85);
-  --ey-glass-fallback: rgba(22, 26, 37, 0.95);
+  /* 桥接 --ey-* 与 --vp-* */
+  --ey-bg: var(--base);
+  --ey-fg: var(--ink);
+  --ey-fg-2: var(--ink-2);
+  --ey-fg-3: var(--ink-3);
+  --ey-surface: var(--glass-fill);
+  --ey-surface-2: var(--glass-strong);
+  --ey-accent: var(--accent);
+  --ey-accent-ink: var(--accent-ink);
+  --ey-line: var(--line);
+  --ey-line-2: var(--line-2);
 
-  --ey-fg: #e8ecf4;
-  --ey-fg-2: #a5aec0;
-  --ey-fg-3: #6c7589;
-  --ey-fg-disabled: #4e576e;
-
-  /* 核心强调色与多重微光 */
-  --ey-accent: #6e9bff;
-  --ey-accent-ink: #0b1020;
-  --ey-accent-soft: rgba(110, 155, 255, 0.16);
-  --ey-accent-2: #b996ff;
-  --ey-accent-2-ink: #ffffff;
-  --ey-accent-ok: #4fd8a6;
-  --ey-accent-warn: #fbbf24;
-  --ey-accent-fail: #ff7f7a;
-
-  /* 空间边框边缘光晕 */
-  --ey-line: rgba(255, 255, 255, 0.08);
-  --ey-line-2: rgba(255, 255, 255, 0.16);
-  --ey-line-accent: rgba(110, 155, 255, 0.45);
-  --ey-edge-top: rgba(255, 255, 255, 0.26);
-
-  /* 漂移 Blob 色值 */
-  --ey-blob-1: #1f3466;
-  --ey-blob-2: #4d2944;
-  --ey-blob-3: #2a2660;
-  --ey-blob-4: #0d4950;
-  --ey-grain-op: 0.07;
-
-  --ey-code-bg: rgba(8, 11, 18, 0.55);
-  --ey-grid-line: rgba(110, 155, 255, 0.05);
-  --ey-grid-glow: rgba(110, 155, 255, 0.22);
-
-  --ey-vessel-note: rgba(110, 155, 255, 0.12);
-  --ey-vessel-tip: rgba(79, 216, 166, 0.12);
-  --ey-vessel-warn: rgba(251, 191, 36, 0.12);
-  --ey-vessel-danger: rgba(255, 127, 122, 0.12);
-
-  --ey-shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
-  --ey-shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
-  --ey-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --vp-c-bg: var(--base);
+  --vp-c-bg-soft: var(--glass-fill);
+  --vp-c-bg-elv: var(--glass-strong);
+  --vp-c-text-1: var(--ink);
+  --vp-c-text-2: var(--ink-2);
+  --vp-c-text-3: var(--ink-3);
+  --vp-c-brand-1: var(--accent);
+  --vp-c-brand-2: var(--t2);
+  --vp-c-divider: var(--line);
 }
 
-/* ===================================================================
-   浅色模式 (Light Mode)
-   =================================================================== */
-:root[data-theme="spatial"][data-mode="light"] {
-  color-scheme: light;
-
-  --ey-bg: #eef1f6;
-  --ey-surface: rgba(255, 255, 255, 0.48);
-  --ey-surface-2: rgba(255, 255, 255, 0.72);
-  --ey-surface-3: rgba(255, 255, 255, 0.88);
-  --ey-glass-fallback: rgba(248, 250, 253, 0.96);
-
-  --ey-fg: #172033;
-  --ey-fg-2: #4b566c;
-  --ey-fg-3: #8a93a6;
-  --ey-fg-disabled: #b0b7c7;
-
-  --ey-accent: #3d7bff;
-  --ey-accent-ink: #ffffff;
-  --ey-accent-soft: rgba(61, 123, 255, 0.14);
-  --ey-accent-2: #9867f0;
-  --ey-accent-2-ink: #ffffff;
-  --ey-accent-ok: #1fae7e;
-  --ey-accent-warn: #d97706;
-  --ey-accent-fail: #ec5b5b;
-
-  --ey-line: rgba(23, 32, 51, 0.08);
-  --ey-line-2: rgba(23, 32, 51, 0.16);
-  --ey-line-accent: rgba(61, 123, 255, 0.4);
-  --ey-edge-top: rgba(255, 255, 255, 0.95);
-
-  --ey-blob-1: #a9c1e8;
-  --ey-blob-2: #f3cbb0;
-  --ey-blob-3: #c9c3e6;
-  --ey-blob-4: #b8dde6;
-  --ey-grain-op: 0.05;
-
-  --ey-code-bg: rgba(255, 255, 255, 0.6);
-  --ey-grid-line: rgba(61, 123, 255, 0.05);
-  --ey-grid-glow: rgba(61, 123, 255, 0.18);
-
-  --ey-vessel-note: rgba(61, 123, 255, 0.08);
-  --ey-vessel-tip: rgba(31, 174, 126, 0.08);
-  --ey-vessel-warn: rgba(217, 119, 6, 0.1);
-  --ey-vessel-danger: rgba(236, 91, 91, 0.08);
-
-  --ey-shadow-sm: 0 4px 14px rgba(38, 52, 92, 0.08);
-  --ey-shadow-md: 0 10px 30px rgba(38, 52, 92, 0.12);
-  --ey-shadow-lg: 0 20px 50px rgba(38, 52, 92, 0.16);
-}
-
-/* ===================================================================
-   VitePress 变量映射
-   =================================================================== */
 :root[data-theme="spatial"] {
-  --vp-c-bg: var(--ey-bg);
-  --vp-c-bg-soft: var(--ey-surface);
-  --vp-c-bg-elv: var(--ey-surface-2);
-  --vp-c-text-1: var(--ey-fg);
-  --vp-c-text-2: var(--ey-fg-2);
-  --vp-c-text-3: var(--ey-fg-3);
-  --vp-c-brand-1: var(--ey-accent);
-  --vp-c-brand-2: var(--ey-accent-2);
-  --vp-c-divider: var(--ey-line);
-  --vp-code-block-bg: var(--ey-code-bg);
-  --vp-font-family-base: var(--ey-font-body);
-  --vp-font-family-mono: var(--ey-font-mono);
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --ok-soft: color-mix(in srgb, var(--ok) 16%, transparent);
+  --fail-soft: color-mix(in srgb, var(--fail) 16%, transparent);
 }
 
-/* 空间主题下毛玻璃卡片通用增强 */
-:root[data-theme="spatial"] .ey-callout,
-:root[data-theme="spatial"] .ey-prev-next__link,
-:root[data-theme="spatial"] .ey-related-card,
-:root[data-theme="spatial"] .ey-diagram-cas {
-  backdrop-filter: blur(var(--ey-blur)) saturate(var(--ey-sat));
-  -webkit-backdrop-filter: blur(var(--ey-blur)) saturate(var(--ey-sat));
-  box-shadow: inset 0 1px 0 var(--ey-edge-top, rgba(255,255,255,0.15)), var(--ey-shadow-sm);
-  border-radius: var(--ey-radius-md);
+/* 空间主题下 VPNavBar 亚克力毛玻璃 */
+:root[data-theme="spatial"] .VPNavBar {
+  background: var(--glass-fill) !important;
+  backdrop-filter: blur(var(--blur)) saturate(var(--sat)) !important;
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(var(--sat)) !important;
+  border-bottom: 1px solid var(--line) !important;
 }
 
-@supports not (backdrop-filter: blur(10px)) {
-  :root[data-theme="spatial"] .ey-callout,
-  :root[data-theme="spatial"] .ey-prev-next__link,
-  :root[data-theme="spatial"] .ey-related-card,
-  :root[data-theme="spatial"] .ey-diagram-cas {
-    background-color: var(--ey-glass-fallback);
-  }
-}

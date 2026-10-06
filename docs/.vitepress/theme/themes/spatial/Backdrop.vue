@@ -1,109 +1,83 @@
 <template>
-  <!--
-    空间主题专属 Backdrop (背景层)
-    实现：多重漂移径向渐变光晕 (Drifting Blobs) + SVG 噪点肌理 (Grain)
-    响应 data-fx：
-      high: 完整平滑漂移动画
-      low: 静态微光柔和渐变
-      off: 纯色背景，不消耗任何动画帧
-  -->
-  <div class="spatial-backdrop" aria-hidden="true">
-    <div class="spatial-sky">
-      <div class="spatial-blob spatial-blob--1"></div>
-      <div class="spatial-blob spatial-blob--2"></div>
-      <div class="spatial-blob spatial-blob--3"></div>
-      <div class="spatial-blob spatial-blob--4"></div>
-    </div>
-    <!-- 噪点纹理 -->
-    <div class="spatial-grain"></div>
+  <div class="sky" aria-hidden="true">
+    <i class="blob b1"></i>
+    <i class="blob b2"></i>
+    <i class="blob b3"></i>
+    <i class="blob b4"></i>
+    <div class="grain"></div>
   </div>
 </template>
 
 <style scoped>
-.spatial-backdrop {
+.sky {
   position: fixed;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  background-color: var(--ey-bg);
+  pointer-events: none;
+  background: var(--base);
 }
 
-.spatial-sky {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.spatial-blob {
+.blob {
   position: absolute;
   width: 72vmax;
   height: 72vmax;
   border-radius: 50%;
+  background: radial-gradient(circle at center, var(--c) 0%, color-mix(in srgb, var(--c) 40%, transparent) 34%, transparent 66%);
   will-change: transform;
-  filter: blur(40px);
+  animation: drift 46s ease-in-out infinite alternate;
 }
 
-.spatial-blob--1 {
-  background: radial-gradient(circle at center, var(--ey-blob-1) 0%, transparent 66%);
+.b1 {
+  --c: var(--blob-1);
   left: -22vmax;
   top: -26vmax;
-  animation: spatial-drift 46s ease-in-out infinite alternate;
 }
 
-.spatial-blob--2 {
-  background: radial-gradient(circle at center, var(--ey-blob-2) 0%, transparent 66%);
+.b2 {
+  --c: var(--blob-2);
   right: -24vmax;
   top: -6vmax;
-  animation: spatial-drift 54s ease-in-out -12s infinite alternate;
+  animation-duration: 54s;
+  animation-delay: -12s;
 }
 
-.spatial-blob--3 {
-  background: radial-gradient(circle at center, var(--ey-blob-3) 0%, transparent 66%);
+.b3 {
+  --c: var(--blob-3);
   left: 18vmax;
   bottom: -40vmax;
-  animation: spatial-drift 60s ease-in-out -30s infinite alternate;
+  animation-duration: 60s;
+  animation-delay: -30s;
 }
 
-.spatial-blob--4 {
-  background: radial-gradient(circle at center, var(--ey-blob-4) 0%, transparent 66%);
+.b4 {
+  --c: var(--blob-4);
   left: -30vmax;
   bottom: -30vmax;
   width: 56vmax;
   height: 56vmax;
-  opacity: 0.7;
-  animation: spatial-drift 50s ease-in-out -20s infinite alternate;
+  animation-duration: 50s;
+  animation-delay: -20s;
+  opacity: .7;
 }
 
-@keyframes spatial-drift {
+@keyframes drift {
   0% { transform: translate3d(0, 0, 0) scale(1); }
-  33% { transform: translate3d(5vmax, 3vmax, 0) scale(1.06); }
-  66% { transform: translate3d(-3vmax, 6vmax, 0) scale(0.95); }
-  100% { transform: translate3d(4vmax, -2vmax, 0) scale(1.03); }
+  33% { transform: translate3d(6vmax, 4vmax, 0) scale(1.08); }
+  66% { transform: translate3d(-4vmax, 7vmax, 0) scale(.94); }
+  100% { transform: translate3d(5vmax, -3vmax, 0) scale(1.04); }
 }
 
-/* 噪点层 */
-.spatial-grain {
+.grain {
   position: absolute;
   inset: 0;
-  opacity: var(--ey-grain-op, 0.06);
+  opacity: var(--grain-op);
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-/* 低特效或省电模式降级 */
-:root[data-fx="low"] .spatial-blob {
-  animation: none;
-  filter: blur(24px);
-}
-
-:root[data-fx="off"] .spatial-sky,
-:root[data-fx="off"] .spatial-grain {
-  display: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .spatial-blob {
-    animation: none;
+  .blob {
+    animation: none !important;
   }
 }
 </style>
