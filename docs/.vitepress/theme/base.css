@@ -1,0 +1,621 @@
+/**
+ * THEME BASE STYLES
+ * 基础骨架样式 — 所有样式只引用 --ey-* 变量，不写死颜色/字体/圆角
+ *
+ * 此文件的规则适用于三个主题共同的骨架结构：
+ * - 正文排版（typography）
+ * - 代码块样式扩展
+ * - 链接样式
+ * - 提示框（note/tip/warning/danger）
+ * - 文章骨架中的共用组件（面包屑、进度、旁注）
+ * - 响应式断点基础
+ * - 无障碍基础
+ *
+ * 不包含：
+ * - 主题专属的背景/Hero/Toc 样式（在 themes/[theme]/xxx.css 中）
+ * - VitePress 覆盖变量（在各 tokens/[theme].css 中）
+ */
+
+/* ===================================================================
+   1. 全局基础重置
+   =================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  /* 安全区域适配（刘海屏 / 底部手势条）*/
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  scroll-padding-top: calc(var(--ey-topbar-h, 56px) + var(--ey-space-5, 24px));
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--ey-bg);
+  color: var(--ey-fg);
+  font-family: var(--ey-font-body);
+  font-size: var(--ey-text-base);
+  line-height: var(--ey-leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 禁止横向溢出 */
+  overflow-x: hidden;
+}
+
+/* ===================================================================
+   2. 无障碍：焦点环
+   =================================================================== */
+/* 仅键盘导航时显示焦点环，鼠标点击不显示 */
+:focus-visible {
+  outline: 2px solid var(--ey-accent);
+  outline-offset: 3px;
+  border-radius: var(--ey-radius-sm, 2px);
+}
+
+/* 高对比度模式下保持可见性 */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid ButtonText;
+  }
+}
+
+/* ===================================================================
+   3. 正文排版 (Typography)
+   应用于 .ey-prose 容器内
+   =================================================================== */
+.ey-prose {
+  max-width: var(--ey-article-max, 740px);
+  font-family: var(--ey-font-body);
+  font-size: var(--ey-text-base);
+  line-height: var(--ey-leading-normal);
+  color: var(--ey-fg);
+  /* 宽内容仅在容器内滚动 */
+  overflow-x: hidden;
+}
+
+/* 段落 */
+.ey-prose p {
+  margin: 0 0 1.2em;
+}
+
+/* 标题 */
+.ey-prose h1,
+.ey-prose h2,
+.ey-prose h3,
+.ey-prose h4 {
+  font-family: var(--ey-font-display);
+  font-weight: 700;
+  line-height: var(--ey-leading-tight);
+  letter-spacing: var(--ey-tracking-tight);
+  color: var(--ey-fg);
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+}
+
+.ey-prose h1 { font-size: var(--ey-text-2xl); margin-top: 0; }
+.ey-prose h2 { font-size: var(--ey-text-xl); border-bottom: var(--ey-border-width) solid var(--ey-line); padding-bottom: 0.4em; }
+.ey-prose h3 { font-size: var(--ey-text-lg); }
+.ey-prose h4 { font-size: var(--ey-text-md); }
+
+/* 链接 */
+.ey-prose a {
+  color: var(--ey-accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--ey-accent), 0.4);
+  text-underline-offset: 3px;
+  transition: color var(--ey-dur-fast) var(--ey-ease-standard),
+              text-decoration-color var(--ey-dur-fast) var(--ey-ease-standard);
+}
+
+.ey-prose a:hover {
+  text-decoration-color: var(--ey-accent);
+}
+
+/* 行内代码 */
+.ey-prose code:not(pre code) {
+  font-family: var(--ey-font-mono);
+  font-size: 0.875em;
+  background-color: var(--ey-accent-soft);
+  color: var(--ey-accent);
+  padding: 0.15em 0.4em;
+  border-radius: var(--ey-radius-sm);
+  border: var(--ey-border-width) solid var(--ey-line);
+  word-break: break-word;
+}
+
+/* 代码块容器 */
+.ey-prose pre {
+  background-color: var(--ey-code-bg);
+  border: var(--ey-border-width) solid var(--ey-line);
+  border-radius: var(--ey-radius-md);
+  padding: var(--ey-space-5) var(--ey-space-5);
+  overflow-x: auto;  /* 代码块横向滚动仅在自身 */
+  font-family: var(--ey-font-mono);
+  font-size: var(--ey-text-sm);
+  line-height: 1.6;
+  margin: 1.5em 0;
+}
+
+.ey-prose pre code {
+  font-family: inherit;
+  font-size: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* 列表 */
+.ey-prose ul,
+.ey-prose ol {
+  padding-left: 1.8em;
+  margin: 0 0 1.2em;
+}
+
+.ey-prose li {
+  margin-bottom: 0.4em;
+}
+
+.ey-prose li > ul,
+.ey-prose li > ol {
+  margin-top: 0.4em;
+  margin-bottom: 0;
+}
+
+/* 引用块 */
+.ey-prose blockquote {
+  margin: 1.5em 0;
+  padding: var(--ey-space-3) var(--ey-space-4);
+  border-left: 3px solid var(--ey-accent);
+  background-color: var(--ey-accent-soft);
+  border-radius: 0 var(--ey-radius-md) var(--ey-radius-md) 0;
+  color: var(--ey-fg-2);
+  font-style: italic;
+}
+
+.ey-prose blockquote p {
+  margin: 0;
+}
+
+/* 表格 */
+.ey-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--ey-text-sm);
+  margin: 1.5em 0;
+  /* 宽表格横向滚动 */
+  display: block;
+  overflow-x: auto;
+}
+
+.ey-prose thead {
+  background-color: var(--ey-surface);
+}
+
+.ey-prose th,
+.ey-prose td {
+  padding: var(--ey-space-2) var(--ey-space-4);
+  border: var(--ey-border-width) solid var(--ey-line-2);
+  text-align: left;
+}
+
+.ey-prose th {
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--ey-fg);
+}
+
+.ey-prose tr:nth-child(even) td {
+  background-color: var(--ey-surface);
+}
+
+/* 分割线 */
+.ey-prose hr {
+  border: none;
+  border-top: var(--ey-border-width) solid var(--ey-line-2);
+  margin: 2em 0;
+}
+
+/* 图片 */
+.ey-prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--ey-radius-md);
+  display: block;
+  margin: 1.5em auto;
+}
+
+/* 文字选中 */
+::selection {
+  background-color: var(--ey-accent-soft);
+  color: var(--ey-fg);
+}
+
+/* ===================================================================
+   4. 提示框 (Callout Blocks)
+   覆盖 VitePress 默认 custom-block 或独立使用 .ey-callout
+   =================================================================== */
+.ey-callout,
+.custom-block {
+  border-radius: var(--ey-radius-md);
+  padding: var(--ey-space-4) var(--ey-space-5);
+  margin: 1.5em 0;
+  border-left: 3px solid;
+}
+
+.ey-callout--note,
+.custom-block.info {
+  background-color: var(--ey-vessel-note);
+  border-color: var(--ey-accent-2);
+  color: var(--ey-fg);
+}
+
+.ey-callout--tip,
+.custom-block.tip {
+  background-color: var(--ey-vessel-tip);
+  border-color: var(--ey-accent-ok);
+}
+
+.ey-callout--warning,
+.custom-block.warning {
+  background-color: var(--ey-vessel-warn);
+  border-color: var(--ey-accent-warn);
+}
+
+.ey-callout--danger,
+.custom-block.danger {
+  background-color: var(--ey-vessel-danger);
+  border-color: var(--ey-accent-fail);
+}
+
+.ey-callout__title,
+.custom-block-title {
+  font-family: var(--ey-font-display);
+  font-weight: 700;
+  font-size: var(--ey-text-sm);
+  letter-spacing: var(--ey-tracking-wide);
+  text-transform: uppercase;
+  margin-bottom: var(--ey-space-2);
+}
+
+/* ===================================================================
+   5. 面包屑 (Breadcrumb)
+   =================================================================== */
+.ey-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ey-space-2);
+  font-size: var(--ey-text-sm);
+  color: var(--ey-fg-3);
+  margin-bottom: var(--ey-space-5);
+  font-family: var(--ey-font-mono);
+  letter-spacing: var(--ey-tracking-wide);
+}
+
+.ey-breadcrumb__item {
+  display: flex;
+  align-items: center;
+  gap: var(--ey-space-2);
+}
+
+.ey-breadcrumb__sep {
+  color: var(--ey-fg-disabled);
+  user-select: none;
+}
+
+.ey-breadcrumb a {
+  color: var(--ey-fg-3);
+  text-decoration: none;
+  transition: color var(--ey-dur-fast);
+}
+
+.ey-breadcrumb a:hover {
+  color: var(--ey-accent);
+}
+
+.ey-breadcrumb__current {
+  color: var(--ey-fg-2);
+  font-weight: 500;
+}
+
+/* ===================================================================
+   6. 章节进度条 (Reading Progress)
+   =================================================================== */
+.ey-reading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--ey-accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 1000;
+  transition: transform var(--ey-dur-instant) linear;
+  pointer-events: none;
+}
+
+/* 工程主题：顶部细条（移动端默认） */
+.ey-reading-bar--top {
+  display: block;
+}
+
+/* ===================================================================
+   7. 上下篇导航 (PrevNext)
+   =================================================================== */
+.ey-prev-next {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ey-space-5);
+  margin-top: var(--ey-space-9);
+  padding-top: var(--ey-space-6);
+  border-top: var(--ey-border-width) solid var(--ey-line);
+}
+
+@media (max-width: 480px) {
+  .ey-prev-next {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ey-prev-next__link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ey-space-1);
+  padding: var(--ey-space-4) var(--ey-space-5);
+  background: var(--ey-surface);
+  border: var(--ey-border-width) solid var(--ey-line);
+  border-radius: var(--ey-radius-md);
+  text-decoration: none;
+  transition: border-color var(--ey-dur-fast), background var(--ey-dur-fast);
+  min-height: 44px;  /* 可触摸最小高度 */
+}
+
+.ey-prev-next__link:hover {
+  border-color: var(--ey-accent);
+  background: var(--ey-surface-2);
+}
+
+.ey-prev-next__link--next {
+  text-align: right;
+}
+
+.ey-prev-next__label {
+  font-size: var(--ey-text-xs);
+  letter-spacing: var(--ey-tracking-wider);
+  text-transform: uppercase;
+  font-family: var(--ey-font-mono);
+  color: var(--ey-fg-3);
+}
+
+.ey-prev-next__title {
+  font-size: var(--ey-text-base);
+  font-weight: 600;
+  color: var(--ey-fg);
+  line-height: var(--ey-leading-tight);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ey-prev-next__progress {
+  font-size: var(--ey-text-xs);
+  color: var(--ey-fg-3);
+  font-family: var(--ey-font-mono);
+}
+
+/* ===================================================================
+   8. 旁注 / 注释块 (Sidenote)
+   桌面：右侧浮出；移动：折叠为行内提示框
+   =================================================================== */
+.ey-sidenote {
+  font-size: var(--ey-text-sm);
+  color: var(--ey-fg-2);
+  border-left: 2px solid var(--ey-line-2);
+  padding-left: var(--ey-space-3);
+  margin: var(--ey-space-3) 0;
+}
+
+@media (min-width: 1280px) {
+  .ey-prose {
+    position: relative;
+  }
+
+  .ey-sidenote {
+    position: absolute;
+    right: calc(-1 * min(260px, 22vw));
+    width: min(240px, 20vw);
+    border-left: none;
+    padding-left: 0;
+    padding-top: 0;
+    border-top: 2px solid var(--ey-line-2);
+    margin: 0;
+    font-size: var(--ey-text-xs);
+  }
+}
+
+/* 移动端：旁注变折叠框 */
+@media (max-width: 768px) {
+  .ey-sidenote {
+    background: var(--ey-surface);
+    border-left: none;
+    border: var(--ey-border-width) solid var(--ey-line-2);
+    border-radius: var(--ey-radius-md);
+    padding: var(--ey-space-3) var(--ey-space-4);
+  }
+}
+
+/* ===================================================================
+   9. 主题切换器（共用外壳，各主题填充内容）
+   位置：导航栏右侧
+   =================================================================== */
+.ey-theme-switcher {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ey-theme-switcher__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ey-space-2);
+  padding: var(--ey-space-2) var(--ey-space-3);
+  background: var(--ey-surface);
+  border: var(--ey-border-width) solid var(--ey-line);
+  border-radius: var(--ey-radius-pill);
+  font-size: var(--ey-text-sm);
+  font-family: var(--ey-font-display);
+  font-weight: 600;
+  color: var(--ey-fg);
+  cursor: pointer;
+  transition: border-color var(--ey-dur-fast), background var(--ey-dur-fast);
+  min-height: 36px;
+  min-width: 44px;
+}
+
+.ey-theme-switcher__btn:hover {
+  border-color: var(--ey-accent);
+  background: var(--ey-surface-2);
+}
+
+/* 切换菜单下拉面板 */
+.ey-theme-menu {
+  position: absolute;
+  top: calc(100% + var(--ey-space-2));
+  right: 0;
+  min-width: 220px;
+  background: var(--ey-surface-2);
+  border: var(--ey-border-width) solid var(--ey-line-2);
+  border-radius: var(--ey-radius-lg);
+  padding: var(--ey-space-2) 0;
+  z-index: 200;
+  box-shadow: var(--ey-shadow-lg);
+  /* 初始隐藏 */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity var(--ey-dur-fast), transform var(--ey-dur-fast), visibility 0ms var(--ey-dur-fast);
+}
+
+.ey-theme-menu[data-open] {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--ey-dur-fast), transform var(--ey-dur-fast);
+}
+
+.ey-theme-menu__section-label {
+  font-size: var(--ey-text-xs);
+  letter-spacing: var(--ey-tracking-wider);
+  text-transform: uppercase;
+  font-family: var(--ey-font-mono);
+  color: var(--ey-fg-3);
+  padding: var(--ey-space-2) var(--ey-space-4) var(--ey-space-1);
+}
+
+.ey-theme-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--ey-space-3);
+  width: 100%;
+  padding: var(--ey-space-2) var(--ey-space-4);
+  font-size: var(--ey-text-sm);
+  color: var(--ey-fg-2);
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-align: left;
+  border-radius: var(--ey-radius-sm);
+  transition: background var(--ey-dur-instant), color var(--ey-dur-instant);
+  min-height: 44px;
+}
+
+.ey-theme-menu__item:hover {
+  background: var(--ey-surface-3);
+  color: var(--ey-fg);
+}
+
+.ey-theme-menu__item[aria-checked="true"] {
+  color: var(--ey-accent);
+  font-weight: 600;
+}
+
+.ey-theme-menu__item--disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.ey-theme-menu__item-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.ey-theme-menu__item-note {
+  font-size: var(--ey-text-xs);
+  color: var(--ey-fg-3);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.ey-theme-menu__divider {
+  height: var(--ey-border-width);
+  background: var(--ey-line);
+  margin: var(--ey-space-2) 0;
+}
+
+/* ===================================================================
+   10. 响应式断点基础 (Mobile-First)
+   断点：480 / 768 / 1024 / 1280
+   =================================================================== */
+
+/* 基础：≤480px（最小手机竖屏）*/
+@media (max-width: 480px) {
+  .ey-prose {
+    font-size: var(--ey-text-base);  /* 至少 15px */
+  }
+  .ey-prose pre {
+    font-size: 13px;  /* 代码块 13px */
+    border-radius: 0;  /* 小屏代码块去圆角，贴边 */
+    margin-left: calc(-1 * var(--ey-pad));
+    margin-right: calc(-1 * var(--ey-pad));
+    padding-left: var(--ey-pad);
+    padding-right: var(--ey-pad);
+  }
+}
+
+/* 手机横屏兼容 */
+@media (max-height: 480px) and (orientation: landscape) {
+  :root {
+    --ey-topbar-h: 48px;
+  }
+}
+
+/* ===================================================================
+   11. 无障碍：禁用动效
+   =================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ey-reading-bar {
+    transition: none;
+  }
+}

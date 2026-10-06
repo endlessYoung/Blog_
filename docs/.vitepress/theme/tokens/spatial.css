@@ -1,0 +1,159 @@
+/**
+ * SPATIAL THEME TOKENS
+ * 空间主题设计变量 — 从 prototypes/spatial/ 提取
+ * 作用域：[data-theme="spatial"]
+ */
+
+:root[data-theme="spatial"] {
+  --ey-font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', sans-serif;
+  --ey-font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', sans-serif;
+  --ey-font-mono: 'SF Mono', Menlo, Consolas, monospace;
+
+  --ey-text-xs: clamp(11px, 2.4vw, 12px);
+  --ey-text-sm: clamp(12px, 2.6vw, 13px);
+  --ey-text-base: clamp(15px, 3.2vw, 16px);
+  --ey-text-md: clamp(17px, 3.6vw, 18px);
+  --ey-text-lg: clamp(20px, 4vw, 22px);
+  --ey-text-xl: clamp(24px, 5vw, 28px);
+  --ey-text-2xl: clamp(30px, 6vw, 36px);
+  --ey-text-hero: clamp(38px, 8vw, 68px);
+
+  --ey-leading-tight: 1.25;
+  --ey-leading-normal: 1.65;
+  --ey-leading-loose: 1.85;
+
+  --ey-radius-none: 0px;
+  --ey-radius-sm: 8px;
+  --ey-radius-md: 14px;
+  --ey-radius-lg: 20px;
+  --ey-radius-xl: 28px;
+  --ey-radius-pill: 9999px;
+
+  --ey-border-width: 1px;
+  --ey-border-width-thick: 2px;
+
+  --ey-blur: 24px;
+  --ey-blur-sm: 12px;
+  --ey-fx-ambient: 0;
+
+  --ey-space-1: 4px;
+  --ey-space-2: 8px;
+  --ey-space-3: 12px;
+  --ey-space-4: 16px;
+  --ey-space-5: 24px;
+  --ey-space-6: 32px;
+  --ey-space-7: 40px;
+  --ey-space-8: 48px;
+  --ey-space-9: 64px;
+  --ey-space-10: 80px;
+
+  --ey-wrap: 1280px;
+  --ey-article-max: 760px;
+  --ey-gutter: 24px;
+  --ey-pad: clamp(16px, 4vw, 40px);
+  --ey-topbar-h: 60px;
+  --ey-hero-min-h: 520px;
+
+  --ey-dur-instant: 80ms;
+  --ey-dur-fast: 160ms;
+  --ey-dur-normal: 320ms;
+  --ey-dur-slow: 540ms;
+  --ey-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ey-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 深色模式 */
+:root[data-theme="spatial"][data-mode="dark"],
+:root[data-theme="spatial"]:not([data-mode="light"]) {
+  color-scheme: dark;
+  --ey-bg: #0e1117;
+  --ey-surface: rgba(26, 31, 46, 0.65);
+  --ey-surface-2: rgba(36, 43, 62, 0.75);
+  --ey-surface-3: rgba(48, 57, 82, 0.85);
+
+  --ey-fg: #f0f3f8;
+  --ey-fg-2: #a8b3cf;
+  --ey-fg-3: #7582a3;
+  --ey-fg-disabled: #4e5872;
+
+  --ey-accent: #6e9bff;
+  --ey-accent-ink: #ffffff;
+  --ey-accent-soft: rgba(110, 155, 255, 0.15);
+  --ey-accent-2: #c084fc;
+  --ey-accent-2-ink: #ffffff;
+  --ey-accent-ok: #34d399;
+  --ey-accent-warn: #fbbf24;
+  --ey-accent-fail: #f87171;
+
+  --ey-line: rgba(255, 255, 255, 0.08);
+  --ey-line-2: rgba(255, 255, 255, 0.16);
+  --ey-line-accent: rgba(110, 155, 255, 0.4);
+
+  --ey-code-bg: #131722;
+  --ey-grid-line: rgba(110, 155, 255, 0.04);
+  --ey-grid-glow: rgba(110, 155, 255, 0.2);
+
+  --ey-vessel-note: rgba(110, 155, 255, 0.12);
+  --ey-vessel-tip: rgba(52, 211, 153, 0.12);
+  --ey-vessel-warn: rgba(251, 191, 36, 0.12);
+  --ey-vessel-danger: rgba(248, 113, 113, 0.12);
+
+  --ey-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --ey-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --ey-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* 浅色模式 */
+:root[data-theme="spatial"][data-mode="light"] {
+  color-scheme: light;
+  --ey-bg: #f5f7fc;
+  --ey-surface: rgba(255, 255, 255, 0.7);
+  --ey-surface-2: rgba(240, 244, 255, 0.8);
+  --ey-surface-3: rgba(228, 235, 252, 0.9);
+
+  --ey-fg: #131728;
+  --ey-fg-2: #4a5472;
+  --ey-fg-3: #6e7998;
+  --ey-fg-disabled: #a0a9c2;
+
+  --ey-accent: #3b82f6;
+  --ey-accent-ink: #ffffff;
+  --ey-accent-soft: rgba(59, 130, 246, 0.12);
+  --ey-accent-2: #9333ea;
+  --ey-accent-2-ink: #ffffff;
+  --ey-accent-ok: #059669;
+  --ey-accent-warn: #d97706;
+  --ey-accent-fail: #dc2626;
+
+  --ey-line: rgba(20, 30, 60, 0.08);
+  --ey-line-2: rgba(20, 30, 60, 0.16);
+  --ey-line-accent: rgba(59, 130, 246, 0.35);
+
+  --ey-code-bg: #edf1f9;
+  --ey-grid-line: rgba(59, 130, 246, 0.05);
+  --ey-grid-glow: rgba(59, 130, 246, 0.18);
+
+  --ey-vessel-note: rgba(59, 130, 246, 0.08);
+  --ey-vessel-tip: rgba(5, 150, 105, 0.08);
+  --ey-vessel-warn: rgba(217, 119, 6, 0.1);
+  --ey-vessel-danger: rgba(220, 38, 38, 0.08);
+
+  --ey-shadow-sm: 0 4px 12px rgba(20, 30, 60, 0.06);
+  --ey-shadow-md: 0 8px 24px rgba(20, 30, 60, 0.1);
+  --ey-shadow-lg: 0 16px 40px rgba(20, 30, 60, 0.14);
+}
+
+:root[data-theme="spatial"] {
+  --vp-c-bg: var(--ey-bg);
+  --vp-c-bg-soft: var(--ey-surface);
+  --vp-c-bg-elv: var(--ey-surface-2);
+  --vp-c-text-1: var(--ey-fg);
+  --vp-c-text-2: var(--ey-fg-2);
+  --vp-c-text-3: var(--ey-fg-3);
+  --vp-c-brand-1: var(--ey-accent);
+  --vp-c-brand-2: var(--ey-accent-2);
+  --vp-c-divider: var(--ey-line);
+  --vp-code-block-bg: var(--ey-code-bg);
+  --vp-font-family-base: var(--ey-font-body);
+  --vp-font-family-mono: var(--ey-font-mono);
+}

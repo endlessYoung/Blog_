@@ -374,6 +374,43 @@ export default defineConfig({
   },
   lang: 'zh-CN',
   head: [
+    [
+      'script',
+      {},
+      `
+(function(){
+  var THEMES=['engineering','spatial','fluid'];
+  var FX_LEVELS=['auto','high','low','off'];
+  var root=document.documentElement;
+  try{
+    var savedTheme=localStorage.getItem('ey-theme');
+    var theme=THEMES.includes(savedTheme)?savedTheme:'engineering';
+    var modeKey='ey-mode-'+theme;
+    var savedMode=localStorage.getItem(modeKey);
+    var sysDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+    var mode;
+    if(theme==='fluid'){
+      mode='dark';
+    } else if(savedMode==='dark'||savedMode==='light'){
+      mode=savedMode;
+    } else {
+      mode=sysDark?'dark':'light';
+    }
+    var savedFx=localStorage.getItem('ey-fx');
+    var fx=FX_LEVELS.includes(savedFx)?savedFx:'auto';
+    root.setAttribute('data-theme',theme);
+    root.setAttribute('data-mode',mode);
+    root.setAttribute('data-fx',fx);
+    if(theme==='fluid') root.style.colorScheme='dark';
+  }catch(e){
+    var sysDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
+    root.setAttribute('data-theme','engineering');
+    root.setAttribute('data-mode',sysDark?'dark':'light');
+    root.setAttribute('data-fx','auto');
+  }
+})();
+      `.trim()
+    ],
     ['link', { rel: 'icon', href: '/Blog_/favicon.ico' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/Blog_/feed.xml' }], // 也是放在/public目录中
     // Hero 霓虹标题 / 霓虹按钮：深浅色双套变量（与 theme/custom.css 双保险）
@@ -424,7 +461,9 @@ html:not(.dark) {
     const fm = pageData.frontmatter as Record<string, any> | undefined
     // Collect noindex pages so they can be excluded from sitemap
     const key = ((pageData as any).relativePath || pageData.filePath?.replace(/^.*[\\/]docs[\\/]/, '') || '').replace(/\.md$/, '')
-    if (fm?.noindex && key) noindexPages.add(key)
+    const filename = key.split('/').pop() || ''
+    const isPureDigit = /^\d+$/.test(filename)
+    if ((fm?.noindex || fm?.draft || isPureDigit) && key) noindexPages.add(key)
     // Auto-inject created date from git cache if missing in frontmatter
     if (!fm?.created) {
       if (key && createdDates[key]) {
@@ -443,8 +482,9 @@ html:not(.dark) {
     const url = pagePath ? `${siteUrl}${base}${pagePath}` : `${siteUrl}${base}`
 
     const fm = ctx.pageData.frontmatter as Record<string, any> | undefined
-    // ??/?????????frontmatter: noindex: true?
-    if (fm?.noindex) {
+    const pageFilename = ctx.page.split('/').pop() || ''
+    const isDigitDraft = /^\d+\.md$/.test(pageFilename)
+    if (fm?.noindex || fm?.draft || isDigitDraft) {
       return [
         ['meta', { name: 'robots', content: 'noindex, nofollow' }],
       ]
@@ -613,6 +653,9 @@ html:not(.dark) {
       },
       { text: 'Flutter', link: '/Flutter/dart语言简介' },
       { text: 'Linux', link: '/Linux/Index' },
+      { text: '目录', link: '/catalog' },
+      { text: '图集', link: '/figures' },
+      { text: '归档', link: '/archive' },
     ],
 
     sidebar: {

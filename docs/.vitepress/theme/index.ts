@@ -1,5 +1,9 @@
 import '@fontsource-variable/space-grotesk'
 import Theme from 'vitepress/theme'
+import './tokens/engineering.css'
+import './tokens/spatial.css'
+import './tokens/fluid.css'
+import './base.css'
 import './style/var.css'
 import './style/tech.css'
 import './style/vp-code-group.css'
@@ -37,11 +41,23 @@ import HomeCategoryCards from './components/home/HomeCategoryCards.vue'
 import HomeMetricsStrip from './components/home/HomeMetricsStrip.vue'
 import HomeSectionHeader from './components/home/HomeSectionHeader.vue'
 import SiteNotFound from './components/SiteNotFound.vue'
+import ThemeSwitcher from './components/ThemeSwitcher.vue'
+import ArticleBreadcrumb from './components/Article/ArticleBreadcrumb.vue'
+import ArticlePrevNext from './components/Article/ArticlePrevNext.vue'
+import EngineeringBackdrop from './themes/engineering/Backdrop.vue'
+import DiagramCas from './components/Diagram/DiagramCas.vue'
+import { useTheme } from './composables/useTheme'
 // 存储滚动位置
 const scrollPositions: Record<string, number> = {}
 
 export default {
   ...Theme,
+  enhanceApp({ app }: any) {
+    if (Theme.enhanceApp) {
+      Theme.enhanceApp({ app })
+    }
+    app.component('DiagramCas', DiagramCas)
+  },
   Layout: {
     setup() {
       const route = useRoute()
@@ -230,13 +246,21 @@ export default {
           nextTick(() => { initMermaid() })
         },
       )
+      const theme = useTheme()
+      onMounted(() => {
+        theme.init()
+      })
+
       return () => [
         h(Theme.Layout, null, {
-        'layout-top': () => h(frontmatter.value.layout === 'home' ? HomeParticleField : TechBackground),
+        'layout-top': () => [
+          h(frontmatter.value.layout === 'home' ? HomeParticleField : TechBackground),
+          h(EngineeringBackdrop),
+        ],
         'not-found': () => h(SiteNotFound),
         'nav-bar-title-before': () => h(SidebarToggle),
         'nav-bar-title-after': () => h(NavBrandTitle),
-        'nav-bar-content-after': () => h(TocToggle),
+        'nav-bar-content-after': () => [h(ThemeSwitcher), h(TocToggle)],
         'home-hero-before': () => [h(HomeHeroEyebrow), h(HomeHeroCopySwitch)],
         /* 占位以保留 has-image 布局钩子；HUD 已关闭，视觉只留 journey 大卡 */
         'home-hero-image': () =>
@@ -245,8 +269,8 @@ export default {
         'home-hero-after': () => h(HomeMetricsStrip),
         'home-features-before': () => h(HomeSectionHeader),
         'home-features-after': () => h(HomeCategoryCards),
-        'doc-before': () => h(ArticleMetadata),
-        'doc-after': () => [h(SeriesNav), h(RelatedArticles), h(Comments)],
+        'doc-before': () => [h(ArticleBreadcrumb), h(ArticleMetadata)],
+        'doc-after': () => [h(ArticlePrevNext), h(SeriesNav), h(RelatedArticles), h(Comments)],
         }),
         h(ReadingProgress),
         h(ImageViewer),

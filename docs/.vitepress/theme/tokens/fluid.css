@@ -1,0 +1,114 @@
+/**
+ * FLUID THEME TOKENS
+ * 流体主题设计变量 — 从 prototypes/fluid/ 提取
+ * 作用域：[data-theme="fluid"]（仅深色）
+ */
+
+:root[data-theme="fluid"] {
+  --ey-font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+  --ey-font-body: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+  --ey-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --ey-text-xs: clamp(11px, 2.4vw, 12px);
+  --ey-text-sm: clamp(12px, 2.6vw, 13px);
+  --ey-text-base: clamp(15px, 3.2vw, 16px);
+  --ey-text-md: clamp(17px, 3.6vw, 18px);
+  --ey-text-lg: clamp(20px, 4vw, 22px);
+  --ey-text-xl: clamp(24px, 5vw, 28px);
+  --ey-text-2xl: clamp(30px, 6vw, 36px);
+  --ey-text-hero: clamp(38px, 8vw, 68px);
+
+  --ey-leading-tight: 1.25;
+  --ey-leading-normal: 1.68;
+  --ey-leading-loose: 1.9;
+
+  --ey-radius-none: 0px;
+  --ey-radius-sm: 8px;
+  --ey-radius-md: 14px;
+  --ey-radius-lg: 24px;
+  --ey-radius-xl: 44px;
+  --ey-radius-pill: 9999px;
+
+  --ey-border-width: 1px;
+  --ey-border-width-thick: 2px;
+
+  --ey-blur: 0px;
+  --ey-blur-sm: 0px;
+  --ey-fx-ambient: 1;
+
+  --ey-space-1: 4px;
+  --ey-space-2: 8px;
+  --ey-space-3: 12px;
+  --ey-space-4: 16px;
+  --ey-space-5: 24px;
+  --ey-space-6: 32px;
+  --ey-space-7: 40px;
+  --ey-space-8: 48px;
+  --ey-space-9: 64px;
+  --ey-space-10: 80px;
+
+  --ey-wrap: 1280px;
+  --ey-article-max: 760px;
+  --ey-gutter: 24px;
+  --ey-pad: clamp(16px, 4vw, 40px);
+  --ey-topbar-h: 60px;
+  --ey-hero-min-h: 520px;
+
+  --ey-dur-instant: 100ms;
+  --ey-dur-fast: 200ms;
+  --ey-dur-normal: 400ms;
+  --ey-dur-slow: 700ms;
+  --ey-ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --ey-ease-spring: cubic-bezier(0.25, 1.25, 0.5, 1);
+
+  /* 仅深色强制 color-scheme */
+  color-scheme: dark;
+  --ey-bg: #0a0c10;
+  --ey-surface: rgba(18, 22, 31, 0.7);
+  --ey-surface-2: rgba(26, 32, 45, 0.8);
+  --ey-surface-3: rgba(35, 43, 61, 0.9);
+
+  --ey-fg: #f3f6fc;
+  --ey-fg-2: #a2acc0;
+  --ey-fg-3: #6d788f;
+  --ey-fg-disabled: #464f61;
+
+  --ey-accent: #ff5a36;
+  --ey-accent-ink: #ffffff;
+  --ey-accent-soft: rgba(255, 90, 54, 0.15);
+  --ey-accent-2: #06b6d4;
+  --ey-accent-2-ink: #ffffff;
+  --ey-accent-ok: #10b981;
+  --ey-accent-warn: #f59e0b;
+  --ey-accent-fail: #f43f5e;
+
+  --ey-line: rgba(255, 255, 255, 0.08);
+  --ey-line-2: rgba(255, 255, 255, 0.16);
+  --ey-line-accent: rgba(255, 90, 54, 0.4);
+
+  --ey-code-bg: #10131a;
+  --ey-grid-line: rgba(255, 90, 54, 0.04);
+  --ey-grid-glow: rgba(255, 90, 54, 0.2);
+
+  --ey-vessel-note: rgba(6, 182, 212, 0.12);
+  --ey-vessel-tip: rgba(16, 185, 129, 0.12);
+  --ey-vessel-warn: rgba(245, 158, 11, 0.12);
+  --ey-vessel-danger: rgba(244, 63, 94, 0.12);
+
+  --ey-shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.3);
+  --ey-shadow-md: 0 10px 28px rgba(0, 0, 0, 0.45);
+  --ey-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
+
+  --vp-c-bg: var(--ey-bg);
+  --vp-c-bg-soft: var(--ey-surface);
+  --vp-c-bg-elv: var(--ey-surface-2);
+  --vp-c-text-1: var(--ey-fg);
+  --vp-c-text-2: var(--ey-fg-2);
+  --vp-c-text-3: var(--ey-fg-3);
+  --vp-c-brand-1: var(--ey-accent);
+  --vp-c-brand-2: var(--ey-accent-2);
+  --vp-c-divider: var(--ey-line);
+  --vp-code-block-bg: var(--ey-code-bg);
+  --vp-font-family-base: var(--ey-font-body);
+  --vp-font-family-mono: var(--ey-font-mono);
+}
