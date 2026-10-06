@@ -44,7 +44,9 @@ import SiteNotFound from './components/SiteNotFound.vue'
 import ThemeSwitcher from './components/ThemeSwitcher.vue'
 import ArticleBreadcrumb from './components/Article/ArticleBreadcrumb.vue'
 import ArticlePrevNext from './components/Article/ArticlePrevNext.vue'
-import EngineeringBackdrop from './themes/engineering/Backdrop.vue'
+import ThemeBackdrop from './components/ThemeBackdrop.vue'
+import ThemeHero from './components/ThemeHero.vue'
+import ThemeToc from './components/ThemeToc.vue'
 import DiagramCas from './components/Diagram/DiagramCas.vue'
 import { useTheme } from './composables/useTheme'
 // 存储滚动位置
@@ -57,6 +59,8 @@ export default {
       Theme.enhanceApp({ app })
     }
     app.component('DiagramCas', DiagramCas)
+    app.component('ThemeHero', ThemeHero)
+    app.component('ThemeToc', ThemeToc)
   },
   Layout: {
     setup() {
@@ -255,7 +259,7 @@ export default {
         h(Theme.Layout, null, {
         'layout-top': () => [
           h(frontmatter.value.layout === 'home' ? HomeParticleField : TechBackground),
-          h(EngineeringBackdrop),
+          h(ThemeBackdrop),
         ],
         'not-found': () => h(SiteNotFound),
         'nav-bar-title-before': () => h(SidebarToggle),

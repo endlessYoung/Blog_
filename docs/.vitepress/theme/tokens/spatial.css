@@ -1,14 +1,16 @@
 /**
  * SPATIAL THEME TOKENS
- * 空间主题设计变量 — 从 prototypes/spatial/ 提取
+ * 空间主题设计变量 — 从 prototypes/spatial/ 提炼并扩展
  * 作用域：[data-theme="spatial"]
  */
 
 :root[data-theme="spatial"] {
-  --ey-font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', sans-serif;
-  --ey-font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', sans-serif;
-  --ey-font-mono: 'SF Mono', Menlo, Consolas, monospace;
+  /* 字体栈 */
+  --ey-font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', sans-serif;
+  --ey-font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Microsoft YaHei UI', system-ui, sans-serif;
+  --ey-font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', Consolas, ui-monospace, monospace;
 
+  /* 字号阶梯 */
   --ey-text-xs: clamp(11px, 2.4vw, 12px);
   --ey-text-sm: clamp(12px, 2.6vw, 13px);
   --ey-text-base: clamp(15px, 3.2vw, 16px);
@@ -18,24 +20,27 @@
   --ey-text-2xl: clamp(30px, 6vw, 36px);
   --ey-text-hero: clamp(38px, 8vw, 68px);
 
+  /* 行高与字距 */
   --ey-leading-tight: 1.25;
-  --ey-leading-normal: 1.65;
-  --ey-leading-loose: 1.85;
+  --ey-leading-normal: 1.7;
+  --ey-leading-loose: 1.9;
+  --ey-tracking-tight: -0.025em;
+  --ey-tracking-normal: 0em;
+  --ey-tracking-wide: 0.04em;
+  --ey-tracking-wider: 0.08em;
 
+  /* 几何 — 空间主题优雅大圆角 */
   --ey-radius-none: 0px;
   --ey-radius-sm: 8px;
-  --ey-radius-md: 14px;
-  --ey-radius-lg: 20px;
+  --ey-radius-md: 16px;
+  --ey-radius-lg: 22px;
   --ey-radius-xl: 28px;
   --ey-radius-pill: 9999px;
 
   --ey-border-width: 1px;
   --ey-border-width-thick: 2px;
 
-  --ey-blur: 24px;
-  --ey-blur-sm: 12px;
-  --ey-fx-ambient: 0;
-
+  /* 间距与布局 */
   --ey-space-1: 4px;
   --ey-space-2: 8px;
   --ey-space-3: 12px;
@@ -47,102 +52,159 @@
   --ey-space-9: 64px;
   --ey-space-10: 80px;
 
-  --ey-wrap: 1280px;
+  --ey-wrap: 1240px;
   --ey-article-max: 760px;
   --ey-gutter: 24px;
   --ey-pad: clamp(16px, 4vw, 40px);
   --ey-topbar-h: 60px;
   --ey-hero-min-h: 520px;
 
-  --ey-dur-instant: 80ms;
-  --ey-dur-fast: 160ms;
-  --ey-dur-normal: 320ms;
-  --ey-dur-slow: 540ms;
+  /* 物理弹簧动效曲线 */
+  --ey-dur-instant: 70ms;
+  --ey-dur-fast: 180ms;
+  --ey-dur-normal: 360ms;
+  --ey-dur-slow: 720ms;
   --ey-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ey-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ey-ease-spring: cubic-bezier(0.34, 1.56, 0.45, 1);
+  --ey-ease-gentle: cubic-bezier(0.22, 1.12, 0.36, 1);
+
+  /* 毛玻璃模糊基准（由 data-fx 控制动态缩放）*/
+  --ey-blur: 26px;
+  --ey-blur-sm: 12px;
+  --ey-sat: 1.7;
 }
 
-/* 深色模式 */
+/* ===================================================================
+   特效等级响应 (data-fx)
+   =================================================================== */
+:root[data-theme="spatial"][data-fx="high"],
+:root[data-theme="spatial"]:not([data-fx="low"]):not([data-fx="off"]) {
+  --ey-blur: 26px;
+  --ey-blur-sm: 14px;
+  --ey-fx-ambient: 1;
+}
+
+:root[data-theme="spatial"][data-fx="low"] {
+  --ey-blur: 8px;
+  --ey-blur-sm: 4px;
+  --ey-fx-ambient: 0;
+}
+
+:root[data-theme="spatial"][data-fx="off"] {
+  --ey-blur: 0px;
+  --ey-blur-sm: 0px;
+  --ey-fx-ambient: 0;
+}
+
+/* ===================================================================
+   深色模式 (Dark Mode)
+   =================================================================== */
 :root[data-theme="spatial"][data-mode="dark"],
 :root[data-theme="spatial"]:not([data-mode="light"]) {
   color-scheme: dark;
+
   --ey-bg: #0e1117;
-  --ey-surface: rgba(26, 31, 46, 0.65);
-  --ey-surface-2: rgba(36, 43, 62, 0.75);
-  --ey-surface-3: rgba(48, 57, 82, 0.85);
+  --ey-surface: rgba(30, 36, 52, 0.46);
+  --ey-surface-2: rgba(24, 29, 42, 0.74);
+  --ey-surface-3: rgba(38, 46, 68, 0.85);
+  --ey-glass-fallback: rgba(22, 26, 37, 0.95);
 
-  --ey-fg: #f0f3f8;
-  --ey-fg-2: #a8b3cf;
-  --ey-fg-3: #7582a3;
-  --ey-fg-disabled: #4e5872;
+  --ey-fg: #e8ecf4;
+  --ey-fg-2: #a5aec0;
+  --ey-fg-3: #6c7589;
+  --ey-fg-disabled: #4e576e;
 
+  /* 核心强调色与多重微光 */
   --ey-accent: #6e9bff;
-  --ey-accent-ink: #ffffff;
-  --ey-accent-soft: rgba(110, 155, 255, 0.15);
-  --ey-accent-2: #c084fc;
+  --ey-accent-ink: #0b1020;
+  --ey-accent-soft: rgba(110, 155, 255, 0.16);
+  --ey-accent-2: #b996ff;
   --ey-accent-2-ink: #ffffff;
-  --ey-accent-ok: #34d399;
+  --ey-accent-ok: #4fd8a6;
   --ey-accent-warn: #fbbf24;
-  --ey-accent-fail: #f87171;
+  --ey-accent-fail: #ff7f7a;
 
+  /* 空间边框边缘光晕 */
   --ey-line: rgba(255, 255, 255, 0.08);
   --ey-line-2: rgba(255, 255, 255, 0.16);
-  --ey-line-accent: rgba(110, 155, 255, 0.4);
+  --ey-line-accent: rgba(110, 155, 255, 0.45);
+  --ey-edge-top: rgba(255, 255, 255, 0.26);
 
-  --ey-code-bg: #131722;
-  --ey-grid-line: rgba(110, 155, 255, 0.04);
-  --ey-grid-glow: rgba(110, 155, 255, 0.2);
+  /* 漂移 Blob 色值 */
+  --ey-blob-1: #1f3466;
+  --ey-blob-2: #4d2944;
+  --ey-blob-3: #2a2660;
+  --ey-blob-4: #0d4950;
+  --ey-grain-op: 0.07;
+
+  --ey-code-bg: rgba(8, 11, 18, 0.55);
+  --ey-grid-line: rgba(110, 155, 255, 0.05);
+  --ey-grid-glow: rgba(110, 155, 255, 0.22);
 
   --ey-vessel-note: rgba(110, 155, 255, 0.12);
-  --ey-vessel-tip: rgba(52, 211, 153, 0.12);
+  --ey-vessel-tip: rgba(79, 216, 166, 0.12);
   --ey-vessel-warn: rgba(251, 191, 36, 0.12);
-  --ey-vessel-danger: rgba(248, 113, 113, 0.12);
+  --ey-vessel-danger: rgba(255, 127, 122, 0.12);
 
-  --ey-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
-  --ey-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --ey-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --ey-shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
+  --ey-shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --ey-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
-/* 浅色模式 */
+/* ===================================================================
+   浅色模式 (Light Mode)
+   =================================================================== */
 :root[data-theme="spatial"][data-mode="light"] {
   color-scheme: light;
-  --ey-bg: #f5f7fc;
-  --ey-surface: rgba(255, 255, 255, 0.7);
-  --ey-surface-2: rgba(240, 244, 255, 0.8);
-  --ey-surface-3: rgba(228, 235, 252, 0.9);
 
-  --ey-fg: #131728;
-  --ey-fg-2: #4a5472;
-  --ey-fg-3: #6e7998;
-  --ey-fg-disabled: #a0a9c2;
+  --ey-bg: #eef1f6;
+  --ey-surface: rgba(255, 255, 255, 0.48);
+  --ey-surface-2: rgba(255, 255, 255, 0.72);
+  --ey-surface-3: rgba(255, 255, 255, 0.88);
+  --ey-glass-fallback: rgba(248, 250, 253, 0.96);
 
-  --ey-accent: #3b82f6;
+  --ey-fg: #172033;
+  --ey-fg-2: #4b566c;
+  --ey-fg-3: #8a93a6;
+  --ey-fg-disabled: #b0b7c7;
+
+  --ey-accent: #3d7bff;
   --ey-accent-ink: #ffffff;
-  --ey-accent-soft: rgba(59, 130, 246, 0.12);
-  --ey-accent-2: #9333ea;
+  --ey-accent-soft: rgba(61, 123, 255, 0.14);
+  --ey-accent-2: #9867f0;
   --ey-accent-2-ink: #ffffff;
-  --ey-accent-ok: #059669;
+  --ey-accent-ok: #1fae7e;
   --ey-accent-warn: #d97706;
-  --ey-accent-fail: #dc2626;
+  --ey-accent-fail: #ec5b5b;
 
-  --ey-line: rgba(20, 30, 60, 0.08);
-  --ey-line-2: rgba(20, 30, 60, 0.16);
-  --ey-line-accent: rgba(59, 130, 246, 0.35);
+  --ey-line: rgba(23, 32, 51, 0.08);
+  --ey-line-2: rgba(23, 32, 51, 0.16);
+  --ey-line-accent: rgba(61, 123, 255, 0.4);
+  --ey-edge-top: rgba(255, 255, 255, 0.95);
 
-  --ey-code-bg: #edf1f9;
-  --ey-grid-line: rgba(59, 130, 246, 0.05);
-  --ey-grid-glow: rgba(59, 130, 246, 0.18);
+  --ey-blob-1: #a9c1e8;
+  --ey-blob-2: #f3cbb0;
+  --ey-blob-3: #c9c3e6;
+  --ey-blob-4: #b8dde6;
+  --ey-grain-op: 0.05;
 
-  --ey-vessel-note: rgba(59, 130, 246, 0.08);
-  --ey-vessel-tip: rgba(5, 150, 105, 0.08);
+  --ey-code-bg: rgba(255, 255, 255, 0.6);
+  --ey-grid-line: rgba(61, 123, 255, 0.05);
+  --ey-grid-glow: rgba(61, 123, 255, 0.18);
+
+  --ey-vessel-note: rgba(61, 123, 255, 0.08);
+  --ey-vessel-tip: rgba(31, 174, 126, 0.08);
   --ey-vessel-warn: rgba(217, 119, 6, 0.1);
-  --ey-vessel-danger: rgba(220, 38, 38, 0.08);
+  --ey-vessel-danger: rgba(236, 91, 91, 0.08);
 
-  --ey-shadow-sm: 0 4px 12px rgba(20, 30, 60, 0.06);
-  --ey-shadow-md: 0 8px 24px rgba(20, 30, 60, 0.1);
-  --ey-shadow-lg: 0 16px 40px rgba(20, 30, 60, 0.14);
+  --ey-shadow-sm: 0 4px 14px rgba(38, 52, 92, 0.08);
+  --ey-shadow-md: 0 10px 30px rgba(38, 52, 92, 0.12);
+  --ey-shadow-lg: 0 20px 50px rgba(38, 52, 92, 0.16);
 }
 
+/* ===================================================================
+   VitePress 变量映射
+   =================================================================== */
 :root[data-theme="spatial"] {
   --vp-c-bg: var(--ey-bg);
   --vp-c-bg-soft: var(--ey-surface);
@@ -156,4 +218,24 @@
   --vp-code-block-bg: var(--ey-code-bg);
   --vp-font-family-base: var(--ey-font-body);
   --vp-font-family-mono: var(--ey-font-mono);
+}
+
+/* 空间主题下毛玻璃卡片通用增强 */
+:root[data-theme="spatial"] .ey-callout,
+:root[data-theme="spatial"] .ey-prev-next__link,
+:root[data-theme="spatial"] .ey-related-card,
+:root[data-theme="spatial"] .ey-diagram-cas {
+  backdrop-filter: blur(var(--ey-blur)) saturate(var(--ey-sat));
+  -webkit-backdrop-filter: blur(var(--ey-blur)) saturate(var(--ey-sat));
+  box-shadow: inset 0 1px 0 var(--ey-edge-top, rgba(255,255,255,0.15)), var(--ey-shadow-sm);
+  border-radius: var(--ey-radius-md);
+}
+
+@supports not (backdrop-filter: blur(10px)) {
+  :root[data-theme="spatial"] .ey-callout,
+  :root[data-theme="spatial"] .ey-prev-next__link,
+  :root[data-theme="spatial"] .ey-related-card,
+  :root[data-theme="spatial"] .ey-diagram-cas {
+    background-color: var(--ey-glass-fallback);
+  }
 }
