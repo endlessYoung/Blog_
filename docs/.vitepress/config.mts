@@ -284,11 +284,13 @@ export default defineConfig({
   // Cyberpunk / Sci-Fi：默认深色。Hero 霓虹渐变标题与霓虹按钮通过 --vp-home-hero-* / --vp-button-brand-*（见 theme/custom.css）
   appearance: 'dark',
   sitemap: {
-    hostname: 'https://endlessyoung.github.io/Blog_',
+    // 必须以 / 结尾。否则相对路径会按 URL 规则替换掉最后一段 Blog_，
+    // 生成 https://endlessyoung.github.io/Android/... 这种站外 404。
+    hostname: 'https://endlessyoung.github.io/Blog_/',
     transformItems(items) {
       return items.filter((item) => {
         const clean = (item.url || '').replace(/^\//, '').replace(/\.html$/, '').replace(/\/index$/, '')
-        return !noindexPages.has(clean)
+        return clean !== '404' && !noindexPages.has(clean)
       })
     },
   },
