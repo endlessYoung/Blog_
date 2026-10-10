@@ -243,13 +243,121 @@
   from { opacity: 0; transform: translateY(14px); }
 }
 
-/* Tools */
 .ey-tools {
   flex: none;
   margin-left: auto;
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.ey-socials {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: 4px;
+}
+
+.ey-social-link {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--man-fg-2);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--man-tick), transform var(--man-snap) var(--man-ease);
+}
+
+.ey-social-link:hover {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* For items with a popup, prevent translateY jump on hover so it doesn't flicker */
+.ey-social-qr-wrap .ey-social-link:hover {
+  transform: none;
+}
+
+.ey-social-link svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* QR code popup (WeChat etc.) */
+.ey-social-qr-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ey-qr-popup {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  width: 176px;
+  box-sizing: border-box;
+  background: var(--man-bg);
+  border: 1px solid var(--man-line-2);
+  border-radius: 4px;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, .55);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--man-snap), visibility var(--man-snap), transform var(--man-snap) var(--man-ease);
+  pointer-events: none;
+}
+
+/* Seamless bridge between the icon and the popup so mouse movement never loses hover */
+.ey-qr-popup::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+
+.ey-social-qr-wrap:hover .ey-qr-popup,
+.ey-social-qr-wrap:focus-within .ey-qr-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(6px);
+  pointer-events: auto;
+}
+
+.ey-qr-popup img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  min-width: 150px;
+  min-height: 150px;
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: cover;
+  background: #ffffff;
+  padding: 6px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.ey-qr-label {
+  color: var(--man-fg-2);
+  font: 500 12px/1 var(--man-display);
+  letter-spacing: .04em;
+  white-space: nowrap;
 }
 
 .ey-shell .ey-search {
