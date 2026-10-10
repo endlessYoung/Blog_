@@ -70,15 +70,25 @@ jobs:
       - name: Submit to IndexNow
         continue-on-error: true
         run: |
+          # Fetch deployed sitemap and parse URLs into JSON array
+          curl -sS --connect-timeout 10 --max-time 30 \
+            "https://endlessyoung.github.io/Blog_/sitemap.xml" -o sitemap_indexnow.xml || true
+          if [ -s sitemap_indexnow.xml ]; then
+            URLS=$(sed -n 's:.*<loc>\([^<]*\)</loc>.*:"\1",:p' sitemap_indexnow.xml | tr -d '\r\n' | sed 's/,$//')
+            URL_LIST="[$URLS]"
+          else
+            URL_LIST='["https://endlessyoung.github.io/Blog_/"]'
+          fi
+          echo "Submitting URLs to IndexNow..."
           curl -sS --connect-timeout 10 --max-time 30 \
             -X POST "https://www.bing.com/indexnow" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "host": "endlessyoung.github.io",
-              "key": "208c12af10454a61a4ef6e0fcd59aec0",
-              "keyLocation": "https://endlessyoung.github.io/Blog_/208c12af10454a61a4ef6e0fcd59aec0.txt",
-              "urlList": ["https://endlessyoung.github.io/Blog_/"]
-            }'
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{
+              \"host\": \"endlessyoung.github.io\",
+              \"key\": \"208c12af10454a61a4ef6e0fcd59aec0\",
+              \"keyLocation\": \"https://endlessyoung.github.io/Blog_/208c12af10454a61a4ef6e0fcd59aec0.txt\",
+              \"urlList\": $URL_LIST
+            }"
 
       - name: Submit Sitemap to Bing
         continue-on-error: true

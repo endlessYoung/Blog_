@@ -69,6 +69,36 @@ function parseArticleFrontmatter(file: string): Record<string, unknown> {
   return fm
 }
 
+function extractExcerpt(file: string): string {
+  try {
+    const raw = readFileSync(file, 'utf-8').replace(/^---[\s\S]*?---\r?\n?/, '')
+    const clean = raw
+      .replace(/```[\s\S]*?```/g, ' ')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      .replace(/[#*>\-_~]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+    return clean.slice(0, 160)
+  } catch {
+    return ''
+  }
+}
+
+/** Pre-computed fallback descriptions from article body for articles lacking frontmatter description */
+const articleDescriptions: Record<string, string> = (() => {
+  const srcDir = join(__dirname, '..')
+  const map: Record<string, string> = {}
+  for (const file of listMarkdownFiles(srcDir)) {
+    const rel = relative(srcDir, file).replace(/\\/g, '/').replace(/\.md$/, '')
+    const fm = parseArticleFrontmatter(file)
+    const desc = String(fm.description || '').trim() || extractExcerpt(file)
+    if (desc) map[rel] = desc
+  }
+  return map
+})()
+
 /** relativePath -> up to 4 related articles (tag intersection + same category). */
 const relatedIndex: Record<string, RelatedEntry[]> = (() => {
   const srcDir = join(__dirname, '..')
@@ -334,6 +364,13 @@ export default defineConfig({
         const token = tokens[idx]
         token.attrSet('loading', 'lazy')
         token.attrSet('decoding', 'async')
+        const currentAlt = (token.content || token.attrGet('alt') || '').trim()
+        if (!currentAlt || currentAlt === 'alt text') {
+          const src = token.attrGet('src') || ''
+          const filename = src.split('/').pop()?.split('#')[0]?.split('?')[0]?.replace(/\.[^.]+$/, '') || ''
+          const fallbackAlt = decodeURIComponent(filename) || env.title || "Endlessyoung's Blog 技术插图"
+          token.attrSet('alt', fallbackAlt)
+        }
         return defaultImage ? defaultImage(tokens, idx, options, env, self) : self.renderToken(tokens, idx, options)
       }
       const fence = md.renderer.rules.fence
@@ -471,16 +508,19 @@ html:not(.dark) {
         ['meta', { name: 'robots', content: 'noindex, nofollow' }],
       ]
     }
-    const ogTitle = fm?.title || ctx.title
-    const ogDescription = fm?.description || ctx.description
+    const cleanKey = ctx.page.replace(/\.md$/, '')
+    const pageDesc = fm?.description || articleDescriptions[cleanKey] || ctx.description || ''
+    const ogTitle = fm?.title ? `${fm.title} | Endlessyoung's Blog` : (ctx.title || "Endlessyoung's Blog")
+    const ogDescription = pageDesc
     const ogType = ctx.page === 'index.md' ? 'website' : 'article'
 
     const tags = Array.isArray(fm.tags) ? (fm.tags as string[]).join(', ') : ''
     const created = fm.created ? String(fm.created) : ''
     const lastUpdatedTs = typeof ctx.pageData.lastUpdated === 'number' ? ctx.pageData.lastUpdated : 0
-    const dateModified = lastUpdatedTs ? new Date(lastUpdatedTs).toISOString() : ''
+    const dateModified = lastUpdatedTs ? new Date(lastUpdatedTs).toISOString() : (created ? new Date(created).toISOString() : '')
     const head: HeadConfig[] = [
       ['link', { rel: 'canonical', href: url }],
+      ['meta', { name: 'description', content: ogDescription }],
       ['meta', { property: 'og:url', content: url }],
       ['meta', { property: 'og:title', content: ogTitle }],
       ['meta', { property: 'og:description', content: ogDescription }],
@@ -495,6 +535,7 @@ html:not(.dark) {
         name: "Endlessyoung's Blog",
         url: `${siteUrl}${base}`,
         inLanguage: 'zh-CN',
+        description: ogDescription,
         potentialAction: {
           '@type': 'SearchAction',
           target: { '@type': 'EntryPoint', urlTemplate: `${siteUrl}${base}?q={search_term_string}` },
@@ -505,17 +546,61 @@ html:not(.dark) {
       const articleSchema: Record<string, unknown> = {
         '@context': 'https://schema.org',
         '@type': 'Article',
-        headline: ogTitle,
+        headline: fm?.title || ctx.title,
         inLanguage: 'zh-CN',
-        mainEntityOfPage: url,
-        author: { '@type': 'Person', name: 'Endless Young' },
-        publisher: { '@type': 'Organization', name: 'Endless Young' },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': url
+        },
+        image: `${siteUrl}${base}index.png`,
+        author: {
+          '@type': 'Person',
+          name: 'Endless Young',
+          url: `${siteUrl}${base}`
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Endless Young',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${siteUrl}${base}panda.webp`
+          }
+        },
       }
       if (ogDescription) articleSchema.description = ogDescription
       if (tags) articleSchema.keywords = tags
       if (created) articleSchema.datePublished = created
       if (dateModified) articleSchema.dateModified = dateModified
       head.push(['script', { type: 'application/ld+json' }, JSON.stringify(articleSchema)])
+
+      // BreadcrumbList schema
+      const pathParts = cleanKey.split('/').filter(Boolean)
+      if (pathParts.length > 0) {
+        const breadcrumbItems = [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: '首页',
+            item: `${siteUrl}${base}`
+          }
+        ]
+        let currentPath = `${siteUrl}${base}`
+        for (let i = 0; i < pathParts.length; i++) {
+          const part = pathParts[i]
+          currentPath += (i === pathParts.length - 1 ? `${part}.html` : `${part}/`)
+          breadcrumbItems.push({
+            '@type': 'ListItem',
+            position: i + 2,
+            name: (i === pathParts.length - 1 && fm?.title) ? fm.title : part,
+            item: currentPath
+          })
+        }
+        head.push(['script', { type: 'application/ld+json' }, JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: breadcrumbItems
+        })])
+      }
     }
     if (pageNeedsKatex(ctx.page)) {
       head.push(['link', { rel: 'stylesheet', href: `${base}katex.min.css` }])

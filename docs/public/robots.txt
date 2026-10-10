@@ -1,3 +1,21 @@
 User-agent: *
 Allow: /
+Disallow: /assets/
+Disallow: /*.json$
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: YisouSpider
+Allow: /
+
 Sitemap: https://endlessyoung.github.io/Blog_/sitemap.xml
