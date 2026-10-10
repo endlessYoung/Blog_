@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
-import { useData, useRoute, useRouter } from 'vitepress'
+import { useData, useRoute, useRouter, withBase } from 'vitepress'
 import { provideAnimatedAppearanceToggle } from '../appearanceTransition'
 import { initImageViewer } from '../imageViewer'
 import { initMermaid } from '../mermaid'
@@ -35,6 +35,30 @@ provideAnimatedAppearanceToggle(
 
 let stopTransitions: (() => void) | undefined
 
+function ensureKatex(apply: boolean) {
+  if (typeof document === 'undefined') return
+  const href = withBase('/katex.min.css')
+  let link = document.getElementById('ey-katex') as HTMLLinkElement | null
+    ?? document.querySelector<HTMLLinkElement>('link[href*="katex.min.css"]')
+  if (!link) {
+    link = document.createElement('link')
+    link.id = 'ey-katex'
+    document.head.appendChild(link)
+  } else {
+    link.id = 'ey-katex'
+  }
+  if (apply) {
+    link.rel = 'stylesheet'
+    link.removeAttribute('as')
+    link.href = href
+    return
+  }
+  if (link.rel === 'stylesheet') return
+  link.rel = 'preload'
+  link.setAttribute('as', 'style')
+  link.href = href
+}
+
 function onScroll() {
   scrollPositions[route.path] = window.scrollY
 }
@@ -61,6 +85,12 @@ function onKey(event: KeyboardEvent) {
     palette.value = true
   }
 }
+
+watch(
+  () => !isHome.value && !missing.value,
+  (need) => ensureKatex(need),
+  { immediate: true },
+)
 
 onMounted(() => {
   applyWorld('manual')

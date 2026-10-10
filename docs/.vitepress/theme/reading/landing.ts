@@ -56,7 +56,7 @@ export function useReturnLanding(
   })
 
   function showArticles(partId: string) {
-    return !landingPath.value || openId.value === partId
+    return openId.value === partId
   }
 
   function isSpacer(link: string) {

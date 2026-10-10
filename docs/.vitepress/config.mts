@@ -18,6 +18,13 @@ interface RelatedEntry {
   meta: string
 }
 
+/** Homepage / tags / 404 have no formulas. Articles keep a blocking stylesheet so math never flashes unstyled. */
+function pageNeedsKatex(page: string) {
+  if (!page || page === 'index.md') return false
+  if (page.startsWith('tags/')) return false
+  return true
+}
+
 /** Build a static "related reading" index from article frontmatter (SSR-friendly). */
 function listMarkdownFiles(dir: string): string[] {
   const results: string[] = []
@@ -419,7 +426,6 @@ html:not(.dark) {
 }
       `.trim()
     ],
-    ['link', { rel: 'stylesheet', href: '/Blog_/katex.min.css' }],
     ['meta', { name: 'msvalidate.01', content: 'C134079F38DF28B5CB2B9AE952C0CBC7' }],
     ['meta', { name: 'google-site-verification', content: 'bNLBnwMb4Bl-KmTweCSRTZaLa4ZRD2Z7YgqTjpUU-Hw' }],
     ['meta', { name: 'robots', content: 'index, follow' }],
@@ -506,6 +512,9 @@ html:not(.dark) {
       if (created) articleSchema.datePublished = created
       if (dateModified) articleSchema.dateModified = dateModified
       head.push(['script', { type: 'application/ld+json' }, JSON.stringify(articleSchema)])
+    }
+    if (pageNeedsKatex(ctx.page)) {
+      head.push(['link', { rel: 'stylesheet', href: `${base}katex.min.css` }])
     }
     return head
   },

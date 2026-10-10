@@ -13,7 +13,7 @@ const engines = new Map<string, MiniSearchType<Doc>>()
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue'
 import { useData, useRouter, withBase } from 'vitepress'
-import MiniSearch, { type SearchResult } from 'minisearch'
+import type { SearchResult } from 'minisearch'
 import localSearchIndex from '@localSearchIndex'
 import { buildManualCatalog, findManualArticle, normPath } from '../reading/catalog'
 import { pageMeta, recentPages } from '../reading/corpus'
@@ -47,7 +47,7 @@ const scope = ref('all')
 const input = ref<HTMLInputElement | null>(null)
 const listEl = ref<HTMLElement | null>(null)
 const active = ref(0)
-const engine = shallowRef<MiniSearch<Doc> | null>(null)
+const engine = shallowRef<MiniSearchType<Doc> | null>(null)
 const loading = ref(true)
 
 const parts = computed(() => buildManualCatalog(theme.value.sidebar))
@@ -239,7 +239,10 @@ onMounted(async () => {
   } else {
     const loader = localSearchIndex[key]
     if (loader) {
-      const mod = await loader()
+      const [{ default: MiniSearch }, mod] = await Promise.all([
+        import('minisearch'),
+        loader(),
+      ])
       const built = MiniSearch.loadJSON<Doc>(mod.default, {
         fields: ['title', 'titles', 'text'],
         storeFields: ['title', 'titles'],

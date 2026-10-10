@@ -1,5 +1,11 @@
-import mermaid from 'mermaid'
 import { openViewer } from './imageViewer'
+
+let mermaidMod: typeof import('mermaid') | null = null
+
+async function loadMermaid() {
+  if (!mermaidMod) mermaidMod = await import('mermaid')
+  return mermaidMod.default
+}
 
 /** 与博客 Dracula / Cyberpunk 风格统一的 Mermaid 主题变量 */
 const DARK_THEME = {
@@ -121,7 +127,8 @@ export async function initMermaid(force = false): Promise<void> {
   els = els.filter((el) => !el.getAttribute('data-processed'))
   if (els.length === 0) return
 
-  mermaid.initialize(theme === 'dark' ? DARK_THEME : LIGHT_THEME)
+  const mermaidApi = await loadMermaid()
+  mermaidApi.initialize(theme === 'dark' ? DARK_THEME : LIGHT_THEME)
 
   for (const el of els) {
     const code = el.textContent?.trim() || ''
@@ -130,7 +137,7 @@ export async function initMermaid(force = false): Promise<void> {
 
     try {
       // 用 mermaid.render() 生成 SVG 再注入 DOM，兼容 v11
-      const { svg } = await mermaid.render(`mermaid-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, code)
+      const { svg } = await mermaidApi.render(`mermaid-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, code)
       el.innerHTML = svg
       el.setAttribute('data-processed', 'true')
       bindClickToOpen(el)

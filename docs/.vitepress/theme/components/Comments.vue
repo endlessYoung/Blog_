@@ -105,14 +105,55 @@ const fillPageviewFallback = async (
   }
 }
 
+let idleId = 0
+let idleTimer = false
+let io: IntersectionObserver | null = null
+
+function scheduleMount() {
+  cancelIdle()
+  io?.disconnect()
+  let started = false
+  const run = () => {
+    if (started) return
+    started = true
+    cancelIdle()
+    io?.disconnect()
+    void mount()
+  }
+  const el = document.getElementById('comments')
+  if (el && 'IntersectionObserver' in window) {
+    io = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) run()
+    }, { rootMargin: '400px 0px' })
+    io.observe(el)
+  }
+  if (typeof requestIdleCallback === 'function') {
+    idleTimer = false
+    idleId = requestIdleCallback(run, { timeout: 1500 })
+  } else {
+    idleTimer = true
+    idleId = window.setTimeout(run, 1)
+  }
+}
+
+function cancelIdle() {
+  if (!idleId) return
+  if (idleTimer) clearTimeout(idleId)
+  else if (typeof cancelIdleCallback === 'function') cancelIdleCallback(idleId)
+  idleId = 0
+}
+
 onMounted(() => {
-  mount()
+  scheduleMount()
 })
 onBeforeUnmount(() => {
+  cancelIdle()
+  io?.disconnect()
+  io = null
   walineInstance?.destroy?.()
   walineInstance = null
 })
-watch(() => route.path, () => mount())
+watch(() => route.path, () => scheduleMount())
 </script>
 
 <style scoped>
