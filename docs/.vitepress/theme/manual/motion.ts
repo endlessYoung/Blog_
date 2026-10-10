@@ -239,6 +239,14 @@ export function bindCatalogTransitions(router: TransitionRouter) {
     const title = link.querySelector<HTMLElement>('.art-title')
     if (!num || !title) return
 
+    // If already inside an article (e.g. clicking another article in the side chapter list),
+    // do not trigger full-root View Transition which causes old/new page jump & flicker.
+    // Instead, let standard VitePress SPA router handle it seamlessly.
+    const isCurrentlyArticle = !!document.querySelector('.m-article')
+    if (isCurrentlyArticle) {
+      return
+    }
+
     event.preventDefault()
     event.stopPropagation()
     tagPair(num, title)

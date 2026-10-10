@@ -117,7 +117,7 @@ watch(() => route.path, () => {
   palette.value = false
   nextTick(() => {
     const saved = scrollPositions[route.path]
-    if (saved !== undefined) window.scrollTo(0, saved)
+    window.scrollTo(0, saved !== undefined ? saved : 0)
     initMermaid()
   })
 })
