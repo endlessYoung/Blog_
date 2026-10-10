@@ -70,7 +70,7 @@ interface TransitionRouter {
 }
 
 function clearNames() {
-  document.documentElement.classList.remove('vt-fwd', 'vt-back', 'vt-theme')
+  document.documentElement.classList.remove('vt-fwd', 'vt-back', 'vt-theme', 'vt-article')
   document.querySelectorAll<HTMLElement>('[data-vt], .manual-a-num, .spatial-a-num, .fluid-a-num, .a-title, .vp-doc h1').forEach((el) => {
     el.style.viewTransitionName = ''
   })
@@ -239,12 +239,11 @@ export function bindCatalogTransitions(router: TransitionRouter) {
     const title = link.querySelector<HTMLElement>('.art-title')
     if (!num || !title) return
 
-    // If already inside an article (e.g. clicking another article in the side chapter list),
-    // do not trigger full-root View Transition which causes old/new page jump & flicker.
-    // Instead, let standard VitePress SPA router handle it seamlessly.
+    // If already inside an article, mark root so we can suppress full-page displacement
+    // while keeping the shared-element title and number flying animation intact!
     const isCurrentlyArticle = !!document.querySelector('.m-article')
     if (isCurrentlyArticle) {
-      return
+      document.documentElement.classList.add('vt-article')
     }
 
     event.preventDefault()

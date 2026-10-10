@@ -465,6 +465,11 @@ html.manual::view-transition-group(vt-title) {
 }
 html.manual::view-transition-old(root) { animation: manual-vt-out 200ms cubic-bezier(.7, 0, .84, 0) both; }
 html.manual::view-transition-new(root) { animation: manual-vt-in 320ms cubic-bezier(.16, 1, .3, 1) 140ms both; }
+
+/* When navigating between articles in the same chapter, suppress full-screen displacement so only the title/number fly smoothly without flashing the page */
+html.manual.vt-article::view-transition-old(root) { animation: none; opacity: 1; }
+html.manual.vt-article::view-transition-new(root) { animation: none; opacity: 1; }
+
 @keyframes manual-vt-out { to { opacity: 0; transform: translateY(-8px); } }
 @keyframes manual-vt-in { from { opacity: 0; transform: translateY(12px); } }
 
