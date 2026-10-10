@@ -50,7 +50,7 @@
 
 最终你可能看到类似：
 
-![alt text](embedding分类.png)
+![alt text](embedding分类.webp)
 
 这就是 `Embedding` 的核心思想：
 
@@ -215,9 +215,9 @@ Word2Vec主要有两种方式：
 请用中文解释光合作用
 ```
 
-在模型“理解”这句话之前，它会经历一个严格的 `Embedding` 流水线，这个过程不是用一个现成的向量表去查整句，而是分步完成的：
+在模型“理解”这句话之前，它会经历一个严格的 `Embedding` 流水线，在这个过程不是用一个现成的向量表去查整句，而是分步完成的：
 
-![alt text](<LLM 输入 Embedding 流水线.png>)
+![alt text](<LLM 输入 Embedding 流水线.webp>)
 
 1. 分词
    句子首先被切成一串token。可能是整词、子词或者标点。比如BPE分词器会把这句话切分成类似
@@ -260,7 +260,7 @@ Word2Vec主要有两种方式：
 
 具体流程：
 
-![alt text](<RAG 整体架构（离线入库 + 在线检索）.png>)
+![alt text](<RAG 整体架构（离线入库 + 在线检索）.webp>)
 
 1. 知识入库（离线阶段）
 
