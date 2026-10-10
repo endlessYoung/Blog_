@@ -13,6 +13,7 @@ const engines = new Map<string, MiniSearchType<Doc>>()
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue'
 import { useData, useRouter, withBase } from 'vitepress'
+import { prefetchPage } from '../reading/prefetch'
 import type { SearchResult } from 'minisearch'
 import localSearchIndex from '@localSearchIndex'
 import { buildManualCatalog, findManualArticle, normPath } from '../reading/catalog'
@@ -172,6 +173,10 @@ watch(query, () => {
 watch(scope, () => { active.value = 0 })
 watch(active, () => {
   nextTick(() => listEl.value?.querySelector('.on')?.scrollIntoView({ block: 'nearest' }))
+})
+watch(current, (item) => {
+  if (!item) return
+  prefetchPage(withBase(item.href.startsWith('/') ? item.href : `/${item.href}`))
 })
 
 function escapeHtml(text: string) {

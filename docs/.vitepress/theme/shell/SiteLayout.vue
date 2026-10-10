@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useData, useRoute, useRouter, withBase } from 'vitepress'
+import { prefetchKatex, prefetchPage } from '../reading/prefetch'
 import { provideAnimatedAppearanceToggle } from '../appearanceTransition'
 import { initImageViewer } from '../imageViewer'
 import { initMermaid } from '../mermaid'
@@ -40,10 +41,7 @@ function ensureKatex(apply: boolean) {
   const href = withBase('/katex.min.css')
   let link = document.getElementById('ey-katex') as HTMLLinkElement | null
     ?? document.querySelector<HTMLLinkElement>('link[href*="katex.min.css"]')
-  if (!apply) {
-    if (link && link.rel !== 'stylesheet') link.remove()
-    return
-  }
+  if (!apply) return
   if (!link) {
     link = document.createElement('link')
     link.id = 'ey-katex'
@@ -58,6 +56,12 @@ function ensureKatex(apply: boolean) {
 
 function onScroll() {
   scrollPositions[route.path] = window.scrollY
+}
+
+function onPointerOver(event: PointerEvent) {
+  const link = event.target instanceof Element ? event.target.closest('a') : null
+  if (!link || link.target === '_blank') return
+  prefetchPage(link.getAttribute('href'))
 }
 
 function isTyping(target: EventTarget | null) {
@@ -95,13 +99,17 @@ onMounted(() => {
   stopTransitions = bindCatalogTransitions(router)
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('keydown', onKey)
+  window.addEventListener('pointerover', onPointerOver, { passive: true })
   nextTick(() => initMermaid())
+  const idle = window.requestIdleCallback || ((cb: () => void) => window.setTimeout(cb, 1))
+  idle(() => { if (isHome.value) prefetchKatex() })
 })
 
 onUnmounted(() => {
   stopTransitions?.()
   window.removeEventListener('scroll', onScroll)
   window.removeEventListener('keydown', onKey)
+  window.removeEventListener('pointerover', onPointerOver)
 })
 
 watch(() => route.path, () => {

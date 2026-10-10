@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { buildManualCatalog, catalogStats, findManualArticle, normPath, type ManualArticle, type ManualPart } from '../reading/catalog'
 import { useReturnLanding } from '../reading/landing'
 import { pageMeta, recentPages, termGroups } from '../reading/corpus'
+import { prefetchHrefs, prefetchKatex, prefetchPage } from '../reading/prefetch'
 import ManualOdo from './ManualOdo.vue'
 import ManualGallery from './ManualGallery.vue'
 import { EASE_OUT, playMastheadIntro, reducedMotion, rollOdo, shouldPlayIntro } from './motion'
@@ -62,9 +63,40 @@ function pad(n: number) {
   return String(n).padStart(2, '0')
 }
 
+function partHrefs(part: ManualPart) {
+  return part.chapters.flatMap((chapter) => chapter.articles.map((article) => withBase(article.link)))
+}
+
+let partWarm = 0
+let catalogIo: IntersectionObserver | null = null
+
+function warmPart(part: ManualPart, limit: number) {
+  prefetchKatex()
+  prefetchHrefs(partHrefs(part), limit)
+}
+
+function observeOpenCatalog() {
+  catalogIo?.disconnect()
+  catalogIo = null
+  const root = rootEl.value
+  if (!openId.value || !root) return
+  catalogIo = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue
+      const link = entry.target as HTMLAnchorElement
+      catalogIo?.unobserve(link)
+      prefetchPage(link.getAttribute('href'))
+    }
+  }, { rootMargin: '120px 0px' })
+  root.querySelectorAll<HTMLAnchorElement>('.part.open a.art-link').forEach((link) => catalogIo?.observe(link))
+}
+
 function togglePart(part: ManualPart) {
   landingPath.value = null
-  openId.value = openId.value === part.id ? null : part.id
+  const opening = openId.value !== part.id
+  openId.value = opening ? part.id : null
+  if (!opening) return
+  warmPart(part, 12)
 }
 
 function showFlap(key: string, next: Flap) {
@@ -80,12 +112,15 @@ function onPartEnter(event: Event) {
   const part = parts.value.find((item) => item.id === row.dataset.part)
   if (!part) return
   showFlap(`part-${part.id}`, { kind: 'part', part })
+  window.clearTimeout(partWarm)
+  partWarm = window.setTimeout(() => warmPart(part, 4), 120)
 }
 
 function onCatalogOver(event: PointerEvent) {
   const node = event.target instanceof Element ? event.target : null
   const link = node?.closest('a.art-link') as HTMLAnchorElement | null
   if (link) {
+    prefetchPage(link.getAttribute('href'))
     const hit = findManualArticle(parts.value, link.dataset.path || link.getAttribute('href') || '')
     if (!hit) return
     const meta = pageMeta(hit.article.link)
@@ -108,6 +143,7 @@ function onCatalogKey(event: KeyboardEvent) {
   event.preventDefault()
   const next = items[Math.max(0, Math.min(items.length - 1, index + (event.key === 'ArrowDown' ? 1 : -1)))]
   next?.focus()
+  if (next instanceof HTMLAnchorElement) prefetchPage(next.getAttribute('href'))
 }
 
 function playIntro() {
@@ -136,9 +172,20 @@ function leaveCard(el: Element, done: () => void) {
   anim.oncancel = () => done()
 }
 
+watch(openId, async () => {
+  await nextTick()
+  observeOpenCatalog()
+})
+
 onMounted(async () => {
   await nextTick()
   if (titleEl.value && shouldPlayIntro()) playIntro()
+  observeOpenCatalog()
+})
+
+onUnmounted(() => {
+  window.clearTimeout(partWarm)
+  catalogIo?.disconnect()
 })
 </script>
 

@@ -2,6 +2,7 @@
 import { computed, inject, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useData, useRoute, withBase } from 'vitepress'
 import { normPath } from '../reading/catalog'
+import { prefetchHrefs } from '../reading/prefetch'
 import { readAccent, writeAccent } from './motion'
 
 const props = defineProps<{ menuOpen: boolean }>()
@@ -47,6 +48,8 @@ function hoverOpen(i: number) {
   timer = window.setTimeout(() => {
     drop.value = i
     hoverAt = performance.now()
+    const hrefs = items.value[i]?.items?.map((child) => withBase(child.link || '/')) || []
+    prefetchHrefs(hrefs, hrefs.length)
   }, drop.value === null ? 80 : 0)
 }
 
