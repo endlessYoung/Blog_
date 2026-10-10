@@ -16,6 +16,16 @@ const htmlPath = join(dist, 'index.html')
 const html = readFileSync(htmlPath, 'utf8')
 const errors = []
 
+if (!/<html[^>]*\bclass="[^"]*\bmanual\b/.test(html)) {
+  errors.push('index.html <html> is missing class="manual" (cold-start FOUC)')
+}
+if (!html.includes('id="ey-manual-boot"')) {
+  errors.push('index.html is missing the html.manual boot script')
+}
+if (html.includes('id="ey-critical"')) {
+  errors.push('index.html still inlines layout-critical CSS (must not restyle the UI)')
+}
+
 const catalogLinks = (html.match(/manual-art-link/g) || []).length
 if (catalogLinks > 24) {
   errors.push(`index.html still SSR ${catalogLinks} article links (expect collapsed catalog)`)
@@ -24,6 +34,9 @@ if (catalogLinks > 24) {
 const blocking = [...html.matchAll(/<link[^>]+rel=["']stylesheet["'][^>]*>/gi)].map((m) => m[0])
 if (blocking.some((t) => t.includes('katex'))) {
   errors.push('homepage still has render-blocking katex.min.css')
+}
+if (/katex\.min\.css/.test(html)) {
+  errors.push('homepage still references katex.min.css on first load')
 }
 if (blocking.some((t) => t.includes('vp-icons.css'))) {
   errors.push('vp-icons.css 仍是 render-blocking stylesheet')

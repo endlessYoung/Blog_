@@ -40,6 +40,10 @@ function ensureKatex(apply: boolean) {
   const href = withBase('/katex.min.css')
   let link = document.getElementById('ey-katex') as HTMLLinkElement | null
     ?? document.querySelector<HTMLLinkElement>('link[href*="katex.min.css"]')
+  if (!apply) {
+    if (link && link.rel !== 'stylesheet') link.remove()
+    return
+  }
   if (!link) {
     link = document.createElement('link')
     link.id = 'ey-katex'
@@ -47,15 +51,8 @@ function ensureKatex(apply: boolean) {
   } else {
     link.id = 'ey-katex'
   }
-  if (apply) {
-    link.rel = 'stylesheet'
-    link.removeAttribute('as')
-    link.href = href
-    return
-  }
-  if (link.rel === 'stylesheet') return
-  link.rel = 'preload'
-  link.setAttribute('as', 'style')
+  link.rel = 'stylesheet'
+  link.removeAttribute('as')
   link.href = href
 }
 

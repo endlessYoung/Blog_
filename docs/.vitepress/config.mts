@@ -3,6 +3,7 @@ import markdownItKatex from 'markdown-it-katex'
 import { readFileSync, readdirSync, statSync, writeFileSync } from 'fs'
 import { join, relative } from 'path'
 import { Feed } from 'feed'
+import { stampManualHtml } from '../../scripts/stamp-manual-html.mjs'
 
 // ??/??????frontmatter: noindex???? sitemap ???
 const noindexPages = new Set<string>()
@@ -392,6 +393,9 @@ export default defineConfig({
     }
   },
   lang: 'zh-CN',
+  transformHtml(code) {
+    return stampManualHtml(code)
+  },
   head: [
     ['link', { rel: 'icon', href: '/Blog_/favicon.ico' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/Blog_/feed.xml' }], // 也是放在/public目录中
