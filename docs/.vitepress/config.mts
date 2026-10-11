@@ -468,6 +468,7 @@ html:not(.dark) {
     ],
     ['meta', { name: 'msvalidate.01', content: 'C134079F38DF28B5CB2B9AE952C0CBC7' }],
     ['meta', { name: 'google-site-verification', content: 'bNLBnwMb4Bl-KmTweCSRTZaLa4ZRD2Z7YgqTjpUU-Hw' }],
+    ['meta', { name: 'baidu-site-verification', content: 'codeva-ujwJIEN0rV' }],
     ['meta', { name: 'robots', content: 'index, follow' }],
     // Open Graph (global fallbacks; per-page overrides in transformHead)
     ['meta', { property: 'og:type', content: 'website' }],
