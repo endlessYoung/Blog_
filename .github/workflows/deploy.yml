@@ -110,7 +110,7 @@ jobs:
           curl -sS --connect-timeout 10 --max-time 30 \
             "https://endlessyoung.top/sitemap.xml" -o sitemap.xml || true
           if [ -s sitemap.xml ]; then
-            sed -n 's:.*<loc>\([^<]*\)</loc>.*:\1:p' sitemap.xml > urls.txt
+            sed -n 's:.*<loc>\([^<]*\)</loc>.*:\1:p' sitemap.xml | head -n 10 > urls.txt
           else
             echo "https://endlessyoung.top/" > urls.txt
           fi
@@ -118,5 +118,5 @@ jobs:
           curl -sS --connect-timeout 10 --max-time 60 \
             -H "Content-Type: text/plain" \
             --data-binary @urls.txt \
-            "https://data.zz.baidu.com/urls?site=https://endlessyoung.top&token=${BAIDU_PUSH_TOKEN}" \
+            "http://data.zz.baidu.com/urls?site=https://endlessyoung.top&token=${BAIDU_PUSH_TOKEN}" \
             || echo "Baidu push skipped"
