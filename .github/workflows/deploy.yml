@@ -72,21 +72,21 @@ jobs:
         run: |
           # Fetch deployed sitemap and parse URLs into JSON array
           curl -sS --connect-timeout 10 --max-time 30 \
-            "https://endlessyoung.github.io/Blog_/sitemap.xml" -o sitemap_indexnow.xml || true
+            "https://endlessyoung.top/sitemap.xml" -o sitemap_indexnow.xml || true
           if [ -s sitemap_indexnow.xml ]; then
             URLS=$(sed -n 's:.*<loc>\([^<]*\)</loc>.*:"\1",:p' sitemap_indexnow.xml | tr -d '\r\n' | sed 's/,$//')
             URL_LIST="[$URLS]"
           else
-            URL_LIST='["https://endlessyoung.github.io/Blog_/"]'
+            URL_LIST='["https://endlessyoung.top/"]'
           fi
           echo "Submitting URLs to IndexNow..."
           curl -sS --connect-timeout 10 --max-time 30 \
             -X POST "https://www.bing.com/indexnow" \
             -H "Content-Type: application/json; charset=utf-8" \
             -d "{
-              \"host\": \"endlessyoung.github.io\",
+              \"host\": \"endlessyoung.top\",
               \"key\": \"208c12af10454a61a4ef6e0fcd59aec0\",
-              \"keyLocation\": \"https://endlessyoung.github.io/Blog_/208c12af10454a61a4ef6e0fcd59aec0.txt\",
+              \"keyLocation\": \"https://endlessyoung.top/208c12af10454a61a4ef6e0fcd59aec0.txt\",
               \"urlList\": $URL_LIST
             }"
 
@@ -94,7 +94,7 @@ jobs:
         continue-on-error: true
         run: |
           curl -sS --connect-timeout 10 --max-time 30 \
-            "https://www.bing.com/ping?sitemap=https://endlessyoung.github.io/Blog_/sitemap.xml" \
+            "https://www.bing.com/ping?sitemap=https://endlessyoung.top/sitemap.xml" \
             || echo "Bing ping skipped"
 
       - name: Submit to Baidu active push
@@ -108,15 +108,15 @@ jobs:
           fi
           # Collect URLs from the sitemap (fallback to homepage)
           curl -sS --connect-timeout 10 --max-time 30 \
-            "https://endlessyoung.github.io/Blog_/sitemap.xml" -o sitemap.xml || true
+            "https://endlessyoung.top/sitemap.xml" -o sitemap.xml || true
           if [ -s sitemap.xml ]; then
             sed -n 's:.*<loc>\([^<]*\)</loc>.*:\1:p' sitemap.xml > urls.txt
           else
-            echo "https://endlessyoung.github.io/Blog_/" > urls.txt
+            echo "https://endlessyoung.top/" > urls.txt
           fi
           echo "Submitting $(wc -l < urls.txt) URLs to Baidu"
           curl -sS --connect-timeout 10 --max-time 60 \
             -H "Content-Type: text/plain" \
             --data-binary @urls.txt \
-            "https://data.zz.baidu.com/urls?site=endlessyoung.github.io&token=${BAIDU_PUSH_TOKEN}" \
+            "https://data.zz.baidu.com/urls?site=https://endlessyoung.top&token=${BAIDU_PUSH_TOKEN}" \
             || echo "Baidu push skipped"

@@ -18,4 +18,4 @@ Allow: /
 User-agent: YisouSpider
 Allow: /
 
-Sitemap: https://endlessyoung.github.io/Blog_/sitemap.xml
+Sitemap: https://endlessyoung.top/sitemap.xml

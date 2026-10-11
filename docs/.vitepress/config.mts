@@ -322,9 +322,8 @@ export default defineConfig({
   // Cyberpunk / Sci-Fi：默认深色。Hero 霓虹渐变标题与霓虹按钮通过 --vp-home-hero-* / --vp-button-brand-*（见 theme/custom.css）
   appearance: 'dark',
   sitemap: {
-    // 必须以 / 结尾。否则相对路径会按 URL 规则替换掉最后一段 Blog_，
-    // 生成 https://endlessyoung.github.io/Android/... 这种站外 404。
-    hostname: 'https://endlessyoung.github.io/Blog_/',
+    // 根域名结尾带 /
+    hostname: 'https://endlessyoung.top/',
     transformItems(items) {
       return items.filter((item) => {
         const clean = (item.url || '').replace(/^\//, '').replace(/\.html$/, '').replace(/\/index$/, '')
@@ -332,7 +331,7 @@ export default defineConfig({
       })
     },
   },
-  base: isProduction ? '/Blog_/' : '/',
+  base: '/',
   markdown: {
     // Shiki：深色 Dracula 贴合赛博霓虹；浅色保留 one-light
     theme: {
@@ -434,8 +433,8 @@ export default defineConfig({
     return stampManualHtml(code)
   },
   head: [
-    ['link', { rel: 'icon', href: '/Blog_/favicon.ico' }],
-    ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/Blog_/feed.xml' }], // 也是放在/public目录中
+    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/feed.xml' }], // 也是放在/public目录中
     // Hero 霓虹标题 / 霓虹按钮：深浅色双套变量（与 theme/custom.css 双保险）
     [
       'style',
@@ -474,10 +473,10 @@ html:not(.dark) {
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'zh_CN' }],
     ['meta', { property: 'og:site_name', content: "Endlessyoung's Blog" }],
-    ['meta', { property: 'og:image', content: 'https://endlessyoung.github.io/Blog_/index.png' }],
+    ['meta', { property: 'og:image', content: 'https://endlessyoung.top/index.png' }],
     // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:image', content: 'https://endlessyoung.github.io/Blog_/index.png' }],
+    ['meta', { name: 'twitter:image', content: 'https://endlessyoung.top/index.png' }],
   ],
   transformPageData(pageData) {
     const fm = pageData.frontmatter as Record<string, any> | undefined
@@ -493,8 +492,8 @@ html:not(.dark) {
   },
 
   transformHead(ctx) {
-    const siteUrl = 'https://endlessyoung.github.io'
-    const base = isProduction ? '/Blog_/' : '/'
+    const siteUrl = 'https://endlessyoung.top'
+    const base = '/'
 
     // Build canonical / og:url: strip .md, replace /index.html → /
     let pagePath = ctx.page.replace(/\.md$/, '.html')
@@ -609,8 +608,8 @@ html:not(.dark) {
   },
 
   async buildEnd(siteConfig) {
-    const siteUrl = 'https://endlessyoung.github.io'
-    const base = '/Blog_/'
+    const siteUrl = 'https://endlessyoung.top'
+    const base = '/'
     const feedUrl = `${siteUrl}${base}`
     const md = await createMarkdownRenderer(siteConfig.srcDir, siteConfig.markdown, base, siteConfig.logger)
 
