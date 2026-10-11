@@ -712,7 +712,15 @@ html:not(.dark) {
         ]
       },
       { text: 'Ai', link: '/Ai/监督学习入门' },
-      { text: 'Agent', link: '/Agent/基础概念' },
+      {
+        text: 'Agent',
+        items: [
+          { text: 'Agent 基础', link: '/Agent/基础概念' },
+          { text: '框架与工具', link: '/Agent/LangChain' },
+          { text: '知识与推理', link: '/Agent/知识图谱' },
+          { text: '实践进阶', link: '/Agent/MultiAgent' },
+        ],
+      },
       {
         text: '数据与算法',
         items: [

@@ -55,6 +55,38 @@ function on(link?: string) {
   return root ? path.startsWith(`/${root}`) : path === target
 }
 
+function childOn(link?: string, siblings?: NavItem[]) {
+  if (!link) return false
+  const path = normPath(route.path)
+  const target = normPath(link)
+  if (path === target) return true
+
+  const root = target.split('/').filter(Boolean)[0]
+  if (!root) return false
+
+  const sameRootSiblings = (siblings || []).filter((s) => {
+    const sRoot = normPath(s.link).split('/').filter(Boolean)[0]
+    return sRoot === root
+  })
+
+  if (sameRootSiblings.length <= 1) {
+    return path.startsWith(`/${root}`)
+  }
+
+  const sidebar = (theme.value.sidebar || {}) as Record<string, any>
+  const sectionKey = Object.keys(sidebar).find((k) => k.replace(/^\/|\/$/g, '') === root)
+  const groups = sectionKey ? sidebar[sectionKey] : null
+  if (Array.isArray(groups)) {
+    for (const group of groups) {
+      const links = (group.items || []).map((it: any) => normPath(it.link))
+      if (links.includes(target) && links.includes(path)) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
 function groupOn(item: NavItem) {
   return !!item.items?.some((child) => on(child.link))
 }
@@ -156,7 +188,7 @@ onUnmounted(() => {
                   v-for="(child, j) in item.items"
                   :key="child.link"
                   class="ey-drop-row"
-                  :class="{ on: on(child.link) }"
+                  :class="{ on: childOn(child.link, item.items) }"
                   :style="{ '--i': j }"
                   :href="withBase(child.link || '/')"
                 >
@@ -240,7 +272,7 @@ onUnmounted(() => {
               v-for="(child, j) in item.items"
               :key="child.link"
               class="ey-sheet-link sub"
-              :class="{ on: on(child.link) }"
+              :class="{ on: childOn(child.link, item.items) }"
               :href="withBase(child.link || '/')"
               @click="emit('closeMenu')"
             ><span class="ey-sheet-idx">{{ idx(i) }}.{{ j + 1 }}</span><span>{{ child.text }}</span></a>
