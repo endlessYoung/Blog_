@@ -165,16 +165,6 @@ html.manual .manual-brand-mark {
   border: 1px solid var(--man-line-2);
   background: color-mix(in srgb, var(--man-fg) 3%, transparent);
   color: var(--man-fg);
-  transition: border-color var(--man-snap), background var(--man-snap), transform var(--man-snap);
-}
-
-html.manual .manual-brand:hover .manual-brand-mark {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 8%, transparent);
-}
-
-html.manual .manual-brand:active .manual-brand-mark {
-  transform: scale(0.92);
 }
 
 html.manual .manual-brand-text {

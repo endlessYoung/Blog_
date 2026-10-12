@@ -63,13 +63,6 @@ const logoSrc = computed(() => {
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
-  transition: transform var(--man-snap, 240ms), filter var(--man-snap, 240ms);
-}
-
-:global(.ey-brand:hover) .ey-logo-img,
-:global(.manual-brand:hover) .ey-logo-img {
-  transform: scale(1.08);
-  filter: drop-shadow(0 0 8px var(--accent));
 }
 
 @media (prefers-reduced-motion: reduce) {
