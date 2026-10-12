@@ -36,18 +36,21 @@
 .ey-brand-mark {
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
-  background: var(--man-fg);
-  color: var(--man-bg);
-  font: 700 11px/1 var(--man-display);
-  letter-spacing: .02em;
-  transition: background var(--man-snap), color var(--man-snap);
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--man-line-2);
+  background: color-mix(in srgb, var(--man-fg) 3%, transparent);
+  color: var(--man-fg);
+  transition: border-color var(--man-snap), background var(--man-snap), transform var(--man-snap);
 }
 
 .ey-brand:hover .ey-brand-mark {
-  background: var(--accent);
-  color: var(--accent-ink);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.ey-brand:active .ey-brand-mark {
+  transform: scale(0.92);
 }
 
 .ey-brand-text {

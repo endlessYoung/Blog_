@@ -160,16 +160,21 @@ html.manual .manual-brand {
 html.manual .manual-brand-mark {
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
-  background: var(--man-fg);
-  color: var(--man-bg);
-  font: 700 11px/1 var(--man-display);
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--man-line-2);
+  background: color-mix(in srgb, var(--man-fg) 3%, transparent);
+  color: var(--man-fg);
+  transition: border-color var(--man-snap), background var(--man-snap), transform var(--man-snap);
 }
 
 html.manual .manual-brand:hover .manual-brand-mark {
-  background: var(--accent);
-  color: var(--accent-ink);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+html.manual .manual-brand:active .manual-brand-mark {
+  transform: scale(0.92);
 }
 
 html.manual .manual-brand-text {

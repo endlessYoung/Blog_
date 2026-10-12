@@ -4,6 +4,7 @@ import { useData, useRoute, withBase } from 'vitepress'
 import { normPath } from '../reading/catalog'
 import { prefetchHrefs } from '../reading/prefetch'
 import { readAccent, writeAccent } from './motion'
+import EyLogo from './EyLogo.vue'
 
 const props = defineProps<{ menuOpen: boolean }>()
 const emit = defineEmits<{
@@ -158,7 +159,9 @@ onUnmounted(() => {
   <header class="ey-topbar" :class="{ open: menuOpen }">
     <div class="wrap ey-topbar-inner">
       <a class="ey-brand" :href="withBase('/')" @click="emit('closeMenu')">
-        <span class="ey-brand-mark">EY</span>
+        <span class="ey-brand-mark" aria-hidden="true">
+          <EyLogo :size="24" />
+        </span>
         <span class="ey-brand-text">ENDLESSYOUNG<span class="ey-brand-sub">/ MANUAL</span></span>
       </a>
 
