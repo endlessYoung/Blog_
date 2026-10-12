@@ -433,11 +433,11 @@ export default defineConfig({
     return stampManualHtml(code)
   },
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg?v=neon3' }],
-    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/logo-neon.png?v=neon3' }],
-    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/logo-neon.png?v=neon3' }],
-    ['link', { rel: 'shortcut icon', href: '/favicon.ico?v=neon3' }],
-    ['link', { rel: 'apple-touch-icon', href: '/logo-neon.png?v=neon3' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg?v=neon4' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/logo-neon.png?v=neon4' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/logo-neon.png?v=neon4' }],
+    ['link', { rel: 'shortcut icon', href: '/favicon.ico?v=neon4' }],
+    ['link', { rel: 'apple-touch-icon', href: '/logo-neon.png?v=neon4' }],
     ['link', { rel: 'alternate', type: 'application/rss+xml', title: 'RSS', href: '/feed.xml' }], // 也是放在/public目录中
     // Hero 霓虹标题 / 霓虹按钮：深浅色双套变量（与 theme/custom.css 双保险）
     [
