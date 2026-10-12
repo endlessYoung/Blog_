@@ -160,7 +160,7 @@ onUnmounted(() => {
     <div class="wrap ey-topbar-inner">
       <a class="ey-brand" :href="withBase('/')" @click="emit('closeMenu')">
         <span class="ey-brand-mark" aria-hidden="true">
-          <EyLogo :size="24" />
+          <EyLogo :size="26" />
         </span>
         <span class="ey-brand-text">ENDLESSYOUNG<span class="ey-brand-sub">/ MANUAL</span></span>
       </a>

@@ -99,9 +99,8 @@ html.spatial .VPNavBarTitle:not(.has-sidebar) .sidebar-toggle { display: none !i
 html.spatial .VPNavBarTitle .title > span:not(.manual-brand) { display: none; }
 
 html.spatial .manual-brand-mark {
-  border-radius: 8px;
-  background: var(--sp-ink);
-  color: var(--sp-base);
+  border: none;
+  background: transparent;
 }
 html.spatial .manual-brand-text {
   font-family: var(--sp-display);

@@ -99,9 +99,8 @@ html.fluid .VPNavBarTitle:not(.has-sidebar) .sidebar-toggle,
 html.fluid .manual-brand-sub { display: none !important; }
 html.fluid .VPNavBarTitle .title > span:not(.manual-brand) { display: none; }
 html.fluid .manual-brand-mark {
-  border-radius: 50%;
-  background: linear-gradient(140deg, var(--fl-amber), var(--fl-coral));
-  color: var(--fl-ink);
+  border: none;
+  background: transparent;
 }
 html.fluid .manual-brand-text { color: var(--fl-fg); font-family: var(--fl-display); letter-spacing: -0.03em; }
 html.fluid .VPNavBarSearchButton {

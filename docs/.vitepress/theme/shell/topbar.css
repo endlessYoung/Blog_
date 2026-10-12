@@ -34,13 +34,15 @@
 }
 
 .ey-brand-mark {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border: 1px solid var(--man-line-2);
-  background: color-mix(in srgb, var(--man-fg) 3%, transparent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: transparent;
   color: var(--man-fg);
+  padding: 0;
 }
 
 .ey-brand-text {

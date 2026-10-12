@@ -1,46 +1,28 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { withBase } from 'vitepress'
 
 const props = defineProps<{
   size?: number | string
 }>()
-
-const accent = ref<'orange' | 'blue'>('orange')
-
-function updateAccent() {
-  if (typeof document === 'undefined') return
-  accent.value = document.documentElement.dataset.accent === 'blue' ? 'blue' : 'orange'
-}
-
-let observer: MutationObserver | null = null
-
-onMounted(() => {
-  updateAccent()
-  observer = new MutationObserver(() => updateAccent())
-  observer.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ['data-accent']
-  })
-})
-
-onUnmounted(() => {
-  observer?.disconnect()
-})
-
-const logoSrc = computed(() => {
-  return withBase(accent.value === 'blue' ? '/logo-blue.png' : '/logo-orange.png')
-})
 </script>
 
 <template>
-  <span class="ey-logo-wrap" :style="{ width: (size || 24) + 'px', height: (size || 24) + 'px' }">
+  <span class="ey-logo-wrap" :style="{ width: (size || 26) + 'px', height: (size || 26) + 'px' }">
     <img
-      class="ey-logo-img"
-      :src="logoSrc"
+      class="ey-logo-img ey-logo-dark"
+      :src="withBase('/logo-dark.png')"
       alt="EY Logo"
-      :width="size || 24"
-      :height="size || 24"
+      :width="size || 26"
+      :height="size || 26"
+      loading="eager"
+      decoding="async"
+    />
+    <img
+      class="ey-logo-img ey-logo-light"
+      :src="withBase('/logo-light.png')"
+      alt="EY Logo"
+      :width="size || 26"
+      :height="size || 26"
       loading="eager"
       decoding="async"
     />
@@ -62,7 +44,24 @@ const logoSrc = computed(() => {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
+}
+
+.ey-logo-dark {
+  display: none;
+}
+
+.ey-logo-light {
+  display: block;
+}
+
+:root.dark .ey-logo-dark,
+html.dark .ey-logo-dark {
+  display: block;
+}
+
+:root.dark .ey-logo-light,
+html.dark .ey-logo-light {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
