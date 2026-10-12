@@ -160,7 +160,7 @@ html.dark .ey-logo-light {
 
 .ey-logo-wrap.is-drawing .ey-mask-stroke {
   stroke-dashoffset: 1000;
-  animation: eyDrawStroke 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: eyDrawStroke 1.4s cubic-bezier(0.5, 0, 0.75, 0) forwards;
 }
 
 .ey-logo-wrap.is-drawn .ey-masked-content {
