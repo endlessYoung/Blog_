@@ -77,23 +77,48 @@ function extractExcerpt(file: string): string {
       .replace(/`([^`]+)`/g, '$1')
       .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
       .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
-      .replace(/[#*>\-_~]/g, ' ')
+      .replace(/^#{1,6}\s+/gm, '')
+      .replace(/^\s*>\s?/gm, '')
+      .replace(/^\s*[-*+]\s+/gm, '')
+      .replace(/^\s*\d+\.\s+/gm, '')
+      .replace(/[*_~]/g, '')
       .replace(/\s+/g, ' ')
       .trim()
-    return clean.slice(0, 160)
+    return clean.slice(0, 220)
   } catch {
     return ''
   }
 }
 
-/** Pre-computed fallback descriptions from article body for articles lacking frontmatter description */
+/** Bing flags descriptions under roughly 120 characters and over 160. */
+function clipDescription(text: string): string {
+  const clean = text.replace(/\s+/g, ' ').trim()
+  if (clean.length <= 160) return clean
+  const cut = clean.slice(0, 160)
+  const punct = Math.max(cut.lastIndexOf('。'), cut.lastIndexOf('；'), cut.lastIndexOf('，'))
+  return (punct >= 110 ? cut.slice(0, punct + 1) : cut).trim()
+}
+
+function composeDescription(written: string, excerpt: string): string {
+  const authored = written.trim()
+  const body = excerpt.trim()
+  if (authored.length >= 120) return clipDescription(authored)
+  const rest = authored && body.includes(authored)
+    ? body.replace(authored, ' ').replace(/\s+/g, ' ').trim()
+    : body
+  if (!authored) return clipDescription(rest)
+  if (!rest) return clipDescription(authored)
+  return clipDescription(`${authored} ${rest}`)
+}
+
+/** Descriptions used in meta tags. Short frontmatter is extended from the article body. */
 const articleDescriptions: Record<string, string> = (() => {
   const srcDir = join(__dirname, '..')
   const map: Record<string, string> = {}
   for (const file of listMarkdownFiles(srcDir)) {
     const rel = relative(srcDir, file).replace(/\\/g, '/').replace(/\.md$/, '')
     const fm = parseArticleFrontmatter(file)
-    const desc = String(fm.description || '').trim() || extractExcerpt(file)
+    const desc = composeDescription(String(fm.description || ''), extractExcerpt(file))
     if (desc) map[rel] = desc
   }
   return map
@@ -513,7 +538,7 @@ html:not(.dark) {
       ]
     }
     const cleanKey = ctx.page.replace(/\.md$/, '')
-    const pageDesc = fm?.description || articleDescriptions[cleanKey] || ctx.description || ''
+    const pageDesc = articleDescriptions[cleanKey] || fm?.description || ctx.description || ''
     const ogTitle = fm?.title ? `${fm.title} | Endlessyoung's Blog` : (ctx.title || "Endlessyoung's Blog")
     const ogDescription = pageDesc
     const ogType = ctx.page === 'index.md' ? 'website' : 'article'
