@@ -321,12 +321,11 @@ html.manual {
   border-top: 1px solid var(--man-line);
 }
 
-.m-prose table {
-  display: block;
+html.manual .m-prose table {
+  display: table;
   width: 100%;
   max-width: 100%;
   margin: 24px 0;
-  overflow-x: auto;
   border-collapse: collapse;
   font-size: 15px;
 }
@@ -1020,6 +1019,10 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
   .m-prose h2 { margin-top: 56px; font-size: 25px; }
   .related-articles__list { grid-template-columns: 1fr; }
   .series-nav__text { font-size: 16px; }
+  .m-prose table { display: table; width: 100%; table-layout: fixed; }
+  .m-prose th,
+  .m-prose td { overflow-wrap: anywhere; }
+  .m-prose th { white-space: normal; }
 }
 
 .a-fig {

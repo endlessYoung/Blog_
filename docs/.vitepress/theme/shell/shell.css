@@ -487,6 +487,7 @@ html.manual .manual-home a.log-row { position: relative !important; padding-bott
   .log-row .art-title { grid-column: 1 / -1; grid-row: 2; margin-top: 6px; white-space: normal; }
   .log-part, .log-arrow { display: none; }
   .terms { columns: 2; }
+  .term-group a { max-width: 100%; overflow-wrap: anywhere; }
 }
 
 @media (prefers-reduced-motion: reduce) {

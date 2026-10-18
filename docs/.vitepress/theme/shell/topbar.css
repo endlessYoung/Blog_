@@ -572,6 +572,21 @@ html.ey-locked { overflow: hidden; }
 @media (max-width: 900px) {
   .ey-nav { display: none; }
   .ey-shell .ey-menu { display: block; }
+  .ey-topbar-inner { gap: 8px; min-width: 0; }
+  .ey-brand { min-width: 0; }
+  .ey-brand-text { letter-spacing: .02em; }
+  .ey-socials { display: none; }
+  .ey-shell .ey-search {
+    width: 32px;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+  }
+  .ey-shell .ey-search > span:not(.ey-search-glyph) { display: none; }
+}
+
+@media (max-width: 380px) {
+  .ey-brand-text { display: none; }
 }
 
 @media (min-width: 901px) {
