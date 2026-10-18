@@ -3,6 +3,9 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useData, useRoute, withBase } from 'vitepress'
 import { buildManualCatalog, findManualArticle, normPath } from '../reading/catalog'
 import ManualRuler from './ManualRuler.vue'
+import ManualCasArticle from './ManualCasArticle.vue'
+import ManualGuidedArticle from './ManualGuidedArticle.vue'
+import { figureFor } from './figures'
 import SeriesNav from '../components/SeriesNav.vue'
 import RelatedArticles from '../components/RelatedArticles.vue'
 import Comments from '../components/Comments.vue'
@@ -23,6 +26,7 @@ const sideList = ref<HTMLElement | null>(null)
 const parts = computed(() => buildManualCatalog(theme.value.sidebar))
 const hit = computed(() => findManualArticle(parts.value, route.path))
 const title = computed(() => page.value.title || hit.value?.article.title || '')
+const figure = computed(() => figureFor(title.value))
 const current = computed(() => normPath(route.path))
 
 function day(value: unknown) {
@@ -41,7 +45,7 @@ const updated = computed(() => (page.value.lastUpdated ? day(page.value.lastUpda
 
 function measure() {
   nextTick(() => {
-    const prose = document.querySelector<HTMLElement>('.m-prose')
+    const prose = document.querySelector<HTMLElement>('.cas-doc') || document.querySelector<HTMLElement>('.m-prose')
     if (!prose) return
     const text = prose.innerText || ''
     const cjk = (text.match(/[\u4e00-\u9fff]/g) || []).length
@@ -114,8 +118,12 @@ onMounted(measure)
     </div>
 
     <div class="row a-body">
-      <div class="main m-prose vp-doc">
-        <Content />
+      <div class="main">
+        <ManualCasArticle v-if="figure?.kind === 'cas' && hit" :num="hit.article.num" />
+        <ManualGuidedArticle v-else-if="figure && figure.kind !== 'cas' && hit" :key="figure.kind" :kind="figure.kind" :num="hit.article.num" />
+        <div v-else class="m-prose vp-doc">
+          <Content />
+        </div>
       </div>
       <aside v-if="hit" class="side a-side" :class="{ open: panel === 'chapter' }">
         <div class="a-side-in">

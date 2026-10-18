@@ -112,27 +112,31 @@ html.manual .parts {
 }
 
 .gallery {
-  margin-top: 32px;
+  margin-top: 24px;
+  overflow: hidden;
+  padding: 8px 0 12px;
+}
+
+.gallery.is-still {
   overflow-x: auto;
-  overflow-y: hidden;
   scrollbar-width: none;
-  cursor: grab;
-  user-select: none;
 }
 
-.gallery::-webkit-scrollbar {
+.gallery.is-still::-webkit-scrollbar {
   display: none;
-}
-
-.gallery.dragging {
-  cursor: grabbing;
 }
 
 .gallery-track {
   display: flex;
-  gap: var(--man-gutter);
   width: max-content;
-  padding: 0 max(var(--man-pad), calc((100vw - var(--man-wrap)) / 2 + var(--man-pad)));
+  will-change: transform;
+}
+
+.gallery-set {
+  display: flex;
+  gap: var(--man-gutter);
+  padding-right: var(--man-gutter);
+  flex: none;
 }
 
 .fig-card {
@@ -235,6 +239,58 @@ html.manual .parts {
   50%, 62% { transform: none; }
   75%, 82% { transform: translateX(-84px); background: var(--accent); color: #fff; border-color: var(--accent); }
   95%, 100% { transform: none; }
+}
+
+.m-gen {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2.2fr;
+  gap: 6px;
+  padding: 26px 18px;
+}
+
+.m-gen .zone {
+  position: relative;
+  border: 1px solid var(--man-line-2);
+}
+
+.m-gen .zone b {
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  font: 500 9px/1 var(--man-mono);
+  color: var(--man-fg-3);
+  letter-spacing: .1em;
+}
+
+.m-gen .objs {
+  position: absolute;
+  inset: 26px 18px;
+}
+
+.m-gen .obj {
+  position: absolute;
+  left: 14px;
+  width: 14px;
+  height: 14px;
+  background: var(--man-fg);
+  animation: gen-move 5s var(--man-ease) infinite;
+}
+
+.m-gen .obj:nth-child(1) { top: 28px; }
+.m-gen .obj:nth-child(2) { top: 60px; animation-delay: -1.2s; }
+.m-gen .obj:nth-child(3) { top: 92px; animation-name: gen-die; }
+.m-gen .obj:nth-child(4) { top: 124px; animation-delay: -2.4s; }
+
+@keyframes gen-move {
+  0%, 15% { transform: none; }
+  30%, 45% { transform: translateX(118px); }
+  60%, 70% { transform: translateX(172px); }
+  88%, 100% { transform: translateX(250px); background: var(--accent); }
+}
+
+@keyframes gen-die {
+  0%, 20% { opacity: 1; transform: none; }
+  30%, 100% { opacity: 0; transform: scale(.2); }
 }
 
 .m-bin { padding: 50px 22px 0; }

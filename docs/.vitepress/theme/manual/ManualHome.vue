@@ -7,6 +7,7 @@ import { pageMeta, recentPages, termGroups } from '../reading/corpus'
 import { prefetchHrefs, prefetchKatex, prefetchPage } from '../reading/prefetch'
 import ManualOdo from './ManualOdo.vue'
 import ManualGallery from './ManualGallery.vue'
+import { FIG_DEFS } from './figures'
 import { EASE_OUT, playMastheadIntro, reducedMotion, rollOdo, shouldPlayIntro } from './motion'
 
 const { theme } = useData()
@@ -24,14 +25,8 @@ const day = String(now.getDate()).padStart(2, '0')
 const title = 'ENDLESSYOUNG'
 const groups = termGroups()
 
-const FIG_DEFS = [
-  { title: 'Handler', kind: 'loop' as const, caption: 'Looper 不断从队列取出消息' },
-  { title: 'CAS', kind: 'cas' as const, caption: '两个线程竞争同一个变量' },
-  { title: '二分查找', kind: 'bin' as const, caption: '指针收敛到目标元素' },
-]
-
 const figs = computed(() => {
-  const cards: { article: ManualArticle; kind: 'cas' | 'bin' | 'loop'; caption: string; fig: string }[] = []
+  const cards: { article: ManualArticle; kind: 'cas' | 'bin' | 'gen' | 'loop'; caption: string; fig: string }[] = []
   for (const def of FIG_DEFS) {
     for (const part of parts.value) {
       for (const chapter of part.chapters) {
@@ -213,7 +208,6 @@ onUnmounted(() => {
       <header class="block-head">
         <span class="mono block-num">§ A</span>
         <h2>目录</h2>
-        <p class="block-desc">点击某一部分展开章节，悬停文章可在右侧预览。键盘上下键也能操作。</p>
       </header>
       <div class="contents-grid">
         <div class="parts" @pointerover="onCatalogOver" @keydown="onCatalogKey">
@@ -281,7 +275,6 @@ onUnmounted(() => {
                 <template v-if="flap.kind === 'intro'">
                   <div class="fc-num">START HERE</div>
                   <div class="fc-title">从带交互图的笔记开始</div>
-                  <p class="fc-sum">图集里的三篇对应站内已有文章，卡片里的小图会自己动。</p>
                   <ul>
                     <li v-for="card in figs" :key="card.article.num">
                       <span>{{ card.article.num }}</span><span>{{ card.article.title }}</span>
@@ -311,7 +304,6 @@ onUnmounted(() => {
       <header class="block-head">
         <span class="mono block-num">§ B</span>
         <h2>图集</h2>
-        <p class="block-desc">站内可交互讲解的缩略版。按住拖动浏览，点击进入文章。</p>
       </header>
     </section>
     <ManualGallery :cards="figs" />
@@ -320,7 +312,6 @@ onUnmounted(() => {
       <header class="block-head">
         <span class="mono block-num">§ C</span>
         <h2>更新日志</h2>
-        <p class="block-desc">最近改过的文章，时间来自仓库提交。</p>
       </header>
       <ol class="log">
         <li v-for="row in logs" :key="row.article.num">
@@ -345,7 +336,6 @@ onUnmounted(() => {
       <header class="block-head">
         <span class="mono block-num">§ D</span>
         <h2>索引</h2>
-        <p class="block-desc">按文章标签查找。悬停条目可以预览对应文章。</p>
       </header>
       <div class="terms">
         <div v-for="group in groups" :key="group.key" class="term-group">

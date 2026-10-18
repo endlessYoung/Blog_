@@ -9,7 +9,6 @@ created: 2024-07-08
 # DecorView
 
 ## 1. Activity的创建过程
-![alt text](image-76.png)
 
 AMS管理着Activity生命周期，每当切换Activity状态时通过Binder告诉ActivityThread，ActivityThread通过Handler切换到主线程(UI线程）执行，最终分别调用到我们熟知的onCreate(xx)/onResume()方法。
 
@@ -18,41 +17,48 @@ DecorView的主要角色是作为顶层容器，承载着应用的视图结构�
 DecorView 是一个特别的视图类，它作为窗口的顶级视图。它是所有窗口装饰和内容视图的根视图。在Activity中，可以通过以下方式获取DecorView
 
 ::: code-group
-``` java
+
+```java
 View decorView = getWindow().getDecorView();
 ```
+
 :::
 
 DecorView 包含了状态栏、导航栏、标题栏以及应用程序的内容区域。一般来说，DecorView 的层次结构如下:
 
 ::: code-group
-``` txt
+
+```txt
 DecorView
  ├── StatusBar (状态栏)
  ├── NavigationBar (导航栏)
  ├── TitleBar (标题栏)
  └── ContentView (内容视图)
 ```
+
 :::
 
 通过操作 DecorView，你可以实现一些高级效果，例如全屏模式、隐藏状态栏和导航栏等。下面是一个隐藏状态栏的例子：
 
 ::: code-group
-``` java
+
+```java
 // 隐藏状态栏和导航栏
 decorView.setSystemUiVisibility(
-    View.SYSTEM_UI_FLAG_FULLSCREEN 
-    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION 
+    View.SYSTEM_UI_FLAG_FULLSCREEN
+    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 );
 
 ```
+
 :::
 
 此外，DecorView 还可以用于在窗口中添加自定义视图，覆盖在应用内容之上。例如，显示一个全局的浮动按钮：
 
 ::: code-group
-``` java
+
+```java
 WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
 WindowManager.LayoutParams params = new WindowManager.LayoutParams(
     WindowManager.LayoutParams.WRAP_CONTENT,
@@ -67,6 +73,7 @@ floatButton.setText("Float");
 
 windowManager.addView(floatButton, params);
 ```
+
 :::
 
 **1. DecorView与Window的关系**
@@ -83,12 +90,14 @@ ViewRootImpl是AndroidUI系统的内部机制，作为桥梁连接Window和Decor
 事件分发等。当一个Activity的视图被设置或者窗口发生变化时，ViewRootImpl确保DecorView触发更新和重新绘制。
 
 ## 2. setContentView(xx)源码解析
+
 从Activity onCreate(xx)看起
 
 **AppCompatDelegateImpl**
 
 ::: code-group
-``` java
+
+```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //先调用父类构造函数
@@ -97,8 +106,8 @@ ViewRootImpl是AndroidUI系统的内部机制，作为桥梁连接Window和Decor
         setContentView(R.layout.layout_path);
     }
 ```
-:::
 
+:::
 
 ## 3. 创建流程
 
@@ -107,24 +116,29 @@ DecorView的创建通常在onCreate中开始，当setContentView方法被调用�
 1. 当一个 Activity 启动时，ActivityThread 会调用 Activity 的 performLaunchActivity 方法。这个方法会创建一个新的 Activity 实例，并调用其 onCreate 方法。
 
 ::: code-group
-``` java
+
+```java
 Activity a = performLaunchActivity(r, customIntent);
 ```
+
 :::
 
 ::: code-group
-``` java
+
+```java
 public void setContentView(int layoutResID) {
     getWindow().setContentView(layoutResID);
     initWindowDecorActionBar();
 }
 ```
+
 :::
 
 2. Window的setContentView方法内部，进一步调用了PhoneWindow的setContentView实现。在这个方法中，会创建或找到DecorView，然后将解析的视图树添加到DecorView中。
 
 ::: code-group
-``` java
+
+```java
 @Override
 public void setContentView(int layoutResID) {
     // 确保DecorView已经被创建
@@ -149,6 +163,7 @@ public void setContentView(int layoutResID) {
     mContentParentExplicitlySet = true;
 }
 ```
+
 :::
 
 3. LayoutInflater会根据layoutID找到对应的布局文件并解析，根据文件中的定义构建一个完整的View树。这个View树随后会被设置成Activity的内容视图，实际上被添加到Acitvity所关联的Window的DecorView中。
@@ -156,7 +171,8 @@ public void setContentView(int layoutResID) {
 installDecor方法负责初始化DecorView。如果DecorView还没有被创建，PhoneWindow会创建一个新的DecorView实例，并将其设置为窗口的根视图。接着，解析的视图树（即Activity的布局）被添加到DecorView中。
 
 ::: code-group
-``` java
+
+```java
 private void installDecor() {
     if (mDecor == null) {
         mDecor = generateDecor(-1);
@@ -177,6 +193,7 @@ protected DecorView generateDecor() {
     return new DecorView(getContext(), -1);
 }
 ```
+
 :::
 
 4. 将DecorView添加到WindowManager中
@@ -184,7 +201,8 @@ protected DecorView generateDecor() {
 WindowManager 是系统服务，它负责管理应用程序窗口的显示。它提供了一些用于管理窗口显示的方法，例如添加、删除、更新窗口等。在 Activity 的 onResume() 方法之后，会将 DecorView 添加到 WindowManager 中。这将导致 DecorView 显示在屏幕上。触发点是在，ActivityThread中的handleResumeActivity()方法中
 
 ::: code-group
-``` java
+
+```java
 @Override
 public void handleResumeActivity(ActivityClientRecord r, boolean finalStateRequest,
         boolean isForward, boolean shouldSendCompatFakeFocus, String reason) {
@@ -225,6 +243,7 @@ public void handleResumeActivity(ActivityClientRecord r, boolean finalStateReque
    //  ...
 }
 ```
+
 :::
 
 这就是在onCreate与onResume的时候不能直接拿到View的宽高的原因。因为DecorView添加是在onResume之后。
@@ -234,7 +253,8 @@ public void handleResumeActivity(ActivityClientRecord r, boolean finalStateReque
 在上面将DecorView添加到WindowManager中时，内部是交由WindowManagerGlobal的addView处理，在该方法中会创建ViewRootImpl对象。
 
 ::: code-group
-``` java
+
+```java
 public void addView(View view, ViewGroup.LayoutParams params,
         Display display, Window parentWindow, int userId) {
 
@@ -274,12 +294,14 @@ public void addView(View view, ViewGroup.LayoutParams params,
     }
 }
 ```
+
 :::
 
 DecorView的绘制是由ViewRootImpl触发的，而内部其实是调用了它的requestLayout()方法
 
 ::: code-group
-``` java
+
+```java
 public void setView(View view, WindowManager.LayoutParams attrs, View panelParentView,
         int userId) {
     ...
@@ -305,11 +327,13 @@ requestLayout()方法中，做了经典的两件事情
 2. 等待刷新，触发后续的绘制流程
 */
 ```
+
 :::
 
 ## 4. 总结
 
 整个流程主要可以归纳为四步：
+
 1. 在Activity的attach()方法里面先创建PhoneWindow并获取WindowManager
 2. 在Activity的onCreate()方法里调用setContentView()会通过调用用PhoneWindow的installDecor()来创建DecorView。
 3. 在Activity的onResume()方法之后，也就是handleResumeActivity()方法中，会把DecorView添加到WindowMangaer中，并与wms建立双向通信。最终交个ViewRootImpl进行后续的绘制流程。

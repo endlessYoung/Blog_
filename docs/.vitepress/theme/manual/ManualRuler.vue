@@ -49,7 +49,7 @@ function activations() {
 
 function measure() {
   const body = document.querySelector<HTMLElement>('.m-article .a-body')
-  const prose = document.querySelector<HTMLElement>('.m-prose')
+  const prose = document.querySelector<HTMLElement>('.cas-doc') || document.querySelector<HTMLElement>('.m-prose')
   heads = prose ? [...prose.querySelectorAll<HTMLElement>('h2')] : []
   if (!body || !prose || window.innerWidth < 1100 || !heads.length) {
     show.value = false

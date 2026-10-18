@@ -9,44 +9,44 @@ created: 2024-04-05
 # Context
 
 ## 1.什么是Context
+
 它是Android里的一个上帝类，启动四大组件、获取资源、获取类加载器等重要功能都通过Context 来完成，Activity、Service与Application也都派生自Context，Broadcast Receiver与Content Provider与Context 也有着密切的联系。
 
-Context类图如下所示：
-
-![alt text](image-37.png)
+Context的类关系是：
 
 可以发现Context是个抽象类，它的具体实现类是ContextImpl，ContextWrapper是个包装类，内部的成员变量mBase指向的也是个ContextImpl对象，ContextImpl完成了 实际的功能，Activity、Service与Application都直接或者间接的继承ContextWrapper。
 
 我们知道Context表示的应用的上下文环境，四大组件都与Context有密切的关系，在创建组件的时候会同时创建Context，并将两者进行绑定，我们来看看四大组件与 Context之间的关系。
 
-
 ## 2.Context与四大组件的关系
+
 1. Activity的创建流程
-``` java
+
+```java
 public final class ActivityThread {
-    
+
     private Activity performLaunchActivity(ActivityClientRecord r, Intent customIntent) {
             // System.out.println("##### [" + System.currentTimeMillis() + "] ActivityThread.performLaunchActivity(" + r + ")");
-    
+
             ActivityInfo aInfo = r.activityInfo;
             // 1. 获取LoadedApk对象。
             if (r.packageInfo == null) {
                 r.packageInfo = getPackageInfo(aInfo.applicationInfo, r.compatInfo,
                         Context.CONTEXT_INCLUDE_CODE);
             }
-    
+
             ComponentName component = r.intent.getComponent();
             if (component == null) {
                 component = r.intent.resolveActivity(
                     mInitialApplication.getPackageManager());
                 r.intent.setComponent(component);
             }
-    
+
             if (r.activityInfo.targetActivity != null) {
                 component = new ComponentName(r.activityInfo.packageName,
                         r.activityInfo.targetActivity);
             }
-    
+
             // 2. 创建Activity对象。
             Activity activity = null;
             try {
@@ -66,13 +66,13 @@ public final class ActivityThread {
                         + ": " + e.toString(), e);
                 }
             }
-    
+
             try {
                 // 3. 创建Application对象。
                 Application app = r.packageInfo.makeApplication(false, mInstrumentation);
-    
+
                 // ...log
-                
+
                 if (activity != null) {
                     // 4. 创建ContextImpl对象。
                     Context appContext = createBaseContextForActivity(r, activity);
@@ -93,7 +93,7 @@ public final class ActivityThread {
                             r.ident, app, r.intent, r.activityInfo, title, r.parent,
                             r.embeddedID, r.lastNonConfigurationInstances, config,
                             r.referrer, r.voiceInteractor, window);
-    
+
                     if (customIntent != null) {
                         activity.mIntent = customIntent;
                     }
@@ -103,7 +103,7 @@ public final class ActivityThread {
                     if (theme != 0) {
                         activity.setTheme(theme);
                     }
-    
+
                     activity.mCalled = false;
                     if (r.isPersistable()) {
                         // 5. 执行Activity的onCreate()回调方法。
@@ -148,12 +148,12 @@ public final class ActivityThread {
                     }
                 }
                 r.paused = true;
-    
+
                 mActivities.put(r.token, r);
-    
+
             } catch (SuperNotCalledException e) {
                 throw e;
-    
+
             } catch (Exception e) {
                 if (!mInstrumentation.onException(activity, e)) {
                     throw new RuntimeException(
@@ -161,7 +161,7 @@ public final class ActivityThread {
                         + ": " + e.toString(), e);
                 }
             }
-    
+
             return activity;
         }
 }
@@ -175,16 +175,16 @@ Activity的创建流程如下所示：
 4. 创建ContextImpl对象。
 5. 执行Activity的onCreate()回调方法。
 
-2. Service的创建流程
+6. Service的创建流程
 
-``` java
+```java
 public final class ActivityThread {
-    
+
     private void handleCreateService(CreateServiceData data) {
             // If we are getting ready to gc after going to the background, well
             // we are back active so skip it.
             unscheduleGcIdler();
-    
+
             // 1. 获取LoadedApk对象。
             LoadedApk packageInfo = getPackageInfoNoCheck(
                     data.info.applicationInfo, data.compatInfo);
@@ -200,13 +200,13 @@ public final class ActivityThread {
                         + ": " + e.toString(), e);
                 }
             }
-    
+
             try {
                 if (localLOGV) Slog.v(TAG, "Creating service " + data.info.name);
                 // 3. 创建ContextImpl对象。
                 ContextImpl context = ContextImpl.createAppContext(this, packageInfo);
                 context.setOuterContext(service);
-    
+
                 // 4. 创建Application对象。
                 Application app = packageInfo.makeApplication(false, mInstrumentation);
                 service.attach(context, this, data.info.name, data.token, app,
@@ -241,22 +241,22 @@ Service的创建流程如下所示：
 
 静态广播的创建流程
 
-``` java
+```java
 
 public final class ActivityThread {
-    
+
     private void handleReceiver(ReceiverData data) {
             // If we are getting ready to gc after going to the background, well
             // we are back active so skip it.
             unscheduleGcIdler();
-    
+
             String component = data.intent.getComponent().getClassName();
             // 1. 获取LoadedApk对象。
             LoadedApk packageInfo = getPackageInfoNoCheck(
                     data.info.applicationInfo, data.compatInfo);
-    
+
             IActivityManager mgr = ActivityManagerNative.getDefault();
-    
+
             BroadcastReceiver receiver;
             try {
                 // 2. 创建BroadcastReceiver对象。
@@ -268,13 +268,13 @@ public final class ActivityThread {
             } catch (Exception e) {
                 // ...log
             }
-    
+
             try {
                 // 3. 创建Application对象。
                 Application app = packageInfo.makeApplication(false, mInstrumentation);
-    
+
                 // ...log
-    
+
                 // 4. 获取ContextImpl对象。
                 ContextImpl context = (ContextImpl)app.getBaseContext();
                 sCurrentBroadcastIntent.set(data.intent);
@@ -287,14 +287,13 @@ public final class ActivityThread {
             } finally {
                 sCurrentBroadcastIntent.set(null);
             }
-    
+
             if (receiver.getPendingResult() != null) {
                 data.finish();
             }
-        }   
+        }
 }
 ```
-
 
 静态广播的创建流程如下所示：
 
@@ -306,9 +305,9 @@ public final class ActivityThread {
 
 Content Provider的创建流程
 
-``` java
+```java
 public final class ActivityThread {
-    
+
      private IActivityManager.ContentProviderHolder installProvider(Context context,
                 IActivityManager.ContentProviderHolder holder, ProviderInfo info,
                 boolean noisy, boolean noReleaseNeeded, boolean stable) {
@@ -362,9 +361,9 @@ public final class ActivityThread {
                 if (DEBUG_PROVIDER) Slog.v(TAG, "Installing external provider " + info.authority + ": "
                         + info.name);
             }
-    
+
             IActivityManager.ContentProviderHolder retHolder;
-    
+
             synchronized (mProviderMap) {
                 if (DEBUG_PROVIDER) Slog.v(TAG, "Checking to add " + provider
                         + " / " + info.name);
@@ -412,7 +411,7 @@ public final class ActivityThread {
                     retHolder = prc.holder;
                 }
             }
-    
+
             return retHolder;
         }
 }
@@ -426,15 +425,16 @@ public final class ActivityThread {
 Application的创建流程
 
 通过上述内容可以发现，对于四大组件，Application的创建和获取方式也是不尽相同的，具体说来：
+
 - Activity：通过LoadedApk的makeApplication()方法创建。
 - Service：通过LoadedApk的makeApplication()方法创建。
 - 静态广播：通过其回调方法onReceive()方法的第一个参数指向Application。
 - ContentProvider：无法获取Application，因此此时Application不一定已经初始化。
 - LoadedApk的makeApplication()方法如下所示：
 
-``` java
+```java
 public final class LoadedApk {
-    
+
        public Application makeApplication(boolean forceDefaultAppClass,
                 Instrumentation instrumentation) {
             // Application只会创建一次，如果Application对象已经存在则不再创建，一个APK对应一个
@@ -442,16 +442,16 @@ public final class LoadedApk {
             if (mApplication != null) {
                 return mApplication;
             }
-    
+
             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, "makeApplication");
-    
+
             Application app = null;
-    
+
             String appClass = mApplicationInfo.className;
             if (forceDefaultAppClass || (appClass == null)) {
                 appClass = "android.app.Application";
             }
-    
+
             try {
                 // 1. 创建加载Application的ClassLoader对象。
                 java.lang.ClassLoader cl = getClassLoader();
@@ -479,7 +479,7 @@ public final class LoadedApk {
             // 5. 将Application对象添加到ActivityThread的Application列表中。
             mActivityThread.mAllApplications.add(app);
             mApplication = app;
-    
+
             if (instrumentation != null) {
                 try {
                     // 6. 执行Application的回调方法onCreate()。
@@ -493,7 +493,7 @@ public final class LoadedApk {
                     }
                 }
             }
-    
+
             // Rewrite the R 'constants' for all library apks.
             SparseArray<String> packageIdentifiers = getAssets(mActivityThread)
                     .getAssignedPackageIdentifiers();
@@ -503,12 +503,12 @@ public final class LoadedApk {
                 if (id == 0x01 || id == 0x7f) {
                     continue;
                 }
-    
+
                 rewriteRValues(getClassLoader(), packageIdentifiers.valueAt(i), id);
             }
-    
+
             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
-    
+
             return app;
         }
 }
@@ -522,19 +522,19 @@ Application的创建流程如下所示：
 4. 将Application对象设置给ContextImpl。
 5. 将Application对象添加到ActivityThread的Application列表中。
 6. 执行Application的回调方法onCreate()。
-👉 注：Application只会创建一次，如果Application对象已经存在则不再创建，一个APK对应一个LoadedApk对象，一个LoadedApk对象 对应一个Application对象。
+   👉 注：Application只会创建一次，如果Application对象已经存在则不再创建，一个APK对应一个LoadedApk对象，一个LoadedApk对象 对应一个Application对象。
 
 Application对象的构建时通过Instrumentation的newApplication()方法完成的。
 
-``` java
+```java
 public class Instrumentation {
    static public Application newApplication(Class<?> clazz, Context context)
-           throws InstantiationException, IllegalAccessException, 
+           throws InstantiationException, IllegalAccessException,
            ClassNotFoundException {
        Application app = (Application)clazz.newInstance();
        app.attach(context);
        return app;
-   } 
+   }
 }
 ```
 
