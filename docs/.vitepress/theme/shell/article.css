@@ -1024,6 +1024,8 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
 
 .a-fig {
   margin: 28px 0 8px;
+  min-width: 0;
+  max-width: 100%;
   border: 1px solid var(--man-line-2);
   background: var(--surface);
 }
@@ -1122,6 +1124,7 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
 .a-fig-code {
   margin: 0;
   padding: 12px 0;
+  overflow-x: auto;
   font: 13px/1.85 var(--man-mono);
   border-bottom: 1px solid var(--man-line);
   color: var(--man-fg);
@@ -1130,7 +1133,9 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
 .a-fig-code .cl {
   position: relative;
   display: grid;
-  grid-template-columns: 56px 26px 1fr;
+  grid-template-columns: 56px 26px max-content;
+  width: max-content;
+  min-width: 100%;
   padding-right: 12px;
   white-space: pre;
 }
@@ -1180,6 +1185,15 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
 @media (max-width: 700px) {
   .a-fig .cas-stage { grid-template-columns: 1fr; }
   .a-fig .mem-val { font-size: 42px; }
+  .a-fig-ctrl button { padding: 0 8px; letter-spacing: 0; }
+  .a-fig-code { overflow-x: hidden; }
+  .a-fig-code .cl {
+    width: 100%;
+    min-width: 0;
+    white-space: pre-wrap;
+    grid-template-columns: 28px 22px minmax(0, 1fr);
+  }
+  .fig-card { width: min(380px, calc(100vw - 2 * var(--man-pad))); }
 }
 
 .cas-doc { color: var(--man-fg); }
@@ -1242,10 +1256,11 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
 .cas-code .tok-c { color: var(--man-fg-3); }
 .cas-scrolly {
   display: grid;
-  grid-template-columns: minmax(220px, .9fr) minmax(320px, 1.15fr);
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.15fr);
   gap: 28px;
   align-items: start;
   margin-top: 28px;
+  min-width: 0;
 }
 .cas-scrolly .a-fig { position: sticky; top: calc(var(--ey-top) + 20px); margin: 0; }
 .cas-step {
@@ -1388,4 +1403,10 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
   .g-obj,
   .g-ptr,
   .g-bars i { transition: none; }
+}
+
+@media (max-width: 700px) {
+  .g-loop { grid-template-columns: 1fr 1fr; height: auto; }
+  .g-bars { gap: 3px; }
+  .g-bars i em { font-size: 9px; }
 }
