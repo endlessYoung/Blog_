@@ -184,6 +184,9 @@ onUnmounted(() => {
             <div class="zone"><b>OLD</b></div>
             <div class="objs"><i class="obj" /><i class="obj" /><i class="obj" /><i class="obj" /></div>
           </div>
+          <div v-else-if="card.kind === 'gc'" class="fig-stage m-gc">
+            <i /><i /><i /><i /><i /><i />
+          </div>
           <div v-else class="fig-stage m-loop">
             <div class="q"><i /><i /><i /></div>
             <div class="ring" />

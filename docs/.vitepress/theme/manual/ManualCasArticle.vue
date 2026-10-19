@@ -102,7 +102,6 @@ onUnmounted(() => {
 <template>
   <article ref="root" class="cas-doc">
     <section class="cas-sec">
-      <p class="cas-num mono">§1</p>
       <h2 id="cas-what">什么是 CAS</h2>
       <p><code>CAS</code>（Compare And Swap，比较并交换）是非阻塞同步的实现原理。它是 CPU 硬件提供的指令，从硬件层面保证“比较”与“交换”两个操作作为一个整体原子地完成。CAS 指令包含三个操作数：</p>
       <ol>
@@ -118,7 +117,6 @@ onUnmounted(() => {
     </section>
 
     <section class="cas-sec">
-      <p class="cas-num mono">§2</p>
       <h2 id="cas-jdk">在 JDK 中的样子</h2>
       <p><code>AtomicInteger.incrementAndGet()</code> 最终调用 <code>Unsafe.getAndAddInt()</code>：先读取当前值，再用 CAS 尝试写入“当前值 + 1”，失败就回到循环开头。</p>
       <div class="cas-code">
@@ -136,7 +134,6 @@ onUnmounted(() => {
     </section>
 
     <section class="cas-sec">
-      <p class="cas-num mono">§3</p>
       <h2 id="cas-watch">动手看一遍</h2>
       <div class="cas-scrolly">
         <div class="cas-steps">
@@ -157,7 +154,6 @@ onUnmounted(() => {
     </section>
 
     <section class="cas-sec">
-      <p class="cas-num mono">§4</p>
       <h2 id="cas-cost">应用场景与代价</h2>
       <ul>
         <li><strong>乐观锁</strong>：<code>java.util.concurrent.atomic</code> 包中的 <code>AtomicInteger</code>、<code>AtomicReference</code> 等都基于 CAS 实现。</li>

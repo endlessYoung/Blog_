@@ -313,6 +313,29 @@ html.manual .parts {
 @keyframes bin-hi { 0%, 50% { transform: none; } 60%, 100% { transform: translateX(-80px); } }
 @keyframes bin-mid { 0%, 30% { transform: none; } 40%, 55% { transform: translateX(80px); } 65%, 100% { transform: translateX(53px); } }
 
+.m-gc {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  padding: 78px 22px 0;
+}
+.m-gc i {
+  height: 64px;
+  background: var(--man-fg);
+  animation: gc-live 4.8s var(--man-ease) infinite;
+}
+.m-gc i:nth-child(2),
+.m-gc i:nth-child(4),
+.m-gc i:nth-child(5) { animation-name: gc-hole; background: var(--man-fg-3); }
+@keyframes gc-live {
+  0%, 35% { transform: none; }
+  55%, 100% { transform: translateX(0); }
+}
+@keyframes gc-hole {
+  0%, 28% { opacity: 1; }
+  48%, 100% { opacity: 0; }
+}
+
 .m-loop .ring {
   position: absolute;
   left: 50%;

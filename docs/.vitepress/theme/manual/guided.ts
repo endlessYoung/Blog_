@@ -23,8 +23,14 @@ export interface BinBeat extends GuidedBeat {
 
 export type LoopPhase = 'build' | 'queue' | 'next' | 'take' | 'handle' | 'rest'
 
+export type GcPhase = 'heap' | 'mark' | 'sweep' | 'copy' | 'compact'
+
 export interface LoopBeat extends GuidedBeat {
   phase: LoopPhase
+}
+
+export interface GcBeat extends GuidedBeat {
+  phase: GcPhase
 }
 
 export const BIN_VALUES = [3, 7, 11, 14, 18, 21, 25, 29, 33, 36, 40, 44]
@@ -171,5 +177,38 @@ export const LOOP_BEATS: LoopBeat[] = [
     text: '这条消息处理完，loop 回到开头，再取下一条。整个过程没有额外起线程，执行线程就是当初调用 Looper.loop() 的那一个。',
     log: 'UI 处理完。队列还剩 LOG、SAVE，<b>loop</b> 继续。',
     phase: 'rest',
+  },
+]
+
+export const GC_BEATS: GcBeat[] = [
+  {
+    label: '01 · 同一段堆',
+    text: '回收之前，这段内存里活着的是 A、B、C，夹在中间的三格已经没有引用。三种算法面对的是同一段内存，差别在回收之后空闲空间长什么样。',
+    log: '存活 <b>A B C</b>，中间三格是垃圾。',
+    phase: 'heap',
+  },
+  {
+    label: '02 · 标记',
+    text: '从 GC Roots 顺着引用链走一遍，走到的对象标成存活。标记-清除、复制、整理，这一步是一样的。',
+    log: 'A、B、C 被标上。没被走到的格子仍然是垃圾。',
+    phase: 'mark',
+  },
+  {
+    label: '03 · 清除',
+    text: '标记-清除把没被标记的格子直接腾出来，活对象留在原地。空出来的是一块一块的洞，下一次分配只能沿着空闲链表找能放下的洞。',
+    log: '垃圾被清掉。A、B、C <b>原地不动</b>，中间留下碎片。',
+    phase: 'sweep',
+  },
+  {
+    label: '04 · 复制',
+    text: '复制算法把内存分成 From 和 To。只把活对象按顺序抄到 To 的开头，From 整块丢掉。To 里剩下的空闲是连在一起的，分配时移动堆顶指针就行。代价是有一半空间在备用。',
+    log: 'A、B、C 复制到 <b>To</b> 的开头。From 清空。',
+    phase: 'copy',
+  },
+  {
+    label: '05 · 整理',
+    text: '标记-整理不预留半区。活对象往内存的一端滑动，紧挨着排好，后面整段变成连续空闲。对象被移动之后，指向它们的引用都要改，这一步必须停掉用户线程。',
+    log: 'A、B、C 滑到左端。右侧是<b>连续空闲</b>。',
+    phase: 'compact',
   },
 ]

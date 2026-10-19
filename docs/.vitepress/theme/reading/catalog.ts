@@ -6,6 +6,9 @@ export interface ManualArticle {
 
 export interface ManualChapter {
   name: string
+  shortName: string
+  root: string
+  rootLabel: string
   articles: ManualArticle[]
 }
 
@@ -88,7 +91,7 @@ function collectLinks(items: SideItem[] | undefined, bucket: { title: string; li
   }
 }
 
-function chaptersForRoot(items: SideItem[] | undefined, rootLabel: string, prefixRoot: boolean): ManualChapter[] {
+function chaptersForRoot(items: SideItem[] | undefined, root: string, rootLabel: string, prefixRoot: boolean): ManualChapter[] {
   const chapters: ManualChapter[] = []
   const loose: { title: string; link: string }[] = []
   for (const item of items || []) {
@@ -99,6 +102,9 @@ function chaptersForRoot(items: SideItem[] | undefined, rootLabel: string, prefi
       const name = item.text || rootLabel
       chapters.push({
         name: prefixRoot ? `${rootLabel} · ${name}` : name,
+        shortName: name,
+        root,
+        rootLabel,
         articles: links.map((link) => ({ num: '', title: link.title, link: link.link })),
       })
     } else if (item.link && item.text) {
@@ -108,6 +114,9 @@ function chaptersForRoot(items: SideItem[] | undefined, rootLabel: string, prefi
   if (loose.length) {
     chapters.unshift({
       name: rootLabel,
+      shortName: rootLabel,
+      root,
+      rootLabel,
       articles: loose.map((link) => ({ num: '', title: link.title, link: link.link })),
     })
   }
@@ -125,7 +134,7 @@ export function buildManualCatalog(sidebar: unknown): ManualPart[] {
     const chapters = group.roots.flatMap((root) => {
       const items = map[root.path]
       if (!items) return []
-      return chaptersForRoot(items, root.label, prefixRoot)
+      return chaptersForRoot(items, root.path, root.label, prefixRoot)
     })
     let chapterIndex = 0
     for (const chapter of chapters) {

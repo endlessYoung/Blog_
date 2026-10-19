@@ -702,7 +702,7 @@ html:not(.dark) {
   themeConfig: {
     related: relatedIndex,
     homeCategories,
-    outline: { level: [2, 4] },
+    outline: { level: [2, 5] },
     logo: '/panda.webp',
     siteTitle: false,
     darkModeSwitchLabel: "🌓",

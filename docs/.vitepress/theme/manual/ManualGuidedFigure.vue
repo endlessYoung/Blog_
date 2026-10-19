@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue'
-import { BIN_BEATS, BIN_TARGET, BIN_VALUES, GEN_BEATS, LOOP_BEATS, type Zone } from './guided'
+import { BIN_BEATS, BIN_TARGET, BIN_VALUES, GC_BEATS, GEN_BEATS, LOOP_BEATS, type Zone } from './guided'
 import type { FigKind } from './figures'
 
 const props = defineProps<{
@@ -9,7 +9,7 @@ const props = defineProps<{
   step?: number
 }>()
 
-const beats = props.kind === 'gen' ? GEN_BEATS : props.kind === 'bin' ? BIN_BEATS : LOOP_BEATS
+const beats = props.kind === 'gen' ? GEN_BEATS : props.kind === 'bin' ? BIN_BEATS : props.kind === 'loop' ? LOOP_BEATS : GC_BEATS
 const last = beats.length - 1
 const cur = ref(0)
 const playing = ref(false)
@@ -38,6 +38,38 @@ const queue = computed(() => {
 const gen = computed(() => (props.kind === 'gen' ? GEN_BEATS[cur.value] : null))
 const bin = computed(() => (props.kind === 'bin' ? BIN_BEATS[cur.value] : null))
 const loop = computed(() => (props.kind === 'loop' ? LOOP_BEATS[cur.value] : null))
+const gc = computed(() => (props.kind === 'gc' ? GC_BEATS[cur.value] : null))
+
+const gcRows = computed(() => {
+  const phase = gc.value?.phase
+  if (!phase) return []
+  const mixed = [
+    { name: 'A', state: 'live' },
+    { name: '', state: 'dead' },
+    { name: 'B', state: 'live' },
+    { name: '', state: 'dead' },
+    { name: '', state: 'dead' },
+    { name: 'C', state: 'live' },
+  ]
+  const packed = [
+    { name: 'A', state: 'live' },
+    { name: 'B', state: 'live' },
+    { name: 'C', state: 'live' },
+    { name: '', state: 'free' },
+    { name: '', state: 'free' },
+    { name: '', state: 'free' },
+  ]
+  const blank = mixed.map(() => ({ name: '', state: 'hole' }))
+  if (phase === 'mark') {
+    return [{ name: 'HEAP', cells: mixed.map((cell) => ({ ...cell, state: cell.state === 'live' ? 'mark' : 'dead' })) }]
+  }
+  if (phase === 'sweep') {
+    return [{ name: 'HEAP', cells: mixed.map((cell) => ({ ...cell, state: cell.state === 'live' ? 'live' : 'hole' })) }]
+  }
+  if (phase === 'copy') return [{ name: 'FROM', cells: blank }, { name: 'TO', cells: packed }]
+  if (phase === 'compact') return [{ name: 'HEAP', cells: packed }]
+  return [{ name: 'HEAP', cells: mixed }]
+})
 
 function barHeight(value: number) {
   const min = BIN_VALUES[0]
@@ -166,6 +198,15 @@ onUnmounted(() => halt())
       <div class="g-col" :class="{ on: loop.phase === 'handle' }">
         <b>HANDLER</b>
         <i v-if="loop.phase === 'handle'" class="g-msg">UI</i>
+      </div>
+    </div>
+
+    <div v-else-if="gc" class="g-board g-gc">
+      <div v-for="row in gcRows" :key="row.name" class="g-mem">
+        <b>{{ row.name }}</b>
+        <span>
+          <i v-for="(cell, index) in row.cells" :key="`${row.name}-${index}`" :class="cell.state">{{ cell.name }}</i>
+        </span>
       </div>
     </div>
 
