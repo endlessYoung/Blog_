@@ -471,5 +471,11 @@
   "tags/数据结构和算法/index.md": "2026-07-31",
   "Agent/Chunking.md": "2026-08-01",
   "Agent/Embedding.md": "2026-08-03",
-  "404.md": "2026-08-05"
+  "404.md": "2026-08-05",
+  ".vitepress/theme/manual/archive/GC算法.md": "2024-10-09",
+  ".vitepress/theme/manual/archive/Handler.md": "2023-12-17",
+  ".vitepress/theme/manual/archive/RecyclerView四级缓存.md": "2026-10-19",
+  ".vitepress/theme/manual/archive/二分查找.md": "2024-12-04",
+  ".vitepress/theme/manual/archive/伊甸园区算法.md": "2024-10-09",
+  "Android/RecyclerView四级缓存.md": "2026-10-19"
 }
