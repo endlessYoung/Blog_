@@ -8,6 +8,7 @@ import './shell/article.css'
 import './shell/notfound.css'
 
 import SiteLayout from './shell/SiteLayout.vue'
+import ManualScrolly from './manual/ManualScrolly.vue'
 import { readAccent } from './manual/motion'
 
 if (typeof document !== 'undefined') {
@@ -20,4 +21,7 @@ if (typeof document !== 'undefined') {
 export default {
   extends: Theme,
   Layout: SiteLayout,
+  enhanceApp({ app }) {
+    app.component('ManualScrolly', ManualScrolly)
+  },
 }

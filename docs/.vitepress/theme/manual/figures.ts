@@ -1,4 +1,4 @@
-export type FigKind = 'cas' | 'bin' | 'gen' | 'loop' | 'gc'
+export type FigKind = 'cas' | 'bin' | 'gen' | 'loop' | 'gc' | 'rv'
 
 export const FIG_DEFS: { title: string; kind: FigKind; caption: string }[] = [
   { title: 'CAS', kind: 'cas', caption: '两个线程竞争同一个变量' },
@@ -6,6 +6,7 @@ export const FIG_DEFS: { title: string; kind: FigKind; caption: string }[] = [
   { title: 'GC算法', kind: 'gc', caption: '同一段内存，清除、复制、整理' },
   { title: '二分查找', kind: 'bin', caption: '指针收敛到目标元素' },
   { title: 'Handler', kind: 'loop', caption: 'Looper 不断从队列取出消息' },
+  { title: 'RecyclerView四级缓存', kind: 'rv', caption: '同一块 ViewHolder，按四级往下找' },
 ]
 
 export function figureFor(title: string) {

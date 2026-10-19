@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, provide, ref, watch } from 'vue'
 import { useData, useRoute, withBase } from 'vitepress'
 import { buildManualCatalog, findManualArticle, normPath } from '../reading/catalog'
 import ManualRuler from './ManualRuler.vue'
-import ManualCasArticle from './ManualCasArticle.vue'
-import ManualGuidedArticle from './ManualGuidedArticle.vue'
 import { figureFor } from './figures'
+import { manualFigureKey, manualNumKey } from './figureContext'
 import { markHeadings } from './headingNo'
 import SeriesNav from '../components/SeriesNav.vue'
 import RelatedArticles from '../components/RelatedArticles.vue'
@@ -34,6 +33,8 @@ const parts = computed(() => buildManualCatalog(theme.value.sidebar))
 const hit = computed(() => findManualArticle(parts.value, route.path))
 const title = computed(() => page.value.title || hit.value?.article.title || '')
 const figure = computed(() => figureFor(title.value))
+provide(manualFigureKey, figure)
+provide(manualNumKey, computed(() => hit.value?.article.num ?? ''))
 const current = computed(() => normPath(route.path))
 const siblings = computed(() => {
   const found = hit.value
@@ -193,9 +194,7 @@ onMounted(() => {
 
     <div class="row a-body">
       <div class="main">
-        <ManualCasArticle v-if="figure?.kind === 'cas' && hit" :num="hit.article.num" />
-        <ManualGuidedArticle v-else-if="figure && figure.kind !== 'cas' && hit" :key="figure.kind" :kind="figure.kind" :num="hit.article.num" />
-        <div v-else class="m-prose vp-doc">
+        <div class="m-prose vp-doc">
           <Content />
         </div>
       </div>

@@ -1,12 +1,12 @@
 ---
 title: 标签：android
-description: 与「android」相关的文章共 119 篇
+description: 与「android」相关的文章共 120 篇
 hideArticleMeta: true
 ---
 
 # 标签：android
 
-共 **119** 篇文章：
+共 **120** 篇文章：
 
 - [Compose布局系统与 Modifier](/Android/Compose/Compose布局系统 & Modifier) — 文档级 · 教学级 · 指南级
 - [Jetpack Compose 状态管理详解](/Android/Compose/ComposeStateManagement) — 在 Jetpack Compose 中，状态 (State) 是驱动 UI 更新的核心。与传统的 View 体系不同，Compose 是声明式的：UI 是状态的函数。当应用的状态发生变化时，Compose 会重新执行受影响的 Composable 函数（这个过程称为重组），从而更新 UI。
@@ -67,6 +67,7 @@ hideArticleMeta: true
 - [RecyclerView性能优化](/Android/RecyclerView性能优化) — RecyclerView 主要有三层缓存
 - [App卡顿优化](/Android/App卡顿优化) — LayoutInflater加载xml布局的过程会在主线程使用IO读取xml布局文件进行xml解析，再根据解析结果利用反射创建布局中的View/ViewGroup对象。 可以用AsyncLayoutInflater异步加载。
 - [DecorView](/Android/DecorView) — AMS管理着Activity生命周期，每当切换Activity状态时通过Binder告诉ActivityThread，ActivityThread通过Handler切换到主线程(UI线程）执行，最终分别调用到我们熟知的onCreate(xx)/onResume?
+- [RecyclerView四级缓存](/Android/RecyclerView四级缓存) — Recycler 按 Scrap、CachedViews、ViewCacheExtension、RecycledViewPool 四级取 ViewHolder。CachedViews 默认 2 格，池里每种 viewType 默认 5 格。Scrap 不限，Extension 默认是 0。
 - [RecyclerView和ListView区别](/Android/RecyclerView和ListView区别) — ListView 需要自定义ViewHolder,判断convertView是否为null，setTag()与getTag()的使用;RecyclerView有规定好的ViewHolder。 ListView 只支持垂直方向的，而RecyclerView，它里?
 - [RecyclerView知识点汇总](/Android/RecyclerView知识点汇总) — RecyclerView.Adapter - 处理数据集合并负责绑定视图 ViewHolder - 持有所有的用于绑定数据或者需要操作的View LayoutManager - 负责摆放屎图等相关操作 ItemDecoration - 负责绘制item的分割线?
 - [SparseArray](/Android/SparseArray) — Android提供了SparseArray，这也是一种KV形式的数据结构，提供了类似于Map的功能。但是实现方法却和HashMap不一样。它与Map相比，可以说是各有千秋。

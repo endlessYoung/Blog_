@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue'
-import { BIN_BEATS, BIN_TARGET, BIN_VALUES, GC_BEATS, GEN_BEATS, LOOP_BEATS, type Zone } from './guided'
+import { beatsFor, BIN_BEATS, BIN_TARGET, BIN_VALUES, GC_BEATS, GEN_BEATS, LOOP_BEATS, RV_BEATS, type Zone } from './guided'
 import type { FigKind } from './figures'
 
 const props = defineProps<{
@@ -9,7 +9,7 @@ const props = defineProps<{
   step?: number
 }>()
 
-const beats = props.kind === 'gen' ? GEN_BEATS : props.kind === 'bin' ? BIN_BEATS : props.kind === 'loop' ? LOOP_BEATS : GC_BEATS
+const beats = beatsFor(props.kind)
 const last = beats.length - 1
 const cur = ref(0)
 const playing = ref(false)
@@ -39,6 +39,22 @@ const gen = computed(() => (props.kind === 'gen' ? GEN_BEATS[cur.value] : null))
 const bin = computed(() => (props.kind === 'bin' ? BIN_BEATS[cur.value] : null))
 const loop = computed(() => (props.kind === 'loop' ? LOOP_BEATS[cur.value] : null))
 const gc = computed(() => (props.kind === 'gc' ? GC_BEATS[cur.value] : null))
+const rv = computed(() => (props.kind === 'rv' ? RV_BEATS[cur.value] : null))
+const rvRows = computed(() => {
+  const phase = rv.value?.phase
+  const row = (name: string, count: string, slots: number, filled: number, on: boolean) => ({
+    name,
+    count,
+    on,
+    cells: Array.from({ length: slots }, (_, index) => (index < filled ? 'hold' : 'empty')),
+  })
+  return [
+    row('SCRAP', '—', phase === 'scrap' ? 1 : 0, phase === 'scrap' ? 1 : 0, phase === 'scrap'),
+    row('CACHE', '2', 2, phase === 'cache' || phase === 'ext' ? 1 : 0, phase === 'cache' || phase === 'ext'),
+    row('EXT', '0', 0, 0, phase === 'ext'),
+    row('POOL', '5', 5, phase === 'pool' ? 1 : 0, phase === 'pool'),
+  ]
+})
 
 const gcRows = computed(() => {
   const phase = gc.value?.phase
@@ -59,15 +75,12 @@ const gcRows = computed(() => {
     { name: '', state: 'free' },
     { name: '', state: 'free' },
   ]
+  const marked = mixed.map((cell) => ({ ...cell, state: cell.state === 'live' ? 'mark' : 'dead' }))
+  const swept = mixed.map((cell) => ({ ...cell, state: cell.state === 'live' ? 'live' : 'hole' }))
   const blank = mixed.map(() => ({ name: '', state: 'hole' }))
-  if (phase === 'mark') {
-    return [{ name: 'HEAP', cells: mixed.map((cell) => ({ ...cell, state: cell.state === 'live' ? 'mark' : 'dead' })) }]
-  }
-  if (phase === 'sweep') {
-    return [{ name: 'HEAP', cells: mixed.map((cell) => ({ ...cell, state: cell.state === 'live' ? 'live' : 'hole' })) }]
-  }
+  if (phase === 'sweep') return [{ name: 'MARK', cells: marked }, { name: 'HEAP', cells: swept }]
   if (phase === 'copy') return [{ name: 'FROM', cells: blank }, { name: 'TO', cells: packed }]
-  if (phase === 'compact') return [{ name: 'HEAP', cells: packed }]
+  if (phase === 'compact') return [{ name: 'MARK', cells: marked }, { name: 'HEAP', cells: packed }]
   return [{ name: 'HEAP', cells: mixed }]
 })
 
@@ -198,6 +211,16 @@ onUnmounted(() => halt())
       <div class="g-col" :class="{ on: loop.phase === 'handle' }">
         <b>HANDLER</b>
         <i v-if="loop.phase === 'handle'" class="g-msg">UI</i>
+      </div>
+    </div>
+
+    <div v-else-if="rv" class="g-board g-rv">
+      <div v-for="row in rvRows" :key="row.name" class="g-rv-row" :class="{ on: row.on }">
+        <b>{{ row.name }}</b>
+        <em>{{ row.count }}</em>
+        <span>
+          <i v-for="(cell, index) in row.cells" :key="`${row.name}-${index}`" :class="cell">{{ cell === 'hold' ? 'A' : '' }}</i>
+        </span>
       </div>
     </div>
 

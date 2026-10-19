@@ -4,6 +4,7 @@ import { readFileSync, readdirSync, statSync, writeFileSync } from 'fs'
 import { join, relative } from 'path'
 import { Feed } from 'feed'
 import { stampManualHtml } from '../../scripts/stamp-manual-html.mjs'
+import { scrollyMarkdown } from './theme/manual/scrollyMarkdown'
 
 // ??/??????frontmatter: noindex???? sitemap ???
 const noindexPages = new Set<string>()
@@ -374,6 +375,7 @@ export default defineConfig({
     codeCopyButtonTitle: '复制代码',
     config: (md: any) => {
       md.use(markdownItKatex)
+      scrollyMarkdown(md) // slots: ::::scrolly / :::step / :::note
       // code-group 的标签在渲染容器开头时就从子 fence 的 info 里取语言，早于下面的 fence 渲染器；
       // 所以 ` ``` kotlin` 这类带前导空格的 info 要在解析阶段就规范化，否则标签会退化成 txt
       md.core.ruler.after('block', 'normalize-fence-info', (state: any) => {
@@ -772,6 +774,7 @@ html:not(.dark) {
             { text: 'Activity的启动模式', link: '/Android/Activity的启动模式' },
             { text: 'SparseArray', link: '/Android/SparseArray' },
             { text: 'RecyclerView和ListView区别', link: '/Android/RecyclerView和ListView区别' },
+            { text: 'RecyclerView四级缓存', link: '/Android/RecyclerView四级缓存' },
             { text: 'RecyclerView知识点汇总', link: '/Android/RecyclerView知识点汇总' },
             { text: 'DecorView', link: '/Android/DecorView' },
             { text: 'BottomNavigationView', link: '/Android/BottomNavigationView' },

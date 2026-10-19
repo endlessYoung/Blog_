@@ -26,7 +26,7 @@ const title = 'ENDLESSYOUNG'
 const groups = termGroups()
 
 const figs = computed(() => {
-  const cards: { article: ManualArticle; kind: 'cas' | 'bin' | 'gen' | 'loop'; caption: string; fig: string }[] = []
+  const cards: { article: ManualArticle; kind: 'cas' | 'bin' | 'gen' | 'loop' | 'gc' | 'rv'; caption: string; fig: string }[] = []
   for (const def of FIG_DEFS) {
     for (const part of parts.value) {
       for (const chapter of part.chapters) {

@@ -8,22 +8,49 @@ created: 2023-12-17
 
 # Handler
 
-## 1.什么是handler
+## 同一个进程里的线程
 
-**Handler** 用于线程间通信的消息传递机制。Handler其实就是在主线程起一个子线程，子线程运行并生成 **Message**，**Looper** 获取Message并传递给Handler，Handler逐个获取子线程中的Message。
+Handler 传递的是**同一个进程里**、线程之间的消息。跨进程用 Binder 或 Socket。工作线程要更新界面时，不能自己改 View，只能把这件事交给已经在循环取消息的那个线程。
 
-Binder/Socker用于进程间通信，而Handler消息机制用于同进程的线程间通信。
+:::note 主线程
+应用启动时主线程已经准备好 Looper，所以主线程里可以直接 `new Handler()`。见 [为什么主线程可以直接 new Handler](/Android/为什么主线程可以直接new Handler)。
+:::
 
-只要有异步线程与主线程通信的地方就一定会Handler。在多线程的应用场景中，将工作线程中需要更新UI的操作信息传递到UI主线程。
+## 五件东西
 
-## 2.Handler的相关概念
+- **Message**：要做的事。可以是一个 `what`，也可以带一个 `Runnable`。每条消息都有目标 Handler。
+- **MessageQueue**：用链表保存消息。`enqueueMessage` 按 `when` 插入，不是谁先调用谁就一定排在最前。
+- **Looper**：在一个线程里循环调用 `queue.next()`，再把取出的消息交给它的 target。
+- **ThreadLocal**：每个线程自己的 Looper 存在这里，别的线程拿不到。原理见 [ThreadLocal](/Java/ThreadLocal)。
+- **Handler**：消息的处理者。发送、处理、移除都从它进来。
 
-1. Message:代表一个行为What或者遗传动作Runnable，每一个消息在加入消息队列时，都有明确的目标Handler
-2. ThreadLocal:线程本地存储区（简称TLS），每个线程都有自己私有的本地存储区，不同线程之间彼此不能访问对方的TLS区域。ThreadLocal的作用是提供线程内的局部变量TLS，这种变量在线程的生命周期内起作用，每一个线程存在线程隔离。
-3. MessageQueue（C层和Java层都有实现）：以队列的形式对外提供插入和删除的工作，其内部结构是以双向链表的形式存储消息的。
-4. Looper（C层和Java层都有实现）：Looper负责从消息队列中循环取出消息然后把消息交给Handler处理。
-5. Handler：消息的真正处理者，具备获取消息、发送消息、处理消息、移除消息等功能。
+## 取走一条消息
 
-## 3.消息机制
+::::scrolly
+:::step 01 · 构造消息
+工作线程不能直接改界面。它构造一条 Message，target 指向主线程的 Handler。这时消息还没进队列。
+:::
+:::step 02 · 入队
+enqueueMessage 按 when 把消息插进 MessageQueue。队列里现在有 UI、LOG、SAVE，头部是最先该处理的 UI。
+:::
+:::step 03 · next
+主线程的 Looper.loop 一直在执行。它调用 queue.next()。队列空的时候，next() 会停在这里，直到有消息进来。
+:::
+:::step 04 · 取出
+next() 把 UI 从链表上摘下来，交给 Looper。队列里剩下 LOG 和 SAVE。
+:::
+:::step 05 · 分发
+Looper 调用 msg.target.dispatchMessage(msg)。因为 target 是主线程 Handler，handleMessage 就在主线程执行。
+:::
+:::step 06 · 继续循环
+这条消息处理完，loop 回到开头，再取下一条。整个过程没有额外起线程，执行线程就是当初调用 Looper.loop() 的那一个。
+:::
+::::
 
-![Alt text](image-27.png)
+```java
+for (;;) {
+    Message msg = queue.next(); // 队列空着就停在这里
+    if (msg == null) return;    // quit
+    msg.target.dispatchMessage(msg);
+}
+```

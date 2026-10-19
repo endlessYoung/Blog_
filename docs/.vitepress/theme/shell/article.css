@@ -1312,6 +1312,8 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
   line-height: 1.7;
 }
 .cas-note .mono { display: block; margin-bottom: 4px; color: var(--accent); font-size: 10px; letter-spacing: .08em; }
+.m-prose .cas-note p { margin: 0; font-size: 13px; line-height: 1.7; }
+.m-prose .cas-note p + p { margin-top: 8px; }
 .cas-code { margin: 24px 0; border: 1px solid var(--man-line-2); background: var(--code-bg); }
 .cas-code-head {
   display: flex;
@@ -1486,6 +1488,25 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
 .g-col.ring.on .g-orbit { border-color: var(--accent); }
 
 .g-gc { height: auto; min-height: 168px; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 18px 16px; }
+.g-rv { height: auto; min-height: 188px; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 16px; }
+.g-rv-row { display: grid; grid-template-columns: 58px 16px minmax(0, 1fr); gap: 8px; align-items: center; }
+.g-rv-row b { color: var(--man-fg-3); font: 500 10px/1 var(--man-mono); letter-spacing: .08em; }
+.g-rv-row em { color: var(--accent); font: 500 11px/1 var(--man-mono); font-style: normal; }
+.g-rv-row.on b { color: var(--accent); }
+.g-rv-row span { display: flex; gap: 4px; }
+.g-rv-row i {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--man-line-2);
+  color: var(--man-bg);
+  font: 600 11px/1 var(--man-mono);
+  font-style: normal;
+  transition: background var(--man-snap), border-color var(--man-snap), color var(--man-snap);
+}
+.g-rv-row i.hold { background: var(--man-fg); border-color: var(--man-fg); }
+.g-rv-row.on i { border-color: var(--man-fg); }
 .g-mem { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 8px; align-items: center; }
 .g-mem b { color: var(--man-fg-3); font: 500 10px/1 var(--man-mono); letter-spacing: .08em; }
 .g-mem span { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; }
@@ -1509,7 +1530,8 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
   .g-obj,
   .g-ptr,
   .g-bars i,
-  .g-mem i { transition: none; }
+  .g-mem i,
+  .g-rv-row i { transition: none; }
 }
 
 @media (max-width: 700px) {
