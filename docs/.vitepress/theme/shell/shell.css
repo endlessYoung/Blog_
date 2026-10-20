@@ -571,6 +571,7 @@ html.manual .manual-home a.log-row { position: relative !important; padding-bott
   .log-part, .log-arrow { display: none; }
   .terms { columns: 2; }
   .term-group a { max-width: 100%; overflow-wrap: anywhere; }
+  .fig-card { width: min(380px, calc(100vw - 32px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

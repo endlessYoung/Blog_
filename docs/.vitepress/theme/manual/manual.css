@@ -451,8 +451,14 @@ html.manual .manual-flip {
   perspective: 1200px;
 }
 html.manual .manual-flip i {
+  height: 100%;
   transform-origin: left center;
   backface-visibility: hidden;
+}
+html.manual .manual-flip.is-flat { perspective: none; }
+html.manual .manual-flip.is-flat i {
+  transform-origin: center top;
+  backface-visibility: visible;
 }
 
 html.manual::view-transition-group(vt-num),
@@ -485,6 +491,8 @@ html.manual.vt-article::view-transition-new(root) { animation: none; opacity: 1;
   html.manual .block-num { grid-column: 1 / -1; }
   html.manual .block-desc { margin-top: 8px; }
   html.manual .chapters { grid-template-columns: 1fr; padding-left: 0; }
+  html.manual .part.landing .art-link { height: auto; min-height: 40px; overflow: visible; }
+  html.manual .part.landing .art-title { overflow: visible; text-overflow: unset; white-space: normal; }
   html.manual .part-row { grid-template-columns: 44px minmax(0, auto) 1fr auto 20px; gap: 10px; }
   html.manual .part-name { font-size: 20px; }
   html.manual .manual-brand-text { display: none; }

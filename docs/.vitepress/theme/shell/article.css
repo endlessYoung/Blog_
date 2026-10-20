@@ -1372,6 +1372,20 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
   .cas-step:last-child { min-height: 0; }
 }
 
+@media (max-width: 700px) {
+  .cas-scrolly .a-fig {
+    position: sticky;
+    top: calc(var(--ey-top) + 8px);
+    z-index: 5;
+  }
+  .cas-step,
+  .cas-step:last-child { min-height: 70vh; padding-top: 12px; }
+  .a-fig .g-board,
+  .a-fig .g-sort { height: 120px; min-height: 0; }
+  .a-fig .g-sort .g-bars { height: 88px; }
+  .a-fig .fig-log { min-height: 0; padding: 8px 12px; }
+}
+
 @media (max-width: 900px) {
   .cas-doc h2 { font-size: 25px; }
   .cas-doc p,
@@ -1495,6 +1509,9 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
 .g-sort .g-bars i.done { background: var(--accent); }
 .g-sort .g-bars i.done em { color: var(--accent); }
 .a-fig-code.is-scroll { max-height: 12.95em; overflow: auto; }
+@media (max-width: 700px) {
+  .a-fig-code.is-scroll { max-height: 4.6em; }
+}
 .fig-code-src { display: none; }
 
 .g-gc { height: auto; min-height: 168px; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 18px 16px; }
