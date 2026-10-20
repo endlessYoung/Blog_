@@ -13,6 +13,9 @@ const props = defineProps<{
   num: string
   caption: string
   step?: number
+  phase?: string
+  frames?: unknown[]
+  code?: string[]
 }>()
 
 const root = ref<HTMLElement | null>(null)

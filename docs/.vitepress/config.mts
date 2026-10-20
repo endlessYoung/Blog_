@@ -375,7 +375,7 @@ export default defineConfig({
     codeCopyButtonTitle: '复制代码',
     config: (md: any) => {
       md.use(markdownItKatex)
-      scrollyMarkdown(md) // slots: ::::scrolly / :::step / :::note
+      scrollyMarkdown(md) // slots: ::::scrolly name / :::step / :::note
       // code-group 的标签在渲染容器开头时就从子 fence 的 info 里取语言，早于下面的 fence 渲染器；
       // 所以 ` ``` kotlin` 这类带前导空格的 info 要在解析阶段就规范化，否则标签会退化成 txt
       md.core.ruler.after('block', 'normalize-fence-info', (state: any) => {
@@ -402,6 +402,9 @@ export default defineConfig({
       const fence = md.renderer.rules.fence
       md.renderer.rules.fence = (tokens: any, idx: number, options: any, env: any, self: any) => {
         const token = tokens[idx]
+        if (token.meta?.figCode) {
+          return `<pre class="fig-code-src" hidden>${md.utils.escapeHtml(token.content)}</pre>`
+        }
         // 必须在调用原始 fence（Shiki）之前规范化：` ``` java` 的 info 带前导空格时会被当成未知语言 → 无高亮
         if (token.info) {
           token.info = String(token.info).trim().replace(/\s+/g, ' ')
@@ -1162,6 +1165,7 @@ html:not(.dark) {
             { text: '合并数组', link: '/数据结构和算法/合并数组' },
             { text: '移除元素', link: '/数据结构和算法/移除元素' },
             { text: '二分查找', link: '/数据结构和算法/二分查找' },
+            { text: '常见的排序方法', link: '/数据结构和算法/常见的排序方法' },
           ],
         },
         {

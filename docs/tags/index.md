@@ -6,14 +6,14 @@ hideArticleMeta: true
 
 # 标签
 
-共 **134** 个标签，**204** 篇文章：
+共 **134** 个标签，**205** 篇文章：
 
 - [android（121）](/tags/android/)
 - [kotlin（28）](/tags/kotlin/)
 - [ai（26）](/tags/ai/)
 - [java（23）](/tags/java/)
+- [数据结构和算法（5）](/tags/数据结构和算法/)
 - [Activity（5）](/tags/Activity/)
-- [数据结构和算法（4）](/tags/数据结构和算法/)
 - [Handler（4）](/tags/Handler/)
 - [RecyclerView（4）](/tags/RecyclerView/)
 - [Service（4）](/tags/Service/)

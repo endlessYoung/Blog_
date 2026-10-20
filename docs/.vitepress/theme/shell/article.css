@@ -1487,6 +1487,16 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
 }
 .g-col.ring.on .g-orbit { border-color: var(--accent); }
 
+.g-sort { height: auto; min-height: 168px; padding: 28px 16px 18px; }
+.g-sort .g-bars { height: 132px; }
+.g-sort .g-bars i { transition: height var(--man-glide) var(--man-ease), background var(--man-snap); }
+.g-sort .g-bars i.hot { background: var(--man-fg); }
+.g-sort .g-bars i.hot em { color: var(--man-fg); }
+.g-sort .g-bars i.done { background: var(--accent); }
+.g-sort .g-bars i.done em { color: var(--accent); }
+.a-fig-code.is-scroll { max-height: 12.95em; overflow: auto; }
+.fig-code-src { display: none; }
+
 .g-gc { height: auto; min-height: 168px; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 18px 16px; }
 .g-rv { height: auto; min-height: 188px; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 16px; }
 .g-rv-row { display: grid; grid-template-columns: 58px 16px minmax(0, 1fr); gap: 8px; align-items: center; }

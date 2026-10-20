@@ -190,10 +190,3 @@ export const RV_BEATS: RvBeat[] = [
   },
 ]
 
-export function beatsFor(kind: 'gen' | 'bin' | 'loop' | 'gc' | 'rv'): GuidedBeat[] {
-  if (kind === 'gen') return GEN_BEATS
-  if (kind === 'bin') return BIN_BEATS
-  if (kind === 'loop') return LOOP_BEATS
-  if (kind === 'rv') return RV_BEATS
-  return GC_BEATS
-}

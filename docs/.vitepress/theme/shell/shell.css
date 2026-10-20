@@ -336,6 +336,25 @@ html.manual .parts {
   48%, 100% { opacity: 0; }
 }
 
+.m-sort { padding: 52px 22px 0; }
+.m-sort .bars { display: flex; align-items: flex-end; gap: 8px; height: 120px; }
+.m-sort .bars i { flex: 1; background: var(--man-fg); }
+.m-sort .bars i:nth-child(1) { height: 62%; animation: sort-r 4.8s var(--man-ease) infinite; }
+.m-sort .bars i:nth-child(2) { height: 18%; background: var(--accent); animation: sort-l 4.8s var(--man-ease) infinite; }
+.m-sort .bars i:nth-child(3) { height: 50%; }
+.m-sort .bars i:nth-child(4) { height: 30%; }
+.m-sort .bars i:nth-child(5) { height: 96%; }
+@keyframes sort-r {
+  0%, 18% { transform: none; }
+  42%, 68% { transform: translateX(calc(100% + 8px)); }
+  88%, 100% { transform: none; }
+}
+@keyframes sort-l {
+  0%, 18% { transform: none; }
+  42%, 68% { transform: translateX(calc(-100% - 8px)); }
+  88%, 100% { transform: none; }
+}
+
 .m-rv {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

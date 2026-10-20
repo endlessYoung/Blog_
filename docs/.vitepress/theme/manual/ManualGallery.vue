@@ -5,7 +5,7 @@ import gsap from 'gsap'
 import type { ManualArticle } from '../reading/catalog'
 
 const props = defineProps<{
-  cards: { article: ManualArticle; kind: 'cas' | 'bin' | 'gen' | 'loop' | 'gc' | 'rv'; caption: string; fig: string }[]
+  cards: { article: ManualArticle; kind: 'cas' | 'bin' | 'gen' | 'loop' | 'gc' | 'rv' | 'sort'; caption: string; fig: string }[]
 }>()
 
 const gallery = ref<HTMLElement | null>(null)
@@ -186,6 +186,9 @@ onUnmounted(() => {
           </div>
           <div v-else-if="card.kind === 'gc'" class="fig-stage m-gc">
             <i /><i /><i /><i /><i /><i />
+          </div>
+          <div v-else-if="card.kind === 'sort'" class="fig-stage m-sort">
+            <div class="bars"><i /><i /><i /><i /><i /></div>
           </div>
           <div v-else-if="card.kind === 'rv'" class="fig-stage m-rv">
             <span><i /><em>—</em></span>

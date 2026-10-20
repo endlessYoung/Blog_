@@ -1,0 +1,7 @@
+import './modes/gen'
+import './modes/bin'
+import './modes/loop'
+import './modes/gc'
+import './modes/rv'
+import './modes/sort'
+import './modes/cas'

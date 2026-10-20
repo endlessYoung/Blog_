@@ -477,5 +477,8 @@
   ".vitepress/theme/manual/archive/RecyclerView四级缓存.md": "2026-10-19",
   ".vitepress/theme/manual/archive/二分查找.md": "2024-12-04",
   ".vitepress/theme/manual/archive/伊甸园区算法.md": "2024-10-09",
-  "Android/RecyclerView四级缓存.md": "2026-10-19"
+  "Android/RecyclerView四级缓存.md": "2026-10-19",
+  ".vitepress/theme/manual/archive/CAS.md": "2025-01-15",
+  "Android/从重复请求到SingleFlight.md": "2026-10-19",
+  "tags/Room/index.md": "2026-10-19"
 }

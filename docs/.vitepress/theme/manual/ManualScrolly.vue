@@ -1,15 +1,23 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, onUnmounted, ref } from 'vue'
-import ManualArticleFigure from './ManualArticleFigure.vue'
 import ManualGuidedFigure from './ManualGuidedFigure.vue'
-import { CAS_FRAMES, beatsFor } from './guided'
+import { figureCount, hasFigure, mapStep, shellFor } from './fig/registry'
+import { readScrolly, type FigFrame } from './fig/fields'
 import { manualFigureKey, manualNumKey } from './figureContext'
 import type { FigKind } from './figures'
+import './fig/register'
+
+const props = defineProps<{ name?: string }>()
 
 const figure = inject(manualFigureKey, computed(() => undefined))
 const num = inject(manualNumKey, computed(() => ''))
 const root = ref<HTMLElement | null>(null)
 const active = ref(0)
+const frames = ref<FigFrame[]>([])
+const code = ref<string[]>([])
+const kind = computed(() => figure.value?.kind)
+const shell = computed(() => (kind.value ? shellFor(kind.value) ?? ManualGuidedFigure : undefined))
+const figureStep = computed(() => (kind.value ? mapStep(kind.value, active.value) : 0))
 let frame = 0
 let detach = () => {}
 let steps: HTMLElement[] = []
@@ -17,14 +25,8 @@ let pinStart = false
 let pinDone = false
 let pinTimer = 0
 
-const kind = computed(() => figure.value?.kind)
-const figureStep = computed(() => {
-  if (kind.value === 'cas') return CAS_FRAMES[active.value] ?? CAS_FRAMES[CAS_FRAMES.length - 1] ?? 0
-  return active.value
-})
-
 function expectedCount(value: FigKind) {
-  return value === 'cas' ? CAS_FRAMES.length : beatsFor(value).length
+  return figureCount(value)
 }
 
 function show(index: number) {
@@ -86,9 +88,13 @@ function onReset(event: MouseEvent) {
 onMounted(() => {
   const host = root.value
   if (!host) return
+  const doc = readScrolly(host)
+  frames.value = doc.frames
+  code.value = doc.code
   steps = [...host.querySelectorAll<HTMLElement>(':scope .cas-steps > .cas-step')]
   const current = kind.value
-  if (import.meta.env.DEV && current && steps.length !== expectedCount(current)) {
+  const expected = current ? expectedCount(current) : 0
+  if (import.meta.env.DEV && current && expected && steps.length !== expected) {
     console.warn(`[scrolly] ${current}: markdown has ${steps.length} steps, figure has ${expectedCount(current)}`)
   }
   const sync = () => {
@@ -124,19 +130,17 @@ onUnmounted(() => {
     <div class="cas-steps">
       <slot />
     </div>
-    <ManualArticleFigure
-      v-if="kind === 'cas'"
-      kind="cas"
-      :num="num"
-      :step="figureStep"
-      :caption="figure?.caption || ''"
-    />
-    <ManualGuidedFigure
-      v-else-if="kind && kind !== 'cas'"
-      :key="kind"
+    <component
+      :is="shell"
+      v-if="kind && hasFigure(kind)"
+      :key="`${kind}-${name || ''}`"
       :kind="kind"
       :num="num"
+      :caption="figure?.caption || ''"
+      :phase="name"
       :step="figureStep"
+      :frames="frames"
+      :code="code"
     />
   </div>
 </template>

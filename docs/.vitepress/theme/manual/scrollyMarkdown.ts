@@ -1,7 +1,11 @@
-// ::::scrolly / :::step / :::note
-// The article body stays markdown. These containers are the only slots a figure page uses.
+// ::::scrolly name / :::step / :::note
+// A fence directly inside a scrolly is that figure's source. It is not rendered in the reading column.
+// A step may start with `key: value` lines and a blank line. `lines` accepts `2, 4` and `5-9`.
+// Any other key is data for the board registered under the page's figure kind.
 
-type Token = { type: string; nesting: number; info: string }
+import { parseFieldBlock } from './fig/fields'
+
+type Token = { type: string; nesting: number; info: string; content?: string; meta?: { fields?: Record<string, string>; figCode?: boolean } }
 
 function escapeHtml(value: string) {
   return value
@@ -12,13 +16,11 @@ function escapeHtml(value: string) {
 }
 
 function stepIndex(tokens: Token[], idx: number) {
-  let depth = 0
   let count = 0
-  for (let i = 0; i < idx; i++) {
+  for (let i = idx - 1; i >= 0; i--) {
     const token = tokens[i]
-    if (token.type === 'container_scrolly_open') depth++
-    else if (token.type === 'container_scrolly_close') depth--
-    else if (depth > 0 && token.type === 'container_step_open') count++
+    if (token.type === 'container_scrolly_open') return count
+    if (token.type === 'container_step_open') count++
   }
   return count
 }
@@ -84,17 +86,56 @@ function container(md: any, name: string, minMarkers: number, render: (tokens: T
   md.renderer.rules[`container_${name}_close`] = render
 }
 
+function annotate(state: { tokens: Token[] }) {
+  const tokens = state.tokens
+  let scrolly = 0
+  let step = 0
+  for (const token of tokens) {
+    if (token.type === 'container_scrolly_open') scrolly++
+    else if (token.type === 'container_scrolly_close') scrolly--
+    else if (token.type === 'container_step_open') step++
+    else if (token.type === 'container_step_close') step--
+    else if (scrolly > 0 && step === 0 && token.type === 'fence') {
+      token.meta = { ...token.meta, figCode: true }
+    }
+  }
+  for (let i = 0; i < tokens.length; i++) {
+    if (tokens[i].type !== 'container_step_open') continue
+    const fields: Record<string, string> = {}
+    let cursor = i + 1
+    while (cursor < tokens.length && tokens[cursor].type === 'paragraph_open') {
+      const inline = tokens[cursor + 1]
+      const close = tokens[cursor + 2]
+      if (!inline || inline.type !== 'inline' || !close || close.type !== 'paragraph_close') break
+      const parsed = parseFieldBlock(inline.content || '')
+      if (!parsed) break
+      Object.assign(fields, parsed)
+      tokens.splice(cursor, 3)
+    }
+    if (Object.keys(fields).length) tokens[i].meta = { ...tokens[i].meta, fields }
+  }
+}
+
+function fieldAttrs(token: Token) {
+  const fields = token.meta?.fields
+  if (!fields) return ''
+  return Object.entries(fields).map(([key, value]) => ` data-${escapeHtml(key)}="${escapeHtml(value)}"`).join('')
+}
+
 export function scrollyMarkdown(md: any) {
+  md.core.ruler.after('block', 'scrolly-annotate', annotate)
   container(md, 'step', 3, (tokens, idx) => {
     if (tokens[idx].nesting !== 1) return '</section>\n'
     const label = tokens[idx].info.replace(/^\s*step\s*/, '').trim()
     const index = stepIndex(tokens, idx)
     const active = index === 0 ? ' active' : ''
-    return `<section class="cas-step${active}" data-step="${index}"><span class="mono">${escapeHtml(label)}</span>\n`
+    return `<section class="cas-step${active}" data-step="${index}"${fieldAttrs(tokens[idx])}><span class="mono">${escapeHtml(label)}</span>\n`
   })
-  container(md, 'scrolly', 4, (tokens, idx) => (
-    tokens[idx].nesting === 1 ? '<ManualScrolly>\n' : '</ManualScrolly>\n'
-  ))
+  container(md, 'scrolly', 4, (tokens, idx) => {
+    if (tokens[idx].nesting !== 1) return '</ManualScrolly>\n'
+    const name = tokens[idx].info.replace(/^\s*scrolly\s*/, '').trim().split(/\s+/)[0] || ''
+    return name ? `<ManualScrolly name="${escapeHtml(name)}">\n` : '<ManualScrolly>\n'
+  })
   container(md, 'note', 3, (tokens, idx) => {
     if (tokens[idx].nesting !== 1) return '</aside>\n'
     const label = tokens[idx].info.replace(/^\s*note\s*/, '').trim()
