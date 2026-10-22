@@ -1366,7 +1366,7 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
 .cas-step p:last-child { margin-bottom: 0; }
 
 @media (max-width: 1099px) {
-  .cas-scrolly { grid-template-columns: 1fr; }
+  .cas-scrolly { grid-template-columns: minmax(0, 1fr); }
   .cas-scrolly .a-fig { position: relative; top: auto; order: -1; }
   .cas-step,
   .cas-step:last-child { min-height: 0; }
@@ -1565,4 +1565,70 @@ html.manual [data-waline] .wl-power { font-family: var(--man-mono); font-size: 1
   .g-loop { grid-template-columns: 1fr 1fr; height: auto; }
   .g-bars { gap: 3px; }
   .g-bars i em { font-size: 9px; }
+  .cas-scrolly .a-fig {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    max-width: 100%;
+    max-height: min(320px, 46vh);
+    overflow: hidden;
+  }
+  .cas-scrolly .a-fig > .g-board,
+  .cas-scrolly .a-fig > .cas-stage {
+    flex: 0 1 auto;
+    min-height: 0;
+    overflow: auto;
+  }
+  .cas-scrolly .a-fig > .a-fig-head,
+  .cas-scrolly .a-fig > .fig-log,
+  .cas-scrolly .a-fig > .fig-progress,
+  .cas-scrolly .a-fig > .a-fig-ctrl { flex: 0 0 auto; }
+  .cas-scrolly .a-fig > .a-fig-code {
+    flex: 0 0 auto;
+    min-height: 0;
+    max-height: 4.6em;
+    overflow: auto;
+  }
+  .cas-scrolly .a-fig > .a-fig-ctrl { height: auto; flex-wrap: wrap; }
+  .cas-scrolly .a-fig > .a-fig-ctrl button {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 40px;
+    white-space: nowrap;
+  }
+  .cas-scrolly .a-fig > .a-fig-ctrl .speed { margin-left: 0; }
+  .a-fig .g-gen {
+    height: 148px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 10px;
+    gap: 6px;
+  }
+  .a-fig .g-zone b { letter-spacing: 0; }
+  .a-fig .g-obj { width: 28px; height: 28px; margin-left: -14px; }
+  .a-fig .g-obj.eden { left: 28% !important; top: 34px !important; }
+  .a-fig .g-obj.s0 { left: 72% !important; top: 34px !important; }
+  .a-fig .g-obj.s1 { left: 28% !important; top: 92px !important; }
+  .a-fig .g-obj.old { left: 72% !important; top: 92px !important; }
+  .a-fig .g-obj.ghost {
+    left: 42% !important;
+    top: 52px !important;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+  }
+  .a-fig .g-loop { height: auto; min-height: 0; padding: 8px; gap: 6px; }
+  .a-fig .g-col { padding: 6px; gap: 4px; }
+  .a-fig .g-col b { letter-spacing: 0; font-size: 9px; }
+  .a-fig .g-orbit { width: 36px; height: 36px; }
+  .a-fig .g-rv { height: auto; min-height: 0; padding: 8px 10px; gap: 4px; }
+  .a-fig .g-rv-row { grid-template-columns: 46px 14px minmax(0, 1fr); gap: 4px; }
+  .a-fig .g-rv-row b { letter-spacing: 0; }
+  .a-fig .g-rv-row i { width: 22px; height: 22px; }
+  .a-fig .g-gc { height: auto; min-height: 0; padding: 8px 10px; gap: 8px; }
+  .a-fig .g-mem i { height: 32px; }
+  .a-fig .g-mem b { letter-spacing: 0; }
+  .a-fig .g-bin { padding-top: 8px; }
+  .a-fig .g-bin .g-bars { height: 72px; }
+  .a-fig .g-ptr { width: 14px; margin-left: -7px; }
 }
