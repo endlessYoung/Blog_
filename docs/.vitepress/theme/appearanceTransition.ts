@@ -32,9 +32,8 @@ export function provideAnimatedAppearanceToggle(
       return
     }
     const bg = nextDark ? '#111214' : '#fafaf8'
-    const narrow = window.matchMedia('(max-width: 900px)').matches
     const ov = document.createElement('div')
-    ov.className = narrow ? 'manual-flip is-flat' : 'manual-flip'
+    ov.className = 'manual-flip'
     for (let i = 0; i < 12; i++) {
       const column = document.createElement('i')
       column.style.background = bg
@@ -42,9 +41,7 @@ export function provideAnimatedAppearanceToggle(
     }
     document.body.append(ov)
     const ease = 'cubic-bezier(.16, 1, .3, 1)'
-    const frames: Keyframe[] = narrow
-      ? [{ transform: 'translateY(-100%)' }, { transform: 'none' }]
-      : [{ transform: 'rotateY(-92deg)' }, { transform: 'none' }]
+    const frames: Keyframe[] = [{ transform: 'rotateY(-92deg)' }, { transform: 'none' }]
     const anims = [...ov.children].map((column, index) =>
       (column as HTMLElement).animate(frames, {
         duration: 360,

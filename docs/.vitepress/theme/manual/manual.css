@@ -455,11 +455,6 @@ html.manual .manual-flip i {
   transform-origin: left center;
   backface-visibility: hidden;
 }
-html.manual .manual-flip.is-flat { perspective: none; }
-html.manual .manual-flip.is-flat i {
-  transform-origin: center top;
-  backface-visibility: visible;
-}
 
 html.manual::view-transition-group(vt-num),
 html.manual::view-transition-group(vt-title) {
