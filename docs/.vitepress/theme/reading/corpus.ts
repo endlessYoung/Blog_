@@ -1,5 +1,6 @@
 import { data } from './corpus.data'
 import { findManualArticle, normPath, type ManualPart } from './catalog'
+import { keepIndexTerm } from './terms'
 
 export interface CorpusPage {
   url: string
@@ -35,7 +36,7 @@ export function termGroups() {
   for (const page of corpus) {
     for (const tag of page.tags) {
       const name = tag.trim()
-      if (!name || seen.has(name)) continue
+      if (!keepIndexTerm(name) || seen.has(name)) continue
       seen.add(name)
       const key = termKey(name)
       const list = groups.get(key) || []

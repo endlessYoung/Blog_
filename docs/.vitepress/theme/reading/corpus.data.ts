@@ -57,6 +57,7 @@ export default createContentLoader('**/*.md', {
     for (const page of raw) {
       const url = page.url.replace(/\.html$/, '').replace(/\/$/, '') || '/'
       if (url.startsWith('/tags') || url === '/404') continue
+      if (url === '/getting-started' || url === '/markdown-examples') continue
       if (page.frontmatter.layout === 'home') continue
       const tags = Array.isArray(page.frontmatter.tags)
         ? page.frontmatter.tags.map((tag) => String(tag))

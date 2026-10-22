@@ -1,10 +1,10 @@
 ---
-title: 标签：means
-description: 与「means」相关的文章共 1 篇
+title: 标签：K-means
+description: 与「K-means」相关的文章共 1 篇
 hideArticleMeta: true
 ---
 
-# 标签：means
+# 标签：K-means
 
 共 **1** 篇文章：
 

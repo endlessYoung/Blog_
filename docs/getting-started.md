@@ -1,7 +1,7 @@
 ---
 title: Runtime API Examples
 description: This page demonstrates usage of some of the runtime APIs provided by VitePress.
-tags: [getting, started]
+tags: []
 noindex: true
 created: 2023-10-04
 outline: deep
@@ -23,12 +23,15 @@ const { theme, page, frontmatter } = useData()
 ## Results
 
 ### Theme Data
+
 <pre>{{ theme }}</pre>
 
 ### Page Data
+
 <pre>{{ page }}</pre>
 
 ### Page Frontmatter
+
 <pre>{{ frontmatter }}</pre>
 ```
 
@@ -41,12 +44,15 @@ const { site, theme, page, frontmatter } = useData()
 ## Results
 
 ### Theme Data
+
 <pre>{{ theme }}</pre>
 
 ### Page Data
+
 <pre>{{ page }}</pre>
 
 ### Page Frontmatter
+
 <pre>{{ frontmatter }}</pre>
 
 ## More

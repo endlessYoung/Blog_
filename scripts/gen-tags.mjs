@@ -43,6 +43,20 @@ function pageLink(rel) {
   return '/' + rel.replace(/\\/g, '/').replace(/(?:(^|\/)index)?\.md$/, '$1')
 }
 
+const INDEX_STOP = new Set([
+  'a', 'an', 'the', 'of', 'and', 'or', 'to', 'for', 'with', 'from', 'in', 'on',
+  'by', 'new', 'getting', 'started', 'example', 'examples', 'markdown',
+  'unit', 'hard', 'soft', 'linear', 'rectified', 'means',
+])
+
+function keepIndexTerm(tag) {
+  const name = String(tag || '').trim()
+  if (!name) return false
+  if (/^t\d+$/i.test(name)) return false
+  if (/^v\d+$/i.test(name)) return false
+  return !INDEX_STOP.has(name.toLowerCase())
+}
+
 function sanitizeDir(name) {
   return name.replace(/[<>:"/\\|?*\x00-\x1f]+/g, '-').replace(/\s+/g, '-').replace(/^-+|-+$/g, '')
 }
@@ -55,7 +69,7 @@ for (const file of walk(docsDir)) {
   if (fm.noindex) continue
   const title = String(fm.title || '').trim()
   if (!title) continue
-  const tags = Array.isArray(fm.tags) ? fm.tags.map((t) => String(t).trim()).filter(Boolean) : []
+  const tags = Array.isArray(fm.tags) ? fm.tags.map((t) => String(t).trim()).filter(keepIndexTerm) : []
   if (tags.length === 0) continue
   articles.push({
     rel,

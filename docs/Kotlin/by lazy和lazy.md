@@ -2,7 +2,7 @@
 title: by lazy和lazy
 description: 委托模式是软件设计模式中的一项基本技巧。在委托模式中，有两个对象参与处理同一个请求，接受请求的对象将请求委托给另一个对象来处理。委托模式是一项基本技巧，许多其他的模式，如状态模式、策略模式、访问者模式本质上是在更特殊的场合采用了委托模式。
 categories: [Kotlin]
-tags: [kotlin, by, lazy]
+tags: [kotlin, lazy]
 created: 2024-01-01
 ---
 
@@ -13,7 +13,8 @@ created: 2024-01-01
 **委托模式**是软件设计模式中的一项基本技巧。在委托模式中，有两个对象参与处理同一个请求，接受请求的对象将请求委托给另一个对象来处理。委托模式是一项基本技巧，许多其他的模式，如状态模式、策略模式、访问者模式本质上是在更特殊的场合采用了委托模式。
 
 在java中的委托模式：
-``` java
+
+```java
   public class Car {
         public int getCarColor(){
               return 0;
@@ -31,7 +32,7 @@ created: 2024-01-01
 
 java中的委托的进阶示例
 
-``` java
+```java
   public interface BaseCar {
        int getCarColor();
        String getCarName();
@@ -68,20 +69,21 @@ java中的委托的进阶示例
 
 Kotlin中引入了by关键字来实现这种委托。
 
-像前面Java在类Benz中那么多实现委托的代码，在Kotlin中直接一行搞定：  
+像前面Java在类Benz中那么多实现委托的代码，在Kotlin中直接一行搞定：
 
-``` kotlin
+```kotlin
 class Benz (car:Car)：BaseCar by car{
 
 }
 ```
+
 委托需要个委托人吧，那类委托是不是也要个委托类？所以你懂了没？
 
 我知道你想问，那我有些方法不想委托怎么办？
 
 怎么办？上代码：
 
-``` kotlin
+```kotlin
       class Benz (car:Car)：BaseCar by car{
                override fun getCarName():String { return "Benz" }
       }
@@ -90,7 +92,8 @@ class Benz (car:Car)：BaseCar by car{
 简单来说，就是不需要委托哪个方法，就重写哪个方法咯！
 
 至于by lazy，懒加载，大致相当于Java的
-``` java
+
+```java
    OneInterface oi = new OneInterface(){
         public int method(){
              return oneInterfaceImp.method();
@@ -98,14 +101,12 @@ class Benz (car:Car)：BaseCar by car{
    }
 ```
 
-
 只是说kotlin简化了写法：
 
-``` kotlin
+```kotlin
    val oneInterface:OnInterface by lazy {
         OnInterfaceImp()
    }
 ```
 
 同样，不想委托的方法，在lazy{}中重写就可以。
-

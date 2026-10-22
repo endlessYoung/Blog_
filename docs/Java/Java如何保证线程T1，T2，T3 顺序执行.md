@@ -2,7 +2,7 @@
 title: Java如何保证线程T1，T2，T3 顺序执行
 description: Thread.join() 方法会使当前线程等待另一个线程执行完毕后再继续执行。通过在 T1、T2、T3 之间调用 join()，可以确保线程按顺序执行。
 categories: [Java]
-tags: [java, T1, T2, T3]
+tags: [java]
 created: 2025-01-15
 ---
 
@@ -13,7 +13,8 @@ created: 2025-01-15
 `Thread.join()` 方法会使当前线程等待另一个线程执行完毕后再继续执行。通过在 T1、T2、T3 之间调用 `join()`，可以确保线程按顺序执行。
 
 ::: code-group
-``` java
+
+```java
 public class ThreadOrderExample {
 
     public static void main(String[] args) throws InterruptedException {
@@ -40,6 +41,7 @@ public class ThreadOrderExample {
     }
 }
 ```
+
 :::
 
 ## 2. 方法2：countDownLatch方法
@@ -47,7 +49,8 @@ public class ThreadOrderExample {
 `CountDownLatch` 是一个同步辅助类，它允许一个或多个线程一直等待，直到其他线程完成操作。可以用它来确保线程按照特定顺序执行。
 
 ::: code-group
-``` java
+
+```java
 import java.util.concurrent.CountDownLatch;
 
 public class ThreadOrderExample {
@@ -86,6 +89,7 @@ public class ThreadOrderExample {
     }
 }
 ```
+
 :::
 
 ## 3. 方法3：CyclicBarrier
@@ -93,7 +97,8 @@ public class ThreadOrderExample {
 `CyclicBarrier` 是一种可以同步多个线程的工具，但它通常用于所有线程都要在某一点等待并且一旦达到同步点后再一起继续执行。如果想确保多个线程按顺序执行，`CyclicBarrier` 可以配合 `Runnable` 来实现。
 
 ::: code-group
-``` java
+
+```java
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
@@ -137,6 +142,7 @@ public class ThreadOrderExample {
     }
 }
 ```
+
 :::
 
 ## 4. 方法4：使用 Semaphore
@@ -144,7 +150,8 @@ public class ThreadOrderExample {
 `Semaphore` 是一种控制访问共享资源的计数信号量，也可以用来控制线程执行的顺序。通过 `acquire()` 和 `release()` 方法，可以控制线程在特定点的执行顺序。
 
 ::: code-group
-``` java
+
+```java
 import java.util.concurrent.Semaphore;
 
 public class ThreadOrderExample {
@@ -183,6 +190,7 @@ public class ThreadOrderExample {
     }
 }
 ```
+
 :::
 
 ## 5. 方法5：使用 ExecutorService 和 Future
@@ -190,7 +198,8 @@ public class ThreadOrderExample {
 通过 `ExecutorService` 提交线程任务，并使用 `Future.get()` 方法来确保任务按顺序执行。`Future.get()` 会阻塞当前线程，直到对应的任务完成，因此可以通过它来控制线程的顺序。
 
 ::: code-group
-``` java
+
+```java
 import java.util.concurrent.*;
 
 public class ThreadOrderExample {
@@ -224,15 +233,16 @@ public class ThreadOrderExample {
     }
 }
 ```
-:::
 
+:::
 
 ## 6. 方法6：使用 Lock 和 Condition
 
 `Lock` 和 `Condition` 是更低级别的同步工具，它们提供了比 `synchronized` 更精细的控制。通过 `Condition` 对象，可以让线程等待特定的条件，从而控制线程按顺序执行。
 
 ::: code-group
-``` java
+
+```java
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
@@ -285,6 +295,7 @@ public class ThreadOrderExample {
     }
 }
 ```
+
 :::
 
 `ReentrantLock` 和 `Condition` 可以精确控制线程的执行顺序。通过 `conditionT2.signal()` 和 `conditionT3.signal()` 控制 T2 和 T3 在适当时机开始执行。
@@ -295,7 +306,8 @@ public class ThreadOrderExample {
 可以通过使用 `AtomicBoolean` 或 `AtomicInteger` 来控制线程的执行顺序。这些原子变量提供线程安全的操作，允许在多个线程之间共享状态。
 
 ::: code-group
-``` java
+
+```java
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ThreadOrderExample {
@@ -326,4 +338,5 @@ public class ThreadOrderExample {
     }
 }
 ```
+
 :::

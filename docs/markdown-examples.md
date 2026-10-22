@@ -1,7 +1,7 @@
 ---
 title: Markdown Extension Examples
 description: This page demonstrates some of the built-in markdown extensions provided by VitePress.
-tags: [markdown, examples]
+tags: []
 noindex: true
 created: 2023-10-04
 ---
