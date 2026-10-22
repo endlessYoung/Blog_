@@ -173,7 +173,18 @@ onUnmounted(() => {
             @mouseenter="hoverOpen(i)"
             @mouseleave="hoverClose"
           >
+            <a
+              v-if="item.link"
+              class="ey-nav-link"
+              :class="{ on: groupOn(item) || on(item.link), open: drop === i }"
+              :href="withBase(item.link)"
+              :aria-expanded="drop === i"
+              @focus="hoverOpen(i)"
+            >
+              <span class="ey-nav-idx">{{ idx(i) }}</span>{{ item.text }}<span class="ey-caret" />
+            </a>
             <button
+              v-else
               type="button"
               class="ey-nav-link"
               :class="{ on: groupOn(item), open: drop === i }"
@@ -270,7 +281,13 @@ onUnmounted(() => {
       <div class="wrap ey-sheet-inner">
         <template v-for="(item, i) in items" :key="`m-${item.text}`">
           <section v-if="item.items?.length" class="ey-sheet-group" :style="{ '--i': i }">
-            <div class="ey-sheet-label"><span>{{ idx(i) }}</span><span>{{ item.text }}</span></div>
+            <a
+              v-if="item.link"
+              class="ey-sheet-label"
+              :href="withBase(item.link)"
+              @click="emit('closeMenu')"
+            ><span>{{ idx(i) }}</span><span>{{ item.text }}</span></a>
+            <div v-else class="ey-sheet-label"><span>{{ idx(i) }}</span><span>{{ item.text }}</span></div>
             <a
               v-for="(child, j) in item.items"
               :key="child.link"

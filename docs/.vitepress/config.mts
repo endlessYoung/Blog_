@@ -733,36 +733,41 @@ html:not(.dark) {
       ]
     },
     nav: [
-      { text: 'Android', link: '/Android/Android简介' },
       {
-        text: '编程语言',
+        text: '移动开发',
+        link: '/Android/Android简介',
         items: [
-          { text: 'Java', link: '/Java/Integer1000与100的比较' },
+          { text: 'Android', link: '/Android/Android简介' },
           { text: 'Kotlin', link: '/Kotlin/集合' },
-          { text: 'Python', link: '/Python/numpy的常用方法' },
-          { text: 'JavaScript', link: '/JS/1' },
-          { text: 'C++', link: '/C++/头文件的声明规范' },
-        ]
-      },
-      { text: 'Ai', link: '/Ai/监督学习入门' },
-      {
-        text: 'Agent',
-        items: [
-          { text: 'Agent 基础', link: '/Agent/基础概念' },
-          { text: '框架与工具', link: '/Agent/LangChain' },
-          { text: '知识与推理', link: '/Agent/知识图谱' },
-          { text: '实践进阶', link: '/Agent/MultiAgent' },
+          { text: 'Flutter', link: '/Flutter/dart语言简介' },
         ],
       },
       {
-        text: '数据与算法',
+        text: '编程语言',
+        link: '/Java/Integer1000与100的比较',
         items: [
-          { text: '数据结构和算法', link: '/数据结构和算法/合并数组' },
-          { text: 'SQL', link: '/SQL/全文搜索' },
-        ]
+          { text: 'Java', link: '/Java/Integer1000与100的比较' },
+          { text: 'Python', link: '/Python/numpy的常用方法' },
+          { text: 'JavaScript', link: '/JS/1' },
+          { text: 'C++', link: '/C++/头文件的声明规范' },
+        ],
       },
-      { text: 'Flutter', link: '/Flutter/dart语言简介' },
-      { text: 'Linux', link: '/Linux/Index' },
+      {
+        text: 'AI 与智能体',
+        link: '/Ai/监督学习入门',
+        items: [
+          { text: 'AI', link: '/Ai/监督学习入门' },
+          { text: 'Agent', link: '/Agent/基础概念' },
+        ],
+      },
+      {
+        text: '数据与系统',
+        link: '/数据结构和算法/合并数组',
+        items: [
+          { text: '数据结构', link: '/数据结构和算法/合并数组' },
+          { text: 'SQL', link: '/SQL/全文搜索' },
+        ],
+      },
     ],
 
     sidebar: {
@@ -779,6 +784,7 @@ html:not(.dark) {
             { text: 'RecyclerView和ListView区别', link: '/Android/RecyclerView和ListView区别' },
             { text: 'RecyclerView四级缓存', link: '/Android/RecyclerView四级缓存' },
             { text: 'RecyclerView知识点汇总', link: '/Android/RecyclerView知识点汇总' },
+            { text: 'RecyclerView性能优化', link: '/Android/RecyclerView性能优化' },
             { text: 'DecorView', link: '/Android/DecorView' },
             { text: 'BottomNavigationView', link: '/Android/BottomNavigationView' },
             { text: '服务(Service)', link: '/Android/Service' },
@@ -881,14 +887,8 @@ html:not(.dark) {
             { text: 'Android.mk', link: '/Android/Android.mk' },
             { text: '安卓类加载器', link: '/Android/安卓类加载器' },
             { text: 'APK打包流程', link: '/Android/APK打包流程' },
+            { text: 'v1和v2签名机制', link: '/Android/v1和v2签名机制' },
             { text: 'pageSize', link: '/Android/pageSize' },
-          ],
-        },
-        {
-          text: '性能优化',
-          collapsed: false,
-          items: [
-            { text: 'RecyclerView性能优化', link: '/Android/RecyclerView性能优化' },
           ],
         },
         {
@@ -951,19 +951,6 @@ html:not(.dark) {
           ],
         },
         {
-          text: '序列化',
-          collapsed: false,
-          items: [
-          ],
-        },
-        {
-          text: '安全',
-          collapsed: false,
-          items: [
-            { text: 'v1和v2签名机制', link: '/Android/v1和v2签名机制' },
-          ],
-        },
-        {
           text: '安卓日志系统',
           collapsed: false,
           items: [
@@ -996,6 +983,7 @@ html:not(.dark) {
           collapsed: false,
           items: [
             { text: '安卓常见架构', link: '/Android/安卓常见架构' },
+            { text: '策略模式实现状态校验', link: '/Android/策略模式实现状态校验' },
             { text: 'Intent发送数据的上限', link: '/Android/Intent发送数据的上限' },
             { text: 'Looper死循环为什么不会导致应用卡死', link: '/Android/Looper死循环为什么不会导致应用卡死' },
             { text: '如何实现定时器', link: '/Android/如何实现定时器' },
@@ -1013,31 +1001,12 @@ html:not(.dark) {
           ],
         },
         {
-          text: '安卓与设计模式',
-          collapsed: false,
-          items: [
-            { text: '策略模式实现状态校验', link: '/Android/策略模式实现状态校验' },
-          ],
-        },
-        {
           text: 'OpenGL ES',
           collapsed: false,
           items: [
             { text: 'OpenGL ES初步探索', link: '/Android/OpenGL ES初步探索' },
             { text: '坐标系统', link: '/Android/OpenGL ES坐标系统' },
             { text: '纹理', link: '/Android/OpenGL-纹理' },
-          ],
-        },
-        {
-          text: 'Gradle',
-          collapsed: false,
-          items: [
-          ],
-        },
-        {
-          text: 'NDK',
-          collapsed: false,
-          items: [
           ],
         },
       ],
@@ -1092,12 +1061,6 @@ html:not(.dark) {
             { text: 'K-means', link: '/Ai/K-means' },
             { text: 'DESCAN', link: '/Ai/DESCAN' },
             { text: '层次聚类', link: '/Ai/层次聚类' },
-          ],
-        },
-        {
-          text: 'Pytorch',
-          collapsed: false,
-          items: [
           ],
         },
       ],
@@ -1271,40 +1234,16 @@ html:not(.dark) {
             { text: '协程上下文', link: '/Kotlin/协程上下文' },
             { text: '高并发场景下的协程调度与调优', link: '/Kotlin/高并发场景下的协程调度与调优' },
             { text: '协程生命周期', link: '/Kotlin/协程生命周期' },
-          ],
-        },
-        {
-          text: 'Flow',
-          collapsed: false,
-          items: [
             { text: 'Flow', link: '/Kotlin/Flow' },
           ],
         },
       ],
       '/Python/': [
         {
-          text: 'python基础',
-          collapsed: false,
-          items: [
-          ],
-        },
-        {
           text: 'numpy',
           collapsed: false,
           items: [
             { text: 'numpy的常用方法', link: '/Python/numpy的常用方法' },
-          ],
-        },
-        {
-          text: 'ski-learn',
-          collapsed: false,
-          items: [
-          ],
-        },
-        {
-          text: 'pytorch',
-          collapsed: false,
-          items: [
           ],
         },
       ],
@@ -1319,25 +1258,11 @@ html:not(.dark) {
       ],
       '/SQL/': [
         {
-          text: 'SQL基础',
-          collapsed: false,
-          items: [
-            { text: 'SQL简介', link: '/SQL/SQL基础/SQL简介' },
-          ],
-        },
-        {
           text: 'SQL',
           collapsed: false,
           items: [
+            { text: 'SQL简介', link: '/SQL/SQL基础/SQL简介' },
             { text: '全文搜索', link: '/SQL/全文搜索' },
-          ],
-        },
-      ],
-      '/C/': [
-        {
-          text: 'C',
-          collapsed: false,
-          items: [
           ],
         },
       ],
@@ -1351,14 +1276,7 @@ html:not(.dark) {
           ],
         },
       ],
-      '/Linux/': [
-        {
-          text: 'Linux',
-          collapsed: false,
-          items: [
-          ],
-        },
-      ],
+      '/Linux/': [],
     },
 
     socialLinks: [

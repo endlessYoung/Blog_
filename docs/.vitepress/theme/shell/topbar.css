@@ -534,7 +534,10 @@ html.manual:not(.dark) .ey-theme-glyph { transform: rotate(180deg); }
   font: 500 10px/1.4 var(--man-mono);
   letter-spacing: .1em;
   text-transform: uppercase;
+  text-decoration: none;
 }
+
+a.ey-sheet-label:hover { color: var(--man-fg); }
 
 .ey-sheet-foot {
   display: flex;
