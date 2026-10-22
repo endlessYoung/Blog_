@@ -463,6 +463,7 @@ export default defineConfig({
     return stampManualHtml(code)
   },
   head: [
+    ['link', { rel: 'icon', type: 'image/png', sizes: '1536x1536', href: '/favicon-1536.png' }],
     ['link', { rel: 'icon', type: 'image/png', sizes: '48x48', href: '/favicon-48.png' }],
     ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     ['link', { rel: 'apple-touch-icon', href: '/logo-neon.png' }],
