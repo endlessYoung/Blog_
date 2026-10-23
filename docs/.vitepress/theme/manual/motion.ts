@@ -1,4 +1,4 @@
-import { nextTick } from 'vue'
+import { nextTick, watch } from 'vue'
 import { normPath } from '../reading/catalog'
 import { RETURN_PREPARE } from '../reading/landing'
 import { dropFrames, type DropPoint } from '../fluid/drops'
@@ -67,6 +67,47 @@ export function playMastheadIntro(title: HTMLElement, odos: HTMLElement[]) {
 
 interface TransitionRouter {
   go: (to: string) => Promise<void>
+  route: { path: string }
+}
+
+// VitePress registers its own click listener on window. Ours has to be
+// registered first, also on window, or that listener starts a second
+// navigation and the view transition snapshots the page still on screen.
+let onCatalogClick: ((event: MouseEvent) => void) | null = null
+
+if (typeof window !== 'undefined') {
+  const guarded = window as Window & { __eyCatalogClick?: () => void }
+  guarded.__eyCatalogClick?.()
+  const listener = (event: MouseEvent) => onCatalogClick?.(event)
+  window.addEventListener('click', listener, true)
+  guarded.__eyCatalogClick = () => window.removeEventListener('click', listener, true)
+}
+
+function pageKey(href: string) {
+  const url = new URL(href, location.href)
+  let path = url.pathname
+  try { path = decodeURI(path) } catch { /* keep the raw path */ }
+  path = path.replace(/\.html$/, '')
+  path = path.replace(/\/index$/, '/')
+  if (path.length > 1 && path.endsWith('/')) path = path.slice(0, -1)
+  return path || '/'
+}
+
+function whenPageReady(router: TransitionRouter, href: string) {
+  const want = pageKey(href)
+  if (pageKey(router.route.path) === want) return Promise.resolve()
+  return new Promise<void>((resolve) => {
+    let stop = () => {}
+    const timer = window.setTimeout(finish, 8000)
+    stop = watch(() => router.route.path, (path) => {
+      if (pageKey(path) === want) finish()
+    })
+    function finish() {
+      window.clearTimeout(timer)
+      stop()
+      resolve()
+    }
+  })
 }
 
 function clearNames() {
@@ -175,8 +216,8 @@ function settle(transition: ViewTransition, after?: () => void) {
 
 export function bindCatalogTransitions(router: TransitionRouter) {
   const onClick = (event: MouseEvent) => {
-    const target = event.target as Element | null
-    if (!target) return
+    const target = event.target instanceof Element ? event.target : null
+    if (!target?.closest) return
     const kind = activeWorld()
     const home = target.closest('.ey-brand, .a-back, .VPNavBarTitle a') as HTMLAnchorElement | null
     const meta = returnMeta(kind)
@@ -191,6 +232,7 @@ export function bindCatalogTransitions(router: TransitionRouter) {
       if (!canTransition(event)) return
       event.preventDefault()
       event.stopPropagation()
+      event.stopImmediatePropagation()
       tagPair(articleNum, title)
       document.documentElement.classList.add('vt-back')
       const backPoint = { x: event.clientX, y: event.clientY }
@@ -198,6 +240,7 @@ export function bindCatalogTransitions(router: TransitionRouter) {
         articleNum.style.viewTransitionName = ''
         title.style.viewTransitionName = ''
         await router.go(href)
+        await whenPageReady(router, href)
         await nextTick()
         window.dispatchEvent(new CustomEvent(RETURN_PREPARE, { detail: from }))
         await nextTick()
@@ -231,6 +274,7 @@ export function bindCatalogTransitions(router: TransitionRouter) {
     if (link.closest('.gallery.suppress')) {
       event.preventDefault()
       event.stopPropagation()
+      event.stopImmediatePropagation()
       return
     }
     const href = link.getAttribute('href')
@@ -248,6 +292,7 @@ export function bindCatalogTransitions(router: TransitionRouter) {
 
     event.preventDefault()
     event.stopPropagation()
+    event.stopImmediatePropagation()
     tagPair(num, title)
     if (kind === 'spatial') document.documentElement.classList.add('vt-fwd')
     const point = { x: event.clientX, y: event.clientY }
@@ -255,6 +300,7 @@ export function bindCatalogTransitions(router: TransitionRouter) {
       num.style.viewTransitionName = ''
       title.style.viewTransitionName = ''
       await router.go(href)
+      await whenPageReady(router, href)
       await nextTick()
       tagPair(
         document.querySelector<HTMLElement>('.manual-a-num, .spatial-a-num, .fluid-a-num'),
@@ -265,6 +311,8 @@ export function bindCatalogTransitions(router: TransitionRouter) {
     settle(transition)
   }
 
-  document.addEventListener('click', onClick, true)
-  return () => document.removeEventListener('click', onClick, true)
+  onCatalogClick = onClick
+  return () => {
+    if (onCatalogClick === onClick) onCatalogClick = null
+  }
 }
