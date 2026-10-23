@@ -152,6 +152,9 @@
   left: 0;
   z-index: 5;
   min-width: 248px;
+}
+
+.ey-drop-panel {
   padding-bottom: 6px;
   background: var(--man-bg);
   border: 1px solid var(--man-line-2);
@@ -215,14 +218,17 @@
   box-shadow: inset 2px 0 0 var(--accent);
 }
 
-.ey-drop-enter-active { animation: ey-unfold 300ms var(--man-ease) both; }
+.ey-drop-enter-active .ey-drop-panel { animation: ey-unfold 300ms var(--man-ease) both; }
 .ey-drop-enter-active .ey-drop-label { animation: ey-rise 300ms var(--man-ease) 40ms both; }
 .ey-drop-enter-active .ey-drop-row {
   animation: ey-rise 320ms var(--man-ease) both;
   animation-delay: calc(80ms + var(--i, 0) * 30ms);
 }
 
-.ey-drop-leave-active { transition: opacity 160ms var(--ease-in), transform 160ms var(--ease-in); }
+.ey-drop-leave-active {
+  pointer-events: none;
+  transition: opacity 160ms var(--ease-in), transform 160ms var(--ease-in);
+}
 .ey-drop-leave-to { opacity: 0; transform: translateY(-4px); }
 
 @keyframes ey-unfold {

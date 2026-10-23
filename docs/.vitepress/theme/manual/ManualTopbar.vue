@@ -94,6 +94,7 @@ function groupOn(item: NavItem) {
 
 function hoverOpen(i: number) {
   clearTimeout(timer)
+  if (drop.value === i) return
   timer = window.setTimeout(() => {
     drop.value = i
     hoverAt = performance.now()
@@ -102,9 +103,26 @@ function hoverOpen(i: number) {
   }, drop.value === null ? 80 : 0)
 }
 
-function hoverClose() {
+function pointerInsideOpen(x: number, y: number) {
+  if (drop.value === null || !navEl.value) return false
+  const group = navEl.value.querySelectorAll<HTMLElement>('.ey-nav-group')[drop.value]
+  if (!group) return false
+  return [...group.querySelectorAll<HTMLElement>('.ey-drop'), group].some((el) => {
+    const box = el.getBoundingClientRect()
+    return x >= box.left && x <= box.right && y >= box.top && y <= box.bottom
+  })
+}
+
+function hoverClose(event: MouseEvent) {
+  const next = event.relatedTarget
+  if (next instanceof Node && navEl.value?.contains(next)) return
+  const x = event.clientX
+  const y = event.clientY
   clearTimeout(timer)
-  timer = window.setTimeout(() => { drop.value = null }, 160)
+  timer = window.setTimeout(() => {
+    if (pointerInsideOpen(x, y)) return
+    drop.value = null
+  }, 160)
 }
 
 function toggleDrop(i: number) {
@@ -195,21 +213,23 @@ onUnmounted(() => {
             </button>
             <Transition name="ey-drop" :duration="{ enter: 560, leave: 160 }">
               <div v-if="drop === i" class="ey-drop">
-                <div class="ey-drop-label">
-                  <span>{{ item.text }}</span><span>{{ item.items.length }} 栏</span>
+                <div class="ey-drop-panel">
+                  <div class="ey-drop-label">
+                    <span>{{ item.text }}</span><span>{{ item.items.length }} 栏</span>
+                  </div>
+                  <a
+                    v-for="(child, j) in item.items"
+                    :key="child.link"
+                    class="ey-drop-row"
+                    :class="{ on: childOn(child.link, item.items) }"
+                    :style="{ '--i': j }"
+                    :href="withBase(child.link || '/')"
+                  >
+                    <span class="ey-drop-idx">{{ idx(i) }}.{{ j + 1 }}</span>
+                    <span class="ey-drop-text">{{ child.text }}</span>
+                    <span class="ey-drop-arrow">→</span>
+                  </a>
                 </div>
-                <a
-                  v-for="(child, j) in item.items"
-                  :key="child.link"
-                  class="ey-drop-row"
-                  :class="{ on: childOn(child.link, item.items) }"
-                  :style="{ '--i': j }"
-                  :href="withBase(child.link || '/')"
-                >
-                  <span class="ey-drop-idx">{{ idx(i) }}.{{ j + 1 }}</span>
-                  <span class="ey-drop-text">{{ child.text }}</span>
-                  <span class="ey-drop-arrow">→</span>
-                </a>
               </div>
             </Transition>
           </div>
