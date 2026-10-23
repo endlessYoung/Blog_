@@ -27,6 +27,8 @@ export type GcPhase = 'sweep' | 'copy' | 'compact'
 
 export type RvPhase = 'scrap' | 'cache' | 'ext' | 'pool' | 'create'
 
+export type GlidePhase = 'active' | 'memory' | 'resource' | 'data' | 'source'
+
 export interface LoopBeat extends GuidedBeat {
   phase: LoopPhase
 }
@@ -37,6 +39,10 @@ export interface GcBeat extends GuidedBeat {
 
 export interface RvBeat extends GuidedBeat {
   phase: RvPhase
+}
+
+export interface GlideBeat extends GuidedBeat {
+  phase: GlidePhase
 }
 
 export const BIN_VALUES = [3, 7, 11, 14, 18, 21, 25, 29, 33, 36, 40, 44]
@@ -190,3 +196,25 @@ export const RV_BEATS: RvBeat[] = [
   },
 ]
 
+export const GLIDE_BEATS: GlideBeat[] = [
+  {
+    log: '第 1 级：<b>ActiveResources</b>（活动资源）。正在屏幕上显示的图片，通过弱引用持有，防止被内存 LRU 误删。',
+    phase: 'active',
+  },
+  {
+    log: '第 2 级：<b>MemoryCache</b>（内存缓存）。LruResourceCache。图片离开屏幕（引用计数归零）后存入；命中则移回 Active。',
+    phase: 'memory',
+  },
+  {
+    log: '第 3 级：<b>DiskCache RESOURCE</b>（转换后磁盘缓存）。已按目标 View 宽高裁剪缩放并变换后的文件，解码速度最快。',
+    phase: 'resource',
+  },
+  {
+    log: '第 4 级：<b>DiskCache DATA</b>（原始磁盘缓存）。网络下载的原图数据未经任何变换。尺寸不同时可直接在此重新解码，无需重复请求。',
+    phase: 'data',
+  },
+  {
+    log: '四级缓存全未命中。<b>Source / Network</b> 发起网络或数据源加载，下载完成后依次写入磁盘与内存。',
+    phase: 'source',
+  },
+]

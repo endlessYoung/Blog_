@@ -997,6 +997,7 @@ html:not(.dark) {
             { text: '后台显示toast方案', link: '/Android/后台显示toast方案' },
             { text: '多进程模式', link: '/Android/多进程模式' },
             { text: 'Bitmap优化', link: '/Android/Bitmap优化' },
+            { text: 'Glide四级缓存', link: '/Android/Glide四级缓存' },
             { text: '从重复请求到SingleFlight', link: '/Android/从重复请求到SingleFlight' },
           ],
         },

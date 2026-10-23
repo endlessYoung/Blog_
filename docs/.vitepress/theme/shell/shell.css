@@ -355,6 +355,29 @@ html.manual .parts {
   88%, 100% { transform: none; }
 }
 
+.m-glide {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 62px 18px 0;
+}
+.m-glide span { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.m-glide i {
+  width: 100%;
+  height: 64px;
+  border: 1px solid var(--man-line-2);
+  background: transparent;
+  animation: rv-bin 4.8s var(--man-ease) infinite;
+}
+.m-glide em {
+  color: var(--man-fg-3);
+  font: 500 11px/1 var(--man-mono);
+  font-style: normal;
+}
+.m-glide span:nth-child(2) i { animation-name: rv-bin-2; }
+.m-glide span:nth-child(3) i { animation-name: rv-bin-3; }
+.m-glide span:nth-child(4) i { animation-name: rv-bin-4; }
+
 .m-rv {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

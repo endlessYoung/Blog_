@@ -1,13 +1,14 @@
 ---
 title: 标签：android
-description: 与「android」相关的文章共 121 篇
+description: 与「android」相关的文章共 122 篇
 hideArticleMeta: true
 ---
 
 # 标签：android
 
-共 **121** 篇文章：
+共 **122** 篇文章：
 
+- [Glide四级缓存](/Android/Glide四级缓存) — Glide 缓存机制核心逻辑梳理：ActiveResources 弱引用、MemoryCache LRU、RESOURCE 磁盘缓存、DATA 磁盘缓存的检索顺序与互斥流转。
 - [从重复请求到SingleFlight](/Android/从重复请求到SingleFlight) — 用一个可操作的 Feed 实验室说明，为什么相同的刷新会叠在一起，SingleFlight 合并的是进行中的任务，以及 Room Flow 为什么只负责把数据库的变化交给 UI。
 - [RecyclerView四级缓存](/Android/RecyclerView四级缓存) — Recycler 按 Scrap、CachedViews、ViewCacheExtension、RecycledViewPool 四级取 ViewHolder。CachedViews 默认 2 格，池里每种 viewType 默认 5 格。Scrap 不限，Extension 默认是 0。
 - [Compose布局系统与 Modifier](/Android/Compose/Compose布局系统 & Modifier) — 文档级 · 教学级 · 指南级

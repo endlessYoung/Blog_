@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" width="100%" height="100%" style="background:#f8fafc; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;">
+  <defs>
+    <filter id="m-shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.05"/>
+    </filter>
+    <marker id="m-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="m-arrow-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 z" fill="#10b981"/>
+    </marker>
+    <marker id="m-arrow-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 1 1 L 9 5 L 1 9 z" fill="#ef4444"/>
+    </marker>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="40" y="38" fill="#0f172a" font-size="17" font-weight="700">两级内存缓存：动静互斥与生命周期状态流转</text>
+  <text x="40" y="58" fill="#64748b" font-size="11">ActiveResources 与 MemoryCache 严格互斥 · 引用计数（Acquired）驱动生命周期</text>
+
+  <!-- 阶段 1：ActiveResources -->
+  <g transform="translate(40, 80)">
+    <rect width="250" height="280" rx="14" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#m-shadow)"/>
+    <rect x="0" y="0" width="250" height="42" rx="14" fill="#eff6ff"/>
+    <rect x="0" y="28" width="250" height="14" fill="#eff6ff"/>
+    <text x="125" y="26" text-anchor="middle" fill="#1d4ed8" font-size="13" font-weight="700">① 屏幕展示中：ActiveResources</text>
+    
+    <g transform="translate(16, 56)">
+      <rect width="218" height="24" rx="4" fill="#dbeafe"/>
+      <text x="109" y="16" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="600">弱引用 · acquired > 0</text>
+      
+      <text x="6" y="46" fill="#334155" font-size="11" font-weight="600">• 容器：WeakReference 弱引用</text>
+      <text x="6" y="68" fill="#475569" font-size="11">• 状态：当前正展示在 View 上</text>
+      <text x="6" y="90" fill="#475569" font-size="11">• 特性：不计入 LRU 容量统计</text>
+      <text x="6" y="112" fill="#059669" font-size="11" font-weight="600">🛡️ 机制：防正在看的图被踢</text>
+      
+      <!-- 简易图示 -->
+      <rect x="10" y="130" width="198" height="66" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+      <circle cx="36" cy="163" r="14" fill="#3b82f6"/>
+      <text x="36" y="168" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="700">UI</text>
+      <text x="60" y="156" fill="#0f172a" font-size="11" font-weight="600">ImageView 正在显示</text>
+      <text x="60" y="174" fill="#64748b" font-size="10">引用计数 acquired ≥ 1</text>
+    </g>
+  </g>
+
+  <!-- 阶段 2：MemoryCache -->
+  <g transform="translate(350, 80)">
+    <rect width="250" height="280" rx="14" fill="#ffffff" stroke="#86efac" stroke-width="1.5" filter="url(#m-shadow)"/>
+    <rect x="0" y="0" width="250" height="42" rx="14" fill="#f0fdf4"/>
+    <rect x="0" y="28" width="250" height="14" fill="#f0fdf4"/>
+    <text x="125" y="26" text-anchor="middle" fill="#15803d" font-size="13" font-weight="700">② 离开屏幕：MemoryCache</text>
+    
+    <g transform="translate(16, 56)">
+      <rect width="218" height="24" rx="4" fill="#dcfce7"/>
+      <text x="109" y="16" text-anchor="middle" fill="#166534" font-size="11" font-weight="600">LRU 强引用 · acquired == 0</text>
+      
+      <text x="6" y="46" fill="#334155" font-size="11" font-weight="600">• 容器：LruResourceCache 强引用</text>
+      <text x="6" y="68" fill="#475569" font-size="11">• 状态：刚刚滑出屏幕的闲置图</text>
+      <text x="6" y="90" fill="#475569" font-size="11">• 容量：约占设备可用内存 20%</text>
+      <text x="6" y="112" fill="#0284c7" font-size="11" font-weight="600">⚡ 机制：随时待命秒级回捞</text>
+      
+      <rect x="10" y="130" width="198" height="66" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="22" y="148" width="48" height="30" rx="4" fill="#22c55e"/>
+      <text x="46" y="167" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="700">LRU</text>
+      <text x="80" y="156" fill="#0f172a" font-size="11" font-weight="600">LinkedHashMap</text>
+      <text x="80" y="174" fill="#64748b" font-size="10">最近最少使用队列</text>
+    </g>
+  </g>
+
+  <!-- 阶段 3：BitmapPool -->
+  <g transform="translate(660, 80)">
+    <rect width="220" height="280" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" filter="url(#m-shadow)"/>
+    <rect x="0" y="0" width="220" height="42" rx="14" fill="#f1f5f9"/>
+    <rect x="0" y="28" width="220" height="14" fill="#f1f5f9"/>
+    <text x="110" y="26" text-anchor="middle" fill="#475569" font-size="13" font-weight="700">③ 像素复用：BitmapPool</text>
+    
+    <g transform="translate(16, 56)">
+      <rect width="188" height="24" rx="4" fill="#e2e8f0"/>
+      <text x="94" y="16" text-anchor="middle" fill="#334155" font-size="11" font-weight="600">内存池 · inBitmap 复用</text>
+      
+      <text x="4" y="46" fill="#334155" font-size="11" font-weight="600">• 淘汰处理：从 LRU 移除</text>
+      <text x="4" y="68" fill="#475569" font-size="11">• 内存不直接回收</text>
+      <text x="4" y="90" fill="#475569" font-size="11">• 存入 BitmapPool 池中</text>
+      <text x="4" y="112" fill="#7c3aed" font-size="11" font-weight="600">♻️ 机制：复用内存，避 GC</text>
+      
+      <rect x="8" y="130" width="172" height="66" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="86" y="158" text-anchor="middle" fill="#475569" font-size="11" font-weight="700">inBitmap 借用</text>
+      <text x="86" y="176" text-anchor="middle" fill="#94a3b8" font-size="10">后续解码直接套用空间</text>
+    </g>
+  </g>
+
+  <!-- 连线 1：Active -> Memory (滑出屏幕 release) -->
+  <path d="M 290 170 Q 320 150 350 170" fill="none" stroke="#3b82f6" stroke-width="2" marker-end="url(#m-arrow)"/>
+  <rect x="294" y="136" width="52" height="18" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="0.8"/>
+  <text x="320" y="149" text-anchor="middle" fill="#1d4ed8" font-size="9" font-weight="700">滑出屏幕</text>
+
+  <!-- 连线 2：Memory -> Active (重回屏幕 remove 捞回) -->
+  <path d="M 350 250 Q 320 270 290 250" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#m-arrow-green)"/>
+  <rect x="294" y="258" width="52" height="18" rx="3" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="0.8"/>
+  <text x="320" y="271" text-anchor="middle" fill="#047857" font-size="9" font-weight="700">滑回命中</text>
+
+  <!-- 连线 3：Memory -> BitmapPool (LRU 淘汰) -->
+  <path d="M 600 210 L 660 210" fill="none" stroke="#ef4444" stroke-width="2" marker-end="url(#m-arrow-red)"/>
+  <rect x="608" y="194" width="44" height="18" rx="3" fill="#fef2f2" stroke="#fecaca" stroke-width="0.8"/>
+  <text x="630" y="207" text-anchor="middle" fill="#dc2626" font-size="9" font-weight="700">LRU淘汰</text>
+
+  <!-- 底部关键总结提示条 -->
+  <g transform="translate(40, 386)">
+    <rect width="840" height="48" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="420" y="24" text-anchor="middle" fill="#1e293b" font-size="12" font-weight="700">
+      ⚡ 核心设计原则：一张 Bitmap 在内存中，要么在 ActiveResources，要么在 MemoryCache，两者互斥！
+    </text>
+    <text x="420" y="40" text-anchor="middle" fill="#64748b" font-size="11">
+      展示时剥离 LRU（避免滑动误删白屏）· 闲置时收纳进 LRU（受总内存上限约束安全淘汰）
+    </text>
+  </g>
+</svg>

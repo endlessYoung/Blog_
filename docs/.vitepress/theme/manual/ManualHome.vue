@@ -7,7 +7,7 @@ import { pageMeta, recentPages, termGroups } from '../reading/corpus'
 import { prefetchHrefs, prefetchKatex, prefetchPage } from '../reading/prefetch'
 import ManualOdo from './ManualOdo.vue'
 import ManualGallery from './ManualGallery.vue'
-import { FIG_DEFS } from './figures'
+import { FIG_DEFS, type FigKind } from './figures'
 import { EASE_OUT, playMastheadIntro, reducedMotion, rollOdo, shouldPlayIntro } from './motion'
 
 const { theme } = useData()
@@ -26,7 +26,7 @@ const title = 'ENDLESSYOUNG'
 const groups = termGroups()
 
 const figs = computed(() => {
-  const cards: { article: ManualArticle; kind: 'cas' | 'bin' | 'gen' | 'loop' | 'gc' | 'rv' | 'sort'; caption: string; fig: string }[] = []
+  const cards: { article: ManualArticle; kind: FigKind; caption: string; fig: string }[] = []
   for (const def of FIG_DEFS) {
     for (const part of parts.value) {
       for (const chapter of part.chapters) {

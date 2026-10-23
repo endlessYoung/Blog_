@@ -3,9 +3,10 @@ import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { withBase } from 'vitepress'
 import gsap from 'gsap'
 import type { ManualArticle } from '../reading/catalog'
+import type { FigKind } from './figures'
 
 const props = defineProps<{
-  cards: { article: ManualArticle; kind: 'cas' | 'bin' | 'gen' | 'loop' | 'gc' | 'rv' | 'sort'; caption: string; fig: string }[]
+  cards: { article: ManualArticle; kind: FigKind; caption: string; fig: string }[]
 }>()
 
 const gallery = ref<HTMLElement | null>(null)
@@ -195,6 +196,12 @@ onUnmounted(() => {
             <span><i /><em>2</em></span>
             <span><i /><em>0</em></span>
             <span><i /><em>5</em></span>
+          </div>
+          <div v-else-if="card.kind === 'glide'" class="fig-stage m-glide">
+            <span><i /><em>ACT</em></span>
+            <span><i /><em>MEM</em></span>
+            <span><i /><em>RES</em></span>
+            <span><i /><em>DAT</em></span>
           </div>
           <div v-else class="fig-stage m-loop">
             <div class="q"><i /><i /><i /></div>
