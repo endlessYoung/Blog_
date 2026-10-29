@@ -1,94 +1,81 @@
-<p align="center"><sub>源码 · 原理 · 交互图解</sub></p>
+<p align="center"><sub>Android · Kotlin · Java · AI</sub></p>
 
 <h1 align="center">ENDLESSYOUNG / MANUAL</h1>
 
-<p align="center">Android、Java 与 AI 的学习笔记，一本持续更新的技术手册。</p>
+<p align="center">记录源码里的机制，也记录实践中的问题。</p>
 
 <p align="center"><em>这世界太大，勇敢的少年奔赴天涯。</em></p>
 
 <p align="center">
-  <a href="https://endlessyoung.top/">阅读手册</a> ·
+  <a href="https://endlessyoung.top/">进入博客</a> ·
   <a href="https://endlessyoung.top/archives.html">全部文章</a> ·
-  <a href="https://endlessyoung.top/tags/">标签索引</a> ·
-  <a href="https://endlessyoung.top/feed.xml">RSS</a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/endlessYoung/Blog_/actions/workflows/deploy.yml">
-    <img src="https://github.com/endlessYoung/Blog_/actions/workflows/deploy.yml/badge.svg" alt="站点构建与部署状态">
-  </a>
+  <a href="https://endlessyoung.top/tags/">按标签查阅</a> ·
+  <a href="https://endlessyoung.top/feed.xml">订阅 RSS</a>
 </p>
 
 <p align="center">
   <a href="https://endlessyoung.top/">
-    <img src=".github/readme/home.png" alt="手册首页：网格排版、章节目录与文章预览" width="100%">
+    <img src=".github/readme/home.png" alt="Endlessyoung 的技术笔记首页" width="100%">
   </a>
 </p>
 
-## 从一个具体问题开始
+这里是我的学习笔记，主要写 Android、Kotlin、Java 和 AI。读源码时没想通的地方、写代码时碰到的问题，会慢慢整理到这里：一条消息怎样被处理，一个对象何时被回收，一次重复请求为什么会发生。
 
-这里记录读源码、做实验和解决问题时留下的笔记：一条消息怎样被处理，一个对象何时被回收，一次重复请求如何被合并。文章沿着调用过程、数据结构和状态变化展开，部分主题配有交互图解，可以边读边操作。
+文章里有原理梳理、代码示例，也有能动手操作的图解。可以顺着一个主题往下读，也可以带着问题进来，找到需要的那一篇。
 
-- **[Handler](https://endlessyoung.top/Android/Handler.html)** — 跟着消息在队列中流转，看 Looper 如何取出并分发消息。
-- **[RecyclerView 四级缓存](https://endlessyoung.top/Android/RecyclerView四级缓存.html)** — 追踪同一个 ViewHolder，理解四级缓存的查找顺序。
-- **[CAS](https://endlessyoung.top/Java/CAS.html)** — 观察两个线程竞争同一个变量时，比较与交换如何决定结果。
-- **[从重复请求到 SingleFlight](https://endlessyoung.top/Android/从重复请求到SingleFlight.html)** — 通过 Feed 实验室理解请求合并，以及数据库订阅与网络请求各自负责什么。
-- **[Embedding](https://endlessyoung.top/Agent/Embedding.html)** — 从向量表示出发，理解模型如何把语义关系映射到距离。
+## 这里写些什么
 
-## 按主题阅读
+### Android：从组件用法到系统内部
 
-- **移动开发**：Android 组件、Framework、Jetpack Compose、协程、缓存与性能实践。
-- **编程语言**：Java 并发与 JVM、Kotlin 语法与 Flow、Python 与 NumPy、C++ 基础。
-- **AI 与智能体**：机器学习算法、向量表示、文档切分与 Agent 工程笔记。
-- **数据与系统**：数据结构、排序、二分查找及 SQL 等基础主题。
+围绕 Activity、Service、进程通信、消息机制和界面绘制，追踪应用与系统之间的调用过程。也记录 Jetpack Compose、列表与图片缓存，以及实际开发中的请求合并、后台任务等问题。
 
-[全部文章目录](https://endlessyoung.top/archives.html)按分类列出正文，[标签索引](https://endlessyoung.top/tags/)用于查找跨分类的相关内容。
+- [Handler](https://endlessyoung.top/Android/Handler.html)：消息如何入队，Looper 又如何取出并分发它。
+- [RecyclerView 四级缓存](https://endlessyoung.top/Android/RecyclerView四级缓存.html)：一个 ViewHolder 离开屏幕后，会去哪里，又怎样被复用。
+- [Glide 四级缓存](https://endlessyoung.top/Android/Glide四级缓存.html)：一次图片加载如何依次查找活动资源、内存与磁盘缓存。
+- [从重复请求到 SingleFlight](https://endlessyoung.top/Android/从重复请求到SingleFlight.html)：相同请求如何合并，数据库订阅与网络请求分别负责什么。
+
+[浏览 Android 文章 →](https://endlessyoung.top/Android/)
+
+### Kotlin 与 Java：理解并发、运行时与语言细节
+
+Kotlin 部分记录协程、Flow、Channel、泛型与常用语法；Java 部分关注线程池、并发同步、类加载与 JVM 内存管理。读这些内容时，我更关心执行过程：任务在哪里运行，状态由谁维护，对象为什么还没有被回收。
+
+- [协程上下文](https://endlessyoung.top/Kotlin/协程上下文.html)：CoroutineContext 里有哪些元素，它们各自影响什么。
+- [Flow](https://endlessyoung.top/Kotlin/Flow.html)：用协程组织异步数据流。
+- [CAS](https://endlessyoung.top/Java/CAS.html)：两个线程竞争同一个变量时，比较与交换如何决定结果。
+- [GC 算法](https://endlessyoung.top/Java/GC算法.html)：在同一段内存上观察标记清除、复制和整理的区别。
+
+[浏览 Kotlin 文章 →](https://endlessyoung.top/Kotlin/) · [浏览 Java 文章 →](https://endlessyoung.top/Java/)
+
+### AI 与智能体：从学习算法到语义表示
+
+从监督学习、回归、聚类和神经网络等基础概念开始，记录算法要解决的问题与背后的思路。向量表示和文档切分则把视角带到具体的数据处理过程：文字怎样变成向量，一篇长文又该如何拆分。
+
+- [监督学习入门](https://endlessyoung.top/Ai/监督学习入门.html)：从回归与分类认识监督学习。
+- [Embedding](https://endlessyoung.top/Agent/Embedding.html)：为什么词语和句子可以用向量表示，语义关系如何体现为距离。
+- [Chunking](https://endlessyoung.top/Agent/Chunking.html)：长文档如何切成适合检索的片段。
+
+[浏览机器学习笔记 →](https://endlessyoung.top/Ai/) · [浏览 Agent 笔记 →](https://endlessyoung.top/Agent/)
+
+### 算法与基础：把每一步想清楚
+
+整理数组、排序、二分查找等常见问题，关注边界、指针移动和每一步操作的代价。也收录 SQL、Python、NumPy 与 C++ 的学习笔记，方便遇到问题时回来查阅。
+
+- [二分查找](https://endlessyoung.top/数据结构和算法/二分查找.html)：观察搜索区间如何收缩，理解边界的变化。
+- [常见的排序方法](https://endlessyoung.top/数据结构和算法/常见的排序方法.html)：用同一段数组比较冒泡、选择、插入、快排和堆排序。
+
+## 有些过程，可以边读边操作
+
+消息在队列中流转、线程争用变量、对象在内存中移动，只看一段文字不容易记住。部分文章把这些过程做成了交互图解，让执行中的状态变化直接出现在正文旁边。读到不确定的地方，可以停下来，对照代码和图里的变化再看一遍。
 
 <p align="center">
-  <img src=".github/readme/catalog.png" alt="章节目录展开后的文章列表与悬停预览" width="48%">
+  <img src=".github/readme/catalog.png" alt="按主题展开章节，预览想读的文章" width="48%">
   &nbsp;
-  <img src=".github/readme/article.png" alt="文章阅读页：正文、文章元数据与章节导航" width="48%">
+  <img src=".github/readme/article.png" alt="文章正文与同章笔记，方便连续阅读" width="48%">
 </p>
 
-## 为阅读做的设计
+## 找到想读的那一篇
 
-- **手册式编排**：用章节编号、网格和清晰的字号层级组织内容，目录与正文保留阅读位置，方便来回查阅。
-- **交互图解**：在消息循环、GC、CAS、排序与缓存等主题中，把执行过程放进文章，让状态变化可见。
-- **随时检索**：按 `/` 或 `Ctrl / ⌘ + K` 打开本地搜索，可查找文章标题与正文中的小节。
-- **连续阅读**：章节导航、相关阅读、标签和 RSS 提供不同的阅读路径；支持明暗切换、强调色切换与图片放大。
-
-站点基于 **VitePress 2 + Vue 3 + TypeScript** 构建，自定义阅读界面使用 GSAP 编排动效，MiniSearch 提供本地搜索，KaTeX 与 Mermaid 负责公式和图表。文章以 Markdown 保存，构建为静态站点并部署到 GitHub Pages。
-
-## 本地运行
-
-使用 Node.js 22 与 pnpm 9。在仓库根目录执行：
-
-```bash
-pnpm install --frozen-lockfile
-pnpm docs:dev
-```
-
-开发地址为 `http://localhost:5173/`。构建和预览：
-
-```bash
-pnpm docs:build
-pnpm docs:preview
-```
-
-生产构建会生成文章目录、标签页、RSS 和 sitemap，并检查首页资源约束、内部链接、索引标记与 canonical 是否一致。也可以在构建后单独运行 `pnpm docs:seo` 检查已有产物。
-
-## 内容与代码
-
-```text
-docs/
-├── Android/ · Kotlin/ · Flutter/    移动开发
-├── Java/ · Python/ · C++/          编程语言
-├── Ai/ · Agent/                   AI 与智能体
-├── 数据结构和算法/ · SQL/           数据与算法
-├── public/                        站点静态资源
-└── .vitepress/                    站点配置、自定义主题与交互组件
-scripts/                           目录生成与构建检查
-.github/workflows/                 自动构建与发布
-```
-
-新增文章放入对应分类目录，在 frontmatter 中填写 `title`、`description`、`categories`、`tags` 和 `created`。首页章节与侧边导航维护在 `docs/.vitepress/config.mts`；文章总目录和标签页由构建脚本生成。未完成的占位笔记使用 `noindex: true`，完成正文后再开放索引。
+- **按主题读**：从首页展开章节，或打开[全部文章目录](https://endlessyoung.top/archives.html)，沿着一个方向往下看。
+- **带着问题查**：按 `/`、`Ctrl + K` 或 `⌘ + K` 打开搜索；也可以用[标签](https://endlessyoung.top/tags/)找到不同分类下的相关笔记。
+- **接着读下去**：文章里的章节导航与相关阅读可以继续查阅相邻内容；希望看到后续更新，可以[订阅 RSS](https://endlessyoung.top/feed.xml)。
