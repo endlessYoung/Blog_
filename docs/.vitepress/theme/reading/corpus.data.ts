@@ -59,11 +59,12 @@ export default createContentLoader('**/*.md', {
       if (url.startsWith('/tags') || url === '/404') continue
       if (url === '/getting-started' || url === '/markdown-examples') continue
       if (page.frontmatter.layout === 'home') continue
+      if (page.frontmatter.noindex || page.frontmatter.hideArticleMeta) continue
       const tags = Array.isArray(page.frontmatter.tags)
         ? page.frontmatter.tags.map((tag) => String(tag))
         : []
       pages.push({
-        url,
+        url: page.url,
         title: String(page.frontmatter.title || url.split('/').pop() || url),
         tags,
         updated: dates.get(fileOf(url)) || '',

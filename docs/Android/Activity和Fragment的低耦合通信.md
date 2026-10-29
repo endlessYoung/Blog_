@@ -2,7 +2,6 @@
 title: Activity和Fragment的低耦合通信
 categories: [Android]
 tags: [android, Activity, Fragment]
-noindex: true
 created: 2024-07-17
 ---
 
@@ -13,7 +12,8 @@ created: 2024-07-17
 通常通过接口实现 Fragment 与 Activity 之间的通信：
 
 ::: code-group
-``` java
+
+```java
 // 定义接口
 public interface OnFragmentInteractionListener {
     void onFragmentInteraction(String data);
@@ -42,4 +42,5 @@ public class MyActivity extends AppCompatActivity implements OnFragmentInteracti
     }
 }
 ```
+
 :::

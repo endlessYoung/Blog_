@@ -2,17 +2,18 @@
 title: numpy的常用方法
 categories: [Python]
 tags: [python, numpy]
-noindex: true
 created: 2024-05-06
 ---
 
 # numpy的常用方法
 
 ## 1. 创建矩阵
+
 示例：
 
 ::: code-group
-``` python
+
+```python
 import numpy as np
 
 np.array([1, 2, 3, 4, 5]) # 创建一个一维的矩阵
@@ -26,7 +27,7 @@ np.linspace(0, 1, 5) # 返回返回介于...区间的等间距矩阵 [0, 0.25, 0
 np.random.rand(2, 4) # 创建一个随机的两行四列的矩阵
 np.random.randn(*dims) # 生成指定形状的标准正态分布随机数数组
 
-a = np.zeros((2, 4), dtype=np.int32) 
+a = np.zeros((2, 4), dtype=np.int32)
 # numpy矩阵的默认数据类型是64位的浮点数，也可以指定数据类型
 '''
 可选值：1.np.int8/16/32/64
@@ -41,13 +42,15 @@ b = a.astype(int) # 转换数据类型
 .transpose() # 或 .T：转置数组，即交换维度。
 .flatten() # 将数组展平为一维数组。
 ```
+
 :::
 
 ## 2. 矩阵的四则运算与统计排序
 
 示例
 ::: code-group
-``` python
+
+```python
 import numpy as np
 
 a + b
@@ -77,4 +80,5 @@ np.linalg.solve(a, b) # 解线性方程组 ax = b。
 np.correlate(a, v, mode='valid') # 计算两个一维序列的互相关系数。
 np.cov(m, y=None, rowvar=True) # 计算协方差矩阵。
 ```
+
 :::

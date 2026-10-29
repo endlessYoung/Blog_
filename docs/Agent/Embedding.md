@@ -1,3 +1,11 @@
+---
+title: Embedding：AI 如何把世界变成一张数字地图
+description: 从猫、狗和汽车的向量表示出发，解释 Embedding 如何学习语义距离，以及向量维度、相似度与训练目标之间的关系。
+categories: [Agent]
+tags: [agent, Embedding]
+created: 2026-08-03
+---
+
 # Embedding： AI如何把世界变成一张数字地图
 
 ## 1. Embedding 的定义

@@ -1,12 +1,12 @@
 ---
 title: 标签：android
-description: 与「android」相关的文章共 122 篇
+description: 与「android」相关的文章共 128 篇
 hideArticleMeta: true
 ---
 
 # 标签：android
 
-共 **122** 篇文章：
+共 **128** 篇文章：
 
 - [Glide四级缓存](/Android/Glide四级缓存) — Glide 缓存机制核心逻辑梳理：ActiveResources 弱引用、MemoryCache LRU、RESOURCE 磁盘缓存、DATA 磁盘缓存的检索顺序与互斥流转。
 - [从重复请求到SingleFlight](/Android/从重复请求到SingleFlight) — 用一个可操作的 Feed 实验室说明，为什么相同的刷新会叠在一起，SingleFlight 合并的是进行中的任务，以及 Room Flow 为什么只负责把数据库的变化交给 UI。
@@ -37,6 +37,7 @@ hideArticleMeta: true
 - [WorkManager](/Android/WorkManager) — WorkManager 是一种用于启动永久性工作的Jetpack的API。持久性工作是指能够在应用和系统重启后仍然保持工作调度状态的工作。
 - [安卓常见架构](/Android/安卓常见架构) — 在安卓开发中，常见的架构主要有以下几种，每种架构都有其特点、优缺点以及适用场景。以下是它们的详细介绍：
 - [如何实现应用重启](/Android/如何实现应用重启) — 在一些手游中经常会有资源更新后自动重启应用的功能，这个是怎么实现的呢？
+- [一个App会创建多少个Application对象](/Android/一个App会创建多少个Application对象)
 - [Android文件系统](/Android/Android文件系统) — 好的，让我们更全面地深入 Android 文件系统的各个方面，包括所有主要目录及其用途，以及文件系统的架构和管理。
 - [Trace日志简介](/Android/Trace日志) — 在ANR日志中，重点关注主线程的堆栈跟踪。通常，主线程被阻塞的原因可能包括但不限于：
 - [Android一个APP里面最少有几个线程](/Android/Android一个APP里面最少有几个线程) — Android一个进程里面最少包含5个线程，分别为：
@@ -64,6 +65,7 @@ hideArticleMeta: true
 - [WindowManagerService（WMS）](/Android/WindowManagerService) — 从计算机的IO系统角度分析，WMS至少要完成两个功能：
 - [AsyncTask](/Android/AsyncTask) — AsyncTask 是 Android 开发中用于执行后台操作并在完成后更新 UI 的一种便捷工具。尽管 AsyncTask 曾经是 Android 开发中的重要组成部分，但它在 Android 11 (API Level 30) 中已被弃用。推荐使用其他方式?
 - [事件总线EventBus](/Android/事件总线EventBus) — EventBus 是一个开源的 Android 库，用于简化组件之间的通信和解耦。它实现了发布/订阅模式（Publish/Subscribe），允许不同组件在应用内部通过事件进行通信，而不需要显式地持有对方的引用。以下是关于 EventBus 的基本介绍和如何?
+- [Activity和Fragment的低耦合通信](/Android/Activity和Fragment的低耦合通信)
 - [Android与Service通信](/Android/Android与Service通信) — 这是最简单和常见的一种方式，适用于需要一次性操作或简单的后台任务。
 - [AssestManager](/Android/AssestManager) — AssetManager 是 Android 中用于访问应用程序资源（如文本文件、图片、音频文件等）的类。它提供了对应用内部资源的访问接口，通常用于读取和管理应用内的原始资源文件。
 - [Fragment转场动画](/Android/Fragment转场动画) — 使用 FragmentTransaction 的 setCustomAnimations() 方法可以实现自定义转场动画,提交带有动画效果的 Fragment 事务。
@@ -105,11 +107,14 @@ hideArticleMeta: true
 - [AMS剖析](/Android/AMS剖析) — 所有的 Android 应用程序都是由 Zygote 进程 fork 而来，在 Zygote 进程中初始化了 Java 运行时，加载了常用的 Java Classes，加载了系统资源等。这些底层基础都会被 Android 应用程序继承。在从 Zygote 中继?
 - [LiveData](/Android/LiveData) — LiveData 是一个持有可观察数据的类，它可以感知组件的生命周期（如 Activity 和 Fragment）。LiveData 能自动管理观察者（即观察数据变化的对象），并确保数据只在可见的 UI 组件上更新，避免内存泄漏。
 - [SharedPreference](/Android/SharedPreference) — SharedPreferences是Android的一个接口类，是Android 数据存储（保存内部）的一种方法。主要以*.xml的形式保存在Android /data/data/com.*包名/shared_prefs下，SharedPreferences?
+- [实践-recyclerview分组](/Android/实践-recyclerview分组)
 - [实践-Widget](/Android/实践-Widget) — widget就是安卓的桌面小组件，可以方便快捷的使用app提供的部分功能。
 - [AIDL](/Android/AIDL) — AIDL全称为 Android Interface Definition Language，中文译为：安卓接口定义语言。可以利用AIDL定义客户端与服务端均认可的编程接口，以便进程间通信(IPC),在安卓中，进程之间存在进程隔离，所以一个进程通常无法访问另一个?
 - [Handler](/Android/Handler) — Handler 用于线程间通信的消息传递机制。Handler其实就是在主线程起一个子线程，子线程运行并生成 Message，Looper 获取Message并传递给Handler，Handler逐个获取子线程中的Message。
 - [Intent发送数据的上限](/Android/Intent发送数据的上限) — Intent携带信息的大小其实是受到Binder的限制（包括Binder的大小和缓存两种限制）。数据以Parcel对象的形式存放在Binder缓存区中。如果数据或返回值比缓存区域大，那么会抛出TransactionTooLargeException异常。
 - [Looper死循环为什么不会导致应用卡死](/Android/Looper死循环为什么不会导致应用卡死) — 导致卡死的是在Ui线程中执行耗时操作导致界面出现掉帧，甚至ANR，Looper.loop()这个操作本身不会导致这个情况。
+- [实践-WorkManager](/Android/实践-WorkerManager)
+- [实践-路径动画](/Android/实践-路径动画)
 - [AlarmManager](/Android/AlarmManager) — AlarmManager 是 Android 中一个用于在特定时间安排应用程序运行的类，可以安排一次性或重复的任务。通常用于设置闹钟、触发后台任务或进行定期更新等场景。
 - [安卓典型日志分析](/Android/logd日志简介及典型案例分析) — 日志接口内容，共分为java层、native层、kernel层等。下面就对每个层级的内容分别进行介绍。
 - [日志详解](/Android/日志详解) — | 日志分类 | 日志说明 | | ------------- | :-----------: | | Log.e | 错误信息：程序崩溃等 | | Log.w | 警告信息 | | Log.i | 一般消息 | | Log.d | 调试信息，打印变量信息 |?
@@ -117,6 +122,7 @@ hideArticleMeta: true
 - [Intent](/Android/Intent) — 即意图，分为显式意图和隐式意图 | 元素名称 | 设置方法|说明与用途| | --------|-------|---------| | Component|setComponent|组件,指定意图的来源与目标| | Action |setAction |动作?
 - [OpenGL-纹理](/Android/OpenGL-纹理) — 我们已经了解到，我们可以为每个顶点添加颜色来增加图形的细节，从而创建出有趣的图像。但是，如果想让图形看起来更真实，我们就必须有足够多的顶点，从而指定足够多的颜色。这将会产生很多额外开销，因为每个模型都会需求更多的顶点，每个顶点又需求一个颜色属性。
 - [Binder](/Android/Binder) — 在Android系统中，Binder 是一种用于进程间通信（Inter-Process Communication，IPC）的机制。应用程序是由Activity、Service、Broadcast Receiver和Content Provider四种类型的组?
+- [实践-手机所有应用](/Android/实践-手机所有应用)
 - [实践-亮度调节](/Android/实践-亮度调节) — 本文档的所有代码均为kotlin
 - [OpenGL ES初步探索](/Android/OpenGL ES初步探索) — 本文中代码均为Kotlin
 - [进程和应用生命周期](/Android/进程和应用生命周期) — 在大多数情况下，每个 Android 应用都在各自的 Linux 进程中运行。当需要运行应用的一些代码时，系统会为应用创建此进程，并使其保持运行，直到不再需要它且系统需要回收其内存以供其他应用使用。

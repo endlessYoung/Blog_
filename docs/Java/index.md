@@ -1,18 +1,35 @@
 ---
 title: Java
 description: Java 学习笔记，涵盖并发、JVM、集合框架与基础语法等主题。
-categories: [Java]
-tags: [java]
-created: 2026-06-24
-noindex: true
+hideArticleMeta: true
 ---
 
-<script setup>
-import { onMounted } from 'vue'
-import { useRouter } from 'vitepress'
+# Java
 
-const router = useRouter()
-onMounted(() => {
-  router.go('/Java/Integer1000与100的比较')
-})
-</script>
+Java 学习笔记，涵盖并发、JVM、集合框架与基础语法等主题。
+
+本分类共 23 篇文章。以下目录可直接打开正文；其他主题见[全部文章目录](/archives.html)。
+
+- [动态代理](/Java/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86.html) — 如果要给eat方法添加吃饭之前要拿筷子和盛饭的动作，一般来说只能在源代码中添加对应的功能。这属于侵入式修改，在成熟的项目中很少会这样修改，因为可能会产生bug。 此时可以利用代理来帮助我们做以上的两个准备工作再去执行原方法，这种方式叫做动态代理，其特点是能够无?
+- [对象初始化流程](/Java/%E5%AF%B9%E8%B1%A1%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B.html) — 从JVM和底层角度来看，Java对象的初始化流程涉及到类加载、内存管理、对象布局、以及字节码执行等多个方面。以下是详细的分析：
+- [反射](/Java/%E5%8F%8D%E5%B0%84.html) — 反射允许对成员变量，成员方法和构造方法的信息进行编程访问。比如：IDEA的方法提示就是利用的反射。 反射获取到的这些信息不是从java文件中获取的，而是从class字节码中获取的。
+- [分代模型的六种垃圾回收器](/Java/%E5%88%86%E4%BB%A3%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%AD%E7%A7%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8.html) — 这是一个单线程的收集器，适用于客户端模式下的默认新生代收集器。
+- [浮动垃圾](/Java/%E6%B5%AE%E5%8A%A8%E5%9E%83%E5%9C%BE.html) — 在JVM（Java虚拟机）的垃圾回收过程中，“浮动垃圾”是指在并发标记或并发清理阶段由用户线程产生的新垃圾。这些垃圾之所以被称为“浮动”，是因为它们是在垃圾回收器进行标记或清理操作的同时，由于应用程序的持续运行而新产生的垃圾。
+- [类之间的关系](/Java/%E7%B1%BB%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.html) — 是一种最明显也是最一般的关系。例如：Order类依赖Account类，因为Order对象需要访问Account对象来查看信用状态。但是Item类不依赖于Account类，因为Item对象不需要考虑客户账户。因此，如果一个类的方法要使用或操作另一个类的对象，我们?
+- [三色标记算法](/Java/%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95.html) — 三色标记算法通过将对象分为三种颜色状态来追踪和管理内存中的对象。这种方法常用于实现高效的垃圾回收机制，尤其是现代的JVM中。三色标记算法的颜色状态包括 白色、黑色和灰色，每种颜色代表了对象的不同生命周期状态。
+- [双亲委派机制](/Java/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6.html) — 双亲委派机制 是Java类加载器（ClassLoader）的核心工作机制，它通过层次化的类加载模型保障了Java程序的稳定性和安全性。
+- [线程池](/Java/%E7%BA%BF%E7%A8%8B%E6%B1%A0.html) — 线程池其实是一种池化技术的实现，池化技术的核心思想其实就是实现资源的可重复利用，让线程在执行完任务不会销毁去继续处理其他的任务，避免资源重复创建和销毁带来的性能开销。还可以提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。。另外，线程池还能起?
+- [线程池核心线程空闲时处于什么状态](/Java/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E7%BA%BF%E7%A8%8B%E7%A9%BA%E9%97%B2%E6%97%B6%E5%A4%84%E4%BA%8E%E4%BB%80%E4%B9%88%E7%8A%B6%E6%80%81.html) — 在线程池中，核心线程在空闲时的状态取决于线程池的配置，尤其是线程池的 keepAliveTime 和相关的线程管理策略。
+- [伊甸园区算法](/Java/%E4%BC%8A%E7%94%B8%E5%9B%AD%E5%8C%BA%E7%AE%97%E6%B3%95.html) — 在JVM的内存管理机制中，"伊甸园区" 是新生代的一部分，主要用于存放新创建的对象。当对象首次被创建时，通常会被放置在伊甸园区内。伊甸园区的垃圾回收主要遵循以下算法：
+- [CAS](/Java/CAS.html) — CAS (Compare And Swap，比较和交换)，是非阻塞同步的实现原理，它是CPU硬件的指令，从CPU层面保证比较与交换两个操作的原子性。 CAS 指令操作包括三个参数：
+- [CompletableFuture](/Java/CompletableFuture.html) — CompletableFuture 是 Java 8 引入的一个类，属于 java.util.concurrent 包，主要用于异步编程和非阻塞操作。它提供了一种更简单和强大的方式来处理异步计算，相较于传统的 Future 类，CompletableFutur?
+- [ForkJoinPool](/Java/ForkJoinPool.html) — 把大任务分成小任务，分而治之；让每个线程都有本地任务队列，空闲线程可以“偷”别的线程的任务来做（Work Stealing）
+- [GC算法](/Java/GC%E7%AE%97%E6%B3%95.html) — 同一段内存上的标记-清除、复制和整理，以及分代、卡表和三色标记。
+- [HashMap的高级用法](/Java/HashMap.html) — 在 HashMap 中，负载因子用于决定何时需要增加 HashMap 的容量。默认的负载因子是 0.75，也就是说，当哈希表的元素数量达到容量的 75% 时，它会自动扩容。
+- [Integer1000与100的比较](/Java/Integer1000%E4%B8%8E100%E7%9A%84%E6%AF%94%E8%BE%83.html) — Integer是int的包装类型。有人可能认为下面两种声明方式是一样的，但是实际上是错误的。
+- [Java如何保证线程T1，T2，T3 顺序执行](/Java/Java%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E7%BA%BF%E7%A8%8BT1%EF%BC%8CT2%EF%BC%8CT3%20%E9%A1%BA%E5%BA%8F%E6%89%A7%E8%A1%8C.html) — Thread.join() 方法会使当前线程等待另一个线程执行完毕后再继续执行。通过在 T1、T2、T3 之间调用 join()，可以确保线程按顺序执行。
+- [JVM](/Java/JVM%E6%A6%82%E8%BF%B0.html) — Java虚拟机（JVM）是Java程序的运行时环境，它抽象了底层硬件和操作系统的差异，使得Java程序可以在不同平台上运行。JVM的“分布”可以理解为JVM在不同操作系统和硬件平台上的实现，以及JVM的结构和各个部分的功能分布。
+- [JVM分区](/Java/JVM%E5%88%86%E5%8C%BA.html) — JVM内存的管理与分区对于理解Java应用程序的性能、垃圾回收（GC）机制以及内存调优非常关键。JVM内存主要分为以下几个区域，每个区域都有特定的用途和管理机制。
+- [String的intern方法](/Java/String%E7%9A%84intern%E6%96%B9%E6%B3%95.html) — String的intern方法用于在运行时将字符串添加到内部的字符串池中，并返回字符串池中的引用
+- [ThreadLocal](/Java/ThreadLocal.html) — ThreadLocal是java提供的一个用于线程本地存储的类。它为每个线程提供独立的变量副本。确保变量再多线程环境下的线程安全。每个线程访问ThreadLocal时，都会有自己专属的变量副本，互不干扰，避免了并发访问时共享变量的竞争问题。
+- [volatile和synchronize的区别](/Java/volatile%E5%92%8Csynchronize%E7%9A%84%E5%8C%BA%E5%88%AB.html) — volatile 和 synchronized 都是 Java 中用于处理多线程编程的关键字，但它们的作用和机制有所不同

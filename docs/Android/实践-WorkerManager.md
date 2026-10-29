@@ -2,7 +2,6 @@
 title: 实践-WorkManager
 categories: [Android]
 tags: [android, WorkerManager]
-noindex: true
 created: 2023-12-13
 ---
 
@@ -11,7 +10,8 @@ created: 2023-12-13
 WorkManager 是 Android 中用于处理后台任务的现代 API。它是 Jetpack 架构组件的一部分，提供了一个灵活、强大且易于使用的方式，用于执行可延迟、可靠和重复的异步任务。
 
 ## MyWorkManager
-``` java
+
+```java
 package com.example.jobservicetest;
 
 import android.content.Context;
@@ -53,7 +53,7 @@ public class MyWorkManager extends Worker {
 
 ## MainActivity
 
-``` java
+```java
 package com.example.jobservicetest;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -114,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
 ```
 
 ## activity_main.xml
-``` xml
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

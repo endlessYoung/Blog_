@@ -337,6 +337,7 @@ onUnmounted(() => {
         <span class="mono block-num">§ D</span>
         <h2>索引</h2>
       </header>
+      <p class="block-desc"><a class="u-link" :href="withBase('/archives.html')">全部文章目录</a> · <a class="u-link" :href="withBase('/tags/')">按标签浏览</a></p>
       <div class="terms">
         <div v-for="group in groups" :key="group.key" class="term-group">
           <h4>{{ group.key }}</h4>

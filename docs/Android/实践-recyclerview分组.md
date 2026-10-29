@@ -2,7 +2,6 @@
 title: 实践-recyclerview分组
 categories: [Android]
 tags: [android, recyclerview]
-noindex: true
 created: 2023-12-26
 ---
 
@@ -10,7 +9,7 @@ created: 2023-12-26
 
 ## 1. 创建数据类
 
-``` java
+```java
 public class Item {
     private String name;
     private String category;
@@ -33,7 +32,7 @@ public class Item {
 
 ## 2.Activity
 
-``` java
+```java
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
 ## 3.Adapter
 
-``` java
+```java
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -179,7 +178,9 @@ public class GroupedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 }
 ```
+
 ## 4.item_header.xml
+
 ```xml
 <!-- item_header.xml -->
 <TextView
@@ -201,7 +202,7 @@ public class GroupedRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
 ## 5.item_layout.xml
 
-``` xml
+```xml
 <!-- item_layout.xml -->
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"

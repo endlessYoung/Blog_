@@ -6,8 +6,11 @@ import { Feed } from 'feed'
 import { stampManualHtml } from '../../scripts/stamp-manual-html.mjs'
 import { scrollyMarkdown } from './theme/manual/scrollyMarkdown'
 
-// ??/??????frontmatter: noindex???? sitemap ???
+// Match source files and sitemap URLs using the same directory-index convention.
 const noindexPages = new Set<string>()
+function pagePath(path: string): string {
+  return path.replace(/^\//, '').replace(/\.(md|html)$/, '.html').replace(/(^|\/)index\.html$/, '$1')
+}
 const createdDates: Record<string, string> = (() => {
   try {
     return JSON.parse(readFileSync(join(__dirname, 'created-dates.json'), 'utf-8'))
@@ -352,9 +355,12 @@ export default defineConfig({
     hostname: 'https://endlessyoung.top/',
     transformItems(items) {
       return items.filter((item) => {
-        const clean = (item.url || '').replace(/^\//, '').replace(/\.html$/, '').replace(/\/index$/, '')
-        return clean !== '404' && !noindexPages.has(clean)
-      })
+        const clean = pagePath(decodeURI(item.url || ''))
+        return clean !== '404.html' && !noindexPages.has(clean)
+      }).map((item) => ({
+        ...item,
+        url: pagePath(item.url).split('/').map(encodeURIComponent).join('/'),
+      }))
     },
   },
   base: '/',
@@ -516,11 +522,11 @@ html:not(.dark) {
     const fm = pageData.frontmatter as Record<string, any> | undefined
     // Collect noindex pages so they can be excluded from sitemap
     const key = ((pageData as any).relativePath || pageData.filePath?.replace(/^.*[\\/]docs[\\/]/, '') || '').replace(/\.md$/, '')
-    if (fm?.noindex && key) noindexPages.add(key)
+    if (fm?.noindex && key) noindexPages.add(pagePath(`${key}.md`))
     // Auto-inject created date from git cache if missing in frontmatter
     if (!fm?.created) {
-      if (key && createdDates[key]) {
-        (pageData.frontmatter as any).created = createdDates[key]
+      if (key && createdDates[`${key}.md`]) {
+        (pageData.frontmatter as any).created = createdDates[`${key}.md`]
       }
     }
   },
@@ -530,22 +536,22 @@ html:not(.dark) {
     const base = '/'
 
     // Build canonical / og:url: strip .md, replace /index.html → /
-    let pagePath = ctx.page.replace(/\.md$/, '.html')
-    if (pagePath === 'index.html' || pagePath.endsWith('/index.html')) pagePath = pagePath.replace(/index\.html$/, '')
-    const url = pagePath ? `${siteUrl}${base}${pagePath}` : `${siteUrl}${base}`
+    const path = pagePath(ctx.page).split('/').map(encodeURIComponent).join('/')
+    const url = `${siteUrl}${base}${path}`
 
     const fm = ctx.pageData.frontmatter as Record<string, any> | undefined
-    // ??/?????????frontmatter: noindex: true?
+    // Exclude drafts from search while allowing crawlers to follow their links.
     if (fm?.noindex) {
       return [
-        ['meta', { name: 'robots', content: 'noindex, nofollow' }],
+        ['meta', { name: 'robots', content: 'noindex, follow' }],
       ]
     }
     const cleanKey = ctx.page.replace(/\.md$/, '')
     const pageDesc = articleDescriptions[cleanKey] || fm?.description || ctx.description || ''
     const ogTitle = fm?.title ? `${fm.title} | Endlessyoung's Blog` : (ctx.title || "Endlessyoung's Blog")
     const ogDescription = pageDesc
-    const ogType = ctx.page === 'index.md' ? 'website' : 'article'
+    const isArticle = ctx.page !== 'index.md' && !ctx.page.startsWith('tags/') && !fm?.hideArticleMeta
+    const ogType = isArticle ? 'article' : 'website'
 
     const tags = Array.isArray(fm.tags) ? (fm.tags as string[]).join(', ') : ''
     const created = fm.created ? String(fm.created) : ''
@@ -575,7 +581,7 @@ html:not(.dark) {
           'query-input': 'required name=search_term_string',
         },
       })])
-    } else if (!ctx.page.startsWith('tags/')) {
+    } else if (isArticle) {
       const articleSchema: Record<string, unknown> = {
         '@context': 'https://schema.org',
         '@type': 'Article',
@@ -667,7 +673,7 @@ html:not(.dark) {
       if (fm.noindex) continue
       const title = String(fm.title || '').trim()
       if (!title) continue
-      const created = String(fm.created || fm.date || createdDates[rel.replace(/\.md$/, '')] || '1970-01-01')
+      const created = String(fm.created || fm.date || createdDates[rel] || '1970-01-01')
       const body = readFileSync(file, 'utf-8').replace(/^---[\s\S]*?---\r?\n?/, '')
       const html = md.render(body)
       const plain = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
