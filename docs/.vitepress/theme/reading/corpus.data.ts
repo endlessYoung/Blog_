@@ -1,11 +1,25 @@
 import { execFileSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { createContentLoader } from 'vitepress'
 
 export interface CorpusPage {
   url: string
   title: string
+  description?: string
   tags: string[]
+  category: string
+  created: string
   updated: string
+}
+
+function loadCreatedDates() {
+  try {
+    const raw = readFileSync(join(process.cwd(), 'docs', '.vitepress', 'created-dates.json'), 'utf8')
+    return JSON.parse(raw) as Record<string, string>
+  } catch {
+    return {}
+  }
 }
 
 function gitDates() {
@@ -39,6 +53,7 @@ function gitDates() {
 }
 
 const dates = gitDates()
+const createdCache = loadCreatedDates()
 
 function fileOf(url: string) {
   let path = url
@@ -51,23 +66,58 @@ function fileOf(url: string) {
   return `docs${path}.md`
 }
 
+function normDate(raw: unknown): string {
+  if (!raw) return ''
+  if (raw instanceof Date && !Number.isNaN(raw.getTime())) {
+    return raw.toISOString().slice(0, 10)
+  }
+  const s = String(raw).trim()
+  const m = s.match(/^(\d{4}-\d{2}-\d{2})/)
+  return m ? m[1] : ''
+}
+
+function categoryOf(url: string, fmCategories: unknown): string {
+  if (Array.isArray(fmCategories) && fmCategories.length > 0 && fmCategories[0]) {
+    return String(fmCategories[0]).trim()
+  }
+  let decoded = url
+  try {
+    decoded = decodeURIComponent(url)
+  } catch {
+    /* keep */
+  }
+  const seg = decoded.replace(/^\//, '').split('/')[0] || ''
+  return seg || '其他'
+}
+
 export default createContentLoader('**/*.md', {
   transform(raw) {
     const pages: CorpusPage[] = []
     for (const page of raw) {
       const url = page.url.replace(/\.html$/, '').replace(/\/$/, '') || '/'
-      if (url.startsWith('/tags') || url === '/404') continue
+      if (url.startsWith('/tags') || url === '/404' || url === '/archives') continue
       if (url === '/getting-started' || url === '/markdown-examples') continue
       if (page.frontmatter.layout === 'home') continue
       if (page.frontmatter.noindex || page.frontmatter.hideArticleMeta) continue
       const tags = Array.isArray(page.frontmatter.tags)
         ? page.frontmatter.tags.map((tag) => String(tag))
         : []
+      const description = typeof page.frontmatter.description === 'string'
+        ? page.frontmatter.description.trim()
+        : ''
+      const docRel = fileOf(url)
+      const cacheKey = docRel.replace(/^docs\//, '')
+      const fmCreated = normDate(page.frontmatter.created || page.frontmatter.date)
+      const created = fmCreated || normDate(createdCache[cacheKey]) || ''
+      const updated = dates.get(docRel) || created
       pages.push({
         url: page.url,
         title: String(page.frontmatter.title || url.split('/').pop() || url),
+        description: description.length > 110 ? `${description.slice(0, 110)}…` : description || undefined,
         tags,
-        updated: dates.get(fileOf(url)) || '',
+        category: categoryOf(url, page.frontmatter.categories),
+        created: created || updated,
+        updated,
       })
     }
     return pages

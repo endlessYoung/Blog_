@@ -12,9 +12,17 @@ export interface ManualChapter {
   articles: ManualArticle[]
 }
 
+export interface ManualCategory {
+  root: string
+  name: string
+  chapters: ManualChapter[]
+  count: number
+}
+
 export interface ManualPart {
   id: string
   name: string
+  categories: ManualCategory[]
   chapters: ManualChapter[]
   count: number
 }
@@ -131,11 +139,15 @@ export function buildManualCatalog(sidebar: unknown): ManualPart[] {
 
   return GROUPS.map((group) => {
     const prefixRoot = group.roots.length > 1
-    const chapters = group.roots.flatMap((root) => {
+    const categories = group.roots.flatMap((root) => {
       const items = map[root.path]
       if (!items) return []
-      return chaptersForRoot(items, root.path, root.label, prefixRoot)
+      const chapters = chaptersForRoot(items, root.path, root.label, prefixRoot)
+      if (!chapters.length) return []
+      const count = chapters.reduce((n, chapter) => n + chapter.articles.length, 0)
+      return [{ root: root.path, name: root.label, chapters, count }]
     })
+    const chapters = categories.flatMap((category) => category.chapters)
     let chapterIndex = 0
     for (const chapter of chapters) {
       chapterIndex += 1
@@ -143,8 +155,8 @@ export function buildManualCatalog(sidebar: unknown): ManualPart[] {
         article.num = `${group.id}.${pad(chapterIndex)}.${pad(i + 1)}`
       })
     }
-    const count = chapters.reduce((n, chapter) => n + chapter.articles.length, 0)
-    return { id: group.id, name: group.name, chapters, count }
+    const count = categories.reduce((n, category) => n + category.count, 0)
+    return { id: group.id, name: group.name, categories, chapters, count }
   }).filter((part) => part.count > 0)
 }
 

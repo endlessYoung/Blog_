@@ -7,8 +7,11 @@ export function useReturnLanding(
   parts: () => ManualPart[],
   storageKey: string,
   returnedEvent: string,
+  previousPath?: () => string | undefined,
 ) {
   const openId = ref<string | null>(null)
+  const categoryRoot = ref<string | null>(null)
+  const returnedPath = ref<string | null>(null)
   const landingPath = ref<string | null>(null)
 
   function readPending() {
@@ -20,14 +23,17 @@ export function useReturnLanding(
     const hit = findManualArticle(parts(), path)
     if (!hit) return false
     openId.value = hit.part.id
-    landingPath.value = sparse ? normPath(hit.article.link) : null
+    categoryRoot.value = hit.chapter.root
+    returnedPath.value = normPath(hit.article.link)
+    landingPath.value = sparse ? returnedPath.value : null
     return true
   }
 
   function prime() {
     if (typeof document === 'undefined') return
-    if (!document.documentElement.classList.contains('vt-back')) return
-    apply(readPending(), true)
+    const sparse = document.documentElement.classList.contains('vt-back')
+    const from = previousPath?.()
+    if (sparse || from) apply(readPending() || from || null, sparse)
   }
 
   prime()
@@ -47,7 +53,7 @@ export function useReturnLanding(
       window.addEventListener(returnedEvent, onReturned, { once: true })
       return
     }
-    if (apply(readPending(), false)) onReturned()
+    if (apply(readPending() || previousPath?.() || null, false)) onReturned()
   })
 
   onUnmounted(() => {
@@ -63,5 +69,5 @@ export function useReturnLanding(
     return !!landingPath.value && normPath(link) !== landingPath.value
   }
 
-  return { openId, landingPath, showArticles, isSpacer }
+  return { openId, categoryRoot, returnedPath, landingPath, showArticles, isSpacer }
 }

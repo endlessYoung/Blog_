@@ -1,13 +1,8 @@
-import { data } from './corpus.data'
+import { data, type CorpusPage } from './corpus.data'
 import { findManualArticle, normPath, type ManualPart } from './catalog'
 import { keepIndexTerm } from './terms'
 
-export interface CorpusPage {
-  url: string
-  title: string
-  tags: string[]
-  updated: string
-}
+export type { CorpusPage } from './corpus.data'
 
 export const corpus = data as CorpusPage[]
 
@@ -17,11 +12,46 @@ export function pageMeta(link: string) {
   return byUrl.get(normPath(link))
 }
 
-export function recentPages(limit = 8) {
+export interface UpdateEntry {
+  page: CorpusPage
+  date: string
+  kind: 'new' | 'updated'
+}
+
+function dayDiff(a: string, b: string) {
+  const ta = Date.parse(`${a}T00:00:00Z`)
+  const tb = Date.parse(`${b}T00:00:00Z`)
+  if (Number.isNaN(ta) || Number.isNaN(tb)) return 0
+  return Math.round((tb - ta) / 86_400_000)
+}
+
+export function recentUpdates(limit = 60): UpdateEntry[] {
   return corpus
-    .filter((page) => page.updated)
-    .sort((a, b) => b.updated.localeCompare(a.updated))
+    .filter((page) => page.updated || page.created)
+    .map((page): UpdateEntry => {
+      const created = page.created || page.updated
+      const updated = page.updated || page.created
+      const date = updated >= created ? updated : created
+      const isNew = !updated || created >= updated || dayDiff(created, updated) <= 2
+      return { page, date, kind: isNew ? 'new' : 'updated' }
+    })
+    .sort((a, b) =>
+      b.date.localeCompare(a.date)
+      || (b.page.created || '').localeCompare(a.page.created || '')
+      || a.page.title.localeCompare(b.page.title, 'zh'),
+    )
     .slice(0, limit)
+}
+
+export function latestUpdateDate(): string {
+  return recentUpdates(1)[0]?.date || ''
+}
+
+export function recentPages(limit = 8) {
+  return recentUpdates(limit).map((entry) => ({
+    ...entry.page,
+    updated: entry.date,
+  }))
 }
 
 export interface TermEntry {

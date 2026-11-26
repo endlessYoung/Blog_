@@ -7,13 +7,15 @@ import { initImageViewer } from '../imageViewer'
 import { initMermaid } from '../mermaid'
 import { bindCatalogTransitions } from '../manual/motion'
 import { applyWorld } from '../reading/world'
+import { normPath } from '../reading/catalog'
+import { hydrateReadUpdates, useRecentWeekUpdates } from '../reading/updates'
 import ManualGrid from '../manual/ManualGrid.vue'
 import ManualTopbar from '../manual/ManualTopbar.vue'
 import ManualHome from '../manual/ManualHome.vue'
 import ManualArticleFrame from '../manual/ManualArticleFrame.vue'
 import ManualPalette from '../manual/ManualPalette.vue'
+import ManualUpdatesPanel from '../manual/ManualUpdatesPanel.vue'
 import ManualPeek from '../manual/ManualPeek.vue'
-import ManualNotFound from '../manual/ManualNotFound.vue'
 import ImageViewer from '../components/ImageViewer.vue'
 // Kitten 404 scene, kept for later; re-enable together with the template line below.
 // import SiteNotFound from '../components/SiteNotFound.vue'
@@ -23,8 +25,21 @@ const router = useRouter()
 const { frontmatter, page, isDark } = useData()
 const palette = ref(false)
 const paletteQuery = ref('')
+const updatesOpen = ref(false)
+const mounted = ref(false)
 const menuOpen = ref(false)
+const previousPath = ref<string>()
 const scrollPositions: Record<string, number> = {}
+
+const { unreadEntries, markRead } = useRecentWeekUpdates()
+const unreadCount = computed(() => (mounted.value ? Math.min(99, unreadEntries.value.length) : 0))
+
+function markCurrentRouteRead(path: string) {
+  if (!mounted.value) return
+  const norm = normPath(path)
+  const hit = unreadEntries.value.find((entry) => normPath(entry.page.url) === norm)
+  if (hit) markRead(hit.page.url, hit.date)
+}
 
 const isHome = computed(() => frontmatter.value.layout === 'home')
 const missing = computed(() => !!page.value.isNotFound || frontmatter.value.pageClass === 'site-not-found')
@@ -71,19 +86,32 @@ function isTyping(target: EventTarget | null) {
 }
 
 function openSearch(query = '') {
+  updatesOpen.value = false
   paletteQuery.value = query
   palette.value = true
+}
+
+function openUpdates() {
+  palette.value = false
+  menuOpen.value = false
+  updatesOpen.value = !updatesOpen.value
 }
 
 function onKey(event: KeyboardEvent) {
   if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
     event.preventDefault()
+    updatesOpen.value = false
     palette.value = !palette.value
     return
   }
-  if (event.key === '/' && !palette.value && !event.ctrlKey && !event.metaKey && !event.altKey && !isTyping(event.target)) {
+  if (event.key === '/' && !palette.value && !updatesOpen.value && !event.ctrlKey && !event.metaKey && !event.altKey && !isTyping(event.target)) {
     event.preventDefault()
     palette.value = true
+    return
+  }
+  if (event.shiftKey && event.key.toLowerCase() === 'u' && !event.ctrlKey && !event.metaKey && !event.altKey && !isTyping(event.target)) {
+    event.preventDefault()
+    openUpdates()
   }
 }
 
@@ -95,6 +123,9 @@ watch(
 
 onMounted(() => {
   applyWorld('manual')
+  hydrateReadUpdates()
+  mounted.value = true
+  markCurrentRouteRead(route.path)
   initImageViewer()
   stopTransitions = bindCatalogTransitions(router)
   window.addEventListener('scroll', onScroll, { passive: true })
@@ -112,9 +143,12 @@ onUnmounted(() => {
   window.removeEventListener('pointerover', onPointerOver)
 })
 
-watch(() => route.path, () => {
+watch(() => route.path, (to, from) => {
+  previousPath.value = from
   menuOpen.value = false
   palette.value = false
+  updatesOpen.value = false
+  markCurrentRouteRead(to)
   nextTick(() => {
     const saved = scrollPositions[route.path]
     window.scrollTo(0, saved !== undefined ? saved : 0)
@@ -128,20 +162,49 @@ watch(() => route.path, () => {
     <ManualGrid />
     <ManualTopbar
       :menu-open="menuOpen"
+      :updates-open="updatesOpen"
+      :unread-count="unreadCount"
       @search="openSearch()"
+      @updates="openUpdates()"
       @toggle-menu="menuOpen = !menuOpen"
       @close-menu="menuOpen = false"
     />
     <main class="ey-main">
       <!-- <SiteNotFound v-if="missing" /> -->
       <ManualNotFound v-if="missing" @search="openSearch" />
-      <ManualHome v-else-if="isHome" />
+      <ManualHome v-else-if="isHome" :previous-path="previousPath" :unread-count="unreadCount" @open-updates="openUpdates()" />
       <ManualArticleFrame v-else />
     </main>
     <Transition name="ey-pal" :duration="{ enter: 420, leave: 180 }">
       <ManualPalette v-if="palette" :initial="paletteQuery" @close="palette = false; paletteQuery = ''" />
     </Transition>
+    <Transition name="ey-upd">
+      <ManualUpdatesPanel v-if="updatesOpen" @close="updatesOpen = false" />
+    </Transition>
     <ManualPeek />
     <ImageViewer />
   </div>
 </template>
+
+<style scoped>
+.ey-upd-enter-active {
+  transition: opacity 260ms var(--man-ease);
+}
+.ey-upd-leave-active {
+  transition: opacity 200ms ease-in;
+}
+.ey-upd-enter-active :deep(.ey-upd-drawer) {
+  transition: transform 380ms var(--man-ease);
+}
+.ey-upd-leave-active :deep(.ey-upd-drawer) {
+  transition: transform 220ms cubic-bezier(.7, 0, .84, 0);
+}
+.ey-upd-enter-from,
+.ey-upd-leave-to {
+  opacity: 0;
+}
+.ey-upd-enter-from :deep(.ey-upd-drawer),
+.ey-upd-leave-to :deep(.ey-upd-drawer) {
+  transform: translateX(100%);
+}
+</style>

@@ -6,9 +6,10 @@ import { prefetchHrefs } from '../reading/prefetch'
 import { readAccent, writeAccent } from './motion'
 import EyLogo from './EyLogo.vue'
 
-const props = defineProps<{ menuOpen: boolean }>()
+const props = defineProps<{ menuOpen: boolean; updatesOpen?: boolean; unreadCount?: number }>()
 const emit = defineEmits<{
   search: []
+  updates: []
   toggleMenu: []
   closeMenu: []
 }>()
@@ -277,6 +278,21 @@ onUnmounted(() => {
           <span>搜索</span><kbd>/</kbd>
         </button>
         <div class="ey-switch">
+          <button
+            type="button"
+            class="ey-switch-updates"
+            :class="{ open: updatesOpen, unread: (unreadCount || 0) > 0 }"
+            aria-label="最近更新"
+            :title="(unreadCount || 0) > 0 ? `最近更新（${unreadCount} 条未读 · Shift + U）` : '最近更新（Shift + U）'"
+            :aria-expanded="!!updatesOpen"
+            @click="emit('updates')"
+          >
+            <svg class="ey-updates-glyph" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="6.25" stroke="currentColor" stroke-width="1.55" />
+              <path d="M8 4.4v3.8l2.5 1.6" stroke="currentColor" stroke-width="1.55" stroke-linecap="square" />
+            </svg>
+            <span v-if="(unreadCount || 0) > 0" class="ey-updates-dot" aria-hidden="true" />
+          </button>
           <button type="button" aria-label="切换强调色" title="切换强调色" @click="toggleAccent">
             <span class="ey-accent-dot" />
           </button>
@@ -331,3 +347,47 @@ onUnmounted(() => {
     </nav>
   </Transition>
 </template>
+<style scoped>
+.ey-switch-updates {
+  position: relative;
+  color: var(--man-fg);
+}
+.ey-switch-updates:hover,
+.ey-switch-updates.open {
+  color: var(--man-fg);
+}
+.ey-switch-updates.open {
+  color: var(--accent);
+}
+.ey-updates-glyph {
+  width: 15px;
+  height: 15px;
+  transition: transform var(--man-snap) var(--man-ease), color var(--man-tick);
+}
+.ey-switch-updates:hover .ey-updates-glyph {
+  transform: rotate(-18deg);
+}
+.ey-updates-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+}
+.ey-updates-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 1px solid var(--accent);
+  animation: ey-upd-pulse 2.2s var(--man-ease) infinite;
+}
+@keyframes ey-upd-pulse {
+  0% { transform: scale(0.7); opacity: 0.9; }
+  70%, 100% { transform: scale(2); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ey-updates-glyph { transition: none; }
+  .ey-updates-dot::after { animation: none; opacity: 0.5; }
+}
+</style>
