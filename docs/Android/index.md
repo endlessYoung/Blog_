@@ -8,7 +8,7 @@ hideArticleMeta: true
 
 Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与 Compose 等主题。
 
-本分类共 129 篇文章。以下目录可直接打开正文；其他主题见[全部文章目录](/archives.html)。
+本分类共 148 篇文章。以下目录可直接打开正文；其他主题见[全部文章目录](/archives.html)。
 
 - [安卓常见的内存泄漏点](/Android/%E5%AE%89%E5%8D%93%E5%B8%B8%E8%A7%81%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%82%B9.html) — 内存泄漏是指在应用程序运行过程中，由于程序错误或设计不佳，导致无用的内存对象无法被系统及时释放，从而造成内存资源的浪费和应用性能下降的现象。内存泄漏会导致应用程序占用大量的内存资源，降低系统性能，增加系统崩溃的风险，严重影响用户体验，甚至导致应用被系统强制关闭?
 - [安卓常见架构](/Android/%E5%AE%89%E5%8D%93%E5%B8%B8%E8%A7%81%E6%9E%B6%E6%9E%84.html) — 在安卓开发中，常见的架构主要有以下几种，每种架构都有其特点、优缺点以及适用场景。以下是它们的详细介绍：
@@ -22,6 +22,7 @@ Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与
 - [获取位置信息](/Android/%E8%8E%B7%E5%8F%96%E4%BD%8D%E7%BD%AE%E4%BF%A1%E6%81%AF.html) — 在安卓中获取位置信息以及后台位置信息通常使用 FusedLocationProviderClient 和 LocationManager。为了在后台获取位置信息，需要结合使用位置服务、WorkManager 或 JobScheduler 等后台任务管理工具来确?
 - [进程保活](/Android/%E8%BF%9B%E7%A8%8B%E4%BF%9D%E6%B4%BB.html) — 它正在用户与之互动的屏幕顶部运行 Activity（其 onResume() 方法已被调用）。 它具有当前正在运行的 BroadcastReceiver（其 BroadcastReceiver.onReceive() 方法正在执行）。 它有一个 Service?
 - [进程和应用生命周期](/Android/%E8%BF%9B%E7%A8%8B%E5%92%8C%E5%BA%94%E7%94%A8%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html) — 在大多数情况下，每个 Android 应用都在各自的 Linux 进程中运行。当需要运行应用的一些代码时，系统会为应用创建此进程，并使其保持运行，直到不再需要它且系统需要回收其内存以供其他应用使用。
+- [冷启动底层剖析：Zygote 孵化、Page Fault 与 Baseline Profile](/Android/%E5%86%B7%E5%90%AF%E5%8A%A8%E5%BA%95%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9AZygote%E5%AD%B5%E5%8C%96%E3%80%81Page%20Fault%E4%B8%8EBaseline%20Profile.html) — 在移动端体验治理中，冷启动速度直接决定了用户对应用性能的第一印象。 不少工程团队在启动优化上投入了大量精力： - 重构 Application.onCreate()，将非核心 SDK 剥离并推迟初始化； - 使用并行任务图将耗时操作拆分至工作线程池；
 - [启动相机的方法](/Android/%E5%90%AF%E5%8A%A8%E7%9B%B8%E6%9C%BA%E7%9A%84%E6%96%B9%E6%B3%95.html) — Camera1 API 是安卓早期的相机接口，尽管它在新版本的 Android 中已被弃用，但它仍然被一些旧设备和应用所使用。
 - [日志详解](/Android/%E6%97%A5%E5%BF%97%E8%AF%A6%E8%A7%A3.html) — | 日志分类 | 日志说明 | | ------------- | :-----------: | | Log.e | 错误信息：程序崩溃等 | | Log.w | 警告信息 | | Log.i | 一般消息 | | Log.d | 调试信息，打印变量信息 |?
 - [如何实现应用重启](/Android/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BA%94%E7%94%A8%E9%87%8D%E5%90%AF.html) — 在一些手游中经常会有资源更新后自动重启应用的功能，这个是怎么实现的呢？
@@ -55,10 +56,13 @@ Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与
 - [AIDL](/Android/AIDL.html) — AIDL全称为 Android Interface Definition Language，中文译为：安卓接口定义语言。可以利用AIDL定义客户端与服务端均认可的编程接口，以便进程间通信(IPC),在安卓中，进程之间存在进程隔离，所以一个进程通常无法访问另一个?
 - [AIDL的关键字](/Android/AIDL%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97.html) — 好的，下面是 AIDL 中所有关键字和概念的完整列表：
 - [AlarmManager](/Android/AlarmManager.html) — AlarmManager 是 Android 中一个用于在特定时间安排应用程序运行的类，可以安排一次性或重复的任务。通常用于设置闹钟、触发后台任务或进行定期更新等场景。
+- [AlarmManager 底层机制与省电约束](/Android/AlarmManager%E5%BA%95%E5%B1%82%E6%9C%BA%E5%88%B6%E4%B8%8E%E7%9C%81%E7%94%B5%E7%BA%A6%E6%9D%9F.html) — 在 Android 应用开发的日常实践中，当开发者需要让应用在未来的某个时间点准时执行特定任务，或者需要在后台保持稳定的周期性动作时，AlarmManager 往往是第一个进入技术选型视野的系统服务。 从 API 声明的表面语义来看，
 - [AMS和WMS的关系](/Android/AMS%E5%92%8CWMS%E7%9A%84%E5%85%B3%E7%B3%BB.html) — AMS（Activity Manager Service）和WMS（Window Manager Service）是Android系统中两个核心的服务组件，它们共同协作以管理应用程序的界面显示和生命周期。AMS 和 WMS 的交互主要通过 Binder 机制实?
 - [AMS剖析](/Android/AMS%E5%89%96%E6%9E%90.html) — 所有的 Android 应用程序都是由 Zygote 进程 fork 而来，在 Zygote 进程中初始化了 Java 运行时，加载了常用的 Java Classes，加载了系统资源等。这些底层基础都会被 Android 应用程序继承。在从 Zygote 中继?
 - [AMS如何启动App进程](/Android/AMS%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8App%E8%BF%9B%E7%A8%8B.html) — Android 系统的 Activity Manager Service（AMS）是一个核心系统服务，负责管理应用程序的生命周期，其中包括启动和管理应用进程。下面是 AMS 如何启动应用进程的简要过程：
+- [Android Doze 与应用待机机制](/Android/Android%20Doze%E4%B8%8E%E5%BA%94%E7%94%A8%E5%BE%85%E6%9C%BA%E6%9C%BA%E5%88%B6.html) — 真机连着 USB 调试时，网络请求通畅，Alarm 定时器准点触发，WorkManager 也能按计划调度。但一旦拔掉数据线、熄屏放上大半个小时，后台的数据同步往往就会停掉，长连接断开，即时通知也收不到了。直到再次按电源键点亮屏幕，刚才堆积的任务和消息才会在短时间内扎堆弹出来。
 - [Android ip 命令详解](/Android/Android%20ip%20%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3.html) — ip 命令用于管理 Android 设备的网络接口、IP 地址、路由等网络配置。Android 使用 toybox 或 busybox 实现 ip 命令，并且可能缺少部分 GNU/Linux 发行版中的功能。
+- [Android lmkd 与 PSI 水位决策机制](/Android/Android%20lmkd%E4%B8%8EPSI%E6%B0%B4%E4%BD%8D%E5%86%B3%E7%AD%96%E6%9C%BA%E5%88%B6.html) — 在日常使用 Android 手机或开发大型 App 时，几乎所有人都遭遇过这种令人匪夷所思的体验： “手机明明配备了 8GB 甚至 12GB 的超大运存，前台只开了一个相机或大型游戏，切回微信或后台应用仅仅过了两分钟，应用居然直接被系统杀掉重新冷启动了。” 面对这一现象，
 - [Android.mk](/Android/Android.mk.html) — Android.mk 是Android 提供的一种makefile 文件,注意用来编译生成（exe，so，a，jar，apk）等文件。
 - [Android简介](/Android/Android%E7%AE%80%E4%BB%8B.html) — Android是一种基于Linux内核的综合操作系统，即包括各类底层驱动的开发，也包括使用java语言编写，但运行在Dalvik VM（非 Java 虚拟机，Android 4.4 以后运行在ART上）中编译和执行。
 - [Android进程和线程](/Android/Android%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B.html) — 进程是程序的一个运行实例，以区别于“程序”这一静态的概念；而线程则是CPU调度的基本单位。当前大部分的操作系统都支持多任务运行，这一特性让用户感到计算机好像可以是同时处理很多事情。在只有一个CPU核心的情况下，这种“同时”是一种假象。它是操作系统可以采用分时的?
@@ -67,16 +71,23 @@ Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与
 - [Android一个APP里面最少有几个线程](/Android/Android%E4%B8%80%E4%B8%AAAPP%E9%87%8C%E9%9D%A2%E6%9C%80%E5%B0%91%E6%9C%89%E5%87%A0%E4%B8%AA%E7%BA%BF%E7%A8%8B.html) — Android一个进程里面最少包含5个线程，分别为：
 - [Android与Service通信](/Android/Android%E4%B8%8EService%E9%80%9A%E4%BF%A1.html) — 这是最简单和常见的一种方式，适用于需要一次性操作或简单的后台任务。
 - [AndroidTest编译Provider冲突问题](/Android/AndroidTest%E7%BC%96%E8%AF%91Provider%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98.html) — 安装AndroidTest的apk时报错信息：
+- [ANR 底层剖析：Input 超时、同步屏障泄漏与优先级反转](/Android/ANR%E5%BA%95%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9AInput%E8%B6%85%E6%97%B6%E3%80%81%E5%90%8C%E6%AD%A5%E5%B1%8F%E9%9A%9C%E6%B3%84%E6%BC%8F%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC.html) — 在 Android 移动端稳定性治理中，ANR（Application Not Responding，应用无响应）是仅次于 Crash 的核心指标。它直接关联到 Google Play 的坏账率考核与国内各大应用商店的体验分级评定。 在日常排查中，
 - [ANR问题简析](/Android/ANR%E9%97%AE%E9%A2%98%E7%AE%80%E6%9E%90.html) — ANR问题，相信是每位开发日常都会遇到的问题，对于这类问题的分析，按照官方的推荐，或网络博客的总结思路能解决一定的问题，但是多数时候大家的困惑就是应用本逻辑很简单，耗时很短或应用堆栈完全正常，或者或处于空闲状态，可系统为什么就认为接收者发生ANR了呢？下面将之?
 - [AOSP架构](/Android/AOSP%E6%9E%B6%E6%9E%84.html) — AOSP 的软件堆栈包含以下层：
 - [APK打包流程](/Android/APK%E6%89%93%E5%8C%85%E6%B5%81%E7%A8%8B.html) — APK文件大致分为两个部分：代码 和 资源，所以打包也就分为这两个部分。 简要流程：
 - [App卡顿优化](/Android/App%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96.html) — LayoutInflater加载xml布局的过程会在主线程使用IO读取xml布局文件进行xml解析，再根据解析结果利用反射创建布局中的View/ViewGroup对象。 可以用AsyncLayoutInflater异步加载。
 - [Application为什么不能作为Dialog的context](/Android/Application%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BADialog%E7%9A%84context.html) — Dialog的context只能是Activity，而不能是Application，不然会导致弹窗崩溃：
+- [ART 并发复制 GC、CMC 机制与线程安全点停顿](/Android/ART%E5%B9%B6%E5%8F%91%E5%A4%8D%E5%88%B6GC%E3%80%81CMC%E6%9C%BA%E5%88%B6%E4%B8%8E%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%82%B9%E5%81%9C%E9%A1%BF.html) — 在 Android 现代移动端应用的高性能演进过程中，流畅度治理始终是各工程团队的核心关注点。当我们翻开系统监控日志或在线 APM 告警，常能看到类似这样的反常现象： 界面在列表滑动或动画展开时出现了肉眼可见的顿挫与跳帧，系统丢帧指标亮起红灯。然而开发者检索日志，
+- [ART Monitor 锁膨胀、Linux Futex 挂起与优先级反转](/Android/ART%20Monitor%E9%94%81%E8%86%A8%E8%83%80%E3%80%81Linux%20Futex%E6%8C%82%E8%B5%B7%E4%B8%8E%E4%BC%98%E5%85%88%E7%BA%A7%E5%8F%8D%E8%BD%AC.html) — 在 Android 移动端性能工程与流畅度治理的实践中，多线程并发安全与界面响应性能常常处于微妙的博弈之中。为了防止共享状态在并发读写时出现数据错乱，工程师最直接、最熟悉的防护手段就是使用互斥锁——无论是在 Java 中给方法或代码块加上 synchronized，
 - [AssestManager](/Android/AssestManager.html) — AssetManager 是 Android 中用于访问应用程序资源（如文本文件、图片、音频文件等）的类。它提供了对应用内部资源的访问接口，通常用于读取和管理应用内的原始资源文件。
 - [AsyncTask](/Android/AsyncTask.html) — AsyncTask 是 Android 开发中用于执行后台操作并在完成后更新 UI 的一种便捷工具。尽管 AsyncTask 曾经是 Android 开发中的重要组成部分，但它在 Android 11 (API Level 30) 中已被弃用。推荐使用其他方式?
 - [Binder](/Android/Binder.html) — 在Android系统中，Binder 是一种用于进程间通信（Inter-Process Communication，IPC）的机制。应用程序是由Activity、Service、Broadcast Receiver和Content Provider四种类型的组?
+- [Binder 内核映射与 1MB 内存限制真相](/Android/Binder%E5%86%85%E6%A0%B8%E6%98%A0%E5%B0%84%E4%B8%8E1MB%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6%E7%9C%9F%E7%9B%B8.html) — 在 Android 开发与线上稳定性治理中，几乎每一位资深工程师都遭遇过这样一个经典的系统级异常：android.os.TransactionTooLargeException。 面对这个异常，业界流传着一句几乎人尽皆知的八股文定论：“Binder 跨进程调用的传输限制是 1MB，
+- [Binder 异步事务队列积压与 oneway 回压机制](/Android/Binder%E5%BC%82%E6%AD%A5%E4%BA%8B%E5%8A%A1%E9%98%9F%E5%88%97%E7%A7%AF%E5%8E%8B%E4%B8%8Eoneway%E5%9B%9E%E5%8E%8B%E6%9C%BA%E5%88%B6.html) — 在 Android 系统的多进程架构与组件化工程实践中，进程间通信（IPC）是维系系统服务运转与跨进程业务协同的核心纽带。为了避免跨进程调用阻塞调用方的前台线程，Android 接口定义语言（AIDL）提供了一个极具诱惑力的关键字：oneway。 在很多开发者的直觉模型中，
 - [BottomNavigationView](/Android/BottomNavigationView.html) — BottomNavigationView 是 Android 提供的用于底部导航栏的 UI 组件，通常用于在应用中快速切换主要功能模块或页面。它提供了一种简单而直观的方式来导航到不同的目标界面。让我们深入了解 BottomNavigationView 的属性、?
 - [BroadcastReceiver](/Android/BroadcastReceiver.html) — BroadcastReceiver（广播接收器）是Android应用程序的一个关键组件，用于接收系统广播消息或应用程序内部广播，并在接收到广播时采取适当的操作。广播是一种轻量级的通信机制，用于在应用程序组件之间或系统组件之间传递消息。
+- [BufferQueue 跨进程状态机、SurfaceFlinger 合成节拍与 HWC 硬件直通](/Android/BufferQueue%E8%B7%A8%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E6%9C%BA%E3%80%81SurfaceFlinger%E5%90%88%E6%88%90%E8%8A%82%E6%8B%8D%E4%B8%8EHWC%E7%A1%AC%E4%BB%B6%E7%9B%B4%E9%80%9A.html) — 在 Android 移动应用性能优化的漫长探索中，“掉帧”与“卡顿”始终是直接冲击用户核心体验的高频痛点。为了攻克这一难题，工程团队往往会在 UI 主线程与渲染管线上倾注大量心力：重构复杂布局、消除嵌套层级、优化列表 ViewHolder 的绑定逻辑，并将密集的业务计算彻底从主线程剥离。
+- [Choreographer、VSYNC 偏移与三重缓冲机制](/Android/Choreographer%E3%80%81VSYNC%E5%81%8F%E7%A7%BB%E4%B8%8E%E4%B8%89%E9%87%8D%E7%BC%93%E5%86%B2%E6%9C%BA%E5%88%B6.html) — 在 Android 设备中，90Hz、120Hz 甚至 144Hz 的高刷新率屏幕已广泛普及。 但在实际开发与性能治理中，经常会遇到一个现象： 在 120Hz 模式下，页面滑动依然偶发卡顿；抓取系统 Trace 发现，某些帧的主线程耗时仅 6ms（低于 8.33ms 预算），
 - [Compose布局系统与 Modifier](/Android/Compose/Compose%E5%B8%83%E5%B1%80%E7%B3%BB%E7%BB%9F%20%26%20Modifier.html) — 文档级 · 教学级 · 指南级
 - [Compose的gradle配置](/Android/Compose/Compose%E7%9A%84gradle%E9%85%8D%E7%BD%AE.html) — Jetpack Compose 是一个用于构建原生 Android UI 的现代工具包。它使用声明式函数来构建UI组件，不需要我们使用任何xml布局。
 - [ContentProvider](/Android/ContentProvider.html) — ContentProvider（内容提供器）是Android应用程序的一个核心组件，用于管理和提供应用程序数据，以便其他应用程序可以访问和共享这些数据。ContentProvider允许应用程序将数据存储在共享数据库中，并提供标准接口，以便其他应用程序可以执行?
@@ -85,6 +96,7 @@ Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与
 - [DataStore](/Android/DataStore.html) — Jetpack DataStore是一种数据存储方案，可以使用 protocolBuffer 存储 键值对 或者 数据对象。其使用Kotlin 协程和 Flow，以 异步 和 事务一致性 的方式存储数据。推荐从SharedPreference迁移到DataSt?
 - [DecorView](/Android/DecorView.html) — AMS管理着Activity生命周期，每当切换Activity状态时通过Binder告诉ActivityThread，ActivityThread通过Handler切换到主线程(UI线程）执行，最终分别调用到我们熟知的onCreate(xx)/onResume?
 - [dumpsys](/Android/dumpsys.html) — dumpsys是Android提供的系统工具，可以用来查看所有系统服务的信息。 在命令行输入如下命令，就可以罗列出当前所有的系统服务名：
+- [EAS 能效调度、CPUFreq 调频延迟与 Task Cgroup 核迁移](/Android/EAS%E8%83%BD%E6%95%88%E8%B0%83%E5%BA%A6%E3%80%81CPUFreq%E8%B0%83%E9%A2%91%E5%BB%B6%E8%BF%9F%E4%B8%8ETask%20Cgroup%E6%A0%B8%E8%BF%81%E7%A7%BB.html) — 在 Android 性能调优与卡顿治理的深度实践中，许多资深工程师都曾面对过一组极具迷惑性的监控数据： 当线上用户或线下自动化测试频繁上报滑动卡顿、丢帧告警时，我们调取设备全局状态与 APM 指标，往往会发现系统呈现出一种“看似极度闲暇”的假象： - 全局 CPU 使用率仅在 20% 到 30% 之
 - [EventLog日志](/Android/EventLog%E6%97%A5%E5%BF%97.html) — | Num | TagName | 格式 | 功能 | |-------|-------------------------------|-------------------------------------------------------------?
 - [Fragment](/Android/Fragment.html)
 - [Fragment几种不同的commit方法](/Android/Fragment%E5%87%A0%E7%A7%8D%E4%B8%8D%E5%90%8C%E7%9A%84commit%E6%96%B9%E6%B3%95.html) — FragmentTransaction 是用于在 Android 应用中执行 Fragment 操作的类，如添加、替换、移除等
@@ -94,6 +106,7 @@ Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与
 - [Handler](/Android/Handler.html) — Handler 用于线程间通信的消息传递机制。Handler其实就是在主线程起一个子线程，子线程运行并生成 Message，Looper 获取Message并传递给Handler，Handler逐个获取子线程中的Message。
 - [Handler、MessageQueue和Looper](/Android/Handler%E3%80%81MessageQueue%E5%92%8CLooper.html) — Looper不断获取MessageQueue中的一个Message，然后交给Handler来处理。
 - [Handler.postDelayed()消息时间准确吗](</Android/Handler.postDelayed()%E6%B6%88%E6%81%AF%E6%97%B6%E9%97%B4%E5%87%86%E7%A1%AE%E5%90%97.html>) — Handler.postDelayed() 方法用于在延迟一定时间后执行一个任务，它是 Android 中常用的延时执行操作的方式。尽管这种方法在许多场景中非常实用，但它的时间准确性和可靠性可能会受到多种因素的影响。
+- [InputReader 内核采集、SocketPair 与 MotionEvent 重采样](/Android/InputReader%E5%86%85%E6%A0%B8%E9%87%87%E9%9B%86%E3%80%81SocketPair%E4%B8%8EMotionEvent%E9%87%8D%E9%87%87%E6%A0%B7.html) — 在 Android 移动设备的硬件演进历程中，“触控采样率”与“屏幕刷新率”始终是衡量终端交互体验最为直观的性能指标。从早期的 60Hz 屏幕搭配 120Hz 触控采样，到当今旗舰机型普及的 120Hz 高刷屏与 240Hz、360Hz 乃至 480Hz 的超高频触控芯片，
 - [Intent](/Android/Intent.html) — 即意图，分为显式意图和隐式意图 | 元素名称 | 设置方法|说明与用途| | --------|-------|---------| | Component|setComponent|组件,指定意图的来源与目标| | Action |setAction |动作?
 - [Intent发送数据的上限](/Android/Intent%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%8A%E9%99%90.html) — Intent携带信息的大小其实是受到Binder的限制（包括Binder的大小和缓存两种限制）。数据以Parcel对象的形式存放在Binder缓存区中。如果数据或返回值比缓存区域大，那么会抛出TransactionTooLargeException异常。
 - [invalidate会触发其他View的重绘吗？](/Android/invalidate%E4%BC%9A%E8%A7%A6%E5%8F%91%E5%85%B6%E4%BB%96View%E7%9A%84%E9%87%8D%E7%BB%98%E5%90%97%EF%BC%9F.html) — 在Android中，调用某个View的invalidate()方法并不会直接触发其他View的重绘。invalidate()的作用是标记当前View为“脏”状态，意味着这个View需要重新绘制。系统随后会在合适的时机（通常是UI线程的下一个绘制周期）调用该Vi?
@@ -101,21 +114,26 @@ Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与
 - [JobScheduler](/Android/JobScheduler.html) — JobScheduler 是 Android 5.0（API 21）引入的系统级后台任务调度 API，旨在帮助开发者以低功耗、系统友好的方式执行后台任务。它提供条件触发、持久化、系统统一调度等机制，是 Google 在 Doze 模式、App Standby?
 - [JobService](/Android/Jobservice.html) — JobService 是一个安卓系统组件，继承自Sevice（实际为系统托管的特殊服务），用于在满足任务条件时由系统唤醒并运行。是 JobScheduler 派发任务时调用的组件，用于执行具体的后台逻辑。
 - [LeakCanary原理分析](/Android/LeakCanary%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90.html) — | 模块 | 核心组件/类 | 功能关联 | | ------------ | ------------------------------ | -------------------- | | 监控模块 | ActivityDestroyWatcher |?
+- [Linux Kswapd 水位线、ZRAM 压缩惩罚与 Direct Reclaim 停顿](/Android/Linux%20Kswapd%E6%B0%B4%E4%BD%8D%E7%BA%BF%E3%80%81ZRAM%E5%8E%8B%E7%BC%A9%E6%83%A9%E7%BD%9A%E4%B8%8EDirect%20Reclaim%E5%81%9C%E9%A1%BF.html) — 在 Android 应用的性能工程与高刷体验治理中，流畅度永远是技术团队最为看重的核心指标之一。在很多工程师的直觉模型中，内存与卡顿之间的因果链条通常非常单一： “只要应用没有发生剧烈的 Java 堆内存泄漏，内存占用没有触碰系统设定的单进程上限，
 - [LiveData](/Android/LiveData.html) — LiveData 是一个持有可观察数据的类，它可以感知组件的生命周期（如 Activity 和 Fragment）。LiveData 能自动管理观察者（即观察数据变化的对象），并确保数据只在可见的 UI 组件上更新，避免内存泄漏。
 - [Looper死循环为什么不会导致应用卡死](/Android/Looper%E6%AD%BB%E5%BE%AA%E7%8E%AF%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E4%BC%9A%E5%AF%BC%E8%87%B4%E5%BA%94%E7%94%A8%E5%8D%A1%E6%AD%BB.html) — 导致卡死的是在Ui线程中执行耗时操作导致界面出现掉帧，甚至ANR，Looper.loop()这个操作本身不会导致这个情况。
 - [Manifest详解](/Android/Manifest%E8%AF%A6%E8%A7%A3.html) — 在 Android 应用程序开发中，AndroidManifest.xml 是一个非常重要的文件，它描述了应用的基本信息、组件、权限等。
 - [MediaPlayer](/Android/MediaPlayer.html) — Idle 状态： 当使用new()方法创建一个MediaPlayer对象或者调用了其reset()方法时，该MediaPlayer对象处于idle状态。这两种方法的一个重要差别就是：如果在这个状态下调用了getDuration()等方法（相当于调用时机不正确）?
 - [Notification从发送到显示的流程简析](/Android/Notification%E4%BB%8E%E5%8F%91%E9%80%81%E5%88%B0%E6%98%BE%E7%A4%BA%E7%9A%84%E6%B5%81%E7%A8%8B%E7%AE%80%E6%9E%90.html) — Notificatio主要由三部分组成：发送/更新/取消通知的应用app、系统通知服务、NotificationManagerService 和 通知监听器 NotificationListenerService。应用可以调用 NotificationMana?
 - [onResume中获取宽高有效吗？](/Android/onResume%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%AE%BD%E9%AB%98%E6%9C%89%E6%95%88%E5%90%97%EF%BC%9F.html) — View 的测绘绘制流程就是从 ViewRootImpl#performTraversals() 开始的，而这个方法的调用是在 onResume() 方法之后，所以在 onCreate() 和 onResume() 方法中拿不到 View 的测量值。
+- [OOM 底层剖析：虚拟内存耗尽、pthread 创建失败与 Native 内存黑洞](/Android/OOM%E5%BA%95%E5%B1%82%E5%89%96%E6%9E%90%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E8%80%97%E5%B0%BD%E3%80%81pthread%E5%88%9B%E5%BB%BA%E5%A4%B1%E8%B4%A5%E4%B8%8ENative%E5%86%85%E5%AD%98%E9%BB%91%E6%B4%9E.html) — 在 Android 移动端稳定性与性能治理中，OOM（OutOfMemoryError）一直位列线上疑难崩溃的前茅。无论是大厂核心业务的 APM 平台，还是中小团队的崩溃监控后台，OOM 崩溃往往因为现场缺乏清晰的业务堆栈、破坏范围广而成为排查的痛点。 在日常排查中，
 - [OpenGL ES初步探索](/Android/OpenGL%20ES%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2.html) — 本文中代码均为Kotlin
 - [OpenGL-纹理](/Android/OpenGL-%E7%BA%B9%E7%90%86.html) — 我们已经了解到，我们可以为每个顶点添加颜色来增加图形的细节，从而创建出有趣的图像。但是，如果想让图形看起来更真实，我们就必须有足够多的顶点，从而指定足够多的颜色。这将会产生很多额外开销，因为每个模型都会需求更多的顶点，每个顶点又需求一个颜色属性。
+- [Page Cache 脏页回压、文件系统日志提交与 fsync 级联阻塞](/Android/Page%20Cache%E8%84%8F%E9%A1%B5%E5%9B%9E%E5%8E%8B%E3%80%81%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97%E6%8F%90%E4%BA%A4%E4%B8%8Efsync%E7%BA%A7%E8%81%94%E9%98%BB%E5%A1%9E.html) — 在 Android 移动端性能工程与流畅度治理的实践中，“把耗时操作移入子线程”一直被很多工程师奉为规避界面卡顿的金科玉律。面对磁盘文件读写、数据库持久化或键值存储更新，开发者的第一反应往往是在协程中切换到 Dispatchers.IO，或者向专属的后台线程池提交任务。 然而，
 - [Parcelable 和 Bundle](/Android/Parcelable%E5%92%8CBundle.html) — Parcelable 和 Bundle 对象可跨进程边界使用，例如与 IPC/Binder 事务之间，带有 intent 的 Activity 之间等，还可以用来存储跨配置更改的瞬时状态。本页介绍了使用 Parcelable 和 Bundle 对象的建议和最佳?
 - [PhoneWindow](/Android/PhoneWindow.html) — Activity和Dialog在显示过程中都创建了PhoneWindow对象，而PopupWindow和Toast却没有。
 - [RecyclerView和ListView区别](/Android/RecyclerView%E5%92%8CListView%E5%8C%BA%E5%88%AB.html) — ListView 需要自定义ViewHolder,判断convertView是否为null，setTag()与getTag()的使用;RecyclerView有规定好的ViewHolder。 ListView 只支持垂直方向的，而RecyclerView，它里?
 - [RecyclerView四级缓存](/Android/RecyclerView%E5%9B%9B%E7%BA%A7%E7%BC%93%E5%AD%98.html) — Recycler 按 Scrap、CachedViews、ViewCacheExtension、RecycledViewPool 四级取 ViewHolder。CachedViews 默认 2 格，池里每种 viewType 默认 5 格。Scrap 不限，Extension 默认是 0。
 - [RecyclerView性能优化](/Android/RecyclerView%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html) — RecyclerView 主要有三层缓存
 - [RecyclerView知识点汇总](/Android/RecyclerView%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB.html) — RecyclerView.Adapter - 处理数据集合并负责绑定视图 ViewHolder - 持有所有的用于绑定数据或者需要操作的View LayoutManager - 负责摆放屎图等相关操作 ItemDecoration - 负责绘制item的分割线?
+- [RenderThread 硬件加速、Shader 编译停顿与 GPU Fence 回压](/Android/RenderThread%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F%E3%80%81Shader%E7%BC%96%E8%AF%91%E5%81%9C%E9%A1%BF%E4%B8%8EGPU%20Fence%E5%9B%9E%E5%8E%8B.html) — 在 Android 性能调优与掉帧治理的实战中，许多开发者都经历过这样一种困惑： 在线上 APM 监控或线下自动化测试中，系统频繁报告界面掉帧（Janky Frame）。我们使用 Perfetto 或 Systrace 打开卡顿现场，查看主线程的执行轨迹，
 - [Retrofit](/Android/Retrofit.html) — Retrofit 是一个类型安全的 HTTP 客户端，主要用于与 RESTful API 进行交互，简化了网络请求的流程。
+- [SavedStateRegistry 与进程重建状态恢复机制](/Android/SavedStateRegistry%E4%B8%8E%E8%BF%9B%E7%A8%8B%E9%87%8D%E5%BB%BA%E7%8A%B6%E6%80%81%E6%81%A2%E5%A4%8D%E6%9C%BA%E5%88%B6.html) — 在日常 Android 业务开发中，很多工程师都有过这样的经历：订单填写页或搜索筛选页明明已经用上了 Jetpack ViewModel，在本地测试旋转屏幕、切换深浅色模式时，界面上的状态都能稳稳保留，没有任何异常。 可一旦应用上线，
 - [Service](/Android/Service.html) — Service（服务）是Android应用程序的一个核心组件，它是一种后台运行的组件，用于执行长时间运行的任务，而不需要用户界面。Service通常用于处理与用户界面无关的操作，如下载文件、播放音乐、处理网络请求等。Service可以在应用程序的生命周期内独立?
 - [Service的启动方式和区别](/Android/Service%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F%E5%92%8C%E5%8C%BA%E5%88%AB.html) — （1）Started Service被开启的service通过其他组件调用startService()被创建，这种service可以无限地运行下去，必须调用stopSelf()方法或者其他组件调用stopService()方法来停止它，当service被停止时?
 - [Service生命周期](/Android/Service%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html) — （1）service整体的生命时间是从onCreate()被调用开始，到onDestroy()方法返回为止。和activity一样，service在onCreate()中进行它的初始化工作，在onDestroy()中释放残留的资源比如，一个音乐播放servic?
@@ -124,6 +142,7 @@ Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与
 - [SharedPreference](/Android/SharedPreference.html) — SharedPreferences是Android的一个接口类，是Android 数据存储（保存内部）的一种方法。主要以*.xml的形式保存在Android /data/data/com.*包名/shared_prefs下，SharedPreferences?
 - [Skia：全面解读](/Android/Skia.html) — Skia是一个高性能的2D图形库，被广泛用于各种操作系统和设备，包括Android、Chrome、Flutter、Firefox等。它提供了强大的绘图能力和跨平台支持，成为许多图形应用的核心组件。
 - [SparseArray](/Android/SparseArray.html) — Android提供了SparseArray，这也是一种KV形式的数据结构，提供了类似于Map的功能。但是实现方法却和HashMap不一样。它与Map相比，可以说是各有千秋。
+- [SQLite WAL 索引共享内存、Checkpoint 锁竞争与 fsync 挂起](/Android/SQLite%20WAL%E7%B4%A2%E5%BC%95%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E3%80%81Checkpoint%E9%94%81%E7%AB%9E%E4%BA%89%E4%B8%8Efsync%E6%8C%82%E8%B5%B7.html) — 在 Android 应用的架构设计与持久化存储治理中，SQLite 始终扮演着最为核心的本地基础设施角色。伴随着 Jetpack Room 的普及以及现代移动架构对响应式数据流（如 Flow、Paging3）的深度依赖，数据库访问已经从过去的“偶发读写”演化为高频并发的“实时数据总线”。
 - [StartActivity之后发生了什么](/Android/StartActivity%E4%B9%8B%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88.html) — 由于Android系统是基于Linux的，原则上说它的应用程序并不只是APK这一种类型，换句话说，所有Linux支持的应用程序都可以通过一定方式运行在Android系统上（比如一些系统级的应用程序）
 - [Surface 和 SurfaceHolder](/Android/Surface%E5%92%8CSurfaceHolder.html) — Surface 对象使应用能够渲染要在屏幕上显示的图像。通过 SurfaceHolder 接口，应用可以编辑和控制 Surface。Surface 通过 BufferQueue 机制在生产者和消费者之间传递图像缓冲区。生产者可以是CPU绘图程序（如Canvas?
 - [SystemServer进程的意义](/Android/SystemServer%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%84%8F%E4%B9%89.html) — 系统服务的集中管理者：SystemServer是Android框架层众多核心服务的宿主，这些服务包括但不限于Activity Manager (AMS)、Package Manager (PMS)、Window Manager (WMS)、Power Mana?

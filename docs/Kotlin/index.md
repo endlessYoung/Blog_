@@ -8,9 +8,10 @@ hideArticleMeta: true
 
 Kotlin 学习笔记，涵盖语法、协程、Flow 与实战应用等主题。
 
-本分类共 29 篇文章。以下目录可直接打开正文；其他主题见[全部文章目录](/archives.html)。
+本分类共 30 篇文章。以下目录可直接打开正文；其他主题见[全部文章目录](/archives.html)。
 
 - [操作符重载](/Kotlin/%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD.html) — 在Kotlin中，操作符重载（Operator Overloading）允许你为类定义或修改运算符的行为。通过定义特定的函数，你可以自定义一些常见的运算符（如 +, -, *, / 等）的行为。Kotlin使用operator关键字来标记这些函数，以表明它们是?
+- [拆解 CoroutineScheduler：少量 CPU 线程如何支撑十万协程](/Kotlin/CoroutineScheduler%E5%BA%95%E5%B1%82%E7%BC%96%E6%8E%92.html) — 很多人在初学 Kotlin 协程时，都听过这样一句宣传语：“协程是轻量级线程，一台设备能轻松并发运行数十万个协程。” 然而只要稍加探究源码，就会发现一个令人困惑的矛盾事实： 在 Dispatchers.Default 调度器底层，线程池的线程数其实默认就等于设备的 CPU 核心数。
 - [初始化数组](/Kotlin/%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E7%BB%84.html)
 - [泛型](/Kotlin/%E6%B3%9B%E5%9E%8B.html) — Kotlin 的泛型（Generics）提供了一种方式，使类型参数化，允许编写更加通用和可重用的代码。 泛型在 Kotlin 中的使用和 Java 类似，但也有一些独特的特性和改进。下面是对 Kotlin 泛型的详细介绍，包括泛型类、泛型函数、型变（协变与逆变?
 - [范围表达式](/Kotlin/%E8%8C%83%E5%9B%B4%E8%A1%A8%E8%BE%BE%E5%BC%8F.html) — Kotlin 的范围表达式（Range Expressions）用于表示一个区间，可以用于检查某个值是否在某个范围内、遍历该范围内的所有值、生成序列等操作。范围表达式主要通过 .. 运算符创建，并且支持多种类型，包括整数、字符等。

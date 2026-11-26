@@ -1,14 +1,15 @@
 ---
 title: 标签：kotlin
-description: 与「kotlin」相关的文章共 30 篇
+description: 与「kotlin」相关的文章共 31 篇
 hideArticleMeta: true
 ---
 
 # 标签：kotlin
 
-共 **30** 篇文章：
+共 **31** 篇文章：
 
 - [从重复请求到SingleFlight](/Android/从重复请求到SingleFlight) — 用一个可操作的 Feed 实验室说明，为什么相同的刷新会叠在一起，SingleFlight 合并的是进行中的任务，以及 Room Flow 为什么只负责把数据库的变化交给 UI。
+- [拆解 CoroutineScheduler：少量 CPU 线程如何支撑十万协程](/Kotlin/CoroutineScheduler底层编排) — 很多人在初学 Kotlin 协程时，都听过这样一句宣传语：“协程是轻量级线程，一台设备能轻松并发运行数十万个协程。” 然而只要稍加探究源码，就会发现一个令人困惑的矛盾事实： 在 Dispatchers.Default 调度器底层，线程池的线程数其实默认就等于设备的 CPU 核心数。
 - [协程上下文](/Kotlin/协程上下文) — CoroutineContext 是一个协程的运行环境容器，决定协程的生命周期、运行线程、错误处理机制等核心行为。它由若干个元素组成。
 - [Channel](/Kotlin/Channel) — Channel 是一种热流（Hot Stream） 的通信机制，类似于Go语言中的channel。它允许协程之间进行数据传递和同步。Channel可以被多个生产者和消费者共享，支持双向通信。
 - [高并发场景下的协程调度与调优](/Kotlin/高并发场景下的协程调度与调优) — | 特性 | withContext() | launch() | |:--------------:|:-----------------------------:|:----------------------------------:| | 是否为挂起函?

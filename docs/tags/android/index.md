@@ -1,16 +1,35 @@
 ---
 title: 标签：android
-description: 与「android」相关的文章共 128 篇
+description: 与「android」相关的文章共 147 篇
 hideArticleMeta: true
 ---
 
 # 标签：android
 
-共 **128** 篇文章：
+共 **147** 篇文章：
 
+- [SavedStateRegistry 与进程重建状态恢复机制](/Android/SavedStateRegistry与进程重建状态恢复机制) — 在日常 Android 业务开发中，很多工程师都有过这样的经历：订单填写页或搜索筛选页明明已经用上了 Jetpack ViewModel，在本地测试旋转屏幕、切换深浅色模式时，界面上的状态都能稳稳保留，没有任何异常。 可一旦应用上线，
+- [BufferQueue 跨进程状态机、SurfaceFlinger 合成节拍与 HWC 硬件直通](/Android/BufferQueue跨进程状态机、SurfaceFlinger合成节拍与HWC硬件直通) — 在 Android 移动应用性能优化的漫长探索中，“掉帧”与“卡顿”始终是直接冲击用户核心体验的高频痛点。为了攻克这一难题，工程团队往往会在 UI 主线程与渲染管线上倾注大量心力：重构复杂布局、消除嵌套层级、优化列表 ViewHolder 的绑定逻辑，并将密集的业务计算彻底从主线程剥离。
+- [AlarmManager 底层机制与省电约束](/Android/AlarmManager底层机制与省电约束) — 在 Android 应用开发的日常实践中，当开发者需要让应用在未来的某个时间点准时执行特定任务，或者需要在后台保持稳定的周期性动作时，AlarmManager 往往是第一个进入技术选型视野的系统服务。 从 API 声明的表面语义来看，
+- [InputReader 内核采集、SocketPair 与 MotionEvent 重采样](/Android/InputReader内核采集、SocketPair与MotionEvent重采样) — 在 Android 移动设备的硬件演进历程中，“触控采样率”与“屏幕刷新率”始终是衡量终端交互体验最为直观的性能指标。从早期的 60Hz 屏幕搭配 120Hz 触控采样，到当今旗舰机型普及的 120Hz 高刷屏与 240Hz、360Hz 乃至 480Hz 的超高频触控芯片，
+- [SQLite WAL 索引共享内存、Checkpoint 锁竞争与 fsync 挂起](/Android/SQLite WAL索引共享内存、Checkpoint锁竞争与fsync挂起) — 在 Android 应用的架构设计与持久化存储治理中，SQLite 始终扮演着最为核心的本地基础设施角色。伴随着 Jetpack Room 的普及以及现代移动架构对响应式数据流（如 Flow、Paging3）的深度依赖，数据库访问已经从过去的“偶发读写”演化为高频并发的“实时数据总线”。
+- [Linux Kswapd 水位线、ZRAM 压缩惩罚与 Direct Reclaim 停顿](/Android/Linux Kswapd水位线、ZRAM压缩惩罚与Direct Reclaim停顿) — 在 Android 应用的性能工程与高刷体验治理中，流畅度永远是技术团队最为看重的核心指标之一。在很多工程师的直觉模型中，内存与卡顿之间的因果链条通常非常单一： “只要应用没有发生剧烈的 Java 堆内存泄漏，内存占用没有触碰系统设定的单进程上限，
+- [Binder 异步事务队列积压与 oneway 回压机制](/Android/Binder异步事务队列积压与oneway回压机制) — 在 Android 系统的多进程架构与组件化工程实践中，进程间通信（IPC）是维系系统服务运转与跨进程业务协同的核心纽带。为了避免跨进程调用阻塞调用方的前台线程，Android 接口定义语言（AIDL）提供了一个极具诱惑力的关键字：oneway。 在很多开发者的直觉模型中，
+- [ART Monitor 锁膨胀、Linux Futex 挂起与优先级反转](/Android/ART Monitor锁膨胀、Linux Futex挂起与优先级反转) — 在 Android 移动端性能工程与流畅度治理的实践中，多线程并发安全与界面响应性能常常处于微妙的博弈之中。为了防止共享状态在并发读写时出现数据错乱，工程师最直接、最熟悉的防护手段就是使用互斥锁——无论是在 Java 中给方法或代码块加上 synchronized，
+- [Android Doze 与应用待机机制](/Android/Android Doze与应用待机机制) — 真机连着 USB 调试时，网络请求通畅，Alarm 定时器准点触发，WorkManager 也能按计划调度。但一旦拔掉数据线、熄屏放上大半个小时，后台的数据同步往往就会停掉，长连接断开，即时通知也收不到了。直到再次按电源键点亮屏幕，刚才堆积的任务和消息才会在短时间内扎堆弹出来。
+- [Page Cache 脏页回压、文件系统日志提交与 fsync 级联阻塞](/Android/Page Cache脏页回压、文件系统日志提交与fsync级联阻塞) — 在 Android 移动端性能工程与流畅度治理的实践中，“把耗时操作移入子线程”一直被很多工程师奉为规避界面卡顿的金科玉律。面对磁盘文件读写、数据库持久化或键值存储更新，开发者的第一反应往往是在协程中切换到 Dispatchers.IO，或者向专属的后台线程池提交任务。 然而，
+- [ART 并发复制 GC、CMC 机制与线程安全点停顿](/Android/ART并发复制GC、CMC机制与线程安全点停顿) — 在 Android 现代移动端应用的高性能演进过程中，流畅度治理始终是各工程团队的核心关注点。当我们翻开系统监控日志或在线 APM 告警，常能看到类似这样的反常现象： 界面在列表滑动或动画展开时出现了肉眼可见的顿挫与跳帧，系统丢帧指标亮起红灯。然而开发者检索日志，
+- [EAS 能效调度、CPUFreq 调频延迟与 Task Cgroup 核迁移](/Android/EAS能效调度、CPUFreq调频延迟与Task Cgroup核迁移) — 在 Android 性能调优与卡顿治理的深度实践中，许多资深工程师都曾面对过一组极具迷惑性的监控数据： 当线上用户或线下自动化测试频繁上报滑动卡顿、丢帧告警时，我们调取设备全局状态与 APM 指标，往往会发现系统呈现出一种“看似极度闲暇”的假象： - 全局 CPU 使用率仅在 20% 到 30% 之
+- [RenderThread 硬件加速、Shader 编译停顿与 GPU Fence 回压](/Android/RenderThread硬件加速、Shader编译停顿与GPU Fence回压) — 在 Android 性能调优与掉帧治理的实战中，许多开发者都经历过这样一种困惑： 在线上 APM 监控或线下自动化测试中，系统频繁报告界面掉帧（Janky Frame）。我们使用 Perfetto 或 Systrace 打开卡顿现场，查看主线程的执行轨迹，
+- [OOM 底层剖析：虚拟内存耗尽、pthread 创建失败与 Native 内存黑洞](/Android/OOM底层剖析：虚拟内存耗尽、pthread创建失败与Native内存黑洞) — 在 Android 移动端稳定性与性能治理中，OOM（OutOfMemoryError）一直位列线上疑难崩溃的前茅。无论是大厂核心业务的 APM 平台，还是中小团队的崩溃监控后台，OOM 崩溃往往因为现场缺乏清晰的业务堆栈、破坏范围广而成为排查的痛点。 在日常排查中，
+- [ANR 底层剖析：Input 超时、同步屏障泄漏与优先级反转](/Android/ANR底层剖析：Input超时、同步屏障泄漏与优先级反转) — 在 Android 移动端稳定性治理中，ANR（Application Not Responding，应用无响应）是仅次于 Crash 的核心指标。它直接关联到 Google Play 的坏账率考核与国内各大应用商店的体验分级评定。 在日常排查中，
+- [冷启动底层剖析：Zygote 孵化、Page Fault 与 Baseline Profile](/Android/冷启动底层剖析：Zygote孵化、Page Fault与Baseline Profile) — 在移动端体验治理中，冷启动速度直接决定了用户对应用性能的第一印象。 不少工程团队在启动优化上投入了大量精力： - 重构 Application.onCreate()，将非核心 SDK 剥离并推迟初始化； - 使用并行任务图将耗时操作拆分至工作线程池；
 - [Glide四级缓存](/Android/Glide四级缓存) — Glide 缓存机制核心逻辑梳理：ActiveResources 弱引用、MemoryCache LRU、RESOURCE 磁盘缓存、DATA 磁盘缓存的检索顺序与互斥流转。
 - [从重复请求到SingleFlight](/Android/从重复请求到SingleFlight) — 用一个可操作的 Feed 实验室说明，为什么相同的刷新会叠在一起，SingleFlight 合并的是进行中的任务，以及 Room Flow 为什么只负责把数据库的变化交给 UI。
 - [RecyclerView四级缓存](/Android/RecyclerView四级缓存) — Recycler 按 Scrap、CachedViews、ViewCacheExtension、RecycledViewPool 四级取 ViewHolder。CachedViews 默认 2 格，池里每种 viewType 默认 5 格。Scrap 不限，Extension 默认是 0。
+- [Choreographer、VSYNC 偏移与三重缓冲机制](/Android/Choreographer、VSYNC偏移与三重缓冲机制) — 在 Android 设备中，90Hz、120Hz 甚至 144Hz 的高刷新率屏幕已广泛普及。 但在实际开发与性能治理中，经常会遇到一个现象： 在 120Hz 模式下，页面滑动依然偶发卡顿；抓取系统 Trace 发现，某些帧的主线程耗时仅 6ms（低于 8.33ms 预算），
+- [Android lmkd 与 PSI 水位决策机制](/Android/Android lmkd与PSI水位决策机制) — 在日常使用 Android 手机或开发大型 App 时，几乎所有人都遭遇过这种令人匪夷所思的体验： “手机明明配备了 8GB 甚至 12GB 的超大运存，前台只开了一个相机或大型游戏，切回微信或后台应用仅仅过了两分钟，应用居然直接被系统杀掉重新冷启动了。” 面对这一现象，
+- [Binder 内核映射与 1MB 内存限制真相](/Android/Binder内核映射与1MB内存限制真相) — 在 Android 开发与线上稳定性治理中，几乎每一位资深工程师都遭遇过这样一个经典的系统级异常：android.os.TransactionTooLargeException。 面对这个异常，业界流传着一句几乎人尽皆知的八股文定论：“Binder 跨进程调用的传输限制是 1MB，
 - [Compose布局系统与 Modifier](/Android/Compose/Compose布局系统 & Modifier) — 文档级 · 教学级 · 指南级
 - [Jetpack Compose 状态管理详解](/Android/Compose/ComposeStateManagement) — 在 Jetpack Compose 中，状态 (State) 是驱动 UI 更新的核心。与传统的 View 体系不同，Compose 是声明式的：UI 是状态的函数。当应用的状态发生变化时，Compose 会重新执行受影响的 Composable 函数（这个过程称为重组），从而更新 UI。
 - [JobScheduler](/Android/JobScheduler) — JobScheduler 是 Android 5.0（API 21）引入的系统级后台任务调度 API，旨在帮助开发者以低功耗、系统友好的方式执行后台任务。它提供条件触发、持久化、系统统一调度等机制，是 Google 在 Doze 模式、App Standby?
