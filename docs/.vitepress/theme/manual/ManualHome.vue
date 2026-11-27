@@ -241,7 +241,9 @@ onUnmounted(() => {
     <section class="masthead wrap">
       <div class="mh-meta mono">
         <span>VOL.{{ year }} · 技术参考手册</span>
-        <button type="button" class="mh-updates-trigger mono" title="打开最近更新面板（Shift + U）" @click="emit('openUpdates')">最后更新 <ManualOdo :value="year" />-<ManualOdo :value="month" />-<ManualOdo :value="day" /> <span v-if="(unreadCount || 0) > 0" class="mh-updates-badge">+{{ unreadCount }}</span><span class="mh-updates-arrow" aria-hidden="true">↗</span></button>
+        <!-- 最近更新入口按钮（暂时隐藏，如需恢复将 v-if 改为 true 即可） -->
+        <button v-if="false" type="button" class="mh-updates-trigger mono" title="打开最近更新面板（Shift + U）" @click="emit('openUpdates')">最后更新 <ManualOdo :value="year" />-<ManualOdo :value="month" />-<ManualOdo :value="day" /> <span v-if="(unreadCount || 0) > 0" class="mh-updates-badge">+{{ unreadCount }}</span><span class="mh-updates-arrow" aria-hidden="true">↗</span></button>
+        <span v-else class="mh-updates-trigger mono is-static">最后更新 <ManualOdo :value="year" />-<ManualOdo :value="month" />-<ManualOdo :value="day" /></span>
       </div>
       <h1 ref="titleEl" class="mh-title" aria-label="ENDLESSYOUNG">
         <span v-for="(ch, i) in title" :key="i" class="ch" aria-hidden="true">{{ ch }}</span>
@@ -501,6 +503,14 @@ onUnmounted(() => {
   letter-spacing: inherit;
   cursor: pointer;
   transition: color var(--man-tick), border-color var(--man-tick);
+}
+.mh-updates-trigger.is-static {
+  border-bottom: none;
+  cursor: default;
+}
+.mh-updates-trigger.is-static:hover {
+  color: inherit;
+  border-bottom: none;
 }
 .mh-updates-trigger:hover {
   color: var(--accent);

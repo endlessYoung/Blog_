@@ -16,5 +16,6 @@ CLAUDE.*
 .vscode/
 .agents/
 .cursor/
+superpowers/
 AGENTS.md
 skills-lock.json

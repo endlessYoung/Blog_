@@ -278,7 +278,9 @@ onUnmounted(() => {
           <span>搜索</span><kbd>/</kbd>
         </button>
         <div class="ey-switch">
+          <!-- 最近更新按钮（暂时隐藏，需要时将 v-if 改为 true 即可） -->
           <button
+            v-if="false"
             type="button"
             class="ey-switch-updates"
             :class="{ open: updatesOpen, unread: (unreadCount || 0) > 0 }"
