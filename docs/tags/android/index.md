@@ -1,13 +1,14 @@
 ---
 title: 标签：android
-description: 与「android」相关的文章共 147 篇
+description: 与「android」相关的文章共 148 篇
 hideArticleMeta: true
 ---
 
 # 标签：android
 
-共 **147** 篇文章：
+共 **148** 篇文章：
 
+- [Compose Snapshot 状态系统与重组优化实战](/Android/Compose/ComposeSnapshot与重组优化) — 深入剖析 Jetpack Compose Snapshot 状态快照与重组优化机制。涵盖 StateRecord 多版本隔离、RecomposeScope 作用域划分与 inline 容器陷阱、编译器稳定性推断与 Strong Skipping Mode，以及延迟状态读取和 Compiler Metrics 排查方案。
 - [SavedStateRegistry 与进程重建状态恢复机制](/Android/SavedStateRegistry与进程重建状态恢复机制) — 在日常 Android 业务开发中，很多工程师都有过这样的经历：订单填写页或搜索筛选页明明已经用上了 Jetpack ViewModel，在本地测试旋转屏幕、切换深浅色模式时，界面上的状态都能稳稳保留，没有任何异常。 可一旦应用上线，
 - [BufferQueue 跨进程状态机、SurfaceFlinger 合成节拍与 HWC 硬件直通](/Android/BufferQueue跨进程状态机、SurfaceFlinger合成节拍与HWC硬件直通) — 在 Android 移动应用性能优化的漫长探索中，“掉帧”与“卡顿”始终是直接冲击用户核心体验的高频痛点。为了攻克这一难题，工程团队往往会在 UI 主线程与渲染管线上倾注大量心力：重构复杂布局、消除嵌套层级、优化列表 ViewHolder 的绑定逻辑，并将密集的业务计算彻底从主线程剥离。
 - [AlarmManager 底层机制与省电约束](/Android/AlarmManager底层机制与省电约束) — 在 Android 应用开发的日常实践中，当开发者需要让应用在未来的某个时间点准时执行特定任务，或者需要在后台保持稳定的周期性动作时，AlarmManager 往往是第一个进入技术选型视野的系统服务。 从 API 声明的表面语义来看，

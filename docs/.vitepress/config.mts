@@ -855,6 +855,7 @@ html:not(.dark) {
             { text: 'Compose Gradle 配置', link: '/Android/Compose/Compose的gradle配置' },
             { text: 'Compose 状态管理', link: '/Android/Compose/ComposeStateManagement' },
             { text: 'Compose 布局系统 & Modifier', link: '/Android/Compose/Compose布局系统 & Modifier' },
+            { text: 'Compose Snapshot 状态系统与重组优化', link: '/Android/Compose/ComposeSnapshot与重组优化' },
           ],
         },
         {

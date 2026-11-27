@@ -8,7 +8,7 @@ hideArticleMeta: true
 
 Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与 Compose 等主题。
 
-本分类共 148 篇文章。以下目录可直接打开正文；其他主题见[全部文章目录](/archives.html)。
+本分类共 149 篇文章。以下目录可直接打开正文；其他主题见[全部文章目录](/archives.html)。
 
 - [安卓常见的内存泄漏点](/Android/%E5%AE%89%E5%8D%93%E5%B8%B8%E8%A7%81%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%82%B9.html) — 内存泄漏是指在应用程序运行过程中，由于程序错误或设计不佳，导致无用的内存对象无法被系统及时释放，从而造成内存资源的浪费和应用性能下降的现象。内存泄漏会导致应用程序占用大量的内存资源，降低系统性能，增加系统崩溃的风险，严重影响用户体验，甚至导致应用被系统强制关闭?
 - [安卓常见架构](/Android/%E5%AE%89%E5%8D%93%E5%B8%B8%E8%A7%81%E6%9E%B6%E6%9E%84.html) — 在安卓开发中，常见的架构主要有以下几种，每种架构都有其特点、优缺点以及适用场景。以下是它们的详细介绍：
@@ -88,6 +88,7 @@ Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与
 - [BroadcastReceiver](/Android/BroadcastReceiver.html) — BroadcastReceiver（广播接收器）是Android应用程序的一个关键组件，用于接收系统广播消息或应用程序内部广播，并在接收到广播时采取适当的操作。广播是一种轻量级的通信机制，用于在应用程序组件之间或系统组件之间传递消息。
 - [BufferQueue 跨进程状态机、SurfaceFlinger 合成节拍与 HWC 硬件直通](/Android/BufferQueue%E8%B7%A8%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81%E6%9C%BA%E3%80%81SurfaceFlinger%E5%90%88%E6%88%90%E8%8A%82%E6%8B%8D%E4%B8%8EHWC%E7%A1%AC%E4%BB%B6%E7%9B%B4%E9%80%9A.html) — 在 Android 移动应用性能优化的漫长探索中，“掉帧”与“卡顿”始终是直接冲击用户核心体验的高频痛点。为了攻克这一难题，工程团队往往会在 UI 主线程与渲染管线上倾注大量心力：重构复杂布局、消除嵌套层级、优化列表 ViewHolder 的绑定逻辑，并将密集的业务计算彻底从主线程剥离。
 - [Choreographer、VSYNC 偏移与三重缓冲机制](/Android/Choreographer%E3%80%81VSYNC%E5%81%8F%E7%A7%BB%E4%B8%8E%E4%B8%89%E9%87%8D%E7%BC%93%E5%86%B2%E6%9C%BA%E5%88%B6.html) — 在 Android 设备中，90Hz、120Hz 甚至 144Hz 的高刷新率屏幕已广泛普及。 但在实际开发与性能治理中，经常会遇到一个现象： 在 120Hz 模式下，页面滑动依然偶发卡顿；抓取系统 Trace 发现，某些帧的主线程耗时仅 6ms（低于 8.33ms 预算），
+- [Compose Snapshot 状态系统与重组优化实战](/Android/Compose/ComposeSnapshot%E4%B8%8E%E9%87%8D%E7%BB%84%E4%BC%98%E5%8C%96.html) — 深入剖析 Jetpack Compose Snapshot 状态快照与重组优化机制。涵盖 StateRecord 多版本隔离、RecomposeScope 作用域划分与 inline 容器陷阱、编译器稳定性推断与 Strong Skipping Mode，以及延迟状态读取和 Compiler Metrics 排查方案。
 - [Compose布局系统与 Modifier](/Android/Compose/Compose%E5%B8%83%E5%B1%80%E7%B3%BB%E7%BB%9F%20%26%20Modifier.html) — 文档级 · 教学级 · 指南级
 - [Compose的gradle配置](/Android/Compose/Compose%E7%9A%84gradle%E9%85%8D%E7%BD%AE.html) — Jetpack Compose 是一个用于构建原生 Android UI 的现代工具包。它使用声明式函数来构建UI组件，不需要我们使用任何xml布局。
 - [ContentProvider](/Android/ContentProvider.html) — ContentProvider（内容提供器）是Android应用程序的一个核心组件，用于管理和提供应用程序数据，以便其他应用程序可以访问和共享这些数据。ContentProvider允许应用程序将数据存储在共享数据库中，并提供标准接口，以便其他应用程序可以执行?
