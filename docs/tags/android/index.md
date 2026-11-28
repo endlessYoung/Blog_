@@ -1,13 +1,14 @@
 ---
 title: 标签：android
-description: 与「android」相关的文章共 148 篇
+description: 与「android」相关的文章共 149 篇
 hideArticleMeta: true
 ---
 
 # 标签：android
 
-共 **148** 篇文章：
+共 **149** 篇文章：
 
+- [R8 全模式优化、Keep 规则陷阱与包体积瘦身实战](/Android/R8全模式优化与Keep规则实战) — 剖析 AGP 8.0 默认开启 R8 Full Mode 后的代码裁剪、优化与混淆机制，拆解 Signature 泛型擦除、反射崩溃及宽泛 Keep 规则导致的包体积膨胀问题，结合 keepattributes、条件规则 -if、资源严格裁剪及 apkanalyzer 排查给出可落地的治理方案。
 - [Compose Snapshot 状态系统与重组优化实战](/Android/Compose/ComposeSnapshot与重组优化) — 深入剖析 Jetpack Compose Snapshot 状态快照与重组优化机制。涵盖 StateRecord 多版本隔离、RecomposeScope 作用域划分与 inline 容器陷阱、编译器稳定性推断与 Strong Skipping Mode，以及延迟状态读取和 Compiler Metrics 排查方案。
 - [SavedStateRegistry 与进程重建状态恢复机制](/Android/SavedStateRegistry与进程重建状态恢复机制) — 在日常 Android 业务开发中，很多工程师都有过这样的经历：订单填写页或搜索筛选页明明已经用上了 Jetpack ViewModel，在本地测试旋转屏幕、切换深浅色模式时，界面上的状态都能稳稳保留，没有任何异常。 可一旦应用上线，
 - [BufferQueue 跨进程状态机、SurfaceFlinger 合成节拍与 HWC 硬件直通](/Android/BufferQueue跨进程状态机、SurfaceFlinger合成节拍与HWC硬件直通) — 在 Android 移动应用性能优化的漫长探索中，“掉帧”与“卡顿”始终是直接冲击用户核心体验的高频痛点。为了攻克这一难题，工程团队往往会在 UI 主线程与渲染管线上倾注大量心力：重构复杂布局、消除嵌套层级、优化列表 ViewHolder 的绑定逻辑，并将密集的业务计算彻底从主线程剥离。

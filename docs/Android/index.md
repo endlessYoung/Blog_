@@ -8,7 +8,7 @@ hideArticleMeta: true
 
 Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与 Compose 等主题。
 
-本分类共 149 篇文章。以下目录可直接打开正文；其他主题见[全部文章目录](/archives.html)。
+本分类共 150 篇文章。以下目录可直接打开正文；其他主题见[全部文章目录](/archives.html)。
 
 - [安卓常见的内存泄漏点](/Android/%E5%AE%89%E5%8D%93%E5%B8%B8%E8%A7%81%E7%9A%84%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%82%B9.html) — 内存泄漏是指在应用程序运行过程中，由于程序错误或设计不佳，导致无用的内存对象无法被系统及时释放，从而造成内存资源的浪费和应用性能下降的现象。内存泄漏会导致应用程序占用大量的内存资源，降低系统性能，增加系统崩溃的风险，严重影响用户体验，甚至导致应用被系统强制关闭?
 - [安卓常见架构](/Android/%E5%AE%89%E5%8D%93%E5%B8%B8%E8%A7%81%E6%9E%B6%E6%9E%84.html) — 在安卓开发中，常见的架构主要有以下几种，每种架构都有其特点、优缺点以及适用场景。以下是它们的详细介绍：
@@ -128,6 +128,7 @@ Android 开发相关文章，涵盖 Jetpack、Framework 源码、性能优化与
 - [Page Cache 脏页回压、文件系统日志提交与 fsync 级联阻塞](/Android/Page%20Cache%E8%84%8F%E9%A1%B5%E5%9B%9E%E5%8E%8B%E3%80%81%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97%E6%8F%90%E4%BA%A4%E4%B8%8Efsync%E7%BA%A7%E8%81%94%E9%98%BB%E5%A1%9E.html) — 在 Android 移动端性能工程与流畅度治理的实践中，“把耗时操作移入子线程”一直被很多工程师奉为规避界面卡顿的金科玉律。面对磁盘文件读写、数据库持久化或键值存储更新，开发者的第一反应往往是在协程中切换到 Dispatchers.IO，或者向专属的后台线程池提交任务。 然而，
 - [Parcelable 和 Bundle](/Android/Parcelable%E5%92%8CBundle.html) — Parcelable 和 Bundle 对象可跨进程边界使用，例如与 IPC/Binder 事务之间，带有 intent 的 Activity 之间等，还可以用来存储跨配置更改的瞬时状态。本页介绍了使用 Parcelable 和 Bundle 对象的建议和最佳?
 - [PhoneWindow](/Android/PhoneWindow.html) — Activity和Dialog在显示过程中都创建了PhoneWindow对象，而PopupWindow和Toast却没有。
+- [R8 全模式优化、Keep 规则陷阱与包体积瘦身实战](/Android/R8%E5%85%A8%E6%A8%A1%E5%BC%8F%E4%BC%98%E5%8C%96%E4%B8%8EKeep%E8%A7%84%E5%88%99%E5%AE%9E%E6%88%98.html) — 剖析 AGP 8.0 默认开启 R8 Full Mode 后的代码裁剪、优化与混淆机制，拆解 Signature 泛型擦除、反射崩溃及宽泛 Keep 规则导致的包体积膨胀问题，结合 keepattributes、条件规则 -if、资源严格裁剪及 apkanalyzer 排查给出可落地的治理方案。
 - [RecyclerView和ListView区别](/Android/RecyclerView%E5%92%8CListView%E5%8C%BA%E5%88%AB.html) — ListView 需要自定义ViewHolder,判断convertView是否为null，setTag()与getTag()的使用;RecyclerView有规定好的ViewHolder。 ListView 只支持垂直方向的，而RecyclerView，它里?
 - [RecyclerView四级缓存](/Android/RecyclerView%E5%9B%9B%E7%BA%A7%E7%BC%93%E5%AD%98.html) — Recycler 按 Scrap、CachedViews、ViewCacheExtension、RecycledViewPool 四级取 ViewHolder。CachedViews 默认 2 格，池里每种 viewType 默认 5 格。Scrap 不限，Extension 默认是 0。
 - [RecyclerView性能优化](/Android/RecyclerView%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96.html) — RecyclerView 主要有三层缓存

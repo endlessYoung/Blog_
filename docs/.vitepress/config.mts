@@ -896,6 +896,7 @@ html:not(.dark) {
             { text: 'APK打包流程', link: '/Android/APK打包流程' },
             { text: 'v1和v2签名机制', link: '/Android/v1和v2签名机制' },
             { text: 'pageSize', link: '/Android/pageSize' },
+            { text: 'R8 全模式优化与 Keep 规则实战', link: '/Android/R8全模式优化与Keep规则实战' },
           ],
         },
         {

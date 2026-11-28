@@ -6,15 +6,15 @@ hideArticleMeta: true
 
 # 标签
 
-共 **181** 个标签，**239** 篇文章：
+共 **183** 个标签，**240** 篇文章：
 
-- [android（148）](/tags/android/)
+- [android（149）](/tags/android/)
 - [kotlin（31）](/tags/kotlin/)
 - [ai（26）](/tags/ai/)
 - [java（23）](/tags/java/)
+- [性能优化（6）](/tags/性能优化/)
 - [Activity（6）](/tags/Activity/)
 - [数据结构和算法（5）](/tags/数据结构和算法/)
-- [性能优化（5）](/tags/性能优化/)
 - [Compose（5）](/tags/Compose/)
 - [RecyclerView（5）](/tags/RecyclerView/)
 - [App（4）](/tags/App/)
@@ -32,6 +32,7 @@ hideArticleMeta: true
 - [AIDL（2）](/tags/AIDL/)
 - [AlarmManager（2）](/tags/AlarmManager/)
 - [ANR（2）](/tags/ANR/)
+- [APK（2）](/tags/APK/)
 - [Application（2）](/tags/Application/)
 - [ART（2）](/tags/ART/)
 - [c++（2）](/tags/c++/)
@@ -39,6 +40,7 @@ hideArticleMeta: true
 - [Doze（2）](/tags/Doze/)
 - [Framework（2）](/tags/Framework/)
 - [GC（2）](/tags/GC/)
+- [gradle（2）](/tags/gradle/)
 - [Intent（2）](/tags/Intent/)
 - [IO优化（2）](/tags/IO优化/)
 - [IPC（2）](/tags/IPC/)
@@ -65,7 +67,6 @@ hideArticleMeta: true
 - [AI导论（1）](/tags/AI导论/)
 - [AndroidTest（1）](/tags/AndroidTest/)
 - [AOSP（1）](/tags/AOSP/)
-- [APK（1）](/tags/APK/)
 - [AssestManager（1）](/tags/AssestManager/)
 - [AsyncTask（1）](/tags/AsyncTask/)
 - [Baseline Profile（1）](/tags/Baseline-Profile/)
@@ -107,7 +108,6 @@ hideArticleMeta: true
 - [Futex（1）](/tags/Futex/)
 - [Glide（1）](/tags/Glide/)
 - [GPU（1）](/tags/GPU/)
-- [gradle（1）](/tags/gradle/)
 - [HashMap（1）](/tags/HashMap/)
 - [HWC（1）](/tags/HWC/)
 - [id（1）](/tags/id/)
@@ -147,9 +147,11 @@ hideArticleMeta: true
 - [Parcelable（1）](/tags/Parcelable/)
 - [PhoneWindow（1）](/tags/PhoneWindow/)
 - [postDelayed（1）](/tags/postDelayed/)
+- [ProGuard（1）](/tags/ProGuard/)
 - [Provider（1）](/tags/Provider/)
 - [PSI（1）](/tags/PSI/)
 - [python（1）](/tags/python/)
+- [R8（1）](/tags/R8/)
 - [RAG（1）](/tags/RAG/)
 - [reified（1）](/tags/reified/)
 - [ReLU（1）](/tags/ReLU/)

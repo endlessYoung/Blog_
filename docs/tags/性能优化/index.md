@@ -1,13 +1,14 @@
 ---
 title: 标签：性能优化
-description: 与「性能优化」相关的文章共 5 篇
+description: 与「性能优化」相关的文章共 6 篇
 hideArticleMeta: true
 ---
 
 # 标签：性能优化
 
-共 **5** 篇文章：
+共 **6** 篇文章：
 
+- [R8 全模式优化、Keep 规则陷阱与包体积瘦身实战](/Android/R8全模式优化与Keep规则实战) — 剖析 AGP 8.0 默认开启 R8 Full Mode 后的代码裁剪、优化与混淆机制，拆解 Signature 泛型擦除、反射崩溃及宽泛 Keep 规则导致的包体积膨胀问题，结合 keepattributes、条件规则 -if、资源严格裁剪及 apkanalyzer 排查给出可落地的治理方案。
 - [Compose Snapshot 状态系统与重组优化实战](/Android/Compose/ComposeSnapshot与重组优化) — 深入剖析 Jetpack Compose Snapshot 状态快照与重组优化机制。涵盖 StateRecord 多版本隔离、RecomposeScope 作用域划分与 inline 容器陷阱、编译器稳定性推断与 Strong Skipping Mode，以及延迟状态读取和 Compiler Metrics 排查方案。
 - [ART 并发复制 GC、CMC 机制与线程安全点停顿](/Android/ART并发复制GC、CMC机制与线程安全点停顿) — 在 Android 现代移动端应用的高性能演进过程中，流畅度治理始终是各工程团队的核心关注点。当我们翻开系统监控日志或在线 APM 告警，常能看到类似这样的反常现象： 界面在列表滑动或动画展开时出现了肉眼可见的顿挫与跳帧，系统丢帧指标亮起红灯。然而开发者检索日志，
 - [EAS 能效调度、CPUFreq 调频延迟与 Task Cgroup 核迁移](/Android/EAS能效调度、CPUFreq调频延迟与Task Cgroup核迁移) — 在 Android 性能调优与卡顿治理的深度实践中，许多资深工程师都曾面对过一组极具迷惑性的监控数据： 当线上用户或线下自动化测试频繁上报滑动卡顿、丢帧告警时，我们调取设备全局状态与 APM 指标，往往会发现系统呈现出一种“看似极度闲暇”的假象： - 全局 CPU 使用率仅在 20% 到 30% 之
